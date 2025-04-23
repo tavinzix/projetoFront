@@ -3,48 +3,133 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/css.css">
     <title>Iconst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header class="menu">
-        <div class="logo">Iconst</div>
+        <div class="logo">
+           <img src="img/site/logo.png">
+        </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
             <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
             <button type="submit" class="lupa-icone">
-                <img src="img/lupa.png" id="iconeft">
+                <img src="img/site/lupa.png" id="iconeft">
             </button>
         </form>
-        
+
         <button class="menu-hamburguer" id="menu-hamburguer">
             &#9776;
         </button>
-        
+
         <ul class="menu-link" id="menu-link">
             <li><a href="#">Início</a></li>
-            <li><a href="#">Sobre</a></li>
-            <li><a href="#">Projetos</a></li>
-            <li><a href="#">Contato</a></li>
-            <li><a href="carrinho do usuario"><img src="img/site/carrinho.png"></a></li> <!--https://icons8.com.br/icon/5esIoe7Rz8YD/buying-->
-            <li><a href="perfil do usuario"><img src="img/users/idUser_nome.jpg" id="iconePerfil"></a></li> <!--https://icons8.com.br/icon/7695/search-->               
+            <!-- icone carrinho https://icons8.com.br/icon/5esIoe7Rz8YD/buying-->
+            <li><a href="carrinho do usuario"><img src="img/site/carrinho.png"></a></li>
+            <!-- icone lupa https://icons8.com.br/icon/7695/search-->
+            <li><a href="perfil do usuario"><img src="img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
         </ul>
     </header>
 
     <main>
-        <div>
-            <h1> Produtos em destaque</h1>
-            <div class="produtos">
-                <img src="img/users/idUser_nome.jpg" >
-                <p>Produto 1</p>
-                <p>Descricao</p>
-                <p>Preço</p>
+
+        <div class="categorias-externo">
+            <div class="categorias">
+                
+            </div>
+        </div>
+
+
+        <div class="carrossel-exterior">
+            <div class="topo-carrossel">
+                <h1>Produtos em destaque</h1>
+                <a href="pagina com todos os itens"> Ver todos os itens</a>
             </div>
 
+            <button class="btn seta-esquerda">&#10094;</button>
+
+            <div class="carrossel">
+                <div class="produtos">
+                    <a href="#">
+                        <img src="img/produto/p1.jpg" alt="Produto 1">
+                        <p>Produto 1</p>
+                        <p>Descrição</p>
+                        <p>Preço</p>
+                    </a>
+                </div>
+                <div class="produtos">
+                    <a href="#">
+                        <img src="img/produto/p2.jpg" alt="Produto 2">
+                        <p>Produto 2</p>
+                        <p>Descrição</p>
+                        <p>Preço</p>
+                    </a>
+                </div>
+                <div class="produtos">
+                    <a href="#">
+                        <img src="img/produto/p3.jpg" alt="Produto 3">
+                        <p>Produto 3</p>
+                        <p>Descrição</p>
+                        <p>Preço</p>
+                    </a>
+                </div>
+                <div class="produtos">
+                    <a href="#">
+                        <img src="img/produto/p1.jpg" alt="Produto 1">
+                        <p>Produto 1</p>
+                        <p>Descrição</p>
+                        <p>Preço</p>
+                    </a>
+                </div>
+                <div class="produtos">
+                    <a href="#">
+                        <img src="img/produto/p2.jpg" alt="Produto 2">
+                        <p>Produto 2</p>
+                        <p>Descrição</p>
+                        <p>Preço</p>
+                    </a>
+                </div>
+                <div class="produtos">
+                    <a href="#">
+                        <img src="img/produto/p3.jpg" alt="Produto 3">
+                        <p>Produto 3</p>
+                        <p>Descrição</p>
+                        <p>Preço</p>
+                    </a>
+                </div>
+                <div class="produtos">
+                    <a href="#">
+                        <img src="img/produto/p1.jpg" alt="Produto 1">
+                        <p>Produto 1</p>
+                        <p>Descrição</p>
+                        <p>Preço</p>
+                    </a>
+                </div>
+                <div class="produtos">
+                    <a href="#">
+                        <img src="img/produto/p2.jpg" alt="Produto 2">
+                        <p>Produto 2</p>
+                        <p>Descrição</p>
+                        <p>Preço</p>
+                    </a>
+                </div>
+                <div class="produtos">
+                    <a href="#">
+                        <img src="img/produto/p3.jpg" alt="Produto 3">
+                        <p>Produto 3</p>
+                        <p>Descrição</p>
+                        <p>Preço</p>
+                    </a>
+                </div>
+            </div>
+            <button class="btn seta-direita">&#10095;</button>
         </div>
-        <h1> produtos em destaque </h1>
-        <h1> produtos em destaque </h1>
     </main>
 
     <script src="js/js.js"></script>
