@@ -168,7 +168,6 @@ Itens como pisos de cerâmica, porcelanato, azulejos, etc.
 
 
 /*CATEGORIAS*/
-
 1. Construção e Reforma
     Categoria ampla que inclui produtos para construção de novas obras ou reformas.
 Subcategorias:
@@ -300,13 +299,3 @@ Subcategorias:
     Câmeras de Monitoramento e Alarmes
     Controle de Climatização (ar condicionado inteligente, ventiladores)
     Sistemas de Som e Áudio (sistemas de som para ambientes internos e externos)
-
-
-13. Projetos e Consultoria
-    Serviços que complementam o processo de construção, como consultoria e projetos arquitetônicos.
-Subcategorias:
-    Consultoria de Engenharia (projetos estruturais, projetos elétricos)
-    Arquitetura (projetos arquitetônicos, design de interiores)
-    Consultoria em Sustentabilidade (projetos ecológicos, uso de materiais sustentáveis)
-    Licenciamento e Aprovação de Projetos (ajuda na documentação para aprovação)
-    Consultoria para Reformas (design e planejamento de reformas)
