@@ -1,0 +1,312 @@
+
+
+/*INFORMAÇÕES PARA CADASTROS*/
+1. Ferramentas
+Itens como martelos, serras, chaves, parafusadeiras, etc.
+    Nome do item
+    Descrição: Detalhes sobre a ferramenta.
+    Preço
+    Categoria: (Ferramentas, EPI, etc.)
+    Imagem do produto
+    Peso
+    Material (ex: Aço, Plástico, Alumínio)
+    Marca
+    Cor
+    Tamanho/Dimensões (ex: 30 cm, 20 cm)
+    Tipo de uso (ex: Profissional, Doméstico, Industrial)
+    Potência (para ferramentas elétricas)
+    Voltagem (para ferramentas elétricas)
+    Garantia (ex: 1 ano)
+    Código de Produto
+    Certificação (ex: INMETRO, CE)
+    Quantidade em estoque
+    Tipo de embalagem (ex: Caixa, Blister)
+    Segurança (ex: Normas de segurança, resistência a impactos)
+
+
+2. Materiais de Construção
+Itens como cimento, areia, tijolos, blocos, concreto, etc.
+    Nome do item
+    Descrição: Detalhes sobre o material (ex: Cimento Portland, Areia Fina)
+    Preço
+    Categoria: (Cimento, Argamassa, Bloco, etc.)
+    Imagem do produto
+    Tipo (ex: Cimento Portland, Cimento Para Uso Geral)
+    Peso (em kg)
+    Volume (em m³ ou litros)
+    Composição (ex: 100% cimento, areia + cal)
+    Marca
+    Tamanho/Dimensões (ex: 25kg, 40x20x10 cm)
+    Cor
+    Quantidade por embalagem (ex: 25 kg, 100 unidades)
+    Data de validade (para materiais como tintas, colas, etc.)
+    Certificação (ex: ABNT, Norma Técnica)
+    Estoque disponível
+    Tipo de embalagem (ex: saco, palete)
+    Aplicação (ex: Construção, Revestimento, Reparo)
+    Referência de compatibilidade (com outros materiais ou ferramentas)
+
+
+3. Equipamentos de Proteção Individual (EPIs)
+Itens como capacetes, luvas, botas, óculos de proteção, etc.
+    Nome do item
+    Descrição: Informações detalhadas sobre o EPI (ex: "Capacete de segurança em ABS").
+    Preço
+    Categoria: (Capacete, Luva, Botas, Óculos, etc.)
+    Imagem do produto
+    Material (ex: PVC, Borracha, Couro, Poliéster)
+    Tamanho (ex: P, M, G, ou medidas específicas)
+    Cor
+    Marca
+    Normas de segurança (ex: NR-6, NR-12, CE)
+    Certificação (ex: ANVISA, INMETRO)
+    Uso recomendado (ex: Proteção contra impactos, Proteção contra corte)
+    Peso
+    Estoque disponível
+    Tipo de embalagem (ex: caixa, saco)
+    Vida útil (para luvas, óculos, etc.)
+
+
+4. Tintas e Vernizes
+Itens como tintas para paredes, vernizes, esmaltes, etc.
+    Nome do item
+    Descrição
+    Preço
+    Categoria: (Tinta, Verniz, Esmalte, etc.)
+    Imagem do produto
+    Cor
+    Tipo de tinta (ex: Acrílica, PVA, Esmalte Sintético)
+    Acabamento (ex: Fosco, Semibrilho, Brilhante)
+    Composição (ex: Água, Solvente, Resinas)
+    Rendimento (ex: m² por litro)
+    Peso (em kg ou litros)
+    Volume (ex: 1L, 3,6L, 20L)
+    Marca
+    Área de aplicação (ex: Interna, Externa, Piso)
+    Tempo de secagem
+    Durabilidade (ex: 5 anos)
+    Certificação (ex: INMETRO)
+    Estoque disponível
+    Tipo de embalagem (ex: lata, pote)
+
+
+5. Móveis e Equipamentos para Construção
+Itens como andaimes, escadas, bancadas de trabalho, etc.
+    Nome do item
+    Descrição
+    Preço
+    Categoria: (Escada, Andaime, Bancada, etc.)
+    Imagem do produto
+    Peso
+    Material (ex: Alumínio, Aço, Madeira)
+    Capacidade de carga (para andaimes, escadas)
+    Dimensões (ex: Altura, Largura, Profundidade)
+    Marca
+    Cor
+    Certificação (ex: INMETRO)
+    Tipo de uso (ex: Residencial, Industrial)
+    Estoque disponível
+    Garantia
+
+
+6. Instalações Elétricas
+Itens como fios, cabos, interruptores, tomadas, etc.
+    Nome do item
+    Descrição
+    Preço
+    Categoria: (Fios, Cabos, Tomadas, Interruptores, etc.)
+    Imagem do produto
+    Tipo de fio/cabo (ex: Fio flexível, Cabo de cobre, Cabos para instalações industriais)
+    Material (ex: Cobre, Alumínio)
+    Tensão nominal (ex: 220V, 110V)
+    Quantidade por embalagem (ex: metro, rolo)
+    Cor
+    Capacidade de corrente (ex: 10A, 20A)
+    Marca
+    Normas e Certificações (ex: NBR, ABNT, IEC)
+    Estoque disponível
+    Aplicação (ex: Residencial, Comercial)
+
+
+7. Piscinas e Jardinagem
+Itens como bombas de piscina, filtros, plantas, etc.
+    Nome do item
+    Descrição
+    Preço
+    Categoria: (Bombas, Filtros, Plantas, Ferramentas de Jardinagem, etc.)
+    Imagem do produto
+    Tipo de bomba (ex: Bomba submersa, bomba de circulação)
+    Capacidade de bomba (ex: 2000 L/h, 5000 L/h)
+    Tipo de filtro (ex: Filtro de areia, Filtro de cartucho)
+    Material (ex: Plástico, Aço inox)
+    Tamanho/Dimensões
+    Marca
+    Potência (em watts)
+    Certificação (ex: INMETRO)
+    Estoque disponível
+    Uso recomendado (ex: Piscina, Jardim, Fontes)
+
+
+8. Pisos, Revestimentos e Cerâmicas
+Itens como pisos de cerâmica, porcelanato, azulejos, etc.
+    Nome do item
+    Descrição
+    Preço
+    Categoria: (Piso, Revestimento, Azulejo, etc.)
+    Imagem do produto
+    Material (ex: Cerâmica, Porcelanato, Granito)
+    Cor
+    Tamanho/Dimensões (ex: 60x60cm, 30x30cm)
+    Acabamento (ex: Fosco, Brilhante, Antiderrapante)
+    Marca
+    Certificação (ex: INMETRO, ABNT)
+    Resistência ao desgaste
+    Peso
+    Estoque disponível
+    Aplicação (ex: Interna, Externa)
+
+
+
+/*CATEGORIAS*/
+
+1. Construção e Reforma
+    Categoria ampla que inclui produtos para construção de novas obras ou reformas.
+Subcategorias:
+    Ferramentas Manuais (chaves, martelos, serras)
+    Ferramentas Elétricas (parafusadeiras, furadeiras, lixadeiras)
+    Materiais de Construção (cimento, areia, tijolos, etc.)
+    Impermeabilizantes (membranas, tintas impermeáveis, etc.)
+    Revestimentos (piso, azulejo, revestimento para paredes)
+    Sistemas de Isolamento (térmico, acústico)
+
+
+2. Materiais para Construção
+    Produtos específicos utilizados durante a construção de uma obra.
+Subcategorias:
+    Cimento e Argamassa
+    Tijolos e Blocos (tijolo cerâmico, bloco de concreto)
+    Areia e Pedras (areia fina, pedrisco)
+    Ferragens e Aços (vergalhões, telas, malhas)
+    Madeira e Painéis (tábuas de madeira, compensados, MDF)
+    Tinta e Acabamento (tintas, esmaltes, vernizes)
+
+3. Elétrica e Iluminação
+    Categoria voltada para instalações elétricas e sistemas de iluminação.
+Subcategorias:
+    Fios e Cabos Elétricos (cabos de energia, fios de cobre)
+    Interruptores e Tomadas
+    Lâmpadas e Luminárias (LED, fluorescente, pendentes)
+    Disjuntores e Proteções (disjuntores, fusíveis)
+    Extensões e Adaptadores
+    Instalações de Energia Solar (placas solares, inversores, baterias)
+
+
+4. Saneamento e Hidráulica
+    Produtos voltados para instalações hidráulicas e saneamento.
+Subcategorias:
+    Tubos e Conexões (PVC, cobre, ferro galvanizado)
+    Acessórios Hidráulicos (registro, válvulas, filtros)
+    Bombas d'Água (bombas submersíveis, de pressão)
+    Caixas D'Água e Reservatórios
+    Tanques e Cisternas
+    Sistemas de Irrigação (aspersores, mangueiras)
+
+
+5. Pisos, Revestimentos e Decoração
+    Itens para decoração e acabamentos internos e externos de ambientes.
+Subcategorias:
+    Pisos e Revestimentos Cerâmicos (porcelanato, azulejo)
+    Pisos Laminados e Vinílicos
+    Tijolos e Pedras Ornamentais (pedras naturais, mármores)
+    Papéis de Parede
+    Rodapés e Forros
+    Adesivos e Stencils Decorativos
+    Móveis para Construção e Decoração (moveis planejados, banquetas, cadeiras)
+
+
+
+6. Jardinagem e Paisagismo
+    Produtos voltados para a decoração de jardins e o uso de plantas na obra.
+Subcategorias:
+    Ferramentas de Jardinagem (tesouras, pás, regadores)
+    Sementes e Mudas (flores, plantas ornamentais, hortaliças)
+    Gramas e Plantas para Paisagismo
+    Vasos e Jardineiras
+    Cercas e Alambrados
+    Acessórios para Irrigação (gotejadores, mangueiras)
+    Pá de Plantio e Ferramentas Manuais
+
+
+7. Segurança e Proteção
+    Produtos voltados para segurança e proteção no canteiro de obras ou uso doméstico.
+Subcategorias:
+    Equipamentos de Proteção Individual (EPIs) (capacetes, luvas, botas)
+    Sinalização de Segurança (placas, cones, barreiras)
+    Câmeras de Segurança (câmeras IP, circuitos fechados)
+    Alarmes e Sensores
+    Cintos de Segurança e Linhas de Vida
+    Extintores de Incêndio e Kits de Emergência
+
+
+8. Móveis e Utilidades
+    Produtos relacionados ao mobiliário de ambientes construídos, tanto para obras novas como para reformas.
+Subcategorias:
+    Móveis Planejados (armários, cozinhas, closets)
+    Acessórios para Banheiro (espelhos, box, duchas)
+    Camas e Sofás
+    Móveis para Escritório (mesas, cadeiras)
+    Armazenamento e Organização (prateleiras, caixas organizadoras)
+    Utensílios Domésticos (ferramentas, ferramentas manuais)
+
+
+9. Pinturas e Acabamentos
+    Produtos para acabamento final de uma obra ou reforma, incluindo tintas e produtos de acabamento.
+Subcategorias:
+    Tintas e Vernizes (tinta acrílica, esmalte sintético)
+    Texturizadores (pinturas texturizadas, efeitos decorativos)
+    Revestimentos de Parede (papel de parede, revestimentos 3D)
+    Selantes e Vedantes (selantes para janelas, portas)
+    Lixas e Escovas (para acabamentos)
+    Rolos e Pincéis (para pintura)
+
+
+10. Equipamentos e Máquinas
+    Máquinas e equipamentos de grande porte ou para uso profissional.
+Subcategorias:
+    Máquinas de Corte (serras, cortadoras de concreto)
+    Betoneiras e Misturadores
+    Geradores e Compressores
+    Empilhadeiras e Guinchos
+    Andaimes e Escadas (escadas telescópicas, escadas de alumínio)
+    Máquinas para Acabamento (lixadeiras industriais, polidoras)
+
+
+11. Madeiras e Metais
+    Produtos que utilizam madeira e metal como base, muitas vezes usados em construções, móveis ou acabamentos.
+Subcategorias:
+    Madeira (tábuas, compensados, MDF)
+    Metais (ferro, aço inox, alumínio)
+    Pinos e Parafusos (parafuso galvanizado, pregos)
+    Perfis Metálicos (vigas, chapas de aço)
+    Portas e Janelas (madeira, alumínio, aço)
+
+
+12. Automação Residencial
+    Produtos voltados para automação de casas e construções inteligentes.
+Subcategorias:
+    Sistemas de Iluminação Inteligente (lâmpadas Wi-Fi, interruptores inteligentes)
+    Sensores de Presença (para iluminação ou segurança)
+    Fechaduras Eletrônicas (para portas e portões)
+    Câmeras de Monitoramento e Alarmes
+    Controle de Climatização (ar condicionado inteligente, ventiladores)
+    Sistemas de Som e Áudio (sistemas de som para ambientes internos e externos)
+
+
+13. Projetos e Consultoria
+    Serviços que complementam o processo de construção, como consultoria e projetos arquitetônicos.
+Subcategorias:
+    Consultoria de Engenharia (projetos estruturais, projetos elétricos)
+    Arquitetura (projetos arquitetônicos, design de interiores)
+    Consultoria em Sustentabilidade (projetos ecológicos, uso de materiais sustentáveis)
+    Licenciamento e Aprovação de Projetos (ajuda na documentação para aprovação)
+    Consultoria para Reformas (design e planejamento de reformas)
