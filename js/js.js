@@ -22,7 +22,7 @@ btnDireitaCategoria.addEventListener('click', () => {
 
 
 
-/*Scrol produtos em destaque*/
+/*Scrol ofertas recentes*/
 const carrossel = document.querySelector('.carrossel-oferta');
 const btnEsquerdaOferta = document.querySelector('.seta-esquerda-oferta');
 const btnDireitaOferta = document.querySelector('.seta-direita-oferta');
