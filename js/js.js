@@ -23,15 +23,15 @@ btnDireitaCategoria.addEventListener('click', () => {
 
 
 /*Scrol produtos em destaque*/
-const carrossel = document.querySelector('.carrossel-produto');
-const btnEsquerdaProduto = document.querySelector('.seta-esquerda-produto');
-const btnDireitaProduto = document.querySelector('.seta-direita-produto');
+const carrossel = document.querySelector('.carrossel-oferta');
+const btnEsquerdaOferta = document.querySelector('.seta-esquerda-oferta');
+const btnDireitaOferta = document.querySelector('.seta-direita-oferta');
 
-btnEsquerdaProduto.addEventListener('click', () => {
+btnEsquerdaOferta.addEventListener('click', () => {
   carrossel.scrollBy({ left: -220, behavior: 'smooth' });
 });
 
-btnDireitaProduto.addEventListener('click', () => {
+btnDireitaOferta.addEventListener('click', () => {
   carrossel.scrollBy({ left: 220, behavior: 'smooth' });
 });
 
