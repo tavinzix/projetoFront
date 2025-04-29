@@ -7,7 +7,7 @@ CREATE TABLE usuarios (
     dt_nasc date,
     cpf VARCHAR(14) UNIQUE,
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status CHARACTER(1) DEFAULT "1",
+    status CHARACTER(1) DEFAULT "1" CHECK (status IN ('1', '2', '3')), -- 1 = ativo, 2 = inativo, 3 = banido
     img_user VARCHAR(250) DEFAULT "avatar.jpg"
 );
 
@@ -24,7 +24,6 @@ CREATE TABLE enderecos (
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
-
 CREATE TABLE vendedores (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL UNIQUE,
@@ -37,13 +36,33 @@ CREATE TABLE vendedores (
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
+CREATE TABLE vendedores_entrega(
+    id SERIAL PRIMARY KEY,
+    vendedor_id INT NOT NULL,
+    nome_transporte VARCHAR(255) NOT NULL,
+    tipo_envio CHAR(1) CHECK (tipo_envio IN ('1', '2', '3')) NOT NULL, -- 1 = Normal, 2 = Expresso, 3 = Econômico
+    preco_base NUMERIC(10,2) DEFAULT 0.00,
+    prazo_entrega INT, -- prazo em dias
+    ativo BOOLEAN DEFAULT TRUE,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (vendedor_id) REFERENCES vendedores(id) ON DELETE CASCADE
+);
 
 CREATE TABLE administradores (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status CHARACTER(1) DEFAULT "1"
+    status CHARACTER(1) DEFAULT "1" CHECK (status IN ('1', '2')) -- 1 = ativo, 2 = inativo 
+);
+
+CREATE TABLE solicitacoes_vendedor (
+    id SERIAL PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    data_solicitacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status CHAR(1) CHECK (status IN ('1', '2')),  -- 1 = Pendente, 2 = Rejeitado
+    motivo_rejeicao TEXT,  -- Motivo da rejeição, se aplicável
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
 CREATE TABLE categorias (
@@ -94,4 +113,65 @@ CREATE TABLE avaliacoes_produtos (
     data_avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+CREATE TABLE avaliacoes_vendedores (
+    id SERIAL PRIMARY KEY,
+    vendedor_id INT NOT NULL,
+    usuario_id INT NOT NULL,
+    nota INT CHECK (nota >= 1 AND nota <= 5),
+    comentario TEXT,
+    data_avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (vendedor_id) REFERENCES vendedores(id) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE carrinho (
+    id SERIAL PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+CREATE TABLE carrinho_itens (
+    id SERIAL PRIMARY KEY,
+    carrinho_id INT NOT NULL,
+    produto_id INT NOT NULL,
+    quantidade INT NOT NULL DEFAULT 1,
+    preco_unitario NUMERIC(10,2) NOT NULL,
+    FOREIGN KEY (carrinho_id) REFERENCES carrinhos(id) ON DELETE CASCADE,
+    FOREIGN KEY (produto_id) REFERENCES produtos(id)
+);
+
+CREATE TABLE pedidos (
+    id SERIAL PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(20) DEFAULT '1' CHECK (status IN ('1', '2', '3', '4', '5', '6', '7')), -- 1 - aguardando pagamento, 2 - a caminho, 3 - aguardando envio,, 4 - enviado, 5 - entregues, 6 - cancelados, 7 - reembolsado   
+    valor_total NUMERIC(10,2),
+    endereco_entrega_id INT,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (endereco_entrega_id) REFERENCES enderecos(id)
+);
+
+CREATE TABLE pedido_itens (
+    id SERIAL PRIMARY KEY,
+    pedido_id INT NOT NULL,
+    produto_id INT NOT NULL,
+    quantidade INT NOT NULL,
+    preco_unitario NUMERIC(10,2) NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE CASCADE,
+    FOREIGN KEY (produto_id) REFERENCES produtos(id)
+);
+
+CREATE TABLE vendedores_ofertas (
+    id SERIAL PRIMARY KEY,
+    vendedor_id INT NOT NULL,
+    produto_id INT NOT NULL,
+    preco_oferta NUMERIC(10,2) NOT NULL,
+    data_inicio TIMESTAMP NOT NULL,
+    data_fim TIMESTAMP NOT NULL,
+    ativo BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (vendedor_id) REFERENCES vendedores(id) ON DELETE CASCADE,
+    FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
 );
