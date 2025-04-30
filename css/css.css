@@ -9,7 +9,6 @@ body {
   background-color: #f5f5f5;
 }
 
-
 .topo-produtos h1,
 .topo-categorias h1,
 .topo-carrossel h1 {
@@ -101,9 +100,9 @@ header.menu {
 }
 
 .busca-input:focus {
-  border-color: #4A90E2;
+  border-color: #b64d02;
   outline: none;
-  box-shadow: 0 2px 8px #FF6B00;
+  box-shadow: 0 2px 8px #858585;
 }
 
 .lupa-icone {
@@ -118,10 +117,13 @@ header.menu {
   border: 0;
 }
 
+
+
 /*CATEGORIAS*/
 
 .categorias-exterior {
-  padding: 30px;
+  padding: 20px;
+  position: relative;
 }
 
 .topo-categorias {
@@ -147,7 +149,7 @@ header.menu {
   overflow-x: hidden;
   /*grid-template-columns: repeat(12, 1fr);*/
   gap: 20px;
-  padding: 0 30px;
+  padding: 20px;
 
 }
 
@@ -186,10 +188,12 @@ header.menu {
 
 .seta-esquerda-categoria {
   left: 10px;
+  margin-top: 20px;
 }
 
 .seta-direita-categoria {
   right: 10px;
+  margin-top: 20px;
 }
 
 
@@ -240,6 +244,10 @@ header.menu {
   margin-left: 20px;
 }
 
+.topo-carrossel a:hover {
+  color: rgb(185, 75, 1);
+}
+
 .ofertas {
   flex: 0 0 calc(100% / 6);
   max-width: calc(100% / 6);
@@ -271,6 +279,10 @@ header.menu {
   border-radius: 100px;
   width: 50px;
   height: 50px;
+}
+
+.btn:hover{
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .seta-esquerda-oferta {
@@ -319,13 +331,26 @@ header.menu {
   object-fit: cover;
 }
 
-.mais-produtos{
-  padding: 30px;
-  background-color: #FF6B00;
-  border-radius: 20px;
-  color: wheat;
+.botao-produtos{
+  text-align: center;
 }
 
+.botao-produtos button{
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #f60;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.botao-produtos button:hover{
+  box-shadow: 0 2px 8px black;
+  transform: translateY(-3px) scale(1.05);
+  transition: transform 0.2s ease;
+}
 
 
 
@@ -348,6 +373,12 @@ header.menu {
   .ofertas {
     flex: 0 0 calc(100% / 4);
     max-width: calc(100% / 4);
+  }
+
+  .produtos-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
   }
 }
 
@@ -373,11 +404,12 @@ header.menu {
     top: 100px;
     right: 0;
     width: 100%;
-    background-color: #1F3C88;
+    background-color: #FF6B00;
     flex-direction: column;
     align-items: center;
     display: none;
     padding: 20px 0;
+    z-index: 2;
   }
 
   .menu-link.active {
@@ -389,6 +421,12 @@ header.menu {
   .ofertas {
     flex: 0 0 calc(100% / 2);
     max-width: calc(100% / 2);
+  }
+
+  .produtos-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
   }
 
 }
@@ -403,5 +441,11 @@ header.menu {
   .ofertas {
     flex: 0 0 100%;
     max-width: 100%;
+  }
+  
+  .produtos-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
   }
 }
