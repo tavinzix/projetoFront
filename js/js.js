@@ -8,14 +8,7 @@ hamb.addEventListener('click', () => {
 
 /*Scrol categorias */
 
-/*const categoria = document.querySelectorAll('.categorias').forEach(() => {
-
-
-
-});*/
-
 const categoria = document.querySelector('.categorias');
-
 const btnEsquerdaCategoria = document.querySelector('.seta-esquerda-categoria');
 const btnDireitaCategoria = document.querySelector('.seta-direita-categoria');
 
