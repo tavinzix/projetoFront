@@ -2,23 +2,27 @@
 const hamb = document.getElementById('menu-hamburguer');
 const menu = document.getElementById('menu-link');
 
-hamb.addEventListener('click', () => {
-  menu.classList.toggle('active');
-});
+if (hamb && menu) {
+  hamb.addEventListener('click', () => {
+    menu.classList.toggle('active');
+  });
+}
+
 
 /*Scrol categorias */
 const categoria = document.querySelector('.categorias');
 const btnEsquerdaCategoria = document.querySelector('.seta-esquerda-categoria');
 const btnDireitaCategoria = document.querySelector('.seta-direita-categoria');
 
-btnEsquerdaCategoria.addEventListener('click', () => {
-  categoria.scrollBy({ left: -200, behavior: 'smooth' });
-});
+if (categoria && btnEsquerdaCategoria && btnDireitaCategoria) {
+  btnEsquerdaCategoria.addEventListener('click', () => {
+    categoria.scrollBy({ left: -200, behavior: 'smooth' });
+  });
 
-btnDireitaCategoria.addEventListener('click', () => {
-  categoria.scrollBy({ left: 200, behavior: 'smooth' });
-});
-
+  btnDireitaCategoria.addEventListener('click', () => {
+    categoria.scrollBy({ left: 200, behavior: 'smooth' });
+  });
+}
 
 
 /*Scrol ofertas recentes*/
@@ -26,11 +30,27 @@ const carrossel = document.querySelector('.carrossel-oferta');
 const btnEsquerdaOferta = document.querySelector('.seta-esquerda-oferta');
 const btnDireitaOferta = document.querySelector('.seta-direita-oferta');
 
-btnEsquerdaOferta.addEventListener('click', () => {
-  carrossel.scrollBy({ left: -220, behavior: 'smooth' });
-});
 
-btnDireitaOferta.addEventListener('click', () => {
-  carrossel.scrollBy({ left: 220, behavior: 'smooth' });
-});
+if (carrossel && btnEsquerdaOferta && btnDireitaOferta) {
+  btnEsquerdaOferta.addEventListener('click', () => {
+    carrossel.scrollBy({ left: -220, behavior: 'smooth' });
+  });
 
+  btnDireitaOferta.addEventListener('click', () => {
+    carrossel.scrollBy({ left: 220, behavior: 'smooth' });
+  });
+}
+
+
+/*Mostrar/esconder senha*/
+const mostrarSenha = document.getElementById('mostrar-senha');
+const senhaInput = document.getElementById('senha');
+mostrarSenha.addEventListener('click', () => {
+  if (senhaInput.type === 'password') {
+    senhaInput.type = 'text';
+    mostrarSenha.innerHTML = '<img src="img/site/olhoFechado.png"></img>';
+  } else {
+    senhaInput.type = 'password';
+    mostrarSenha.innerHTML = '<img src="img/site/olhoAberto.png"></img>';
+  }
+});
