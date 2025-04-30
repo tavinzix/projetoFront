@@ -7,17 +7,16 @@ hamb.addEventListener('click', () => {
 });
 
 /*Scrol categorias */
-
 const categoria = document.querySelector('.categorias');
 const btnEsquerdaCategoria = document.querySelector('.seta-esquerda-categoria');
 const btnDireitaCategoria = document.querySelector('.seta-direita-categoria');
 
 btnEsquerdaCategoria.addEventListener('click', () => {
-  categoria.scrollBy({ left: -800, behavior: 'smooth' });
+  categoria.scrollBy({ left: -200, behavior: 'smooth' });
 });
 
 btnDireitaCategoria.addEventListener('click', () => {
-  categoria.scrollBy({ left: 800, behavior: 'smooth' });
+  categoria.scrollBy({ left: 200, behavior: 'smooth' });
 });
 
 

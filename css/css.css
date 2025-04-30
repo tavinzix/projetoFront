@@ -118,9 +118,7 @@ header.menu {
 }
 
 
-
 /*CATEGORIAS*/
-
 .categorias-exterior {
   padding: 20px;
   position: relative;
@@ -152,7 +150,6 @@ header.menu {
   grid-template-rows: repeat(2, 1fr);
   gap: 20px;
   padding: 20px;
-
 }
 
 .itens-categoria {
@@ -197,20 +194,6 @@ header.menu {
   right: 10px;
   margin-top: 20px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*OFERTAS RECENTES*/
@@ -296,13 +279,7 @@ header.menu {
 }
 
 
-
-
-
-
-
 /*PRODUTOS EM DESTAQUE*/
-
 .produtos-exterior {
   padding: 30px;
 }
