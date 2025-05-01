@@ -54,3 +54,24 @@ mostrarSenha.addEventListener('click', () => {
     mostrarSenha.innerHTML = '<img src="img/site/olhoAberto.png"></img>';
   }
 });
+
+/*Recuperar senha*/
+
+function enviarCodigo(){
+  const cpf = document.getElementById("cpf").value;
+  const dtNasc = document.getElementById("dtNasc").value;
+
+  document.getElementById("form1").setAttribute('style', 'display: none');
+  document.getElementById("form2").setAttribute('style', 'display: block');
+}
+
+function validarCodigo() {
+  const codigo = document.getElementById("codigo").value;
+
+  document.getElementById("form2").setAttribute('style', 'display: none');
+  document.getElementById("form3").setAttribute('style', 'display: block');
+}
+
+function redefinirSenha() {
+  alert("alterar senha");
+}
