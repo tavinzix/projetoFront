@@ -240,7 +240,6 @@ header.menu {
   padding: 10px;
   background: #fff;
   border: 1px solid rgba(0, 0, 0, .09);
-  ;
   text-align: center;
 }
 
@@ -366,7 +365,7 @@ header.menu {
   margin-bottom: 20px;
 }
 
-.login-formulario {
+.login-formulario, .recuperacao-formulario {
   width: 100%;
   max-width: 400px;
   background-color: #ffffff;
@@ -375,20 +374,20 @@ header.menu {
   box-shadow: 0 40px 40px #c1c1c1;
 }
 
-.login-formulario h2 {
+.login-formulario h2, .recuperacao-formulario h2 {
   font-size: 25px;
   color: #333;
   text-align: center;
 }
 
-.login-formulario label {
+.login-formulario label, .recuperacao-formulario label {
   display: block;
   margin-bottom: 10px;
   margin-top: 20px;
   color: #444;
 }
 
-.login-formulario input {
+.login-formulario input, .recuperacao-formulario input{
   width: 100%;
   padding: 10px;
   border-radius: 8px;
@@ -417,7 +416,7 @@ header.menu {
   transform: scale(1.05);
 }
 
-.login-formulario button {
+.login-formulario button, .recuperacao-formulario button {
   width: 100%;
   padding: 15px;
   background-color: #FF6B00;
@@ -434,7 +433,7 @@ header.menu {
   font-style: normal;
 }
 
-.login-formulario button:hover {
+.login-formulario button:hover, .recuperacao-formulario button:hover {
   background-color: #c25304;
 }
 
@@ -454,13 +453,32 @@ header.menu {
   color: #b14b07;
 }
 
+/*RECUPERAR SENHA*/
+.recuperar-exterior {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 
+.recuperar-forms h2{
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.recuperar-forms p{
+  color: #333;
+  font-size: 15px;
+  text-align: center;
+
+}
 
 
 
 /*responsivo*/
 
 @media (max-width: 1200px) {
+
   /*OFERTAS*/
   .ofertas {
     flex: 0 0 calc(100% / 6);
