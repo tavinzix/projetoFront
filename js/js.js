@@ -55,8 +55,19 @@ mostrarSenha.addEventListener('click', () => {
   }
 });
 
-/*Recuperar senha*/
+const mostrarCSenha = document.getElementById('mostrar-cSenha');
+const cSenhaInput = document.getElementById('cSenha');
+mostrarCSenha.addEventListener('click', () => {
+  if (cSenhaInput.type === 'password') {
+    cSenhaInput.type = 'text';
+    mostrarCSenha.innerHTML = '<img src="img/site/olhoFechado.png"></img>';
+  } else {
+    cSenhaInput.type = 'password';
+    mostrarCSenha.innerHTML = '<img src="img/site/olhoAberto.png"></img>';
+  }
+});
 
+/*Recuperar senha*/
 function enviarCodigo(){
   const cpf = document.getElementById("cpf").value;
   const dtNasc = document.getElementById("dtNasc").value;
@@ -73,5 +84,13 @@ function validarCodigo() {
 }
 
 function redefinirSenha() {
-  alert("alterar senha");
+  alert("Senha alterada");
+  window.location.href = "index.html";
+}
+
+/*CADASTRO DE USUARIO*/
+
+function criarContaUsuario(){
+  alert("Conta cadastrada");
+  window.location.href = "index.html";
 }
