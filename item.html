@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/css.css">
+    <link rel="stylesheet" href="css/responsivo.css">
+    <title>Detalhes do produto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!--CABEÇALHO-->
+    <header class="menu">
+        <div class="logo">
+            <a href="index.html"> <img src="img/site/logo.png"></a>
+        </div>
+
+        <form action="buscar produto do banco" method="GET" class="busca-container">
+            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+            <button type="submit" class="lupa-icone">
+                <!-- icone lupa https://icons8.com.br/icon/7695/search-->
+                <img src="img/site/lupa.png" id="iconeft">
+            </button>
+        </form>
+
+        <button class="menu-hamburguer" id="menu-hamburguer">
+            &#9776;
+        </button>
+
+        <ul class="menu-link" id="menu-link">
+            <li><a href="index.html">Início</a></li>
+            <!-- icone carrinho https://icons8.com.br/icon/5esIoe7Rz8YD/buying-->
+            <li><a href="carrinho do usuario"><img src="img/site/carrinho.png"></a></li>
+            <li><a href="perfil do usuario"><img src="img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
+        </ul>
+    </header>
+
+    <main class="detalheProduto-container">
+        <section class="galeria-produto">
+            <div class="imagem-principal">
+                <img src="img/produtos/p1.jpg" id="imagem-grande" alt="Produto">
+            </div>
+
+            <div class="miniaturas">
+                <img src="img/produtos/p1.jpg" onclick="trocarImagem(this)">
+                <img src="img/produtos/p2.png" onclick="trocarImagem(this)">
+                <img src="img/produtos/p3.png" onclick="trocarImagem(this)">
+            </div>
+        </section>
+
+        <section class="informacoes-produto">
+            <h1>Tijolo Furado</h1>
+            <p class="descricao">Tijolo com 9 furos ideal para sua obra. Compre nosso tijolo agora mesmo e garanta que sua casa não irá cair tão cedo</p>
+            <p class="preco">R$ 1,00</p>
+
+            
+            <div class="quantidade-container">
+                <label for="quantidade">Quantidade:</label>
+                <button onclick="alterarQtd(-1)">-</button>
+                <input type="number" id="quantidade" value="1" min="1">
+                <button onclick="alterarQtd(1)">+</button>
+            </div>
+
+            <div class="acoes">
+                <button class="comprar" id="comprar">Comprar Agora</button>
+                <button class="carrinho" id="carrinho">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="frete">
+                <input type="text" placeholder="Digite seu CEP">
+                <button>Calcular Frete</button>
+            </div>
+
+            <div class="vendedor">
+                <h3>Vendedor</h3>
+                <div class="vendedor-info">
+                    <img src="img/lojas/l1.jpg" alt="Logo da loja">
+                    <div>
+                        <a href="#" class="nome-loja">Loja do vendedor</a>
+                        <p>Cidade: Pelotas - RS</p>
+                        <p>Avaliação: ★★★★☆(125 vendas)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="comentarios">
+        <h2>Comentários</h2>
+        <div class="comentario">
+            <strong>João S.</strong>
+            <p>Produto de ótima qualidade, chegou no prazo!</p>
+        </div>
+        <div class="comentario">
+            <strong>Maria C.</strong>
+            <p>Boa durabilidade e preço justo.</p>
+        </div>
+    </section>
+
+    <section class="recomendados">
+        <h2>Produtos semelhantes</h2>
+        <div class="recomendados-lista">
+            <div class="item-recomendado">
+                <img src="img/produtos/p1.jpg" alt="Tinta Acrílica">
+                <p class="nome">Betoneira</p>
+                <p class="preco">R$ 1.500,00</p>
+            </div>
+
+            <div class="item-recomendado">
+                <img src="img/produtos/p2.png" alt="Martelo">
+                <p class="nome">Tijolo Furado</p>
+                <p class="preco">R$ 2,50</p>
+            </div>
+
+            <div class="item-recomendado">
+                <img src="img/produtos/p3.png" alt="Kit de Brocas">
+                <p class="nome">Tijolo Maciço</p>
+                <p class="preco">R$ 3,50</p>
+            </div>
+            <div class="item-recomendado">
+                <img src="img/produtos/p1.jpg" alt="Tinta Acrílica">
+                <p class="nome">Betoneira</p>
+                <p class="preco">R$ 1.500,00</p>
+            </div>
+
+            <div class="item-recomendado">
+                <img src="img/produtos/p2.png" alt="Martelo">
+                <p class="nome">Tijolo Furado</p>
+                <p class="preco">R$ 2,50</p>
+            </div>
+
+            <div class="item-recomendado">
+                <img src="img/produtos/p3.png" alt="Kit de Brocas">
+                <p class="nome">Tijolo Maciço</p>
+                <p class="preco">R$ 3,50</p>
+            </div>
+            <div class="item-recomendado">
+                <img src="img/produtos/p1.jpg" alt="Tinta Acrílica">
+                <p class="nome">Betoneira</p>
+                <p class="preco">R$ 1.500,00</p>
+            </div>
+
+            <div class="item-recomendado">
+                <img src="img/produtos/p2.png" alt="Martelo">
+                <p class="nome">Tijolo Furado</p>
+                <p class="preco">R$ 2,50</p>
+            </div>
+
+            <div class="item-recomendado">
+                <img src="img/produtos/p3.png" alt="Kit de Brocas">
+                <p class="nome">Tijolo Maciço</p>
+                <p class="preco">R$ 3,50</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/js.js"></script>
+</body>
+
+</html>

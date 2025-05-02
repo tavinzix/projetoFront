@@ -426,7 +426,7 @@ header.menu {
 .recuperacao-formulario {
   width: 100%;
   max-width: 400px;
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 40px 40px #c1c1c1;
@@ -554,7 +554,7 @@ header.menu {
 .cadastro-formulario {
   width: 100%;
   max-width: 400px;
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 10px 30px #c1c1c1;
@@ -643,3 +643,248 @@ header.menu {
 }
 
 /*ITENS*/
+.detalheProduto-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding:  30px 30px 50px;
+  gap: 30px;
+  background-color: #fff;
+}
+
+.galeria-produto {
+  flex: 1;
+  max-width: 500px;
+}
+
+.imagem-principal {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.imagem-principal img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.imagem-principal:hover img {
+  transform: scale(1.5);
+}
+
+.miniaturas {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.miniaturas img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.miniaturas img:hover {
+  transform: scale(1.1);
+}
+
+.informacoes-produto {
+  flex: 1;
+  min-width: 300px;
+}
+
+.detalhes-produto h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.descricao{
+  font-size: 15px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+.preco {
+  font-size: 25px;
+  color: #FF6B00;
+  margin-bottom: 15px;
+}
+
+.quantidade-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.quantidade-container button {
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  background-color: #FF6B00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.quantidade-container input {
+  width: 60px;
+  text-align: center;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.acoes {
+  margin-top: 15px;
+  display: flex;
+  gap: 20px;
+}
+
+.acoes button {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  font-size: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.comprar {
+  background-color: #FF6B00;
+}
+
+.carrinho {
+  background-color: #b64d02;
+}
+
+.frete {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.frete input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.frete button {
+  background-color: #FF6B00;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.vendedor {
+  margin-top: 30px;
+  background-color: #f3f3f3;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.comentarios {
+  background-color: #fff;
+  padding: 15px;
+}
+
+.comentarios h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.comentario {
+  background: #f5f5f5;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.vendedor-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.vendedor-info img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #FF6B00;
+}
+
+.nome-loja {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #FF6B00;
+  text-decoration: none;
+}
+
+.nome-loja:hover {
+  text-decoration: underline;
+}
+
+.recomendados {
+  margin-top: 60px;
+  padding: 20px;
+  border-top: 5px solid #eee;
+}
+
+.recomendados h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.recomendados-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.item-recomendado {
+  width: 180px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #fff;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.item-recomendado:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item-recomendado img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.item-recomendado .nome {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.item-recomendado .preco {
+  font-size: 15px;
+  color: #FF6B00;
+  font-weight: bold;
+}

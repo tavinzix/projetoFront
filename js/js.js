@@ -68,7 +68,7 @@ mostrarCSenha.addEventListener('click', () => {
 });
 
 /*Recuperar senha*/
-function enviarCodigo(){
+function enviarCodigo() {
   const cpf = document.getElementById("cpf").value;
   const dtNasc = document.getElementById("dtNasc").value;
 
@@ -89,8 +89,18 @@ function redefinirSenha() {
 }
 
 /*CADASTRO DE USUARIO*/
-
-function criarContaUsuario(){
+function criarContaUsuario() {
   alert("Conta cadastrada");
   window.location.href = "index.html";
+}
+
+/*ITENS */
+function trocarImagem(elemento) {
+  document.getElementById('imagem-grande').src = elemento.src;
+}
+
+function alterarQtd(valor) {
+  const input = document.getElementById('quantidade');
+  const novaQtd = Math.max(1, parseInt(input.value) + valor);
+  input.value = novaQtd;
 }
