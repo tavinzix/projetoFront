@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/*MENU*/
+header.menu {
+  background-color: #FF6B00;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  height: auto;
+}
+
+.logo {
+  margin: -15px;
+}
+
+.logo img {
+  width: 250px;
+}
+
+#busca {
+  background-color: azure;
+  width: 500px;
+  height: 70px;
+}
+
+.menu-hamburguer {
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+
+.menu-link {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.menu-link li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  display: inline-block;
+}
+
+.menu-link li a:hover {
+  opacity: 0.9;
+  transform: translateY(-3px) scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+#icone-perfil {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+
+/*CAIXA DE PESQUISA*/
+.busca-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.busca-input {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.busca-input:focus {
+  border-color: #b64d02;
+  outline: none;
+  box-shadow: 0 2px 8px #858585;
+}
+
+.lupa-icone {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #888;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
+}

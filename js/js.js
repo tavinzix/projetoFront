@@ -30,7 +30,6 @@ const carrossel = document.querySelector('.carrossel-oferta');
 const btnEsquerdaOferta = document.querySelector('.seta-esquerda-oferta');
 const btnDireitaOferta = document.querySelector('.seta-direita-oferta');
 
-
 if (carrossel && btnEsquerdaOferta && btnDireitaOferta) {
   btnEsquerdaOferta.addEventListener('click', () => {
     carrossel.scrollBy({ left: -220, behavior: 'smooth' });
@@ -45,7 +44,8 @@ if (carrossel && btnEsquerdaOferta && btnDireitaOferta) {
 /*Mostrar/esconder senha*/
 const mostrarSenha = document.getElementById('mostrar-senha');
 const senhaInput = document.getElementById('senha');
-mostrarSenha.addEventListener('click', () => {
+if(mostrarSenha){
+  mostrarSenha.addEventListener('click', () => {
   if (senhaInput.type === 'password') {
     senhaInput.type = 'text';
     mostrarSenha.innerHTML = '<img src="img/site/olhoFechado.png"></img>';
@@ -54,10 +54,12 @@ mostrarSenha.addEventListener('click', () => {
     mostrarSenha.innerHTML = '<img src="img/site/olhoAberto.png"></img>';
   }
 });
+}
 
 const mostrarCSenha = document.getElementById('mostrar-cSenha');
 const cSenhaInput = document.getElementById('cSenha');
-mostrarCSenha.addEventListener('click', () => {
+if(mostrarCSenha){
+  mostrarCSenha.addEventListener('click', () => {
   if (cSenhaInput.type === 'password') {
     cSenhaInput.type = 'text';
     mostrarCSenha.innerHTML = '<img src="img/site/olhoFechado.png"></img>';
@@ -66,6 +68,8 @@ mostrarCSenha.addEventListener('click', () => {
     mostrarCSenha.innerHTML = '<img src="img/site/olhoAberto.png"></img>';
   }
 });
+}
+
 
 /*Recuperar senha*/
 function enviarCodigo() {
@@ -103,4 +107,18 @@ function alterarQtd(valor) {
   const input = document.getElementById('quantidade');
   const novaQtd = Math.max(1, parseInt(input.value) + valor);
   input.value = novaQtd;
+}
+
+const miniaturas = document.querySelector('.miniaturas');
+const btnEsquerdaMiniatura = document.querySelector('.seta-esquerda-miniatura');
+const btnDireitaMiniatura = document.querySelector('.seta-direita-miniatura');
+
+if (miniaturas && btnEsquerdaMiniatura && btnDireitaMiniatura) {
+  btnEsquerdaMiniatura.addEventListener('click', () => {
+    miniaturas.scrollBy({ left: -100, behavior: 'smooth' });
+  });
+
+  btnDireitaMiniatura.addEventListener('click', () => {
+    miniaturas.scrollBy({ left: 100, behavior: 'smooth' });
+  });
 }

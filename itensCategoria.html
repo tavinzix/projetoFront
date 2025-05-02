@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/css.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/produtoCategoria.css">
     <link rel="stylesheet" href="css/responsivo.css">
     <title>Categoria</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,12 +36,109 @@
         </ul>
     </header>
 
-    <main>
-        <section class="titulo-categoria">
-            <h1>Tijolos</h1>
-        </section>
+    <div class="titulo-categoria">
+        <h1>Tijolos</h1>
+    </div>
 
+    
+    <main class="layout-itensCategoria">
+        <!--Filtros-->
+        <aside class="filtro-lateral">
+            <h2>Filtros</h2>
+
+            <!--Preço -->
+            <div class="itens-filtros">
+                <label for="valor-min">Valor Mínimo:</label>
+                <input type="number" id="valor-min" name="valor-min" placeholder="R$ 0,00">
+           
+                <label for="valor-max">Valor Máximo:</label>
+                <input type="number" id="valor-max" name="valor-max" placeholder="R$ 1.000,00">
+            </div>
+
+            <!-- Avaliação -->
+            <div class="itens-filtros">
+                <label>Avaliação mínima:</label>
+                <div>
+                    <input type="radio" name="avaliacao" value="4" id="estrelas-4">
+                    <label for="estrelas-4">4 estrelas ou mais</label>
+                </div>
+                <div>
+                    <input type="radio" name="avaliacao" value="3" id="estrelas-3">
+                    <label for="estrelas-3">3 estrelas ou mais</label>
+                </div>
+                <div>
+                    <input type="radio" name="avaliacao" value="2" id="estrelas-2">
+                    <label for="estrelas-2">2 estrelas ou mais</label>
+                </div>
+            </div>
+
+            <!-- Ordenação -->
+            <div class="itens-filtros">
+                <label for="ordenar">Ordenar por:</label>
+                <select id="ordenar" name="ordenar">
+                    <option value="relevancia">Mais Vendidos</option>
+                    <option value="preco_asc">Menor preço</option>
+                    <option value="preco_desc">Maior preço</option>
+                    <option value="avaliacao">Melhor avaliados</option>
+                </select>
+            </div>
+
+            <!-- Localização -->
+            <div class="itens-filtros">
+                <label for="localizacao">Localização:</label>
+                <input type="text" id="localizacao" name="localizacao" placeholder="Cidade">
+            </div>
+
+            <!-- Estoque -->
+            <div class="itens-filtros">
+                <input type="checkbox" id="disponivel" name="disponivel">
+                <label for="disponivel">Somente produtos em estoque</label>
+            </div>
+
+            <button class="btn-filtrar">Aplicar Filtros</button>
+        </aside>
+
+        <!--Itens-->
         <section class="itensCategoria-exterior">
+            <div class="produto-card">
+                <img src="img/produtos/p2.png" alt="Produto">
+                <h3>Tijolo Furado</h3>
+                <p>R$ 1,00</p>
+                <a href="item.html"> <button>Ver Detalhes</button></a>
+            </div>
+
+            <div class="produto-card">
+                <img src="img/produtos/p3.png" alt="Produto">
+                <h3>Tijolo Maciço</h3>
+                <p>R$ 1,50</p>
+                <a href="item.html"> <button>Ver Detalhes</button></a>
+            </div>
+            <div class="produto-card">
+                <img src="img/produtos/p2.png" alt="Produto">
+                <h3>Tijolo Furado</h3>
+                <p>R$ 1,00</p>
+                <a href="item.html"> <button>Ver Detalhes</button></a>
+            </div>
+
+            <div class="produto-card">
+                <img src="img/produtos/p3.png" alt="Produto">
+                <h3>Tijolo Maciço</h3>
+                <p>R$ 1,50</p>
+                <a href="item.html"> <button>Ver Detalhes</button></a>
+            </div>
+            <div class="produto-card">
+                <img src="img/produtos/p2.png" alt="Produto">
+                <h3>Tijolo Furado</h3>
+                <p>R$ 1,00</p>
+                <a href="item.html"> <button>Ver Detalhes</button></a>
+            </div>
+
+            <div class="produto-card">
+                <img src="img/produtos/p3.png" alt="Produto">
+                <h3>Tijolo Maciço</h3>
+                <p>R$ 1,50</p>
+                <a href="item.html"> <button>Ver Detalhes</button></a>
+            </div>
             <div class="produto-card">
                 <img src="img/produtos/p2.png" alt="Produto">
                 <h3>Tijolo Furado</h3>
