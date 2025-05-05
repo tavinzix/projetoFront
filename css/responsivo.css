@@ -114,6 +114,16 @@
     .imagem-principal img{
         width: 80%;
     }
+
+    /*LOJA*/
+
+    .avaliacao-loja{
+        margin-left: 10%;
+    }
+
+    .lista-produtos{
+        gap: 10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -144,5 +154,16 @@
     /*ITENS*/
     .galeria-produto{
         max-width: 360px;
+    }
+
+    /*LOJA*/
+    .perfil-loja{
+        display: grid;
+    }
+    .logo-loja{
+        text-align: center;
+    }
+    .avaliacao-loja{
+        margin-left: 0%;
     }
 }
