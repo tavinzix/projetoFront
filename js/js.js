@@ -44,30 +44,30 @@ if (carrossel && btnEsquerdaOferta && btnDireitaOferta) {
 /*Mostrar/esconder senha*/
 const mostrarSenha = document.getElementById('mostrar-senha');
 const senhaInput = document.getElementById('senha');
-if(mostrarSenha){
+if (mostrarSenha) {
   mostrarSenha.addEventListener('click', () => {
-  if (senhaInput.type === 'password') {
-    senhaInput.type = 'text';
-    mostrarSenha.innerHTML = '<img src="img/site/olhoFechado.png"></img>';
-  } else {
-    senhaInput.type = 'password';
-    mostrarSenha.innerHTML = '<img src="img/site/olhoAberto.png"></img>';
-  }
-});
+    if (senhaInput.type === 'password') {
+      senhaInput.type = 'text';
+      mostrarSenha.innerHTML = '<img src="img/site/olhoFechado.png"></img>';
+    } else {
+      senhaInput.type = 'password';
+      mostrarSenha.innerHTML = '<img src="img/site/olhoAberto.png"></img>';
+    }
+  });
 }
 
 const mostrarCSenha = document.getElementById('mostrar-cSenha');
 const cSenhaInput = document.getElementById('cSenha');
-if(mostrarCSenha){
+if (mostrarCSenha) {
   mostrarCSenha.addEventListener('click', () => {
-  if (cSenhaInput.type === 'password') {
-    cSenhaInput.type = 'text';
-    mostrarCSenha.innerHTML = '<img src="img/site/olhoFechado.png"></img>';
-  } else {
-    cSenhaInput.type = 'password';
-    mostrarCSenha.innerHTML = '<img src="img/site/olhoAberto.png"></img>';
-  }
-});
+    if (cSenhaInput.type === 'password') {
+      cSenhaInput.type = 'text';
+      mostrarCSenha.innerHTML = '<img src="img/site/olhoFechado.png"></img>';
+    } else {
+      cSenhaInput.type = 'password';
+      mostrarCSenha.innerHTML = '<img src="img/site/olhoAberto.png"></img>';
+    }
+  });
 }
 
 
@@ -121,4 +121,24 @@ if (miniaturas && btnEsquerdaMiniatura && btnDireitaMiniatura) {
   btnDireitaMiniatura.addEventListener('click', () => {
     miniaturas.scrollBy({ left: 100, behavior: 'smooth' });
   });
+}
+
+/*LOJA*/
+function abrirJanela() {
+  document.getElementById("janela-avaliacoes").style.display = "block";
+}
+
+function fecharJanela() {
+  document.getElementById("janela-avaliacoes").style.display = "none";
+}
+
+function mostrarCategoria(categoria) {
+  const abas = document.querySelectorAll('.aba');
+  const produtos = document.querySelectorAll('.lista-produtos');
+
+  abas.forEach(btn => btn.classList.remove('ativa'));
+  produtos.forEach(div => div.classList.add('oculto'));
+
+  document.getElementById(categoria).classList.remove('oculto');
+  document.querySelector(`.aba[onclick="mostrarCategoria('${categoria}')"]`).classList.add('ativa');
 }
