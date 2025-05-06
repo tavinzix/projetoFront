@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/perfilUsuario.css">
+    <link rel="stylesheet" href="css/responsivo.css">
+    <title>Iconst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header class="menu">
+        <div class="logo">
+            <a href="index.html"> <img src="img/site/logo.png"></a>
+        </div>
+
+        <form action="buscar produto do banco" method="GET" class="busca-container">
+            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+            <button type="submit" class="lupa-icone">
+                <!-- icone lupa https://icons8.com.br/icon/7695/search-->
+                <img src="img/site/lupa.png" id="iconeft">
+            </button>
+        </form>
+
+        <button class="menu-hamburguer" id="menu-hamburguer">
+            &#9776;
+        </button>
+
+        <ul class="menu-link" id="menu-link">
+            <li><a href="index.html">Início</a></li>
+            <!-- icone carrinho https://icons8.com.br/icon/5esIoe7Rz8YD/buying-->
+            <li><a href="carrinho do usuario"><img src="img/site/carrinho.png"></a></li>
+            <li><a href="perfil do usuario"><img src="img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
+        </ul>
+    </header>
+
+    <main class="pagina-usuario">
+        <section class="perfil-usuario">
+            <img src="img/users/idUser_nome.jpg" class="foto-usuario" alt="Foto do usuário">
+            <div class="info-usuario">
+                <h2>Usuario 1</h2>
+                <p>Email: usuario@email.com</p>
+                <p>Telefone: (99) 99999-9999</p>
+                <a href="editarPerfilUsuario.html"> <button class="btn-edicao">Editar perfil</button></a>
+                <a href="editarEnderecoUsuario.html"> <button class="btn-edicao">Editar endereços</button></a>
+            </div>
+        </section>
+
+        <section class="historico-compras">
+            <h3>Histórico de Pedidos</h3>
+
+            <ul class="filtros-pedidos">
+                <li class="aba ativa" onclick="filtrarPedidos('todos')">Todos</li>
+                <li class="aba" onclick="filtrarPedidos('entregue')">Entregues</li>
+                <li class="aba" onclick="filtrarPedidos('em-transito')">A caminho</li>
+                <li class="aba" onclick="filtrarPedidos('aguardando-pagamento')">Aguardando pagamento</li>
+                <li class="aba" onclick="filtrarPedidos('aguardando-envio')">Aguardando envio</li>
+                <li class="aba" onclick="filtrarPedidos('estornado')">Estornados</li>
+                <li class="aba" onclick="filtrarPedidos('cancelado')">Cancelados</li>
+                <li class="aba" onclick="filtrarPedidos('enviado')">Enviados</li>
+            </ul>
+
+            <ul class="lista-pedidos">
+                <li class="pedido">
+                    <img src="img/produtos/p2.png" alt="Produto" class="foto-produto">
+                    <div class="info-pedido">
+                        <h4>Palete de Tijolos Cerâmicos</h4>
+                        <p>Data: 22/04/2025</p>
+                        <p>Status: <span class="status entregue">Entregue</span></p>
+                        <p>Valor: R$ 89,90</p>
+                        <button class="btn-detalhes">Ver Detalhes</button>
+                    </div>
+                </li>
+
+                <li class="pedido">
+                    <img src="img/produtos/p3.png" alt="Produto" class="foto-produto">
+                    <div class="info-pedido">
+                        <h4>Cimento CP-II 50kg</h4>
+                        <p>Data: 24/04/2025</p>
+                        <p>Status: <span class="status em-transito">Em trânsito</span></p>
+                        <p>Valor: R$ 39,90</p>
+                        <button class="btn-detalhes">Ver Detalhes</button>
+                    </div>
+                </li>
+
+                <li class="pedido">
+                    <img src="img/produtos/p1.jpg" alt="Produto" class="foto-produto">
+                    <div class="info-pedido">
+                        <h4>Betoneira 400L Monofásica</h4>
+                        <p>Data: 20/04/2025</p>
+                        <p>Status: <span class="status aguardando-pagamento">Aguardando pagamento</span></p>
+                        <p>Valor: R$ 159,90</p>
+                        <button class="btn-detalhes">Ver Detalhes</button>
+                    </div>
+                </li>
+                <li class="pedido">
+                    <img src="img/produtos/p4.jpg" alt="Produto" class="foto-produto">
+                    <div class="info-pedido">
+                        <h4>Areia Fina Ensacada 20kg</h4>
+                        <p>Data: 25/04/2025</p>
+                        <p>Status: <span class="status aguardando-envio">Aguardando envio</span></p>
+                        <p>Valor: R$ 19,90</p>
+                        <button class="btn-detalhes">Ver Detalhes</button>
+                    </div>
+                </li>
+                <li class="pedido">
+                    <img src="img/produtos/p3.png" alt="Produto" class="foto-produto">
+                    <div class="info-pedido">
+                        <h4>Cimento CP-II 50kg</h4>
+                        <p>Data: 24/04/2025</p>
+                        <p>Status: <span class="status estornado">Estornado</span></p>
+                        <p>Valor: R$ 39,90</p>
+                        <button class="btn-detalhes">Ver Detalhes</button>
+                    </div>
+                </li>
+
+                <li class="pedido">
+                    <img src="img/produtos/p4.jpg" alt="Produto" class="foto-produto">
+                    <div class="info-pedido">
+                        <h4>Areia Fina Ensacada 20kg</h4>
+                        <p>Data: 25/04/2025</p>
+                        <p>Status: <span class="status cancelado">Cancelado</span></p>
+                        <p>Valor: R$ 19,90</p>
+                        <button class="btn-detalhes">Ver Detalhes</button>
+                    </div>
+                </li>
+
+                <li class="pedido">
+                    <img src="img/produtos/p4.jpg" alt="Produto" class="foto-produto">
+                    <div class="info-pedido">
+                        <h4>Areia Fina Ensacada g</h4>
+                        <p>Data: 25/04/2025</p>
+                        <p>Status: <span class="status enviado">Enviado</span></p>
+                        <p>Valor: R$ 19,90</p>
+                        <button class="btn-detalhes">Ver Detalhes</button>
+                    </div>
+                </li>
+
+                <li class="pedido">
+                    <img src="img/produtos/p4.jpg" alt="Produto" class="foto-produto">
+                    <div class="info-pedido">
+                        <h4>Areia Fina Ensacada g</h4>
+                        <p>Data: 25/04/2025</p>
+                        <p>Status: <span class="status reembolsado">Reembolsado</span></p>
+                        <p>Valor: R$ 19,90</p>
+                        <button class="btn-detalhes">Ver Detalhes</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+
+<script src="js/js.js"></script>
+
+</html>
