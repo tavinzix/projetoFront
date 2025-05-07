@@ -123,6 +123,22 @@ if (miniaturas && btnEsquerdaMiniatura && btnDireitaMiniatura) {
   });
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  const imagemPrincipal = document.querySelector('.imagem-principal');
+  const imagem = document.querySelector('.imagem-principal img');
+  
+  if (imagemPrincipal && imagem) {
+    imagemPrincipal.addEventListener('mousemove', function(e) {
+      const rect = imagemPrincipal.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / imagemPrincipal.offsetWidth) * 100;
+      const y = ((e.clientY - rect.top) / imagemPrincipal.offsetHeight) * 100;
+      
+      imagem.style.setProperty('--x', x + '%');
+      imagem.style.setProperty('--y', y + '%');
+    });
+  }
+});
+
 /*LOJA*/
 function abrirJanela() {
   document.getElementById("janela-avaliacoes").style.display = "block";
@@ -143,8 +159,8 @@ function mostrarCategoria(categoria) {
   document.querySelector(`.aba[onclick="mostrarCategoria('${categoria}')"]`).classList.add('ativa');
 }
 
-/*PERFIL DO USUARIO*/
 
+/*PERFIL DO USUARIO*/
 function filtrarPedidos(filtro) {
   const pedidos = document.querySelectorAll('.lista-pedidos .pedido');
   const abas = document.querySelectorAll('.filtros-pedidos .aba');
@@ -167,4 +183,13 @@ function filtrarPedidos(filtro) {
       }
     });
   }
+}
+
+
+/*CARRINHO*/
+function alterarQuantidadeCarrinho(botao, valor) {
+  const container = botao.closest('.quantidade-container');
+  const input = container.querySelector('input[type="number"]');
+  const novaQtd = Math.max(1, parseInt(input.value) + valor);
+  input.value = novaQtd;
 }
