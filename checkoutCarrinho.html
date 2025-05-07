@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/carrinho.css">
+    <link rel="stylesheet" href="css/responsivo.css">
+    <title>Iconst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header class="menu">
+        <div class="logo">
+            <a href="index.html"> <img src="img/site/logo.png"></a>
+        </div>
+
+        <form action="buscar produto do banco" method="GET" class="busca-container">
+            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+            <button type="submit" class="lupa-icone">
+                <img src="img/site/lupa.png" id="iconeft">
+            </button>
+        </form>
+
+        <button class="menu-hamburguer" id="menu-hamburguer">
+            &#9776;
+        </button>
+
+        <ul class="menu-link" id="menu-link">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="carrinho do usuario"><img src="img/site/carrinho.png"></a></li>
+            <li><a href="perfil do usuario"><img src="img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
+        </ul>
+    </header>
+
+    <section class="pagina-carrinho">
+        <div class="checkout-exterior">
+            <h1>Confirmação de Compra</h1>
+
+            <section>
+                <h2>Escolha um Endereço</h2>
+                <div class="lista-enderecos">
+                    <div class="card">
+                        <input type="radio" name="endereco" checked />
+                        <div>
+                            <p><strong>Rua de casa 1</strong></p>
+                            <p>Pelotas - RS</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <input type="radio" name="endereco" />
+                        <div>
+                            <p><strong>Rua do trabalho, 1</strong></p>
+                            <p>Pelotas - RS</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="adicionar-opcao">+ Adicionar novo endereço</button>
+            </section>
+
+            <section>
+                <h2>Forma de Pagamento</h2>
+                <div class="card-list">
+                    <label class="card">
+                        <input type="radio" name="pagamento" checked />
+                        <div>
+                            <p><strong>Cartão Picpay</strong></p>
+                            <p>Final 1234</p>
+                        </div>
+                    </label>
+
+                    <label class="card">
+                        <input type="radio" name="pagamento" />
+                        <div>
+                            <p><strong>Cartão Nubank</strong></p>
+                            <p>Final 4567</p>
+                        </div>
+                    </label>
+
+                    <label class="card">
+                        <input type="radio" name="pagamento" />
+                        <div>
+                            <p><strong>Boleto</strong></p>
+                            <p>Aprova em até 3 dias úteis</p>
+                        </div>
+                    </label>
+
+                    <label class="card">
+                        <input type="radio" name="pagamento" />
+                        <div>
+                            <p><strong>PIX</strong></p>
+                            <p>Aprova imediatamente</p>
+                        </div>
+                    </label>
+                </div>
+                <button class="adicionar-opcao">+ Adicionar nova forma de pagamento</button>
+            </section>
+
+            <div class="botao-avancar">
+                 <a href="resumoCompra.html"><button class="botao-avancar">Avançar</button></a>
+            </div>
+           
+        </div>
+    </section>
+</body>
+
+<script src="js/js.js"></script>
+
+</html>
