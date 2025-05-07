@@ -121,3 +121,28 @@ header.menu {
   width: 50px;
   height: 50px;
 }
+
+.quantidade-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.quantidade-container button {
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  background-color: #FF6B00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.quantidade-container input {
+  width: 60px;
+  text-align: center;
+  font-size: 16px;
+  padding: 5px;
+}

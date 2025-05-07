@@ -124,6 +124,34 @@
     .lista-produtos{
         gap: 10px;
     }
+
+    /*PERFIL DO USUARIO*/
+    .perfil-usuario {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    
+      .perfil-usuario {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    
+      .pedido {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    
+      .foto-produto {
+        width: 100%;
+        height: auto;
+      }
+    
+      .editar-enderecos {
+        padding: 1rem;
+      }
+      .editar-perfil {
+        padding: 1rem;
+      }
 }
 
 @media (max-width: 480px) {

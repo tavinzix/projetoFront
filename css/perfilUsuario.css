@@ -221,24 +221,6 @@
   align-self: flex-start;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*EDITAR ENDERECO*/
 
 .editar-enderecos {
@@ -314,37 +296,4 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 15px;
-}
-
-
-
-
-/* Responsivo */
-@media (max-width: 768px) {
-  .perfil-usuario {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .perfil-usuario {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .pedido {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .foto-produto {
-    width: 100%;
-    height: auto;
-  }
-
-  .editar-enderecos {
-    padding: 1rem;
-  }
-  .editar-perfil {
-    padding: 1rem;
-  }
 }
