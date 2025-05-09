@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/formulario.css">
+    <link rel="stylesheet" href="css/responsivo.css">
+    <title>Iconst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header class="menu">
+        <div class="logo">
+            <a href="index.html"> <img src="img/site/logo.png"></a>
+        </div>
+
+        <form action="buscar produto do banco" method="GET" class="busca-container">
+            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+            <button type="submit" class="lupa-icone">
+                <img src="img/site/lupa.png" id="iconeft">
+            </button>
+        </form>
+
+        <button class="menu-hamburguer" id="menu-hamburguer">
+            &#9776;
+        </button>
+
+        <ul class="menu-link" id="menu-link">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="carrinho do usuario"><img src="img/site/carrinho.png"></a></li>
+            <li><a href="perfil do usuario"><img src="img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
+        </ul>
+    </header>
+
+    <section class="formulario-solicitacao-vendedor">
+        <h2>Solicitação de cadastro para vender na plataforma </h2>
+        <form action="solicitar como vendedor" method="post">
+            <label for="nome-loja">Nome da Loja:</label>
+            <input type="text" id="nome-loja" name="nome-loja" required>
+
+            <label for="cnpj">CNPJ:</label>
+            <input type="text" id="cnpj" name="cnpj" required>
+
+            <label for="email-contato">E-mail de Contato:</label>
+            <input type="email" id="email-contato" name="email-contato" required>
+
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" name="telefone" required>
+
+            <label for="endereco">CEP:</label>
+            <input type="text" id="endereco" name="endereco" required>
+
+            <label for="endereco">Endereço Comercial:</label>
+            <input type="text" id="endereco" name="endereco" required>
+
+            <label for="categoria">Categoria Principal *</label>
+            <select id="categoria" name="categoria" required>
+                <option value="">Selecione</option>
+                <option value="materiais">Construção Civil</option>
+                <option value="materiais">Materiais de Construção</option>
+                <option value="ferramentas">Ferramentas</option>
+                <option value="maquinas">Máquinas e Equipamentos</option>
+            </select>
+
+            <label for="descricao">Descrição da Loja:</label>
+            <textarea id="descricao" name="descricao" rows="4"></textarea>
+            <button type="submit">Enviar Solicitação</button>
+        </form>
+    </section>
+
+</body>
+
+<script src="js/js.js"></script>
+
+</html>

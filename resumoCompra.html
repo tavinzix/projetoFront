@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <!--CABEÇALHO-->
     <header class="menu">
         <div class="logo">
             <a href="index.html"> <img src="img/site/logo.png"></a>
@@ -33,64 +34,64 @@
 
         <ul class="menu-link" id="menu-link">
             <li><a href="index.html">Início</a></li>
-            <li><a href="carrinho do usuario"><img src="img/site/carrinho.png"></a></li>
-            <li><a href="perfil do usuario"><img src="img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
+            <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
+            <li><a href="perfilUsuario.html"><img src="img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
         </ul>
     </header>
 
     <section class="pagina-carrinho">
         <h2>Resumo da Compra</h2>
         <a href="checkoutCarrinho.html" class="voltar-link">← Voltar</a>
-      
+
         <div class="resumo-container">
-          <div class="coluna-esquerda">
-            <h3>Itens do Pedido</h3>
-            <ul class="lista-produtos-resumo">
-              <li class="produto-resumo">
-                <img src="img/produtos/p1.jpg" alt="Produto" />
-                <div>
-                  <p><strong>Betoneira</strong></p>
-                  <p>Voltagem: Bivolt</p>
-                  <p>Quantidade: 1</p>
-                  <p>Valor: R$ 2.500</p>
+            <div class="coluna-esquerda">
+                <h3>Itens do Pedido</h3>
+                <ul class="lista-produtos-resumo">
+                    <li class="produto-resumo">
+                        <img src="img/produtos/p1.jpg" alt="Produto" />
+                        <div>
+                            <p><strong>Betoneira</strong></p>
+                            <p>Voltagem: Bivolt</p>
+                            <p>Quantidade: 1</p>
+                            <p>Valor: R$ 2.500</p>
+                        </div>
+                    </li>
+                    <li class="produto-resumo">
+                        <img src="img/produtos/p2.png" alt="Produto" />
+                        <div>
+                            <p><strong>Tijolo</strong></p>
+                            <p>Tipo: Cerâmico</p>
+                            <p>Quantidade: 500</p>
+                            <p>Valor: R$ 500,00</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="coluna-direita">
+                <div class="bloco-resumo">
+                    <h4>Endereço de Entrega</h4>
+                    <p>Rua de casa, 1 - Pelotas - RS</p>
                 </div>
-              </li>
-              <li class="produto-resumo">
-                <img src="img/produtos/p2.png" alt="Produto" />
-                <div>
-                  <p><strong>Tijolo</strong></p>
-                  <p>Tipo: Cerâmico</p>
-                  <p>Quantidade: 500</p>
-                  <p>Valor: R$ 500,00</p>
+
+                <div class="bloco-resumo">
+                    <h4>Forma de Pagamento</h4>
+                    <p>Cartão de Crédito - Mastercard ••••1234</p>
                 </div>
-              </li>
-            </ul>
-          </div>
-      
-          <div class="coluna-direita">
-            <div class="bloco-resumo">
-              <h4>Endereço de Entrega</h4>
-              <p>Rua de casa, 1 - Pelotas - RS</p>
+
+                <div class="resumo-total">
+                    <p>Subtotal: R$ 500,00</p>
+                    <p>Frete: R$ 25,00</p>
+                    <hr>
+                    <p class="total">Total: <strong>R$ 3.000,00</strong></p>
+                </div>
+
+                <div class="acoes-resumo">
+                    <button class="botao-confirmar">Confirmar Pedido</button>
+                </div>
             </div>
-      
-            <div class="bloco-resumo">
-              <h4>Forma de Pagamento</h4>
-              <p>Cartão de Crédito - Mastercard ••••1234</p>
-            </div>
-      
-            <div class="resumo-total">
-              <p>Subtotal: R$ 500,00</p>
-              <p>Frete: R$ 25,00</p>
-              <hr>
-              <p class="total">Total: <strong>R$ 3.000,00</strong></p>
-            </div>
-      
-            <div class="acoes-resumo">
-              <button class="botao-confirmar">Confirmar Pedido</button>
-            </div>
-          </div>
         </div>
-      </section>
+    </section>
 </body>
 
 <script src="js/js.js"></script>
