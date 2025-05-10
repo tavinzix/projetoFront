@@ -104,6 +104,13 @@ CREATE TABLE produto_imagens (
     FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
 );
 
+CREATE TABLE vendedor_imagens (
+    id SERIAL PRIMARY KEY,
+    vendedor_id INT NOT NULL,
+    imagem_url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (vendedor_id) REFERENCES vendedores(id) ON DELETE CASCADE
+);
+
 CREATE TABLE avaliacoes_produtos (
     id SERIAL PRIMARY KEY,
     produto_id INT NOT NULL,
@@ -114,18 +121,6 @@ CREATE TABLE avaliacoes_produtos (
     FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
-
-CREATE TABLE avaliacoes_vendedores (
-    id SERIAL PRIMARY KEY,
-    vendedor_id INT NOT NULL,
-    usuario_id INT NOT NULL,
-    nota INT CHECK (nota >= 1 AND nota <= 5),
-    comentario TEXT,
-    data_avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (vendedor_id) REFERENCES vendedores(id) ON DELETE CASCADE,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
-);
-
 
 CREATE TABLE carrinho (
     id SERIAL PRIMARY KEY,
