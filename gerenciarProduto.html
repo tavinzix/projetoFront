@@ -43,12 +43,12 @@
     <main class="painel-produtos">
         <div class="topo-painel">
             <h2>Meus Produtos</h2>
-            <a href="cadastrarProduto.html" class="btn-novo-produto">+ Novo Produto</a>
+            <a href="cadastrarProduto.html" class="btn-novo-produto">Novo Produto</a>
         </div>
 
         <div class="filtros">
             <form method="GET" class="filtro-form">
-                <input type="text" name="busca" placeholder="Buscar por nome..." />
+                <input type="text" name="busca" placeholder="Buscar por nome do produto" />
 
                 <select name="status">
                     <option value="">Status</option>
@@ -86,7 +86,6 @@
                     <td><span class="tag ativo">Ativo</span></td>
                     <td>
                         <a href="editarProduto.html" class="acao editar">Editar</a>
-                        <a href="#" class="acao status">Inativar</a>
                     </td>
                 </tr>
 
@@ -98,7 +97,6 @@
                     <td><span class="tag inativo">Inativo</span></td>
                     <td>
                         <a href="editarProduto.html" class="acao editar">Editar</a>
-                        <a href="#" class="acao status">Ativar</a>
                     </td>
                 </tr>
             </tbody>

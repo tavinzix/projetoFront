@@ -18,44 +18,44 @@
   <div class="cadastro-exterior">
     <div class="cadastro-formulario">
       <h2>Crie sua conta</h2>
-      <form>
+      <form action="cadastro_usuario.php" method="POST">
         <label for="nome">Nome completo</label>
-        <input type="text" id="nome" placeholder="Seu nome completo" required>
+        <input type="text" id="nome" placeholder="Seu nome completo" name="nome" required>
 
         <label for="email">E-mail</label>
-        <input type="email" id="email" placeholder="seu@email.com" required>
+        <input type="email" id="email" placeholder="seu@email.com" name="email" required>
 
         <label for="cpf">CPF</label>
-        <input type="text" id="cpf" placeholder="000.000.000-00" required>
+        <input type="text" id="cpf" placeholder="000.000.000-00" name="cpf" required>
 
         <label for="nascimento">Data de nascimento</label>
-        <input type="date" id="nascimento" min="1900-01-01" max="2025-12-31" required>
+        <input type="date" id="nascimento" min="1900-01-01" max="2025-12-31" name="nascimento" required>
 
         <label for="telefone">Telefone</label>
-        <input type="tel" id="telefone" placeholder="(00) 00000-0000">
+        <input type="tel" id="telefone" placeholder="(00) 00000-0000" name="telefone">
 
         <div class="senha-input">
           <label for="senhaLabel">Senha</label>
-          <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required />
+          <input type="password" id="senha" placeholder="Digite sua senha" name="senha" required />
           <span class="mostrar-senha" id="mostrar-senha">
             <img src="img/site/olhoAberto.png"></img>
           </span>
         </div>
 
         <div class="senha-input">
-          <label for="cSenhaLabel">Senha</label>
-          <input type="password" id="cSenha" name="cSenha" placeholder="Confirme sua senha" required />
+          <label for="cSenhaLabel">Confirmar senha</label>
+          <input type="password" id="cSenha" placeholder="Confirme sua senha" name="cSenha" required />
           <span class="mostrar-senha" id="mostrar-cSenha">
             <img src="img/site/olhoAberto.png"></img>
           </span>
         </div>
 
-        <button onclick="criarContaUsuario()">Criar Conta</button>
-
+        <button type="submit" name="botaoEnviar">Criar Conta</button>
+        </form>
         <div class="link-cadastro">
-          <a href="login.html">← Já tem uma conta? Entrar</a>
+          <a href="login.php">← Já tem uma conta? Entrar</a>
         </div>
-      </form>
+      
     </div>
   </div>
 

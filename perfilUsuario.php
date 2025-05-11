@@ -1,3 +1,28 @@
+<?php
+    session_start();
+    require_once('config.inc.php');
+    ini_set('default_charset', 'utf-8');
+
+    if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
+        header("Location:login.php");
+        exit;
+    }
+
+    $cpf = $_SESSION['cpf'];
+    $sql = "SELECT * FROM usuarios WHERE cpf = :cpf";
+    $statement = $connection->prepare($sql);
+    $statement->bindValue(':cpf', $cpf);
+    $statement->execute();
+
+    $usuario = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if (!$usuario) {
+        echo "Usuário não encontrado.";
+        exit;
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -34,6 +59,8 @@
 
         <ul class="menu-link" id="menu-link">
             <li><a href="index.html">Início</a></li>
+            <li><a href="solicitacaoCadastroVendedor.html">Quero vender na plataforma</a></li>
+            <li><a href="perfilLoja.html">Painel do vendedor</a></li>
             <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.html"><img src="img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
         </ul>
@@ -48,6 +75,7 @@
                 <p>Telefone: (99) 99999-9999</p>
                 <a href="editarPerfilUsuario.html"> <button class="btn-edicao">Editar perfil</button></a>
                 <a href="editarEnderecoUsuario.html"> <button class="btn-edicao">Editar endereços</button></a>                
+                <a href="sair.php"> <button class="btn-edicao">Finalizar sessão</button></a>                
             </div>
         </section>
 

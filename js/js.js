@@ -92,11 +92,6 @@ function redefinirSenha() {
   window.location.href = "index.html";
 }
 
-/*CADASTRO DE USUARIO*/
-function criarContaUsuario() {
-  alert("Conta cadastrada");
-  window.location.href = "index.html";
-}
 
 /*ITENS */
 function trocarImagem(elemento) {
