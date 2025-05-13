@@ -21,11 +21,13 @@ if (!(empty($cpf) or empty($senha))) // testa se os campos do formulário não e
 		exit; // Certifica que a execução do script seja interrompida após o redirecionamento
 	} else {
 		$_SESSION["msg"] = "Usuário ou senha inválidos"; // mensagem de erro
+		echo "<script>alert('Usuário ou senha inválidos!');</script>";
 		header("Location:login.php"); // volta para o login
 		exit;
 	}
 } else { // caso contrário, se algum campo estiver vazio
 	$_SESSION["msg"] = "Preencha campos cpf e senha"; // mensagem de erro
+	echo "<script>alert('Preencha todos os campos');</script>";
 	header("Location:login.php"); // volta para o login
 	exit;
 }
