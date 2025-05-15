@@ -16,6 +16,7 @@ COMMENT ON COLUMN usuarios.status IS '1 = ativo, 2 = inativo, 3 = banido';
 CREATE TABLE enderecos (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
+    tipo CHARACTER(1) DEFAULT 'Casa' CHECK (tipo IN ('Casa', 'Trabalho')),
     cep VARCHAR(9) NOT NULL,
     estado VARCHAR(2) NOT NULL,
     cidade VARCHAR(100) NOT NULL,
@@ -34,7 +35,6 @@ CREATE TABLE vendedores (
     descricao_loja TEXT,
     imagem_logo VARCHAR(255),
     avaliacao_media NUMERIC(3,2) DEFAULT 0.00,
-    quantidade_vendas INT DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
@@ -108,16 +108,9 @@ CREATE TABLE vendedores_produtos (
 CREATE TABLE produto_imagens (
     id SERIAL PRIMARY KEY,
     produto_id INT NOT NULL,
-    imagem_url VARCHAR(255) NOT NULL,
+    imagem VARCHAR(255) NOT NULL,
     ordem INT DEFAULT 1,
     FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
-);
-
-CREATE TABLE vendedor_imagens (
-    id SERIAL PRIMARY KEY,
-    vendedor_id INT NOT NULL,
-    imagem_url VARCHAR(255) NOT NULL,
-    FOREIGN KEY (vendedor_id) REFERENCES vendedores(id) ON DELETE CASCADE
 );
 
 CREATE TABLE avaliacoes_produtos (
@@ -175,7 +168,7 @@ CREATE TABLE vendedores_ofertas (
     produto_id INT NOT NULL,
     preco_oferta NUMERIC(10,2) NOT NULL,
     data_inicio TIMESTAMP NOT NULL,
-    data_fim TIMESTAMP NOT NULL,
+    data_fim date NOT NULL,
     ativo BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (vendedor_id) REFERENCES vendedores(id) ON DELETE CASCADE,
     FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
