@@ -28,12 +28,18 @@
             echo "Arquivo não pode ser copiado para o servidor.";
         }
         
-        $sql = "UPDATE usuarios SET nome_completo = :nome, email = :email, senha = :nova_senha, telefone = :telefone, img_user = :imagem WHERE id = :id";
+        if(isset($senha_atual) && $senha_atual !='' && isset($nova_senha) && $nova_senha !='' && isset($confirmar_senha) && $confirmar_senha !=''){
+            $sql = "UPDATE usuarios SET nome_completo = :nome, email = :email, senha = :nova_senha, telefone = :telefone, img_user = :imagem WHERE id = :id";
+            $statement = $connection->prepare($sql); 
+        }else{
+            $sql = "UPDATE usuarios SET nome_completo = :nome, email = :email, telefone = :telefone, img_user = :imagem WHERE id = :id";
+            $statement = $connection->prepare($sql); 
+        }
+        
         $statement = $connection->prepare($sql);
         $statement->bindParam(':imagem', $novo_nome, PDO::PARAM_INT);
     }else{
-        /*TODO se não alterar a senha esta ficando em branco */
-        if(isset($senha_atual) && isset($nova_senha) && isset($confirmar_senha)){
+        if(isset($senha_atual) && $senha_atual !='' && isset($nova_senha) && $nova_senha !='' && isset($confirmar_senha) && $confirmar_senha !=''){
             $sql = "UPDATE usuarios SET nome_completo = :nome, email = :email, senha = :nova_senha, telefone = :telefone WHERE id = :id";
             $statement = $connection->prepare($sql); 
         }else{
@@ -44,7 +50,6 @@
    
    $statement->bindParam(':nome', $nome, PDO::PARAM_STR);
    $statement->bindParam(':email', $email, PDO::PARAM_STR);
-   $statement->bindParam(':nova_senha', $nova_senha, PDO::PARAM_STR);
    $statement->bindParam(':telefone', $telefone, PDO::PARAM_STR);
    $statement->bindParam(':id', $id, PDO::PARAM_INT);
 
@@ -53,13 +58,7 @@
    if ($statement) {
         $_SESSION['msgSucesso'] = 'Alteração Efetuada com sucesso';
         header("Location:perfilUsuario.php");
-
    } else {
       echo "Erro";
    }
 ?>
-
-<br><a href="form_cad_usuario.php" style="text-decoration: none;">Cadastrar usuário</a><br>
-<a href="listagem_usuario.php" style="text-decoration: none;">Listar usuário</a><br>
-<a href="form_cad_prod.php" style="text-decoration: none;">Cadastrar produto</a><br>
-<a href="listagem_produto.php" style="text-decoration: none;">Listar produto</a><br>

@@ -19,7 +19,18 @@
         }
     }
 ?>
-
+ <!--/*TODO arrumar header de todas as paginas]
+     /*TODO criar carrinho {
+        vincular com a quantidade   
+        habilitar opção no botão da pagina do produto
+     }
+     
+     /*TODO pagina do adm para cadastrar categorias
+     /*TODO pagina do vendedor para cadastrar produtos
+     
+     
+     -->
+    
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -40,7 +51,7 @@
     <!--CABEÇALHO-->
     <header class="menu">
         <div class="logo">
-            <a href="index.html"> <img src="img/site/logo.png"></a>
+            <a href="index.php"> <img src="img/site/logo.png"></a>
         </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
@@ -55,7 +66,7 @@
         </button>
 
         <ul class="menu-link" id="menu-link">
-            <li><a href="index.html">Início</a></li>
+            <li><a href="index.php">Início</a></li>
             <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>

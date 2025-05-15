@@ -20,9 +20,7 @@
     if ($usuario && !empty($usuario['img_user'])) {
         $imagemUsuario = 'img/users/' . ($usuario['img_user']);
     }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -75,7 +73,7 @@
                 <p><?php echo $usuario['email']?></p>
                 <p><?php echo $usuario['telefone']?></p>
                 <a href="form_editarPerfilUsuario.php"> <button class="btn-edicao">Editar perfil</button></a>
-                <a href="editarEnderecoUsuario.html"> <button class="btn-edicao">Editar endereços</button></a>                
+                <a href="form_editarEnderecoUsuario.php"> <button class="btn-edicao">Editar endereços</button></a>                
                 <a href="sair.php"> <button class="btn-edicao">Finalizar sessão</button></a>                
             </div>
         </section>
