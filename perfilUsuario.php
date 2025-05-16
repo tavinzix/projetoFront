@@ -1,3 +1,27 @@
+<?php
+    session_start();
+    require_once('config.inc.php');
+    ini_set('default_charset', 'utf-8');
+
+    if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
+        header("Location:login.php");
+        exit;
+    }
+
+    $cpf = $_SESSION['cpf'];
+
+    $sql = "SELECT * FROM usuarios WHERE cpf = :cpf";
+    $stmt = $connection->prepare($sql);
+    $stmt->bindParam(':cpf', $cpf);
+    $stmt->execute();
+    
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($usuario && !empty($usuario['img_user'])) {
+        $imagemUsuario = 'img/users/' . ($usuario['img_user']);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -34,23 +58,27 @@
 
         <ul class="menu-link" id="menu-link">
             <li><a href="index.html">Início</a></li>
+            <li><a href="solicitacaoCadastroVendedor.html">Quero vender na plataforma</a></li>
+            <li><a href="perfilLoja.html">Painel do vendedor</a></li>
             <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
-            <li><a href="perfilUsuario.html"><img src="img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>
     </header>
 
     <main class="pagina-usuario">
         <section class="perfil-usuario">
-            <img src="img/users/idUser_nome.jpg" class="foto-usuario" alt="Foto do usuário">
+            <img src="<?= $imagemUsuario ?>" class="foto-usuario" alt="Foto do usuário">
             <div class="info-usuario">
-                <h2>Usuario 1</h2>
-                <p>Email: usuario@email.com</p>
-                <p>Telefone: (99) 99999-9999</p>
-                <a href="editarPerfilUsuario.html"> <button class="btn-edicao">Editar perfil</button></a>
-                <a href="editarEnderecoUsuario.html"> <button class="btn-edicao">Editar endereços</button></a>                
+                <h2><?php echo $usuario['nome_completo']?></h2>
+                <p><?php echo $usuario['email']?></p>
+                <p><?php echo $usuario['telefone']?></p>
+                <a href="form_editarPerfilUsuario.php"> <button class="btn-edicao">Editar perfil</button></a>
+                <a href="form_editarEnderecoUsuario.php"> <button class="btn-edicao">Editar endereços</button></a>                
+                <a href="sair.php"> <button class="btn-edicao">Finalizar sessão</button></a>                
             </div>
         </section>
 
+        <!--/*TODO conectar com o banco-->
         <section class="historico-compras">
             <h3>Histórico de Pedidos</h3>
 
@@ -155,6 +183,13 @@
         </section>
     </main>
 
+    <!--/*TODO mostrar mensagem depois de carregar a pagina-->
+    <?php
+        if(isset($_SESSION['msgSucesso'])){
+            echo '<script>alert("'.$_SESSION['msgSucesso'].'")</script>';
+            unset($_SESSION["msgSucesso"]);
+        }
+    ?>
 </body>
 
 <script src="js/js.js"></script>

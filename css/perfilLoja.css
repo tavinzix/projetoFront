@@ -85,6 +85,7 @@
 
 canvas {
     max-width: 100%;
+<<<<<<< HEAD
 }
 
 
@@ -188,4 +189,6 @@ canvas {
 .acao.editar:hover,
 .acao.status:hover {
     text-decoration: underline;
+=======
+>>>>>>> 73465bb12c929c84bd817a95417014d688743544
 }

@@ -24,7 +24,7 @@
     </div>
 
     <div class="painel-esquerda">
-      <form class="login-formulario" action="fazer login">
+      <form class="login-formulario" action="valida_login.php" method="POST">
         <h2>Bem-vindo de volta!</h2>
 
         <label for="cpfLabel">CPF</label>
@@ -42,7 +42,7 @@
 
         <div class="links">
           <a href="recuperarSenha.html">Esqueceu a senha?</a>
-          <a href="criarContaUsuario.html">Criar nova conta</a>
+          <a href="form_criarContaUsuario.php">Criar nova conta</a>
         </div>
       </form>
     </div>

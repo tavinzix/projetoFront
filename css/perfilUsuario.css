@@ -1,299 +1,305 @@
 .pagina-usuario {
-  max-width: 1000px;
-  margin: 30px auto;
-  font-family: "Roboto Condensed", sans-serif;
+    max-width: 1000px;
+    margin: 30px auto;
+    font-family: "Roboto Condensed", sans-serif;
 }
 
 .perfil-usuario {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 30px;
-  background: #f5f5f5;
-  padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    background: #f5f5f5;
+    padding: 15px;
 }
 
 .foto-usuario {
-  width: 100px;
-  height: 100px;
-  border-radius: 100px;
-  object-fit: cover;
-  border: 2px solid #ccc;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    object-fit: cover;
+    border: 2px solid #ccc;
 }
 
 .info-usuario h2 {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .info-usuario p {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .btn-edicao,
 .btn-endicao {
-  background: #FF6B00;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-right: 01px;
+    background: #FF6B00;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 01px;
 }
 
 .btn-edicao:hover,
 .btn-endicao:hover,
-.btn-detalhes:hover, 
+.btn-detalhes:hover,
 .btn-salvar:hover {
-  background: #b14b07;
+    background: #b14b07;
 }
 
 .historico-compras h3 {
-  margin-bottom: 15px;
-  font-size: 20px;
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
 .filtros-pedidos {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  gap: 10px;
-  margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .aba {
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: bold;
-  color: rgb(255, 255, 255);
-  background: #adadad;
-  border-radius: 20px;
-  transition: 0.5s;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    background: #adadad;
+    border-radius: 20px;
+    transition: 0.5s;
 }
 
 .aba.ativa {
-  background-color: #FF6B00;
-  color: white;
+    background-color: #FF6B00;
+    color: white;
 }
 
 .aba:hover {
-  transform: translateY(-3px);
+    transform: translateY(-3px);
 }
 
 .lista-pedidos {
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 15px;
 }
 
 .pedido {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  padding: 15px;
-  border-radius: 10px;
-  background: #f8f8f8;
-  border: 1px solid #ddd;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
 }
 
 .foto-produto {
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
 }
 
 .info-pedido h4 {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .info-pedido p {
-  margin: 5px;
+    margin: 5px;
 }
 
 .status {
-  font-weight: bold;
-  padding: 3px 8px;
-  border-radius: 5px;
-  font-size: 15px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 15px;
 }
 
 .status.entregue {
-  background-color: #d4f5d4;
-  color: green;
+    background-color: #d4f5d4;
+    color: green;
 }
 
 .status.status.em-transito {
-  background-color: #d0ebff;
-  color: #0275d8;
+    background-color: #d0ebff;
+    color: #0275d8;
 }
 
 .status.aguardando-pagamento {
-  background-color: #fff0cc;
-  color: #b48c00;
+    background-color: #fff0cc;
+    color: #b48c00;
 }
 
 .status.aguardando-envio {
-  background-color: #ffe3d1;
-  color: #ef5b00;
+    background-color: #ffe3d1;
+    color: #ef5b00;
 }
 
 .status.estornado {
-  background-color: #f8d7da;
-  color: #8e1cb1;
+    background-color: #f8d7da;
+    color: #8e1cb1;
 }
 
 .status.cancelado {
-  background: #ffe0e0;
-  color: red;
+    background: #ffe0e0;
+    color: red;
 }
 
 .status.enviado {
-  background-color: #e0f7f4;
-  color: #066b62;
+    background-color: #e0f7f4;
+    color: #066b62;
 }
 
 .status.reembolsado {
-  background-color: #dce9c8;
-  color: #5c9306;
+    background-color: #dce9c8;
+    color: #5c9306;
 }
 
 .btn-detalhes {
-  margin-top: 10px;
-  background: #FF6B00;
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
+    margin-top: 10px;
+    background: #FF6B00;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 
 /*EDITAR PERFIL USUARIO*/
 
 .editar-perfil {
-  background: #f9f9f9;
-  padding: 30px;
-  border-radius: 12px;
-  margin-top: 20px;
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 20px;
 }
 
 .editar-perfil h3 {
-  margin-bottom: 15px;
-  font-size: 20px;
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
 .form-perfil {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.campo-form {
-  display: flex;
-  flex-direction: column;
+.campo-form{
+    display: flex;
+    flex-direction: column;
 }
 
-.campo-form label {
-  margin-bottom: 10px;
-  font-weight: bold;
+.campo-form label,
+.campo-form-foto label {
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
-.campo-form input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 15px;
+.campo-form input,
+.campo-form-foto input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.container-fotos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 30px;
+}
+
+.foto-interna {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.campo-form-foto img {
+    height: 250px;
+    width: 250px;
 }
 
 .btn-salvar {
-  background-color: #FF6B00;
-  color: white;
-  border: none;
-  padding: 12px;
-  font-size: 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 15px;
-  align-self: flex-start;
+    background-color: #FF6B00;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    align-self: flex-start;
 }
 
 /*EDITAR ENDERECO*/
 
 .editar-enderecos {
-  background: #f9f9f9;
-  padding: 30px;
-  border-radius: 12px;
-  margin-top: 30px;
+    background: #f9f9f9;
+    padding: 30px;
 }
 
 .editar-enderecos h3 {
-  font-size: 20px;
-  margin-bottom: 20px;
+    font-size: 20px;
+    margin-bottom: 20px;
 }
 
 .lista-enderecos {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 30px;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
 }
 
 .endereco {
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
 }
 
 .acoes-endereco {
-  margin-top: 10px;
-  display: flex;
-  gap: 15px;
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
 }
 
 .btn-editar,
 .btn-remover {
-  background-color: #FF6B00;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 15px;
+    background-color: #FF6B00;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
 }
 
 .btn-remover {
-  background-color: #c0392b;
+    background-color: #c0392b;
 }
 
 .btn-editar:hover,
 .btn-remover:hover {
-  transform: translateY(-3px);
+    transform: translateY(-3px);
 }
 
 .form-endereco {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .form-endereco h4 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.campo-form label {
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.campo-form input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 15px;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
