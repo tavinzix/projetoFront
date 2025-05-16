@@ -1,28 +1,28 @@
 .loja-info {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
 }
 
-.loja-info img{
-  width: 80px;
-  height: 80px;
-  border-radius: 10px;
-  object-fit: cover;
+.loja-info img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
 }
 
 .loja-dados h2 {
-  margin: 0;
-  font-size: 20px;
+    margin: 0;
+    font-size: 20px;
 }
 
 .loja-dados p {
-  margin: 4px 0 0;
-  color: #666;
-  font-size: 14px;
+    margin: 4px 0 0;
+    color: #666;
+    font-size: 14px;
 }
 
 .perfilLoja-exterior {
@@ -88,3 +88,104 @@ canvas {
 }
 
 
+/*GERENCIAR PRODUTOS*/
+.painel-produtos {
+    max-width: 1000px;
+    margin: 30PX auto;
+    padding: 15PX;
+}
+
+.topo-painel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.topo-painel h2 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.btn-novo-produto {
+    background-color: #FF6B00;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.filtros {
+    margin-bottom: 1rem;
+}
+
+.filtros form {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.filtro-form input,
+.filtro-form select {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.filtros button {
+    background-color: #FF6B00;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.tabela-produtos {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-produtos th,
+.tabela-produtos td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.imagem-produto{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.tag {
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.tag.ativo {
+    background-color: #d1f7c4;
+    color: #2e7d32;
+}
+
+.tag.inativo {
+    background-color: #ffe0e0;
+    color: #c62828;
+}
+
+.acao {
+    margin-right: 0.5rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: #0066cc;
+}
+
+.acao.editar:hover,
+.acao.status:hover {
+    text-decoration: underline;
+}

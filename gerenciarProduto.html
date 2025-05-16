@@ -47,8 +47,8 @@
         </div>
 
         <div class="filtros">
-            <form method="GET" class="filtro-form">
-                <input type="text" name="busca" placeholder="Buscar por nome..." />
+            <form method="GET">
+                <input type="text" name="busca" placeholder="Buscar por nome do produto" />
 
                 <select name="status">
                     <option value="">Status</option>
@@ -62,7 +62,7 @@
                     <option value="sem">Sem estoque</option>
                 </select>
 
-                <button type="submit" class="btn-filtrar">Filtrar</button>
+                <button type="submit">Filtrar</button>
             </form>
         </div>
 
@@ -79,26 +79,24 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><img src="img/produtos/p1.jpg" class="mini-img" /></td>
+                    <td><img src="img/produtos/p1.jpg" class="imagem-produto" /></td>
                     <td>Cimento CP-II 50kg</td>
                     <td>R$ 35,90</td>
                     <td>20</td>
                     <td><span class="tag ativo">Ativo</span></td>
                     <td>
                         <a href="editarProduto.html" class="acao editar">Editar</a>
-                        <a href="#" class="acao status">Inativar</a>
                     </td>
                 </tr>
 
                 <tr>
-                    <td><img src="img/produtos/p2.png" class="mini-img" /></td>
+                    <td><img src="img/produtos/p2.png" class="imagem-produto" /></td>
                     <td>Furadeira Elétrica 500W</td>
                     <td>R$ 129,00</td>
                     <td>0</td>
                     <td><span class="tag inativo">Inativo</span></td>
                     <td>
                         <a href="editarProduto.html" class="acao editar">Editar</a>
-                        <a href="#" class="acao status">Ativar</a>
                     </td>
                 </tr>
             </tbody>
@@ -107,6 +105,5 @@
 </body>
 
 <script src="js/js.js"></script>
-<script src="js/grafico.js"></script>
 
 </html>
