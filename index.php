@@ -18,17 +18,24 @@
             $imagemUsuario = 'img/users/' . ($usuario['img_user']);
         }
     }
+
+    $sql = "SELECT * FROM categorias ORDER BY nome";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute();
+
 ?>
- <!--/*TODO arrumar header de todas as paginas]
-     /*TODO criar carrinho {
+<!--TODO arrumar header de todas as paginas
+    TODO arrumar favicon de todas as paginas
+    TODOarrumar responsividade das paginas
+    TODO verificar js
+    TODO criar carrinho {
         vincular com a quantidade   
-        habilitar opção no botão da pagina do produto
-     }
-     
-     /*TODO pagina do adm para cadastrar categorias
-     /*TODO pagina do vendedor para cadastrar produtos
-     
-     
+        habilitar opção de adicionar ao carrinho no botão da pagina do produto
+    }
+    TODO funcionalidades do adm
+    TODO pagina do vendedor para cadastrar produtos
+    TODO funcionalidades do vendedor
+    TODO buscar categorias no index e abrir a pagina correspondente
      -->
     
 <!DOCTYPE html>
@@ -82,15 +89,23 @@
             <button class="btn seta-esquerda-categoria">&#10094;</button>
 
             <div class="categorias">
+                <?php
+                    while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) { 
+                ?>
                 <div class="itens-categoria">
+                    <!-- TODO abrir pagina da categoria com os respectivos itens
+                     <a href="itensCategoria/<?php echo $categoria['url']; ?>.html">-->
                     <a href="itensCategoria.html">
                         <div class="img-categoria">
-                            <img src="img/categoria/tintas.jpg" alt="Tintas">
+                            <img src="img/categoria/<?= $categoria['imagem'] ?>" alt="<?php echo $categoria['nome'] ?>">
                         </div>
-                        <p>Tintas</p>
+                        <p><?php echo $categoria['nome'] ?></p>
                     </a>
                 </div>
-
+                <?php 
+                    }
+                ?>
+            <!--
                 <div class="itens-categoria">
                     <a href="itensCategoria.html">
                         <div class="img-categoria">
@@ -383,7 +398,7 @@
                     </div>
                     <p>Construção</p>
                     </a>
-                </div>
+                </div>-->
 
             </div>
 
@@ -392,7 +407,7 @@
     </section>
 
     <!--OFERTAS EM DESTAQUE-->
-    <!--Listar ofertas com maior diferença de preço
+    <!-- TODO Listar ofertas com maior diferença de preço
         quase acabando 
         publicadas por último-->
     <section>
@@ -540,7 +555,7 @@
     </section>
 
     <!--PRODUTOS EM DESTAQUE-->
-    <!--listar itens em 6 colunas e algumas linhas, os demais clicar no botão para abrir nova pagina com itens-->
+    <!--TODO listar itens em 6 colunas e algumas linhas, os demais clicar no botão para abrir nova pagina com itens-->
     <main>
         <div class="produtos-exterior">
             <div class="topo-produtos">

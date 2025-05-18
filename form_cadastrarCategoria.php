@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/formulario.css">
+  <link rel="stylesheet" href="css/responsivo.css">
+  <title>Criar conta - Iconst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+</head>
+<!-- TODO criar css proprio-->
+<body>
+  <div class="cadastro-exterior">
+    <div class="cadastro-formulario">
+      <h2>Cadastrar categoria</h2>
+      <form action="cadastro_categoria.php" method="POST" enctype="multipart/form-data">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="descricao">Descrição</label>
+            <input type="text" id="descricao" name="descricao" required>
+            
+            <label for="url">URL</label>
+            <input type="text" id="url" name="url" required>
+
+            <div class="foto-interna">
+                <label for="foto">Imagem</label>
+                <img id="img" style="max-width:150px">
+                <input type="file" id="foto" name="novaImagem" required 
+                onchange="img.src = window.URL.createObjectURL(this.files[0])">
+            </div>
+
+            <button type="submit" name="botaoEnviar">Criar categoria</button>
+        </form>
+      
+    </div>
+  </div>
+
+  <script src="js/js.js"></script>
+</body>
+
+</html>
