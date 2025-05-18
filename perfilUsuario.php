@@ -12,7 +12,7 @@
 
     $sql = "SELECT * FROM usuarios WHERE cpf = :cpf";
     $stmt = $connection->prepare($sql);
-    $stmt->bindParam(':cpf', $cpf);
+    $stmt->bindParam(':cpf', $cpf, PDO::PARAM_STR);
     $stmt->execute();
     
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -23,7 +23,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -56,10 +56,24 @@
             &#9776;
         </button>
 
-        <ul class="menu-link" id="menu-link">
+        <!--<ul class="menu-link" id="menu-link">
             <li><a href="index.html">Início</a></li>
-            <li><a href="solicitacaoCadastroVendedor.html">Quero vender na plataforma</a></li>
-            <li><a href="perfilLoja.html">Painel do vendedor</a></li>
+            <?php if ($_SESSION['tipo_usuario'] == 'admin'){?>
+                <li><a href="painelAdm.php">Painel Administrativo</a></li><?php } ?>
+            <?php if ($_SESSION['tipo_usuario'] == 'vendedor'){?>
+                <li><a href="perfilLoja.html">Painel do vendedor</a></li><?php } ?>
+            <?php if ($_SESSION['tipo_usuario'] == 'usuario'){?>
+                <li><a href="solicitacaoCadastroVendedor.html">Quero vender na plataforma</a></li>
+            <?php } ?>          
+            <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
+        </ul>-->
+
+         <ul class="menu-link" id="menu-link">
+            <li><a href="index.html">Início</a></li>
+                <li><a href="painelAdm.php">Painel Administrativo</a></li>
+                <li><a href="perfilLoja.html">Painel do vendedor</a></li>
+                <li><a href="solicitacaoCadastroVendedor.html">Quero vender na plataforma</a></li>
             <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>
@@ -73,7 +87,9 @@
                 <p><?php echo $usuario['email']?></p>
                 <p><?php echo $usuario['telefone']?></p>
                 <a href="form_editarPerfilUsuario.php"> <button class="btn-edicao">Editar perfil</button></a>
-                <a href="form_editarEnderecoUsuario.php"> <button class="btn-edicao">Editar endereços</button></a>                
+                <a href="form_editarEnderecoUsuario.php"> <button class="btn-edicao">Editar endereços</button></a>           
+                <!--/*TODO criar formulário para forma de pagamento-->     
+                <a href="form_editarEnderecoUsuario.php"> <button class="btn-edicao">Formas de pagamento</button></a>                
                 <a href="sair.php"> <button class="btn-edicao">Finalizar sessão</button></a>                
             </div>
         </section>
