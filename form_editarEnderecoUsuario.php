@@ -62,7 +62,8 @@ if ($cpf) {
 
 <section class="editar-enderecos">
     <h3>Meus Endereços</h3>
-<!--/*TODO arrumar botão de editar para carregar os dados para o input-->
+    <!--TODO arrumar botão de editar para carregar os dados para o input
+        TODO mensagem quando não tiver nenhum endereço-->
     <div class="lista-enderecos">
         <?php 
         if ($cpf){

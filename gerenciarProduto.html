@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/perfilLoja.css">
+    <link rel="stylesheet" href="css/gerenciarProduto.css">
     <link rel="stylesheet" href="css/responsivo.css">
     <title>Iconst</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,9 +43,10 @@
     <main class="painel-produtos">
         <div class="topo-painel">
             <h2>Meus Produtos</h2>
-            <a href="cadastrarProduto.html" class="btn-novo-produto">Novo Produto</a>
+            <a href="form_cadastrarProduto.html" class="btn-novo-produto">Novo Produto</a>
         </div>
 
+        <!--Filtros-->
         <div class="filtros">
             <form method="GET" class="filtro-form">
                 <input type="text" name="busca" placeholder="Buscar por nome do produto" />
@@ -85,7 +86,7 @@
                     <td>20</td>
                     <td><span class="tag ativo">Ativo</span></td>
                     <td>
-                        <a href="editarProduto.html" class="acao editar">Editar</a>
+                        <a href="editarProduto.html"><button class="btn-editar">Editar</button></a>
                     </td>
                 </tr>
 
@@ -96,7 +97,7 @@
                     <td>0</td>
                     <td><span class="tag inativo">Inativo</span></td>
                     <td>
-                        <a href="editarProduto.html" class="acao editar">Editar</a>
+                        <a href="editarProduto.html"><button class="btn-editar">Editar</button></a>
                     </td>
                 </tr>
             </tbody>

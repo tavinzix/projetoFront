@@ -8,8 +8,6 @@
     exit;
   }
 
-  
-
   $cpf = $_SESSION['cpf'];
 
   $sql = "SELECT * FROM usuarios WHERE cpf = :cpf";

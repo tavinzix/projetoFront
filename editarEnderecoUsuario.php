@@ -7,7 +7,7 @@ if (!isset($_POST['acao'])) {
     header("Location: perfilUsuario.php");
     exit();
 }
-
+// TODO deixar no padrão
 $acao = $_POST['acao'];
 
 if ($acao == 'editar') {

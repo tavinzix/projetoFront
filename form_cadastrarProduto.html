@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/gerenciarProduto.css">
+    <link rel="stylesheet" href="css/responsivo.css">
+    <title>Iconst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cadastrar Novo Produto</h1>
+
+        <form id="formProduto" action="/salvar-produto" method="POST" enctype="multipart/form-data">
+            <!-- Nome -->
+            <div class="form-grupo">
+                <label for="nome">Nome do Produto</label>
+                <input type="text" name="nome" id="nome" required />
+            </div>
+
+            <!-- Descrição -->
+            <div class="form-grupo">
+                <label for="descricao">Descrição</label>
+                <textarea name="descricao" id="descricao" rows="4" required></textarea>
+            </div>
+
+            <!-- Categoria -->
+            <div class="form-grupo">
+                <label for="categoria">Categoria</label>
+                <select name="categoria" id="categoria" required>
+                    <option value="">Selecione</option>
+                    <option value="cimento">Cimento</option>
+                    <option value="tinta">Tinta</option>
+                    <option value="ferramenta">Ferramenta</option>
+                </select>
+            </div>
+
+            <!-- Campos dinâmicos -->
+            <div id="camposDinamicos" class="form-grupo"></div>
+
+            <!-- Estoque -->
+            <div class="form-grupo">
+                <label for="estoque">Estoque</label>
+                <input type="number" name="estoque" id="estoque" min="0" required />
+            </div>
+
+            <!-- Preço -->
+            <div class="form-grupo">
+                <label for="preco">Preço (R$)</label>
+                <input type="number" name="preco" id="preco" step="0.01" min="0" required />
+            </div>
+
+            <!-- Upload de imagens -->
+            <div class="form-grupo">
+                <label for="imagens">Fotos do Produto (até 5 imagens)</label>
+                <input type="file" name="imagens[]" id="imagens" accept="image/*" multiple required />
+                <div id="previewImagens" class="preview-container"></div>
+            </div>
+
+            <!-- Campo oculto para JSON de detalhes -->
+            <input type="hidden" name="detalhes" id="detalhes" />
+
+            <!-- Botão -->
+            <button type="submit" class="btn-cadastrar">Cadastrar Produto</button>
+        </form>
+    </div>
+
+    <script>
+        const categoriaSelect = document.getElementById("categoria");
+        const camposDinamicos = document.getElementById("camposDinamicos");
+        const formProduto = document.getElementById("formProduto");
+        const inputImagens = document.getElementById("imagens");
+        const preview = document.getElementById("previewImagens");
+
+        categoriaSelect.addEventListener("change", () => {
+            const categoria = categoriaSelect.value;
+            camposDinamicos.innerHTML = "";
+
+            if (categoria === "cimento") {
+                camposDinamicos.innerHTML = `
+          <label for="peso">Peso (kg)</label>
+          <input type="number" name="peso" id="peso" required />
+        `;
+            } else if (categoria === "tinta") {
+                camposDinamicos.innerHTML = `
+          <label for="litros">Litros</label>
+          <input type="number" name="litros" id="litros" required />
+          <label for="cor">Cor</label>
+          <input type="text" name="cor" id="cor" required />
+        `;
+            } else if (categoria === "ferramenta") {
+                camposDinamicos.innerHTML = `
+          <label for="marca">Marca</label>
+          <input type="text" name="marca" id="marca" required />
+          <label for="tensao">Tensão</label>
+          <select name="tensao" id="tensao" required>
+            <option value="">Selecione</option>
+            <option value="bivolt">Bivolt</option>
+            <option value="110V">110V</option>
+            <option value="220V">220V</option>
+          </select>
+        `;
+            }
+        });
+
+        // Gerar campo JSONB antes do envio
+        formProduto.addEventListener("submit", function (e) {
+            const campos = camposDinamicos.querySelectorAll("input, select");
+            const detalhes = {};
+            campos.forEach((campo) => {
+                detalhes[campo.name] = campo.value;
+            });
+            document.getElementById("detalhes").value = JSON.stringify(detalhes);
+        });
+
+        // Pré-visualização de imagens
+        inputImagens.addEventListener("change", () => {
+            preview.innerHTML = '';
+            const files = inputImagens.files;
+
+            if (files.length > 5) {
+                alert("Você pode enviar no máximo 5 imagens.");
+                inputImagens.value = "";
+                return;
+            }
+
+            for (let i = 0; i < files.length; i++) {
+                const img = document.createElement("img");
+                img.src = URL.createObjectURL(files[i]);
+                preview.appendChild(img);
+            }
+        });
+    </script>
+</body>
+
+</html>

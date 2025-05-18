@@ -31,7 +31,7 @@
 
 .btn-edicao,
 .btn-endicao {
-    background: #FF6B00;
+    background-color: #FF6B00;
     color: white;
     border: none;
     padding: 8px 16px;
@@ -44,7 +44,7 @@
 .btn-endicao:hover,
 .btn-detalhes:hover,
 .btn-salvar:hover {
-    background: #b14b07;
+    background-color: #b14b07;
 }
 
 .historico-compras h3 {

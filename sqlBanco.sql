@@ -35,6 +35,7 @@ CREATE TABLE vendedores (
     descricao_loja TEXT,
     imagem_logo VARCHAR(255),
     avaliacao_media NUMERIC(3,2) DEFAULT 0.00,
+    status CHARACTER(1) DEFAULT '1' CHECK (status IN ('1', '2', '3')),
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
