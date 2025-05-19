@@ -1,9 +1,9 @@
 <?php
 
 $servername = "localhost";
-$username = "postgres";
-$password = "123456";
-$dbname = "projeto_if";
+$username = "usuario do postgres";
+$password = "senha do banco";
+$dbname = "nome do banco";
 
 try {
 	$connection = new PDO("pgsql:host=$servername;port=5432;dbname=$dbname; user=$username;password=$password");

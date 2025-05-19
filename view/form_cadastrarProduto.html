@@ -20,19 +20,16 @@
         <h1>Cadastrar Novo Produto</h1>
 
         <form id="formProduto" action="/salvar-produto" method="POST" enctype="multipart/form-data">
-            <!-- Nome -->
             <div class="form-grupo">
                 <label for="nome">Nome do Produto</label>
                 <input type="text" name="nome" id="nome" required />
             </div>
 
-            <!-- Descrição -->
             <div class="form-grupo">
                 <label for="descricao">Descrição</label>
                 <textarea name="descricao" id="descricao" rows="4" required></textarea>
             </div>
 
-            <!-- Categoria -->
             <div class="form-grupo">
                 <label for="categoria">Categoria</label>
                 <select name="categoria" id="categoria" required>
@@ -43,32 +40,26 @@
                 </select>
             </div>
 
-            <!-- Campos dinâmicos -->
             <div id="camposDinamicos" class="form-grupo"></div>
 
-            <!-- Estoque -->
             <div class="form-grupo">
                 <label for="estoque">Estoque</label>
                 <input type="number" name="estoque" id="estoque" min="0" required />
             </div>
 
-            <!-- Preço -->
             <div class="form-grupo">
                 <label for="preco">Preço (R$)</label>
                 <input type="number" name="preco" id="preco" step="0.01" min="0" required />
             </div>
 
-            <!-- Upload de imagens -->
             <div class="form-grupo">
                 <label for="imagens">Fotos do Produto (até 5 imagens)</label>
                 <input type="file" name="imagens[]" id="imagens" accept="image/*" multiple required />
                 <div id="previewImagens" class="preview-container"></div>
             </div>
 
-            <!-- Campo oculto para JSON de detalhes -->
             <input type="hidden" name="detalhes" id="detalhes" />
 
-            <!-- Botão -->
             <button type="submit" class="btn-cadastrar">Cadastrar Produto</button>
         </form>
     </div>
@@ -119,24 +110,6 @@
                 detalhes[campo.name] = campo.value;
             });
             document.getElementById("detalhes").value = JSON.stringify(detalhes);
-        });
-
-        // Pré-visualização de imagens
-        inputImagens.addEventListener("change", () => {
-            preview.innerHTML = '';
-            const files = inputImagens.files;
-
-            if (files.length > 5) {
-                alert("Você pode enviar no máximo 5 imagens.");
-                inputImagens.value = "";
-                return;
-            }
-
-            for (let i = 0; i < files.length; i++) {
-                const img = document.createElement("img");
-                img.src = URL.createObjectURL(files[i]);
-                preview.appendChild(img);
-            }
         });
     </script>
 </body>
