@@ -25,9 +25,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/produto.css">
-    <link rel="stylesheet" href="css/responsivo.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/produto.css">
+    <link rel="stylesheet" href="../css/responsivo.css">
     <title>Detalhes do produto</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,26 +38,26 @@
 <body>
    <!--CABEÇALHO-->
     <header class="menu">
-    <div class="logo">
-        <a href="index.php"> <img src="img/site/logo.png"></a>
-    </div>
+        <div class="logo">
+            <a href="index.php"> <img src="img/site/logo.png"></a>
+        </div>
 
-    <form action="buscar produto do banco" method="GET" class="busca-container">
-        <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
-        <button type="submit" class="lupa-icone">
-            <img src="img/site/lupa.png" id="iconeft">
+        <form action="buscar produto do banco" method="GET" class="busca-container">
+            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+            <button type="submit" class="lupa-icone">
+                <img src="img/site/lupa.png" id="iconeft">
+            </button>
+        </form>
+
+        <button class="menu-hamburguer" id="menu-hamburguer">
+            &#9776;
         </button>
-    </form>
 
-    <button class="menu-hamburguer" id="menu-hamburguer">
-        &#9776;
-    </button>
-
-    <ul class="menu-link" id="menu-link">
-        <li><a href="index.php">Início</a></li>
-        <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
-        <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
-    </ul>
+        <ul class="menu-link" id="menu-link">
+            <li><a href="index.php">Início</a></li>
+            <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
+        </ul>
     </header>
 
     <main class="detalheProduto-container">
@@ -65,21 +65,21 @@
         <!--/*TODO puxar imagens do banco -->
         <section class="galeria-produto">
             <div class="imagem-principal">
-                <img src="img/produtos/p1.jpg" id="imagem-grande" alt="Produto">
+                <img src="../img/produtos/p1.jpg" id="imagem-grande" alt="Produto">
             </div>
     
             <div class="faixa-miniaturas">
                 <button class="btn seta-esquerda-miniatura">&#10094;</button>
                 <div class="miniaturas">
-                    <img src="img/produtos/p1.jpg" onclick="trocarImagem(this)">
-                    <img src="img/produtos/p2.png" onclick="trocarImagem(this)">
-                    <img src="img/produtos/p3.png" onclick="trocarImagem(this)">
-                    <img src="img/produtos/p1.jpg" onclick="trocarImagem(this)">
-                    <img src="img/produtos/p2.png" onclick="trocarImagem(this)">
-                    <img src="img/produtos/p3.png" onclick="trocarImagem(this)">
-                    <img src="img/produtos/p1.jpg" onclick="trocarImagem(this)">
-                    <img src="img/produtos/p2.png" onclick="trocarImagem(this)">
-                    <img src="img/produtos/p3.png" onclick="trocarImagem(this)">
+                    <img src="../img/produtos/p1.jpg" onclick="trocarImagem(this)">
+                    <img src="../img/produtos/p2.png" onclick="trocarImagem(this)">
+                    <img src="../img/produtos/p3.png" onclick="trocarImagem(this)">
+                    <img src="../img/produtos/p1.jpg" onclick="trocarImagem(this)">
+                    <img src="../img/produtos/p2.png" onclick="trocarImagem(this)">
+                    <img src="../img/produtos/p3.png" onclick="trocarImagem(this)">
+                    <img src="../img/produtos/p1.jpg" onclick="trocarImagem(this)">
+                    <img src="../img/produtos/p2.png" onclick="trocarImagem(this)">
+                    <img src="../img/produtos/p3.png" onclick="trocarImagem(this)">
                 </div>
                 <button class="btn seta-direita-miniatura">&#10095;</button>
             </div>

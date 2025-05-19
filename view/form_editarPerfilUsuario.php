@@ -30,9 +30,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/perfilUsuario.css">
-    <link rel="stylesheet" href="css/responsivo.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/perfilUsuario.css">
+    <link rel="stylesheet" href="../css/responsivo.css">
     <title>Iconst</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,13 +44,13 @@
     <!--CABEÇALHO-->
     <header class="menu">
         <div class="logo">
-            <a href="index.html"> <img src="img/site/logo.png"></a>
+            <a href="index.html"> <img src="../img/site/logo.png"></a>
         </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
             <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
             <button type="submit" class="lupa-icone">
-                <img src="img/site/lupa.png" id="iconeft">
+                <img src="../img/site/lupa.png" id="iconeft">
             </button>
         </form>
 
@@ -59,15 +59,15 @@
         </button>
 
         <ul class="menu-link" id="menu-link">
-            <li><a href="index.html">Início</a></li>
-            <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
+            <li><a href="../index.php">Início</a></li>
+            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>
     </header>
 
     <section class="editar-perfil">
         <h3>Editar Perfil</h3>
-        <form class="form-perfil" action="editarPerfilUsuario.php" method="POST" enctype="multipart/form-data">     
+        <form class="form-perfil" action="../bd/editarPerfilUsuario.php" method="POST" enctype="multipart/form-data">     
             <div class="campo-form" style="display:none">
                 <label for="id">id</label>
                 <input type="text" id="id" name="id" value="<?php echo $usuario['id'] ?>">
@@ -93,7 +93,7 @@
                 <input type="text" id="email" name="cpf" value="<?php echo $usuario['cpf'] ?>" disabled>
             </div>
 
-            <!--/*TODO converter data de exibição para DD/MM/YYYY -->
+            <!--TODO converter data de exibição para DD/MM/YYYY -->
             <div class="campo-form">
                 <label for="email">Data de nascimento</label>
                 <input type="email" id="email" name="email" value="<?php echo $usuario['dt_nasc'] ?>" disabled>
@@ -113,7 +113,8 @@
                 <label for="confirmar-senha">Confirmar Nova Senha</label>
                 <input type="password" id="confirmar-senha" name="confirmar_senha">
             </div>
-          
+
+            <!--TODO opção para remover foto -->
             <div class="campo-form-foto">
                 <label>Foto de Perfil</label>
                 

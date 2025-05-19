@@ -4,7 +4,7 @@
     ini_set('default_charset', 'utf-8');
 
     $cpf = $_SESSION['cpf'] ?? null;
-    $imagemUsuario = 'img/users/avatar.jpg';
+    $imagemUsuario = '../img/users/avatar.jpg';
 
     if ($cpf) {
         $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
@@ -15,7 +15,7 @@
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($usuario && !empty($usuario['img_user'])) {
-            $imagemUsuario = 'img/users/' . ($usuario['img_user']);
+            $imagemUsuario = '../img/users/' . ($usuario['img_user']);
         }
     }
 
@@ -26,7 +26,8 @@
 ?>
 <!--TODO arrumar header de todas as paginas
     TODO arrumar favicon de todas as paginas
-    TODOarrumar responsividade das paginas
+    TODO arrumar responsividade das paginas
+    TODO verificar se precisa setar a variavel imagemUsuario com o caminho
     TODO verificar js
     TODO criar carrinho {
         vincular com a quantidade   
@@ -75,7 +76,7 @@
         <ul class="menu-link" id="menu-link">
             <li><a href="index.php">Início</a></li>
             <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
-            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
+            <li><a href="view/perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>
     </header>
 

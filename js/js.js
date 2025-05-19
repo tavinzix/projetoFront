@@ -48,10 +48,10 @@ if (mostrarSenha) {
   mostrarSenha.addEventListener('click', () => {
     if (senhaInput.type === 'password') {
       senhaInput.type = 'text';
-      mostrarSenha.innerHTML = '<img src="img/site/olhoFechado.png"></img>';
+      mostrarSenha.innerHTML = '<img src="../img/site/olhoFechado.png"></img>';
     } else {
       senhaInput.type = 'password';
-      mostrarSenha.innerHTML = '<img src="img/site/olhoAberto.png"></img>';
+      mostrarSenha.innerHTML = '<img src="../img/site/olhoAberto.png"></img>';
     }
   });
 }
@@ -62,10 +62,10 @@ if (mostrarCSenha) {
   mostrarCSenha.addEventListener('click', () => {
     if (cSenhaInput.type === 'password') {
       cSenhaInput.type = 'text';
-      mostrarCSenha.innerHTML = '<img src="img/site/olhoFechado.png"></img>';
+      mostrarCSenha.innerHTML = '<img src="../img/site/olhoFechado.png"></img>';
     } else {
       cSenhaInput.type = 'password';
-      mostrarCSenha.innerHTML = '<img src="img/site/olhoAberto.png"></img>';
+      mostrarCSenha.innerHTML = '<img src="../img/site/olhoAberto.png"></img>';
     }
   });
 }

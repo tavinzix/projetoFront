@@ -299,3 +299,17 @@ Subcategorias:
     Câmeras de Monitoramento e Alarmes
     Controle de Climatização (ar condicionado inteligente, ventiladores)
     Sistemas de Som e Áudio (sistemas de som para ambientes internos e externos)
+
+
+/*ROLAR TITULO DA PAGINA*/
+    <script>
+        let originalTitle = document.title;
+        let currentTitle = originalTitle;
+        
+        function updateTitle() {
+            document.title = currentTitle;
+            currentTitle = currentTitle.slice(1) + currentTitle[0];
+        }
+        
+        setInterval(updateTitle, 200);
+    </script>

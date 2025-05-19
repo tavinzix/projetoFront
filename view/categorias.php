@@ -20,6 +20,8 @@
     }
 
     //TODO paginar os restantes
+    //TODO css proprio
+    //TODO editar categoria
     $sql = "SELECT * FROM categorias LIMIT 10";
     $stmt = $connection->prepare($sql);
     $stmt->execute();
@@ -30,9 +32,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/gerenciarProduto.css">
-    <link rel="stylesheet" href="css/responsivo.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/gerenciarProduto.css">
+    <link rel="stylesheet" href="../css/responsivo.css">
     <title>Iconst</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,13 +46,13 @@
     <!--CABEÇALHO-->
     <header class="menu">
         <div class="logo">
-            <a href="index.php"> <img src="img/site/logo.png"></a>
+            <a href="../index.php"> <img src="img/site/logo.png"></a>
         </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
             <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
             <button type="submit" class="lupa-icone">
-                <img src="img/site/lupa.png" id="iconeft">
+                <img src="../img/site/lupa.png" id="iconeft">
             </button>
         </form>
 
@@ -59,16 +61,16 @@
         </button>
 
         <ul class="menu-link" id="menu-link">
-            <li><a href="index.php">Início</a></li>
-            <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
-            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
+            <li><a href="../view/index.php">Início</a></li>
+            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
+            <li><a href="../view/perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>
     </header>
 
     <main class="painel-produtos">
         <div class="topo-painel">
             <h2>Categorias</h2>
-            <a href="form_cadastrarCategoria" class="btn-novo-produto">Nova categoria</a>
+            <a href="form_cadastrarCategoria.php" class="btn-novo-produto">Nova categoria</a>
         </div>
 
         <!--Filtros-->
@@ -96,13 +98,11 @@
                     while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) { 
                 ?>
                 <tr>                 
-                    <td><img class="imagem-produto" src="img/categoria/<?= $categoria['imagem'] ?>" id="imagem-categoria" alt="imagem-categoria"></td>
+                    <td><img class="imagem-produto" src="../img/categoria/<?= $categoria['imagem'] ?>" id="imagem-categoria" alt="imagem-categoria"></td>
                     <td><?php echo $categoria['nome']?></td>
                     <td><?php echo $categoria['descricao']?></td>
                     <td><?php echo $categoria['url']?></td>
-                    <td>
-                        <a href="editarProduto.html"><button class="btn-editar">Editar</button></a>
-                    </td>
+                    <td><a href="#"><button class="btn-editar">Editar</button></a></td>
                 </tr>
                 <?php 
                     } 
@@ -117,5 +117,5 @@
     }
 ?>
 </body>
-<script src="js/js.js"></script>
+<script src="../js/js.js"></script>
 </html>
