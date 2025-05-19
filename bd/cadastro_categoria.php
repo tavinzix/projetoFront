@@ -13,12 +13,12 @@
         $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
         $novo_nome = $url . '.' . $extensao;
 
-        $caminho_imagem_antiga = "img/categoria/" . $novo_nome;
+        $caminho_imagem_antiga = "../img/categoria/" . $novo_nome;
         if (file_exists($caminho_imagem_antiga)) {
             unlink($caminho_imagem_antiga);
         }
 
-        if (move_uploaded_file($arquivo_temporario, "img/categoria/$novo_nome")){
+        if (move_uploaded_file($arquivo_temporario, "../img/categoria/$novo_nome")){
             echo " Upload do arquivo foi concluído com sucesso <br>";
         }else{
             echo "Arquivo não pode ser copiado para o servidor.";
@@ -38,7 +38,7 @@
 
     if ($statement) {
         $_SESSION['msgSucesso'] = 'Categoria cadastrada com sucesso';
-        header("Location:categorias.php");
+        header("Location:../view/categorias.php");
     } else {
       echo "Erro";
     }

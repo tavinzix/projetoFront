@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once('config.inc.php');
+    require_once('../bd/config.inc.php');
 
    $id = $_POST['id'];
    $nome = $_POST['nome'];

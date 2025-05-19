@@ -1,10 +1,10 @@
 <?php
     session_start();
-    require_once('config.inc.php');
+    require_once('../bd/config.inc.php');
     ini_set('default_charset', 'utf-8');
 
     $cpf = $_SESSION['cpf'] ?? null;
-    $imagemUsuario = 'img/users/avatar.jpg';
+    $imagemUsuario = '../img/users/avatar.jpg';
 
     if ($cpf) {
         $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
@@ -15,13 +15,14 @@
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($usuario && !empty($usuario['img_user'])) {
-            $imagemUsuario = 'img/users/' . ($usuario['img_user']);
+            $imagemUsuario = '../img/users/' . ($usuario['img_user']);
         }
     }
 
     //TODO paginar os restantes
     //TODO css proprio
     //TODO editar categoria
+    //TODO remover categoria
     $sql = "SELECT * FROM categorias LIMIT 10";
     $stmt = $connection->prepare($sql);
     $stmt->execute();
@@ -46,7 +47,7 @@
     <!--CABEÇALHO-->
     <header class="menu">
         <div class="logo">
-            <a href="../index.php"> <img src="img/site/logo.png"></a>
+            <a href="../index.php"> <img src="../img/site/logo.png"></a>
         </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">

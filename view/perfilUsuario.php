@@ -1,10 +1,10 @@
 <?php
     session_start();
-    require_once('config.inc.php');
+    require_once('../bd/config.inc.php');
     ini_set('default_charset', 'utf-8');
 
     if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
-        header("Location:login.php");
+        header("Location:login.html");
         exit;
     }
 
@@ -18,7 +18,7 @@
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($usuario && !empty($usuario['img_user'])) {
-        $imagemUsuario = 'img/users/' . ($usuario['img_user']);
+        $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
 ?>
 
@@ -111,7 +111,7 @@
 
             <ul class="lista-pedidos">
                 <li class="pedido">
-                    <img src="img/produtos/p2.png" alt="Produto" class="foto-produto">
+                    <img src="../img/produtos/p2.png" alt="Produto" class="foto-produto">
                     <div class="info-pedido">
                         <h4>Palete de Tijolos Cerâmicos</h4>
                         <p>Data: 22/04/2025</p>
@@ -122,7 +122,7 @@
                 </li>
 
                 <li class="pedido">
-                    <img src="img/produtos/p3.png" alt="Produto" class="foto-produto">
+                    <img src="../img/produtos/p3.png" alt="Produto" class="foto-produto">
                     <div class="info-pedido">
                         <h4>Cimento CP-II 50kg</h4>
                         <p>Data: 24/04/2025</p>
@@ -133,7 +133,7 @@
                 </li>
 
                 <li class="pedido">
-                    <img src="img/produtos/p1.jpg" alt="Produto" class="foto-produto">
+                    <img src="../img/produtos/p1.jpg" alt="Produto" class="foto-produto">
                     <div class="info-pedido">
                         <h4>Betoneira 400L Monofásica</h4>
                         <p>Data: 20/04/2025</p>
@@ -143,7 +143,7 @@
                     </div>
                 </li>
                 <li class="pedido">
-                    <img src="img/produtos/p4.jpg" alt="Produto" class="foto-produto">
+                    <img src="../img/produtos/p4.jpg" alt="Produto" class="foto-produto">
                     <div class="info-pedido">
                         <h4>Areia Fina Ensacada 20kg</h4>
                         <p>Data: 25/04/2025</p>
@@ -153,7 +153,7 @@
                     </div>
                 </li>
                 <li class="pedido">
-                    <img src="img/produtos/p3.png" alt="Produto" class="foto-produto">
+                    <img src="../img/produtos/p3.png" alt="Produto" class="foto-produto">
                     <div class="info-pedido">
                         <h4>Cimento CP-II 50kg</h4>
                         <p>Data: 24/04/2025</p>
@@ -164,7 +164,7 @@
                 </li>
 
                 <li class="pedido">
-                    <img src="img/produtos/p4.jpg" alt="Produto" class="foto-produto">
+                    <img src="../img/produtos/p4.jpg" alt="Produto" class="foto-produto">
                     <div class="info-pedido">
                         <h4>Areia Fina Ensacada 20kg</h4>
                         <p>Data: 25/04/2025</p>
@@ -175,7 +175,7 @@
                 </li>
 
                 <li class="pedido">
-                    <img src="img/produtos/p4.jpg" alt="Produto" class="foto-produto">
+                    <img src="../img/produtos/p4.jpg" alt="Produto" class="foto-produto">
                     <div class="info-pedido">
                         <h4>Areia Fina Ensacada g</h4>
                         <p>Data: 25/04/2025</p>
@@ -186,7 +186,7 @@
                 </li>
 
                 <li class="pedido">
-                    <img src="img/produtos/p4.jpg" alt="Produto" class="foto-produto">
+                    <img src="../img/produtos/p4.jpg" alt="Produto" class="foto-produto">
                     <div class="info-pedido">
                         <h4>Areia Fina Ensacada g</h4>
                         <p>Data: 25/04/2025</p>

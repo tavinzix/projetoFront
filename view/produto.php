@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once('config.inc.php');
+    require_once('../bd/config.inc.php');
     ini_set('default_charset', 'utf-8');
 
     $cpf = $_SESSION['cpf'] ?? null;
