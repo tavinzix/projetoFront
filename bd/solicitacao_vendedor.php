@@ -41,8 +41,69 @@
         //TODO 1 begin em tudo
         //TODO 2 insert na vendedor
         //TODO 3 remover na solicitacao
+
+        $userId = $_POST['id_user'];
+        $nome = $_POST['nome'];
+        $cnpj = $_POST['cnpj'];
+        $descricao = $_POST['descricao'];
+      
+        try {
+            $connection->beginTransaction();
+
+            $sqlInsertVendedor = "INSERT INTO vendedores (user_id, nome_loja, cnpj, descricao_loja)
+                                    VALUES (:userId, :nome, :cnpj, :descricao)";
+
+            $statementInsert = $connection->prepare($sqlInsertVendedor);
+            $statementInsert->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $statementInsert->bindParam(':nome', $nome, PDO::PARAM_STR);
+            $statementInsert->bindParam(':cnpj', $cnpj, PDO::PARAM_STR);
+            $statementInsert->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+
+            if (!$statementInsert->execute()) {
+                throw new Exception('Erro ao inserir vendedor.');
+            }
+
+            $sqlDeleteSolicitacao = "DELETE FROM solicitacoes_vendedor WHERE user_id = :userId";
+            $statementDelete = $connection->prepare($sqlDeleteSolicitacao);
+            $statementDelete->bindParam(':userId', $userId, PDO::PARAM_INT);
+
+            if (!$statementDelete->execute()) {
+                throw new Exception('Erro ao remover solicitação.');
+            }
+
+            $connection->commit();
+
+            $_SESSION['msgSucesso'] = 'Solicitação aprovada com sucesso';
+            header("Location:../view/solicitacaoPendente.php");
+            exit();
+
+        } catch (Exception $e) {
+            $connection->rollBack();
+            echo 'Erro: ' . $e->getMessage();
+        }
     }else if($_POST['acao'] == 'reprovar'){
         //TODO logica para digitar motivo
         //TODO update no status e motivo
+
+        $solicitacaoId = $_POST['id_pedido'];
+        $motivo = $_POST['motivo'];
+
+        try {
+            $sql = "UPDATE solicitacoes_vendedor SET status = 2, motivo = :motivo WHERE id = :id_pedido";
+            $statement = $connection->prepare($sql);
+
+            $statement->bindParam(':id_pedido', $solicitacaoId, PDO::PARAM_INT);
+            $statement->bindParam(':motivo', $motivo, PDO::PARAM_STR);
+
+            if ($statement->execute()) {
+                $_SESSION['msgSucesso'] = 'Solicitação reprovada com sucesso';
+                header("Location:../view/solicitacaoPendente.php");
+                exit();
+            } else {
+                throw new Exception('Erro ao reprovar a solicitação.');
+            }
+        } catch (Exception $e) {
+            echo 'Erro: ' . $e->getMessage();
+        }
     }
 ?>
