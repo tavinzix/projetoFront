@@ -17,12 +17,12 @@
         $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
         $novo_nome = $id . '.' . $extensao;
 
-        $caminho_imagem_antiga = "img/users/" . $novo_nome;
+        $caminho_imagem_antiga = "../img/users/" . $novo_nome;
         if (file_exists($caminho_imagem_antiga)) {
             unlink($caminho_imagem_antiga);
         }
 
-        if (move_uploaded_file($arquivo_temporario, "img/users/$novo_nome")){
+        if (move_uploaded_file($arquivo_temporario, "../img/users/$novo_nome")){
             echo " Upload do arquivo foi concluído com sucesso <br>";
         }else{
             echo "Arquivo não pode ser copiado para o servidor.";
@@ -57,7 +57,7 @@
 
    if ($statement) {
         $_SESSION['msgSucesso'] = 'Alteração Efetuada com sucesso';
-        header("Location:perfilUsuario.php");
+        header("Location:../view/perfilUsuario.php");
    } else {
       echo "Erro";
    }

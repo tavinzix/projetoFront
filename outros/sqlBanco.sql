@@ -65,7 +65,15 @@ COMMENT ON COLUMN administradores.status IS '1 = ativo, 2 = inativo';
 
 CREATE TABLE solicitacoes_vendedor (
     id SERIAL PRIMARY KEY,
-    usuario_id INT NOT NULL,
+    user_id INT NOT NULL,
+    nome_loja VARCHAR(255) NOT NULL,
+    cnpj VARCHAR(18) UNIQUE,
+    email VARCHAR(255),
+    telefone VARCHAR(11),
+    CEP VARCHAR(8),
+    endereco VARCHAR(255),
+    categoria VARCHAR(255),
+    descricao_loja TEXT,
     data_solicitacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status CHAR(1) CHECK (status IN ('1', '2')),
     motivo_rejeicao TEXT,

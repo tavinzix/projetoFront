@@ -112,11 +112,11 @@
         </table>
     </main>
     <?php
-    if(isset($_SESSION['msgSucesso'])){
-        echo '<script>alert("'.$_SESSION['msgSucesso'].'")</script>';
-        unset($_SESSION["msgSucesso"]);
-    }
-?>
+        if(isset($_SESSION['msgSucesso'])){
+            echo '<script>alert("'.$_SESSION['msgSucesso'].'")</script>';
+            unset($_SESSION["msgSucesso"]);
+        }
+    ?>
 </body>
 <script src="../js/js.js"></script>
 </html>

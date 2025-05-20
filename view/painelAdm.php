@@ -4,7 +4,7 @@
     ini_set('default_charset', 'utf-8');
 
     $cpf = $_SESSION['cpf'] ?? null;
-    $imagemUsuario = 'img/users/avatar.jpg';
+    $imagemUsuario = '..img/users/avatar.jpg';
 
     if ($cpf) {
         $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
@@ -47,7 +47,7 @@
         <form action="buscar produto do banco" method="GET" class="busca-container">
             <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
             <button type="submit" class="lupa-icone">
-                <img src="img/site/lupa.png" id="iconeft">
+                <img src="../img/site/lupa.png" id="iconeft">
             </button>
         </form>
 
@@ -67,7 +67,7 @@
             <h3>Menu</h3>
             <ul>
                 <li><a href="categorias.php">Categorias</a></li>
-                <li><a href="#">Solicitações de vendedores</a></li>
+                <li><a href="solicitacaoPendente.php">Solicitações de vendedores</a></li>
                 <li><a href="#">Solicitações de reembolso</a></li>
                 <li><a href="#">Vendedores</a></li>
                 <li><a href="#">Usuários</a></li>

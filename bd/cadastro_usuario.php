@@ -1,6 +1,6 @@
 <?php
 
-require_once('../bd/config.inc.php');
+require_once('config.inc.php');
 
    if (!isset($_POST['botaoEnviar'])) {
       exit;
