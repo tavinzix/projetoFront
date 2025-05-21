@@ -27,7 +27,10 @@
 <!--TODO arrumar header de todas as paginas
     TODO arrumar favicon de todas as paginas
     TODO arrumar responsividade das paginas
-    TODO verificar js
+    TODO verificar js{
+        Feedback claro ao usuário sobre ações e erros. 
+        Validação de formulários.
+    }
     TODO criar carrinho {
         vincular com a quantidade   
         habilitar opção de adicionar ao carrinho no botão da pagina do produto
@@ -44,6 +47,8 @@
         incluir novo check no insert
         pensar em uma lógica para listar também quem aprovou a solicitação
     }
+
+    TODO integrar com api
      -->
     
 <!DOCTYPE html>
