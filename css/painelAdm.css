@@ -1,60 +1,227 @@
-.janela-avaliacoes {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.6);
+/*PAINEL ADM*/
+.painelAdm-exterior {
+    display: flex;
 }
 
-.janela-conteudo-avaliacoes {
-  background-color: #fff;
-  margin: 5% auto;
-  padding: 0 20px 20px 20px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 600px;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
+.opcoes-menu {
+    width: 220px;
+    background: #fff;
+    border-right: 1px solid #ddd;
+    padding: 20px;
 }
 
-.janela-conteudo-avaliacoes h2 {
-  position: sticky;
-  top: 0;
-  padding: 10px 0;
-  margin: 0;
-  font-size: 20px;
-  font-weight: bold;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
+.opcoes-menu h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
-.janela-conteudo-avaliacoes span {
-  float: right;
-  position: sticky;
-  top: 0;
-  display: block;
-  text-align: right;
-  padding: 5px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  background-color: #fff;
-  z-index: 1;
+.opcoes-menu ul {
+    list-style: none;
 }
 
-.comentario-solicitacao {
-  background-color: #f8f8f8;
-  padding: 10px;
-  margin-top: 15px;
-  border-radius: 6px;
-  text-align: left;
+.opcoes-menu ul li {
+    margin-bottom: 10px;
 }
 
-.comentario-solicitacao p {
-  margin: 5px 0;
+.opcoes-menu ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.opcoes-menu ul li a:hover {
+    background-color: #FF6B00;
+    color: white;
+}
+
+.info-plataforma {
+    flex: 1;
+    padding: 30px;
+}
+
+.metricas {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+}
+
+canvas {
+    max-width: 100%;
+}
+
+/*SOLICITAÇÕES PENDENTES*/
+.solicitacoes-exterior,
+.categorias-exterior {
+    max-width: 1000px;
+    margin: 30PX auto;
+    padding: 15PX;
+}
+
+.topo-painel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.filtros {
+    margin-bottom: 1rem;
+}
+
+.filtros form {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.filtro-form input,
+.filtro-form select {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.filtros button {
+    background-color: #FF6B00;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.tabela-solicitacao,
+.tabela-categoria {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-solicitacao th,
+.tabela-solicitacao td,
+.tabela-categoria th,
+.tabela-categoria td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tag {
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.tag.aprovado {
+    background-color: #d1f7c4;
+    color: #2e7d32;
+}
+
+.tag.pendente {
+    background-color: #f7f2c4;
+    color: #7d782e;
+}
+
+.tag.recusado {
+    background-color: #ffe0e0;
+    color: #c62828;
+}
+
+.btn-editar {
+    background-color: #FF6B00;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-editar:hover,
+.filtros button:hover,
+.btn-nova-categoria:hover {
+    background: #b14b07;
+}
+
+.janela-solicitacao {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.janela-conteudo-solicitacoes {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 0 20px 20px 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.janela-conteudo-solicitacoes h2 {
+    position: sticky;
+    top: 0;
+    padding: 10px 0;
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.janela-conteudo-solicitacoes span {
+    float: right;
+    position: sticky;
+    top: 0;
+    display: block;
+    text-align: right;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.informacao-loja {
+    background-color: #f8f8f8;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 6px;
+    text-align: left;
+}
+
+.informacao-loja p {
+    margin: 5px 0;
+}
+
+/*LISTAGEM DE CATEGORIAS*/
+
+.btn-nova-categoria {
+    background-color: #FF6B00;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 6px;
 }

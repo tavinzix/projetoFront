@@ -27,7 +27,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/perfilLoja.css">
+    <link rel="stylesheet" href="../css/painelAdm.css">
     <link rel="stylesheet" href="../css/responsivo.css">
     <title>Painel Administrativo | ICONST</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,8 +62,8 @@
         </ul>
     </header>
 
-    <main class="perfilLoja-exterior">
-        <nav class="opcoes-loja">
+    <main class="painelAdm-exterior">
+        <nav class="opcoes-menu">
             <h3>Menu</h3>
             <ul>
                 <li><a href="categorias.php">Categorias</a></li>
@@ -74,7 +74,7 @@
             </ul>
         </nav>
 
-        <main class="info-vendas">
+        <main class="info-plataforma">
             <section class="metricas">
                 <div class="card">
                     <h3>Total de Vendas</h3>

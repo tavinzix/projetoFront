@@ -30,7 +30,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/gerenciarProduto.css">
     <link rel="stylesheet" href="../css/painelAdm.css">
     <link rel="stylesheet" href="../css/responsivo.css">
     <title>Iconst</title>
@@ -65,7 +64,7 @@
         </ul>
     </header>
 
-    <main class="painel-produtos">
+    <main class="solicitacoes-exterior">
         <div class="topo-painel">
             <h2>Solicitações</h2>
         </div>
@@ -84,13 +83,15 @@
 
         <!--Lista de solicitacoes
         TODO arrumar css-->
-        <table class="tabela-produtos">
+        <table class="tabela-solicitacao">
             <thead>
                 <tr>
                     <th>Nome da loja</th>
                     <th>CNPJ</th>
                     <th>Endereço</th>
+                    <th>Status</th>
                     <th>Ação</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -101,6 +102,8 @@
                     <td><?php echo $solicitacao['nome_loja']?></td>
                     <td><?php echo $solicitacao['cnpj']?></td>
                     <td><?php echo $solicitacao['endereco']?></td>
+                    <!--TODO adicionar status do pedido de acordo com o banco-->
+                    <td><span class="tag pendente">Pendente</span></td>
                     <td><a href="#" onclick='abrirJanelaSolicitacao(<?php echo json_encode($solicitacao) ?>)'><button class="btn-editar">Avaliar</button></a></td>
                 </tr>
                 <?php 
@@ -110,57 +113,58 @@
         </table>
     </main>
 
-    <div id="janela-solicitacoes" class="janela-avaliacoes">
-        <div class="janela-conteudo-avaliacoes">
+    <div id="janela-solicitacoes" class="janela-solicitacao">
+        <div class="janela-conteudo-solicitacoes">
             <span onclick="fecharJanelaSolicitacao()">&#10005;</span>
             <h2>Detalhes da loja</h2>
             
             <form action="../bd/solicitacao_vendedor.php" method="post">
-                <div class="comentario-solicitacao" style="display:none">
+                <div class="informacao-loja" style="display:none">
                     <p><strong>Id do pedido:</strong><p id="id_pedido" name="id_pedido"></p> </p>
                 </div>
 
-                <div class="comentario-solicitacao" style="display:none">
+                <div class="informacao-loja" style="display:none">
                     <p><strong>Id usuario:</strong><p id="id_user" name="id_user"></p> </p>
                 </div>
                 
-                <div class="comentario-solicitacao">
+                <div class="informacao-loja">
                     <p><strong>Nome da loja:</strong><p id="nome" name="nome"></p> </p>
                 </div>
 
-                <div class="comentario-solicitacao">
+                <div class="informacao-loja">
                     <p><strong>CNPJ:</strong><p id="cnpj" name="cnpj"></p> </p>
                 </div>
 
-                <div class="comentario-solicitacao">
+                <div class="informacao-loja">
                     <p><strong>Email:</strong><p id="email" name="email"></p> </p>
                 </div>
 
-                <div class="comentario-solicitacao">
+                <div class="informacao-loja">
                     <p><strong>Telefone:</strong><p id="telefone" name="telefone"></p> </p>
                 </div>
 
-                <div class="comentario-solicitacao">
+                <div class="informacao-loja">
                     <p><strong>CEP:</strong><p id="cep" name="cep"></p></p>
                 </div>
 
-                <div class="comentario-solicitacao">
+                <div class="informacao-loja">
                     <p><strong>Endereco</strong><p id="endereco" name="endereco"></p> </p>
                 </div>
 
-                <div class="comentario-solicitacao">
+                <div class="informacao-loja">
                     <p><strong>Categoria:</strong><p id="categoria" name="categoria"></p> </p>
                 </div>
 
-                <div class="comentario-solicitacao">
+                <div class="informacao-loja">
                     <p><strong>Descrição:</strong><p id="descricao" name="descricao"></p> </p>
                 </div>
 
-                <div class="comentario-solicitacao">
+                <div class="informacao-loja">
                     <p><strong>Data do pedido:</strong><p id="data"></p> </p>
                 </div>
                 
                 <button class="btn-editar" name="acao" value="aprovar">Aprovar</button>
+                <!--TODO comentario para rejeitar-->
                 <button class="btn-editar" name="acao" value="rejeitar">Rejeitar</button></a>
             </form>
         </div>

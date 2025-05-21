@@ -17,8 +17,8 @@
                 VALUES (:userId, :nome, :cnpj, :email, :telefone, :cep, :endereco, :categoria, :descricao, 1)";
 
         $statement = $connection->prepare($sql);
-
-        $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+        
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
         $statement->bindParam(':nome', $nome, PDO::PARAM_STR);
         $statement->bindParam(':cnpj', $cnpj, PDO::PARAM_STR);
         $statement->bindParam(':email', $email, PDO::PARAM_STR);

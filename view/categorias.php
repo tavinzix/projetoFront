@@ -20,7 +20,6 @@
     }
 
     //TODO paginar os restantes
-    //TODO css proprio
     //TODO editar categoria
     //TODO remover categoria
     $sql = "SELECT * FROM categorias LIMIT 10";
@@ -34,7 +33,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/gerenciarProduto.css">
+    <link rel="stylesheet" href="../css/painelAdm.css">
     <link rel="stylesheet" href="../css/responsivo.css">
     <title>Iconst</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,10 +67,10 @@
         </ul>
     </header>
 
-    <main class="painel-produtos">
+    <main class="categorias-exterior">
         <div class="topo-painel">
             <h2>Categorias</h2>
-            <a href="form_cadastrarCategoria.php" class="btn-novo-produto">Nova categoria</a>
+            <a href="form_cadastrarCategoria.php" class="btn-nova-categoria">Nova categoria</a>
         </div>
 
         <!--Filtros-->
@@ -84,7 +83,7 @@
         </div>
 
         <!--Lista de categorias-->
-        <table class="tabela-produtos">
+        <table class="tabela-categoria">
             <thead>
                 <tr>
                     <th>Imagem</th>
