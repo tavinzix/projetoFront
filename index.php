@@ -27,7 +27,6 @@
 <!--TODO arrumar header de todas as paginas
     TODO arrumar favicon de todas as paginas
     TODO arrumar responsividade das paginas
-    TODO verificar se precisa setar a variavel imagemUsuario com o caminho
     TODO verificar js
     TODO criar carrinho {
         vincular com a quantidade   

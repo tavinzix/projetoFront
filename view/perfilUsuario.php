@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/perfilUsuario.css">
     <link rel="stylesheet" href="../css/responsivo.css">
-    <title>Iconst</title>
+    <title>Perfil do usuário | Iconst</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
@@ -61,7 +61,7 @@
             <?php if ($_SESSION['tipo_usuario'] == 'admin'){?>
                 <li><a href="painelAdm.php">Painel Administrativo</a></li><?php } ?>
             <?php if ($_SESSION['tipo_usuario'] == 'vendedor'){?>
-                <li><a href="perfilLoja.html">Painel do vendedor</a></li><?php } ?>
+                <li><a href="painelVendedor.html">Painel do vendedor</a></li><?php } ?>
             <?php if ($_SESSION['tipo_usuario'] == 'usuario'){?>
                 <li><a href="solicitacaoCadastroVendedor.html">Quero vender na plataforma</a></li>
             <?php } ?>          
@@ -72,7 +72,7 @@
          <ul class="menu-link" id="menu-link">
             <li><a href="../index.php">Início</a></li>
             <li><a href="painelAdm.php">Painel Administrativo</a></li>
-            <li><a href="perfilLoja.html">Painel do vendedor</a></li>
+            <li><a href="painelVendedor.html">Painel do vendedor</a></li>
             <li><a href="solicitacaoCadastroVendedor.php">Quero vender na plataforma</a></li>
             <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>

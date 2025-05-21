@@ -1,64 +1,66 @@
 /*LOGIN*/
 .login-exterior {
-  display: flex;
-  height: 100vh;
+    display: flex;
+    height: 100vh;
 }
 
 .painel-direita {
-  flex: 1;
-  background: linear-gradient(135deg, #FF6B00, #f9a825);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+    flex: 1;
+    background: linear-gradient(135deg, #FF6B00, #f9a825);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .painel-esquerda {
-  flex: 1;
-  background-color: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    flex: 1;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .logo-login {
-  text-align: center;
-  color: white;
+    text-align: center;
+    color: white;
 }
 
 .logo-login img {
-  width: 300px;
-  margin-bottom: 20px;
+    width: 300px;
+    margin-bottom: 20px;
 }
 
 .login-formulario,
 .recuperacao-formulario {
-  width: 100%;
-  max-width: 400px;
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 40px 40px #c1c1c1;
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 40px 40px #c1c1c1;
 }
 
 .login-formulario h2,
 .recuperacao-formulario h2,
 .cadastro-exterior h2,
-.formulario-solicitacao-vendedor h2 {
-  font-size: 25px;
-  color: #333;
-  text-align: center;
+.formulario-solicitacao-vendedor h2,
+.categoria-exterior h2 {
+    font-size: 25px;
+    color: #333;
+    text-align: center;
 }
 
 .login-formulario label,
 .recuperacao-formulario label,
 .cadastro-exterior label,
-.formulario-solicitacao-vendedor label {
-  display: block;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  color: #444;
+.formulario-solicitacao-vendedor label,
+.categoria-exterior label {
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    color: #444;
 }
 
 .login-formulario input,
@@ -66,139 +68,144 @@
 .cadastro-exterior input,
 .formulario-solicitacao-vendedor input,
 .formulario-solicitacao-vendedor textarea,
-.formulario-solicitacao-vendedor select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 15px;
-  margin-bottom: 10px;
+.formulario-solicitacao-vendedor select,
+.categoria-exterior input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    margin-bottom: 10px;
 }
 
 .senha-input {
-  position: relative;
-  align-items: center;
+    position: relative;
+    align-items: center;
 }
 
 .mostrar-senha {
-  position: absolute;
-  right: 10px;
-  cursor: pointer;
-  margin-top: 5px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    margin-top: 5px;
 }
 
 .mostrar-senha img {
-  width: 30px;
+    width: 30px;
 }
 
 .mostrar-senha:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .login-formulario button,
 .recuperacao-formulario button,
 .cadastro-exterior button,
-.formulario-solicitacao-vendedor button {
-  width: 100%;
-  padding: 15px;
-  background-color: #FF6B00;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  margin-top: 15px;
-  cursor: pointer;
-  transition: background-color 0.5s linear;
-  font-family: "Roboto Condensed", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
+.formulario-solicitacao-vendedor button,
+.categoria-exterior button {
+    width: 100%;
+    padding: 15px;
+    background-color: #FF6B00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.5s linear;
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
 }
 
 .login-formulario button:hover,
 .recuperacao-formulario button:hover,
 .cadastro-exterior button:hover,
-.formulario-solicitacao-vendedor button:hover {
-  background-color: #c25304;
+.formulario-solicitacao-vendedor button:hover,
+.categoria-exterior button:hover {
+    background-color: #c25304;
 }
 
 .links {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .links a {
-  color: #FF6B00;
-  text-decoration: none;
-  font-size: 15px;
+    color: #FF6B00;
+    text-decoration: none;
+    font-size: 15px;
 }
 
 .links a:hover {
-  color: #b14b07;
+    color: #b14b07;
 }
 
 /*RECUPERAR SENHA*/
 .recuperar-exterior {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 .recuperar-forms h2 {
-  color: #333;
-  margin-bottom: 15px;
+    color: #333;
+    margin-bottom: 15px;
 }
 
 .recuperar-forms p {
-  color: #333;
-  font-size: 15px;
-  text-align: center;
+    color: #333;
+    font-size: 15px;
+    text-align: center;
 }
 
 
 /*CADASTRO USUARIO*/
-.cadastro-exterior {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 50px;
+.cadastro-exterior,
+.categoria-exterior {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 50px;
 }
 
-.cadastro-formulario {
-  width: 100%;
-  max-width: 400px;
-  background-color: #fff;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px #c1c1c1;
+.cadastro-formulario,
+.categoria-formulario {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px #c1c1c1;
 }
 
 .link-cadastro {
-  margin-top: 15px;
-  text-align: center;
+    margin-top: 15px;
+    text-align: center;
 }
 
 .link-cadastro a {
-  color: #FF6B00;
-  text-decoration: none;
-  font-size: 15px;
+    color: #FF6B00;
+    text-decoration: none;
+    font-size: 15px;
 }
 
 .link-cadastro a:hover {
-  color: #b14b07;
+    color: #b14b07;
 }
 
 /*SOLICITACAO VENDEDOR*/
 
 .formulario-solicitacao-vendedor {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 25px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 15px #ddd;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #ddd;
 }

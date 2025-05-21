@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/painelAdm.css">
     <link rel="stylesheet" href="../css/responsivo.css">
-    <title>Iconst</title>
+    <title>Solicitações de vendedores | Iconst</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
@@ -81,8 +81,7 @@
             </form>
         </div>
 
-        <!--Lista de solicitacoes
-        TODO arrumar css-->
+        <!--Lista de solicitacoes-->
         <table class="tabela-solicitacao">
             <thead>
                 <tr>
