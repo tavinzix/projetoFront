@@ -313,3 +313,138 @@ Subcategorias:
         
         setInterval(updateTitle, 200);
     </script>
+
+
+/*CAMPOS DOS PRODUTOS NO BANCO*/
+
+Dados gerais
+    Nome do item
+    Descrição
+    Preço
+    Imagem do produto
+    Cor
+    Marca
+    Tipo de embalagem (ex: Caixa, Blister, saco, lata, etc.)
+    Certificação (ex: INMETRO, ABNT, CE, etc.)
+
+
+1. Ferramentas
+    Peso
+    Material (ex: Aço, Plástico, Alumínio)
+    Tamanho/Dimensões (ex: 30 cm, 20 cm)
+    Tipo de uso (ex: Profissional, Doméstico, Industrial)
+    Potência (para ferramentas elétricas)
+    Voltagem (para ferramentas elétricas)
+    Segurança (ex: Normas de segurança, resistência a impactos)
+
+2. Materiais de Construção
+    Tipo (ex: Cimento Portland, Cimento Para Uso Geral)
+    Peso (em kg)
+    Volume (em m³ ou litros)
+    Composição (ex: 100% cimento, areia + cal)
+    Tamanho/Dimensões (ex: 25kg, 40x20x10 cm)
+    Quantidade por embalagem (ex: 25 kg, 100 unidades)
+    Data de validade (para materiais como tintas, colas, etc.)
+    Aplicação (ex: Construção, Revestimento, Reparo)
+    Referência de compatibilidade (com outros materiais ou ferramentas)
+
+3. Equipamentos de Proteção Individual (EPIs)
+    Material (ex: PVC, Borracha, Couro, Poliéster)
+    Tamanho (ex: P, M, G, ou medidas específicas)
+    Normas de segurança (ex: NR-6, NR-12, CE)
+    Certificação (ex: ANVISA, INMETRO)
+    Uso recomendado (ex: Proteção contra impactos, Proteção contra corte)
+
+4. Tintas e Vernizes
+    Tipo de tinta (ex: Acrílica, PVA, Esmalte Sintético)
+    Acabamento (ex: Fosco, Semibrilho, Brilhante)
+    Composição (ex: Água, Solvente, Resinas)
+    Rendimento (ex: m² por litro)
+    Peso (em kg ou litros)
+    Volume (ex: 1L, 3,6L, 20L)
+    Área de aplicação (ex: Interna, Externa, Piso)
+    Tempo de secagem
+    Durabilidade (ex: 5 anos)
+
+5. Móveis e Equipamentos para Construção
+    Peso
+    Material (ex: Alumínio, Aço, Madeira)
+    Capacidade de carga (para andaimes, escadas)
+    Dimensões (ex: Altura, Largura, Profundidade)
+    Tipo de uso (ex: Residencial, Industrial)
+
+6. Instalações Elétricas
+    Tipo de fio/cabo (ex: Fio flexível, Cabo de cobre, Cabos para instalações industriais)
+    Material (ex: Cobre, Alumínio)
+    Tensão nominal (ex: 220V, 110V)
+    Quantidade por embalagem (ex: metro, rolo)
+    Capacidade de corrente (ex: 10A, 20A)
+    Normas e Certificações (ex: NBR, ABNT, IEC)
+    Aplicação (ex: Residencial, Comercial)
+
+7. Piscinas e Jardinagem
+    Tipo de bomba (ex: Bomba submersa, bomba de circulação)
+    Capacidade de bomba (ex: 2000 L/h, 5000 L/h)
+    Tipo de filtro (ex: Filtro de areia, Filtro de cartucho)
+    Material (ex: Plástico, Aço inox)
+    Potência (em watts)
+    Uso recomendado (ex: Piscina, Jardim, Fontes)
+
+8. Pisos, Revestimentos e Cerâmicas
+    Material (ex: Cerâmica, Porcelanato, Granito)
+    Tamanho/Dimensões (ex: 60x60cm, 30x30cm)
+    Acabamento (ex: Fosco, Brilhante, Antiderrapante)
+    Peso
+    Aplicação (ex: Interna, Externa)
+
+
+
+    /*CARREGAR CAMPOS PRO PRODUTO DINAMICAMENTE*/
+
+    <script>
+        const categoriaSelect = document.getElementById("categoria");
+        const camposDinamicos = document.getElementById("camposDinamicos");
+        const formProduto = document.getElementById("formProduto");
+        const inputImagens = document.getElementById("imagens");
+        const preview = document.getElementById("previewImagens");
+
+        categoriaSelect.addEventListener("change", () => {
+            const categoria = categoriaSelect.value;
+            camposDinamicos.innerHTML = "";
+
+            if (categoria === "cimento") {
+                camposDinamicos.innerHTML = `
+          <label for="peso">Peso (kg)</label>
+          <input type="number" name="peso" id="peso" required />
+        `;
+            } else if (categoria === "tinta") {
+                camposDinamicos.innerHTML = `
+          <label for="litros">Litros</label>
+          <input type="number" name="litros" id="litros" required />
+          <label for="cor">Cor</label>
+          <input type="text" name="cor" id="cor" required />
+        `;
+            } else if (categoria === "ferramenta") {
+                camposDinamicos.innerHTML = `
+          <label for="marca">Marca</label>
+          <input type="text" name="marca" id="marca" required />
+          <label for="tensao">Tensão</label>
+          <select name="tensao" id="tensao" required>
+            <option value="">Selecione</option>
+            <option value="bivolt">Bivolt</option>
+            <option value="110V">110V</option>
+            <option value="220V">220V</option>
+          </select>
+        `;
+            }
+        });
+
+        formProduto.addEventListener("submit", function (e) {
+            const campos = camposDinamicos.querySelectorAll("input, select");
+            const detalhes = {};
+            campos.forEach((campo) => {
+                detalhes[campo.name] = campo.value;
+            });
+            document.getElementById("detalhes").value = JSON.stringify(detalhes);
+        });
+    </script>
