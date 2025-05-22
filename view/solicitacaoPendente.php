@@ -162,7 +162,7 @@
                     <strong>Data do pedido:</strong><p id="data"></p>
                 </div>
                 
-                <button onclick="aprovar()" class="btn-editar" type="button" name="acao" value="aprovar">Aprovar</button>
+                <button onclick="aprovar()" class="btn-editar" type="button">Aprovar</button>
                 <!--TODO comentario para rejeitar
                     TODO não aprovar depois de rejeitar
                     TODO não aprovar 2x-->

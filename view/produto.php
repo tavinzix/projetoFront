@@ -18,7 +18,7 @@
             $imagemUsuario = 'img/users/' . ($usuario['img_user']);
         }
     }
-?>
+?>  
 <!DOCTYPE html>
 <html lang="pt-BR">
 

@@ -354,8 +354,8 @@
 
 <!--
 404
-Esta página deve ser um ninja.funny iconEla simplesmente desapareceu!
-Tente pesquisar por palavras-chave ou descubra novos ícones ou ícones populares
+Esta página deve ser um ninja 🥷 simplesmente desapareceu!
+Tente pesquisar por palavras-chave 
 
 /*
 Uso                                     Cor                 Código HEX 

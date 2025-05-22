@@ -230,4 +230,7 @@ function aprovar() {
         method: "POST",
         body: formData
     });
+
+    fecharJanelaSolicitacao();
+    window.location.reload();
 }

@@ -44,10 +44,6 @@
             echo "Erro";
         }
     }else if($_POST['acao'] == 'aprovar'){
-        //TODO 1 begin em tudo
-        //TODO 2 insert na vendedor
-        //TODO 3 remover na solicitacao
-
         $userId = $_POST['id_user'];
         $nome = $_POST['nome'];
         $cnpj = $_POST['cnpj'];
