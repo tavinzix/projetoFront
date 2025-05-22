@@ -118,6 +118,13 @@ canvas {
     border-bottom: 1px solid #ddd;
 }
 
+.tabela-categoria img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
 .tag {
     padding: 0.3rem 0.6rem;
     border-radius: 4px;
@@ -125,17 +132,17 @@ canvas {
     font-weight: bold;
 }
 
-.tag.aprovado {
+.tag.Aprovado {
     background-color: #d1f7c4;
     color: #2e7d32;
 }
 
-.tag.pendente {
+.tag.Pendente {
     background-color: #f7f2c4;
     color: #7d782e;
 }
 
-.tag.recusado {
+.tag.Recusado {
     background-color: #ffe0e0;
     color: #c62828;
 }

@@ -19,7 +19,9 @@
         }
     }
     
-    $sql = "SELECT * FROM solicitacoes_vendedor LIMIT 10";
+    $sql = "SELECT *, CASE WHEN status = '1' then 'Pendente' 
+            WHEN status = '2' then 'Recusado' else 'Aprovado' end AS status_texto
+            FROM solicitacoes_vendedor LIMIT 10";
     $stmt = $connection->prepare($sql);
     $stmt->execute();
 ?>
@@ -90,7 +92,6 @@
                     <th>Endereço</th>
                     <th>Status</th>
                     <th>Ação</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -101,9 +102,8 @@
                     <td><?php echo $solicitacao['nome_loja']?></td>
                     <td><?php echo $solicitacao['cnpj']?></td>
                     <td><?php echo $solicitacao['endereco']?></td>
-                    <!--TODO adicionar status do pedido de acordo com o banco-->
-                    <td><span class="tag pendente">Pendente</span></td>
-                    <td><a href="#" onclick='abrirJanelaSolicitacao(<?php echo json_encode($solicitacao) ?>)'><button class="btn-editar">Avaliar</button></a></td>
+                    <td><span class="tag <?php echo $solicitacao['status_texto']?>"><?php echo $solicitacao['status_texto']?></span></td>
+                    <td><a onclick='abrirJanelaSolicitacao(<?php echo json_encode($solicitacao) ?>)'><button class="btn-editar">Avaliar</button></a></td>
                 </tr>
                 <?php 
                     } 
@@ -117,53 +117,55 @@
             <span onclick="fecharJanelaSolicitacao()">&#10005;</span>
             <h2>Detalhes da loja</h2>
             
-            <form action="../bd/solicitacao_vendedor.php" method="post">
+            <form action="../bd/solicitacao_vendedor.php" method="post" id="formularioSolicitacao">
                 <div class="informacao-loja" style="display:none">
-                    <p><strong>Id do pedido:</strong><p id="id_pedido" name="id_pedido"></p> </p>
+                    <strong>Id do pedido:</strong><p id="id_pedido" name="id_pedido"></p>
                 </div>
 
                 <div class="informacao-loja" style="display:none">
-                    <p><strong>Id usuario:</strong><p id="id_user" name="id_user"></p> </p>
+                    <strong>Id usuario:</strong><p id="id_user" name="id_user"></p>
                 </div>
                 
                 <div class="informacao-loja">
-                    <p><strong>Nome da loja:</strong><p id="nome" name="nome"></p> </p>
+                    <strong>Nome da loja:</strong><p id="nome" name="nome"></p>
                 </div>
 
                 <div class="informacao-loja">
-                    <p><strong>CNPJ:</strong><p id="cnpj" name="cnpj"></p> </p>
+                    <strong>CNPJ:</strong><p id="cnpj" name="cnpj"></p>
                 </div>
 
                 <div class="informacao-loja">
-                    <p><strong>Email:</strong><p id="email" name="email"></p> </p>
+                    <strong>Email:</strong><p id="email" name="email"></p>
                 </div>
 
                 <div class="informacao-loja">
-                    <p><strong>Telefone:</strong><p id="telefone" name="telefone"></p> </p>
+                    <strong>Telefone:</strong><p id="telefone" name="telefone"></p>
                 </div>
 
                 <div class="informacao-loja">
-                    <p><strong>CEP:</strong><p id="cep" name="cep"></p></p>
+                    <strong>CEP:</strong><p id="cep" name="cep"></p>
                 </div>
 
                 <div class="informacao-loja">
-                    <p><strong>Endereco</strong><p id="endereco" name="endereco"></p> </p>
+                    <strong>Endereco</strong><p id="endereco" name="endereco"></p>
                 </div>
 
                 <div class="informacao-loja">
-                    <p><strong>Categoria:</strong><p id="categoria" name="categoria"></p> </p>
+                    <strong>Categoria:</strong><p id="categoria" name="categoria"></p>
                 </div>
 
                 <div class="informacao-loja">
-                    <p><strong>Descrição:</strong><p id="descricao" name="descricao"></p> </p>
+                    <strong>Descrição:</strong><p id="descricao" name="descricao"></p>
                 </div>
 
                 <div class="informacao-loja">
-                    <p><strong>Data do pedido:</strong><p id="data"></p> </p>
+                    <strong>Data do pedido:</strong><p id="data"></p>
                 </div>
                 
-                <button class="btn-editar" name="acao" value="aprovar">Aprovar</button>
-                <!--TODO comentario para rejeitar-->
+                <button onclick="aprovar()" class="btn-editar" type="button" name="acao" value="aprovar">Aprovar</button>
+                <!--TODO comentario para rejeitar
+                    TODO não aprovar depois de rejeitar
+                    TODO não aprovar 2x-->
                 <button class="btn-editar" name="acao" value="rejeitar">Rejeitar</button></a>
             </form>
         </div>

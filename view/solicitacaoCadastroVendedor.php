@@ -45,7 +45,7 @@
 <body>
     <section class="formulario-solicitacao-vendedor">
         <h2>Solicitação de cadastro para vender na plataforma </h2>
-        <form action="../bd/solicitacao_vendedor.php" method="post">
+        <form action="../bd/solicitacao_vendedor.php" method="post" id="form">
             <label for="user_id" style="display:none">User ID</label>
             <input type="text" id="user_id" name="user_id" style="display:none" value="<?php echo $user_id ?>">
 

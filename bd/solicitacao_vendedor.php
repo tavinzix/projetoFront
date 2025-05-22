@@ -1,6 +1,12 @@
 <?php
     session_start();
     require_once('config.inc.php');
+
+    function erro_json($mensagem){
+        header('Content-Type: application/json', true);
+        echo json_encode(['status' => 'error', 'mensagem' => $mensagem]);
+        exit();
+    }
     
     if ($_POST['acao'] == 'cadastrar') {
         $userId = $_POST['user_id'];
@@ -63,7 +69,8 @@
                 throw new Exception('Erro ao inserir vendedor.');
             }
 
-            $sqlDeleteSolicitacao = "DELETE FROM solicitacoes_vendedor WHERE user_id = :userId";
+            $sqlDeleteSolicitacao = "UPDATE solicitacoes_vendedor set status = 3 WHERE user_id = :userId";
+
             $statementDelete = $connection->prepare($sqlDeleteSolicitacao);
             $statementDelete->bindParam(':userId', $userId, PDO::PARAM_INT);
 
@@ -80,6 +87,7 @@
         } catch (Exception $e) {
             $connection->rollBack();
             echo 'Erro: ' . $e->getMessage();
+            die("teste");
         }
     }else if($_POST['acao'] == 'reprovar'){
         //TODO logica para digitar motivo

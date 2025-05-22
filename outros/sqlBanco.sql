@@ -75,9 +75,9 @@ CREATE TABLE solicitacoes_vendedor (
     categoria VARCHAR(255),
     descricao_loja TEXT,
     data_solicitacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status CHAR(1) CHECK (status IN ('1', '2')),
+    status CHAR(1) CHECK (status IN ('1', '2', '3')),
     motivo_rejeicao TEXT,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
 COMMENT ON COLUMN solicitacoes_vendedor.status IS '1 = Pendente, 2 = Rejeitado';

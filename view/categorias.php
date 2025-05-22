@@ -70,7 +70,7 @@
     <main class="categorias-exterior">
         <div class="topo-painel">
             <h2>Categorias</h2>
-            <a href="form_cadastrarCategoria.php" class="btn-nova-categoria">Nova categoria</a>
+            <a href="form_cadastrarCategoria.html" class="btn-nova-categoria">Nova categoria</a>
         </div>
 
         <!--Filtros-->
