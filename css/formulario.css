@@ -46,7 +46,8 @@
 .recuperacao-formulario h2,
 .cadastro-exterior h2,
 .formulario-solicitacao-vendedor h2,
-.categoria-exterior h2 {
+.categoria-exterior h2,
+.cadastroProduto-exterior h2 {
     font-size: 25px;
     color: #333;
     text-align: center;
@@ -56,7 +57,8 @@
 .recuperacao-formulario label,
 .cadastro-exterior label,
 .formulario-solicitacao-vendedor label,
-.categoria-exterior label {
+.categoria-exterior label,
+.cadastroProduto-formulario label {
     display: block;
     margin-bottom: 10px;
     margin-top: 20px;
@@ -69,7 +71,10 @@
 .formulario-solicitacao-vendedor input,
 .formulario-solicitacao-vendedor textarea,
 .formulario-solicitacao-vendedor select,
-.categoria-exterior input {
+.categoria-exterior input,
+.cadastroProduto-formulario input,
+.cadastroProduto-formulario textarea,
+.cadastroProduto-formulario select {
     width: 100%;
     padding: 10px;
     border-radius: 8px;
@@ -102,7 +107,8 @@
 .recuperacao-formulario button,
 .cadastro-exterior button,
 .formulario-solicitacao-vendedor button,
-.categoria-exterior button {
+.categoria-exterior button,
+.cadastroProduto-formulario button {
     width: 100%;
     padding: 15px;
     background-color: #FF6B00;
@@ -123,7 +129,8 @@
 .recuperacao-formulario button:hover,
 .cadastro-exterior button:hover,
 .formulario-solicitacao-vendedor button:hover,
-.categoria-exterior button:hover {
+.categoria-exterior button:hover,
+.cadastroProduto-formulario button:hover {
     background-color: #c25304;
 }
 
@@ -185,7 +192,8 @@
 
 /*SOLICITACAO VENDEDOR*/
 
-.formulario-solicitacao-vendedor {
+.formulario-solicitacao-vendedor,
+.cadastroProduto-exterior {
     max-width: 600px;
     margin: 40px auto;
     padding: 25px;
@@ -193,3 +201,5 @@
     border-radius: 10px;
     box-shadow: 0 0 15px #ddd;
 }
+
+/*CADASTRAR PRODUTO*/

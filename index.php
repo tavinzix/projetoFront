@@ -22,7 +22,6 @@
     $sql = "SELECT * FROM categorias ORDER BY nome";
     $stmt = $connection->prepare($sql);
     $stmt->execute();
-
 ?>
 <!--TODO arrumar header de todas as paginas
     TODO arrumar favicon de todas as paginas
@@ -50,7 +49,7 @@
 
     TODO integrar com api
      -->
-    
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -103,20 +102,20 @@
 
             <div class="categorias">
                 <?php
-                    while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) { 
+                while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 ?>
-                <div class="itens-categoria">
-                    <!-- TODO abrir pagina da categoria com os respectivos itens
+                    <div class="itens-categoria">
+                        <!-- TODO abrir pagina da categoria com os respectivos itens
                      <a href="itensCategoria/<?php echo $categoria['url']; ?>.html">-->
-                    <a href="itensCategoria.html">
-                        <div class="img-categoria">
-                            <img src="img/categoria/<?= $categoria['imagem'] ?>" alt="<?php echo $categoria['nome'] ?>">
-                        </div>
-                        <p><?php echo $categoria['nome'] ?></p>
-                    </a>
-                </div>
-                <?php 
-                    }
+                        <a href="itensCategoria.html">
+                            <div class="img-categoria">
+                                <img src="img/categoria/<?= $categoria['imagem'] ?>" alt="<?php echo $categoria['nome'] ?>">
+                            </div>
+                            <p><?php echo $categoria['nome'] ?></p>
+                        </a>
+                    </div>
+                <?php
+                }
                 ?>
             </div>
 
@@ -337,7 +336,7 @@
                         <p>R$ 1.000,00</p>
                     </a>
                 </div>
-                
+
             </div>
 
             <div class="botao-produtos">

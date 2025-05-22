@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/gerenciarProduto.css">
-    <link rel="stylesheet" href="css/responsivo.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/gerenciarProduto.css">
+    <link rel="stylesheet" href="../css/formulario.css">
+    <link rel="stylesheet" href="../css/responsivo.css">
     <title>Cadastrar produto | Iconst</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,102 +17,90 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Cadastrar Novo Produto</h1>
+    <div class="cadastroProduto-exterior">
+        <h2>Cadastrar Novo Produto</h2>
 
-        <form id="formProduto" action="/salvar-produto" method="POST" enctype="multipart/form-data">
-            <div class="form-grupo">
-                <label for="nome">Nome do Produto</label>
-                <input type="text" name="nome" id="nome" required />
+        <form id="formProduto" action="/salvar-produto" method="POST" enctype="multipart/form-data"
+            class="cadastroProduto-formulario">
+
+            <label for="nome">Nome do Produto</label>
+            <input type="text" name="nome" id="nome" required />
+
+            <label for="descricao">Descrição</label>
+            <textarea name="descricao" id="descricao" rows="4" required></textarea>
+
+            <!--TODO puxar categoria do banco-->
+            <label for="categoria">Categoria</label>
+            <select name="categoria" id="categoria" required>
+                <option value="">Selecione</option>
+                <option value=" ">Construção e Reforma</option>
+                <option value=" ">Materiais para Construção</option>
+                <option value=" ">Elétrica e Iluminação</option>
+                <option value=" ">Saneamento e Hidráulica</option>
+                <option value=" ">Pisos, Revestimentos e Decoração</option>
+                <option value=" ">Segurança e Proteção</option>
+                <option value=" ">Móveis e Utilidades</option>
+                <option value=" ">Pinturas e Acabamentos</option>
+                <option value=" ">Equipamentos e Máquinas</option>
+                <option value=" ">Madeiras</option>
+                <option value=" ">Metais</option>
+            </select>
+
+            <div id="camposDinamicos"></div>
+
+            <label for="cor">Cor</label>
+            <input type="text" name="cor" id="cor" />
+
+            <label for="marca">Marca</label>
+            <input type="text" name="marca" id="marca" required />
+
+            <label for="imagens">Fotos do Produto (até 5 imagens)</label>
+
+            <div class="imagens-exterior">
+                <div class="img-upload">
+                    <input type="file" id="foto1" name="imagem1" required
+                        onchange="img1.src = window.URL.createObjectURL(this.files[0])">
+                    <img id="img1" style="max-width:150px;">
+                    <span>+</span>
+                </div>
+
+                <div class="img-upload">
+                    <input type="file" id="foto2" name="imagem2" 
+                        onchange="img2.src = window.URL.createObjectURL(this.files[0])">
+                    <img id="img2" style="max-width:150px;">
+                    <span>+</span>
+                </div>
+
+                <div class="img-upload">
+                    <input type="file" id="foto1" name="imagem3" 
+                        onchange="img3.src = window.URL.createObjectURL(this.files[0])">
+                    <img id="img3" style="max-width:150px;">
+                    <span>+</span>
+                </div>
+
+                <div class="img-upload">
+                    <input type="file" id="foto1" name="imagem4" 
+                        onchange="img4.src = window.URL.createObjectURL(this.files[0])">
+                    <img id="img4" style="max-width:150px;">
+                    <span>+</span>
+                </div>
+
+                <div class="img-upload">
+                    <input type="file" id="foto1" name="imagem5" 
+                        onchange="img5.src = window.URL.createObjectURL(this.files[0])">
+                    <img id="img5" style="max-width:150px;">
+                    <span>+</span>
+                </div>
             </div>
 
-            <div class="form-grupo">
-                <label for="descricao">Descrição</label>
-                <textarea name="descricao" id="descricao" rows="4" required></textarea>
-            </div>
 
-            <div class="form-grupo">
-                <label for="categoria">Categoria</label>
-                <select name="categoria" id="categoria" required>
-                    <option value="">Selecione</option>
-                    <option value="cimento">Cimento</option>
-                    <option value="tinta">Tinta</option>
-                    <option value="ferramenta">Ferramenta</option>
-                </select>
-            </div>
 
-            <div id="camposDinamicos" class="form-grupo"></div>
-
-            <div class="form-grupo">
-                <label for="estoque">Estoque</label>
-                <input type="number" name="estoque" id="estoque" min="0" required />
-            </div>
-
-            <div class="form-grupo">
-                <label for="preco">Preço (R$)</label>
-                <input type="number" name="preco" id="preco" step="0.01" min="0" required />
-            </div>
-
-            <div class="form-grupo">
-                <label for="imagens">Fotos do Produto (até 5 imagens)</label>
-                <input type="file" name="imagens[]" id="imagens" accept="image/*" multiple required />
-                <div id="previewImagens" class="preview-container"></div>
-            </div>
 
             <input type="hidden" name="detalhes" id="detalhes" />
 
-            <button type="submit" class="btn-cadastrar">Cadastrar Produto</button>
+            <button type="submit">Cadastrar Produto</button>
         </form>
     </div>
-
-    <script>
-        const categoriaSelect = document.getElementById("categoria");
-        const camposDinamicos = document.getElementById("camposDinamicos");
-        const formProduto = document.getElementById("formProduto");
-        const inputImagens = document.getElementById("imagens");
-        const preview = document.getElementById("previewImagens");
-
-        categoriaSelect.addEventListener("change", () => {
-            const categoria = categoriaSelect.value;
-            camposDinamicos.innerHTML = "";
-
-            if (categoria === "cimento") {
-                camposDinamicos.innerHTML = `
-          <label for="peso">Peso (kg)</label>
-          <input type="number" name="peso" id="peso" required />
-        `;
-            } else if (categoria === "tinta") {
-                camposDinamicos.innerHTML = `
-          <label for="litros">Litros</label>
-          <input type="number" name="litros" id="litros" required />
-          <label for="cor">Cor</label>
-          <input type="text" name="cor" id="cor" required />
-        `;
-            } else if (categoria === "ferramenta") {
-                camposDinamicos.innerHTML = `
-          <label for="marca">Marca</label>
-          <input type="text" name="marca" id="marca" required />
-          <label for="tensao">Tensão</label>
-          <select name="tensao" id="tensao" required>
-            <option value="">Selecione</option>
-            <option value="bivolt">Bivolt</option>
-            <option value="110V">110V</option>
-            <option value="220V">220V</option>
-          </select>
-        `;
-            }
-        });
-
-        // Gerar campo JSONB antes do envio
-        formProduto.addEventListener("submit", function (e) {
-            const campos = camposDinamicos.querySelectorAll("input, select");
-            const detalhes = {};
-            campos.forEach((campo) => {
-                detalhes[campo.name] = campo.value;
-            });
-            document.getElementById("detalhes").value = JSON.stringify(detalhes);
-        });
-    </script>
 </body>
 
 </html>
