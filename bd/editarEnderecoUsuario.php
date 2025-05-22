@@ -46,7 +46,7 @@ if ($_POST['acao'] == 'editar') {
         echo "Erro";
     }  
 
-} elseif ($acao == 'excluir') {
+} elseif ($_POST['acao']== 'excluir') {
     $id = $_POST['id'];
     $userId =$_POST['userId'];
 
@@ -60,10 +60,10 @@ if ($_POST['acao'] == 'editar') {
 
     if($stmt){
         $_SESSION['msgSucesso'] = 'Endereço removido com sucesso!';
-        header("Location: perfilUsuario.php");
+        header("Location: ../view/perfilUsuario.php");
         exit();
     }
-} elseif ($acao == 'salvar') {
+} elseif ($_POST['acao'] == 'salvar') {
     $userId =$_POST['userId'];
     $tipo = $_POST['tipo'];
     $cep = $_POST['cep'];
@@ -79,8 +79,7 @@ if ($_POST['acao'] == 'editar') {
     
     $stmt = $connection->prepare($sql);
 
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $stmt->bindParam(':tipo', $tipo, PDO::PARAM_STR);
     $stmt->bindParam(':cep', $cep, PDO::PARAM_STR);
     $stmt->bindParam(':estado', $estado, PDO::PARAM_STR);
@@ -94,7 +93,7 @@ if ($_POST['acao'] == 'editar') {
 
     if($stmt){
         $_SESSION['msgSucesso'] = 'Endereço cadastrado com sucesso!';
-        header("Location: perfilUsuario.php");
+        header("Location: ../view/perfilUsuario.php");
         exit();
     }
 }
