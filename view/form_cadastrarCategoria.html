@@ -30,12 +30,15 @@
 
             <div class="foto-interna">
                 <label for="foto">Imagem</label>
-                <img id="img" style="max-width:150px">
                 <input type="file" id="foto" name="novaImagem" required 
                 onchange="img.src = window.URL.createObjectURL(this.files[0])">
+                <img id="img" style="max-width:150px">
             </div>
-
             <button type="submit" name="botaoEnviar">Criar categoria</button>
+            
+            <div class="links">
+                <a href="painelAdm.php">← Voltar</a>
+            </div>
         </form>
       
     </div>

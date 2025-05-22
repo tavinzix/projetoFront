@@ -18,7 +18,7 @@
   $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
   if ($usuario && !empty($usuario['img_user'])) {
-    $imagemUsuario = 'img/users/' . ($usuario['img_user']);
+    $imagemUsuario = '../img/users/' . ($usuario['img_user']);
 }
 ?>
 

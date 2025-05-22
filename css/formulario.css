@@ -127,22 +127,6 @@
     background-color: #c25304;
 }
 
-.links {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.links a {
-    color: #FF6B00;
-    text-decoration: none;
-    font-size: 15px;
-}
-
-.links a:hover {
-    color: #b14b07;
-}
-
 /*RECUPERAR SENHA*/
 .recuperar-exterior {
     display: flex;
