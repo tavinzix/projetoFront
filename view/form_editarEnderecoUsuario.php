@@ -166,4 +166,6 @@
             </form>
         </section>
     </body>
+    <script src="../js/global.js"></script>
+
 </html>

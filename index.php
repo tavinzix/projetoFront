@@ -346,6 +346,7 @@
         </div>
     </main>
 
+    <script src="js/global.js"></script>
     <script src="js/js.js"></script>
 </body>
 

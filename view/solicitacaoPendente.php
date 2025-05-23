@@ -170,6 +170,6 @@
             </form>
         </div>
     </div>
-    <script src="../js/js.js"></script>
+    <script src="../js/global.js"></script>
 </body>
 </html>

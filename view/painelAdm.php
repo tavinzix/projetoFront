@@ -98,7 +98,8 @@
     </main>
 </body>
 
-<script src="../js/js.js"></script>
+<script src="../js/global.js"></script>
 <script src="../js/grafico.js"></script>
+<script src="../js/painelAdm.js"></script>
 
 </html>
