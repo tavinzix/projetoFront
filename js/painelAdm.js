@@ -13,14 +13,22 @@ function abrirJanelaSolicitacao(dados_loja) {
     document.getElementById("descricao").innerHTML = dados_loja.descricao_loja;
     document.getElementById("data").innerHTML = dados_loja.data_solicitacao;
 
-    document.getElementById("janela-solicitacoes").style.display = "block";
+    let status = document.getElementById("status").innerText;
 
-    let status = document.getElementById("status").innerHTML;
+    if (status == '3' || status == '2') {
+        const btnRejeitar = document.getElementById("rejeitar");
+        const btnAprovar = document.getElementById("aprovar");
 
-    if(status == 3 || status == 1){
-        ddocument.getElementById("aprovar").setAttribute("disabled", "true");
-        document.getElementById("rejeitar").setAttribute("disabled", "true");
+        btnRejeitar.disabled = true;
+        btnAprovar.disabled = true;
+
+        btnRejeitar.style.backgroundColor = "#ccc";
+        btnAprovar.style.backgroundColor = "#ccc";
+        btnRejeitar.style.cursor = "not-allowed";
+        btnAprovar.style.cursor = "not-allowed";
     }
+
+    document.getElementById("janela-solicitacoes").style.display = "block";
 }
 
 function fecharJanelaSolicitacao() {

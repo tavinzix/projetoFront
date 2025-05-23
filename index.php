@@ -49,7 +49,6 @@
 
     TODO mascara nos inputs
 
-    TODO integrar com api
      -->
 
 <!DOCTYPE html>

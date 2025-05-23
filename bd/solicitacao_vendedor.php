@@ -1,7 +1,6 @@
 <?php
     session_start();
     require_once('config.inc.php');
-
     function erro_json($mensagem){
         header('Content-Type: application/json', true);
         echo json_encode(['status' => 'error', 'mensagem' => $mensagem]);
@@ -44,6 +43,7 @@
             echo "Erro";
         }
     }else if($_POST['acao'] == 'aprovar'){
+
         $userId = $_POST['id_user'];
         $nome = $_POST['nome'];
         $cnpj = $_POST['cnpj'];

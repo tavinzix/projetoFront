@@ -167,14 +167,12 @@
                 </div>
                 
                 <button onclick="aprovar()" class="btn-editar" type="button" id="aprovar">Aprovar</button>
-                <!--TODO comentario para rejeitar
-                    TODO não aprovar depois de rejeitar
-                    TODO não aprovar 2x
-                    TODO ver se ainda aprova e se esta desabilitado quando o status for 1 ou 3-->
+                <!--TODO comentario para rejeitar-->
                 <button class="btn-editar" name="acao" value="rejeitar" id="rejeitar">Rejeitar</button></a>
             </form>
         </div>
     </div>
     <script src="../js/global.js"></script>
+    <script src="../js/painelAdm.js"></script>
 </body>
 </html>
