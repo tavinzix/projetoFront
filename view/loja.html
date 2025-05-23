@@ -18,13 +18,18 @@
     <!--CABEÇALHO-->
     <header class="menu">
         <div class="logo">
-            <a href="index.html"> <img src="../img/site/logo.png"></a>
+            <a href="../index.php"> <img src="../img/site/logo.png"></a>
         </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
-            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+            <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+
+            <button type="button" id="microfone" >
+                <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
+            </button>
+
             <button type="submit" class="lupa-icone">
-                <img src="../img/site/lupa.png" id="iconeft">
+                <img src="../img/site/lupa.png" id="iconeft" alt="Lupa">
             </button>
         </form>
 
@@ -35,7 +40,8 @@
         <ul class="menu-link" id="menu-link">
             <li><a href="../index.php">Início</a></li>
             <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
-            <li><a href="perfilUsuario.html"><img src="../img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
+            </li>
         </ul>
     </header>
 
@@ -53,8 +59,8 @@
             <div class="avaliacao-loja">
                 <h2>Avaliações</h2>
                 <p>Esse vendedor possui 15 avaliações<br>
-                    <p>Sua média é ⭐⭐⭐⭐⭐</p>
-                    <p><a onclick="abrirJanela()" >Ver todas avaliações</a></p>
+                <p>Sua média é ⭐⭐⭐⭐⭐</p>
+                <p><a onclick="abrirJanela()">Ver todas avaliações</a></p>
             </div>
         </section>
 
@@ -266,10 +272,11 @@
                     <p class="preco">R$ 3.499,00</p>
                     <a href="item.html"> <button>Ver Detalhes</button></a>
                 </div>
-            </div>        
+            </div>
         </section>
     </main>
     <script src="../js/global.js"></script>
     <script src="../js/loja.js"></script>
 </body>
+
 </html>

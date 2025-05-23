@@ -2,6 +2,7 @@
 function abrirJanelaSolicitacao(dados_loja) {
     document.getElementById("id_pedido").innerHTML = dados_loja.id;
     document.getElementById("id_user").innerHTML = dados_loja.user_id;
+    document.getElementById("status").innerHTML = dados_loja.status;
     document.getElementById("nome").innerHTML = dados_loja.nome_loja;
     document.getElementById("cnpj").innerHTML = dados_loja.cnpj;
     document.getElementById("email").innerHTML = dados_loja.email;
@@ -13,6 +14,13 @@ function abrirJanelaSolicitacao(dados_loja) {
     document.getElementById("data").innerHTML = dados_loja.data_solicitacao;
 
     document.getElementById("janela-solicitacoes").style.display = "block";
+
+    let status = document.getElementById("status").innerHTML;
+
+    if(status == 3 || status == 1){
+        ddocument.getElementById("aprovar").setAttribute("disabled", "true");
+        document.getElementById("rejeitar").setAttribute("disabled", "true");
+    }
 }
 
 function fecharJanelaSolicitacao() {

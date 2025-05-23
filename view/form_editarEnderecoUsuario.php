@@ -97,7 +97,7 @@
                         }
                     }else { ?>
                         <div class="endereco">
-                            <h3>Não há endereços</h3>
+                            <h3>Ainda não há endereços cadastrados</h3>
                         </div>
                     <?php 
                     }
@@ -129,7 +129,7 @@
 
                 <div class="campo-form">
                     <label for="cep">CEP</label>
-                    <input type="text" id="cep" name="cep" required>
+                    <input type="text" id="cep" name="cep" onclick="getMyLocation()" required>
                 </div>
 
                 <div class="campo-form">
@@ -167,5 +167,6 @@
         </section>
     </body>
     <script src="../js/global.js"></script>
+    <script src="../js/geolocation.js"></script>
 
 </html>
