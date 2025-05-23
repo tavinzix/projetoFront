@@ -10,7 +10,7 @@
 
   $cpf = $_SESSION['cpf'];
 
-  $sql = "SELECT * FROM usuarios WHERE cpf = :cpf";
+  $sql = "SELECT *, to_char(dt_nasc, 'DD/MM/YYYY') as data_nascimento FROM usuarios WHERE cpf = :cpf";
   $stmt = $connection->prepare($sql);
   $stmt->bindParam(':cpf', $cpf);
   $stmt->execute();
@@ -92,11 +92,10 @@
                 <label for="email">CPF</label>
                 <input type="text" id="email" name="cpf" value="<?php echo $usuario['cpf'] ?>" disabled>
             </div>
-
-            <!--TODO converter data de exibição para DD/MM/YYYY -->
+            
             <div class="campo-form">
                 <label for="email">Data de nascimento</label>
-                <input type="email" id="email" name="email" value="<?php echo $usuario['dt_nasc'] ?>" disabled>
+                <input type="email" id="email" name="email" value="<?php echo $usuario['data_nascimento'] ?>" disabled>
             </div>
         
             <div class="campo-form">
