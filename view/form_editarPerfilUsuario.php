@@ -132,6 +132,8 @@
           <button type="submit" class="btn-salvar" name="salvar">Salvar Alterações</button>
         </form>
       </section>
+      <script src="../js/global.js"></script>
+
 </body>
 
 </html>

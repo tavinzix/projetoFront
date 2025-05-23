@@ -97,6 +97,6 @@
 
 </body>
 
-<script src="../js/js.js"></script>
+<script src="../js/global.js"></script>
 
 </html>

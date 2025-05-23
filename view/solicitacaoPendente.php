@@ -126,6 +126,10 @@
                     <strong>Id usuario:</strong><p id="id_user" name="id_user"></p>
                 </div>
                 
+                <div class="informacao-loja" style="display:none">
+                    <strong>Status:</strong><p id="status" name="status"></p>
+                </div>
+                
                 <div class="informacao-loja">
                     <strong>Nome da loja:</strong><p id="nome" name="nome"></p>
                 </div>
@@ -162,14 +166,15 @@
                     <strong>Data do pedido:</strong><p id="data"></p>
                 </div>
                 
-                <button onclick="aprovar()" class="btn-editar" type="button">Aprovar</button>
+                <button onclick="aprovar()" class="btn-editar" type="button" id="aprovar">Aprovar</button>
                 <!--TODO comentario para rejeitar
                     TODO não aprovar depois de rejeitar
-                    TODO não aprovar 2x-->
-                <button class="btn-editar" name="acao" value="rejeitar">Rejeitar</button></a>
+                    TODO não aprovar 2x
+                    TODO ver se ainda aprova e se esta desabilitado quando o status for 1 ou 3-->
+                <button class="btn-editar" name="acao" value="rejeitar" id="rejeitar">Rejeitar</button></a>
             </form>
         </div>
     </div>
-    <script src="../js/js.js"></script>
+    <script src="../js/global.js"></script>
 </body>
 </html>

@@ -269,7 +269,8 @@
         </div>
     </section>
 
-    <script src="js/js.js"></script>
+    <script src="../js/global.js"></script>
+    <script src="../js/produto.js"></script>
 </body>
 
 </html>

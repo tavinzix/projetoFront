@@ -348,6 +348,7 @@
         </div>
     </main>
 
+    <script src="js/global.js"></script>
     <script src="js/js.js"></script>
 </body>
 
@@ -380,4 +381,5 @@ https://erikasarti.com/html/dingbats-simbolos-desenhos/
 
 icone carrinho https://icons8.com.br/icon/5esIoe7Rz8YD/buying
 icone lupa https://icons8.com.br/icon/7695/search
+icone microfone http://icons8.com.br/icons/set/microfone
 -->
