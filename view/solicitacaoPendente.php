@@ -165,14 +165,18 @@
                 <div class="informacao-loja">
                     <strong>Data do pedido:</strong><p id="data"></p>
                 </div>
+
+                <div class="informacao-loja">
+                    <strong>Motivo da rejeição:</strong><br>
+                    <textarea id="motivo" name="motivo" rows="4" required></textarea>
+                </div>
                 
-                <button onclick="aprovar()" class="btn-editar" type="button" id="aprovar">Aprovar</button>
-                <!--TODO comentario para rejeitar-->
-                <button class="btn-editar" name="acao" value="rejeitar" id="rejeitar">Rejeitar</button></a>
+                <button onclick="aprovar()" class="btn-editar" type="button" id="aprovarBtn">Aprovar</button>
+                <button onclick="rejeitar()" class="btn-editar" type="button" id="rejeitarBtn">Rejeitar</button>
             </form>
         </div>
     </div>
-    <script src="../js/global.js"></script>
     <script src="../js/painelAdm.js"></script>
+    <script src="../js/global.js"></script>
 </body>
 </html>

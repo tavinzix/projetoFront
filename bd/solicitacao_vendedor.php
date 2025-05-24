@@ -83,17 +83,13 @@
         } catch (Exception $e) {
             $connection->rollBack();
             echo 'Erro: ' . $e->getMessage();
-            die("teste");
         }
-    }else if($_POST['acao'] == 'reprovar'){
-        //TODO logica para digitar motivo
-        //TODO update no status e motivo
-
+    }else if($_POST['acao'] == 'rejeitar'){
         $solicitacaoId = $_POST['id_pedido'];
         $motivo = $_POST['motivo'];
 
         try {
-            $sql = "UPDATE solicitacoes_vendedor SET status = 2, motivo = :motivo WHERE id = :id_pedido";
+            $sql = "UPDATE solicitacoes_vendedor SET status = 2, motivo_rejeicao = :motivo WHERE id = :id_pedido";
             $statement = $connection->prepare($sql);
 
             $statement->bindParam(':id_pedido', $solicitacaoId, PDO::PARAM_INT);

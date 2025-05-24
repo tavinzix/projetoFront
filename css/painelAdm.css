@@ -223,6 +223,13 @@ canvas {
     margin: 5px 0;
 }
 
+.informacao-loja textarea {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
 /*LISTAGEM DE CATEGORIAS*/
 
 .btn-nova-categoria {
