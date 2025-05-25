@@ -96,6 +96,7 @@ CREATE TABLE produtos (
     nome VARCHAR(255) NOT NULL,
     descricao TEXT,
     categoria_id INT NOT NULL,
+    marca VARCHAR(255) NOT NULL,
     atributos JSONB,
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (categoria_id) REFERENCES categorias(id)

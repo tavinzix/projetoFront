@@ -78,12 +78,12 @@
     font-weight: bold;
 }
 
-.tag.ativo {
+.tag.Ativo {
     background-color: #d1f7c4;
     color: #2e7d32;
 }
 
-.tag.inativo {
+.tag.Inativo {
     background-color: #ffe0e0;
     color: #c62828;
 }

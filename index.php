@@ -1,27 +1,35 @@
 <?php
-    session_start();
-    require_once('bd/config.inc.php');
-    ini_set('default_charset', 'utf-8');
+session_start();
+require_once('bd/config.inc.php');
+ini_set('default_charset', 'utf-8');
 
-    $cpf = $_SESSION['cpf'] ?? null;
-    $imagemUsuario = 'img/users/avatar.jpg';
+$cpf = $_SESSION['cpf'] ?? null;
+$imagemUsuario = 'img/users/avatar.jpg';
 
-    if ($cpf) {
-        $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-        $stmt = $connection->prepare($sql);
-        $stmt->bindParam(':cpf', $cpf);
-        $stmt->execute();
-
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($usuario && !empty($usuario['img_user'])) {
-            $imagemUsuario = 'img/users/' . ($usuario['img_user']);
-        }
-    }
-
-    $sql = "SELECT * FROM categorias ORDER BY nome";
+if ($cpf) {
+    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
     $stmt = $connection->prepare($sql);
+    $stmt->bindParam(':cpf', $cpf);
     $stmt->execute();
+
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($usuario && !empty($usuario['img_user'])) {
+        $imagemUsuario = 'img/users/' . ($usuario['img_user']);
+    }
+}
+
+$sql_categoria = "SELECT * FROM categorias ORDER BY nome";
+$stmt_categoria = $connection->prepare($sql_categoria);
+$stmt_categoria->execute();
+
+$sql_produtoDestaque = "SELECT p.*, vp.*, pi.* FROM produtos p 
+                        JOIN vendedores_produtos vp ON vp.produto_id = p.id 
+                        LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1";
+
+$stmt_produtoDestaque = $connection->prepare($sql_produtoDestaque);
+$stmt_produtoDestaque->execute();
+
 ?>
 <!--TODO arrumar header de todas as paginas
     TODO arrumar favicon de todas as paginas
@@ -35,7 +43,6 @@
         habilitar opção de adicionar ao carrinho no botão da pagina do produto
     }
     TODO funcionalidades do adm
-    TODO pagina do vendedor para cadastrar produtos
     TODO funcionalidades do vendedor
     TODO buscar categorias no index e abrir a pagina correspondente
     TODO mudar toda logica de aceitar a solicitação{
@@ -48,6 +55,12 @@
     }
 
     TODO mascara nos inputs
+    TODO criar filtros nas páginas{
+        solicitações pendentes
+        cadastro de produtos
+        categorias
+        página principal    
+    }
 
      -->
 
@@ -76,6 +89,11 @@
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
             <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+
+            <button type="button" id="microfone" onclick="buscaAudio()">
+                <img src="img/site/microfone.png" id="iconeft" alt="Microfone">
+            </button>
+
             <button type="submit" class="lupa-icone">
                 <img src="img/site/lupa.png" id="iconeft">
             </button>
@@ -103,7 +121,7 @@
 
             <div class="categorias">
                 <?php
-                while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                while ($categoria = $stmt_categoria->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <div class="itens-categoria">
                         <!-- TODO abrir pagina da categoria com os respectivos itens
@@ -281,62 +299,20 @@
             </div>
 
             <div class="produtos-container">
-                <div class="produtos">
-                    <a href="#">
-                        <img src="img/produtos/p1.jpg" alt="Produto 1">
-                        <h3>Betoneira</h3>
-                        <p>Betoneira CSM de 50kg</p>
-                        <p>R$ 1.000,00</p>
-                    </a>
-                </div>
-                <div class="produtos">
-                    <a href="#">
-                        <img src="img/produtos/p1.jpg" alt="Produto 1">
-                        <h3>Betoneira</h3>
-                        <p>Betoneira CSM de 50kg</p>
-                        <p>R$ 1.000,00</p>
-                    </a>
-                </div>
-                <div class="produtos">
-                    <a href="#">
-                        <img src="img/produtos/p1.jpg" alt="Produto 1">
-                        <h3>Betoneira</h3>
-                        <p>Betoneira CSM de 50kg</p>
-                        <p>R$ 1.000,00</p>
-                    </a>
-                </div>
-                <div class="produtos">
-                    <a href="#">
-                        <img src="img/produtos/p1.jpg" alt="Produto 1">
-                        <h3>Betoneira</h3>
-                        <p>Betoneira CSM de 50kg</p>
-                        <p>R$ 1.000,00</p>
-                    </a>
-                </div>
-                <div class="produtos">
-                    <a href="#">
-                        <img src="img/produtos/p1.jpg" alt="Produto 1">
-                        <h3>Betoneira</h3>
-                        <p>Betoneira CSM de 50kg</p>
-                        <p>R$ 1.000,00</p>
-                    </a>
-                </div>
-                <div class="produtos">
-                    <a href="#">
-                        <img src="img/produtos/p1.jpg" alt="Produto 1">
-                        <h3>Betoneira</h3>
-                        <p>Betoneira CSM de 50kg</p>
-                        <p>R$ 1.000,00</p>
-                    </a>
-                </div>
-                <div class="produtos">
-                    <a href="#">
-                        <img src="img/produtos/p1.jpg" alt="Produto 1">
-                        <h3>Betoneira</h3>
-                        <p>Betoneira CSM de 50kg</p>
-                        <p>R$ 1.000,00</p>
-                    </a>
-                </div>
+                <?php
+                while ($produtoDestaque = $stmt_produtoDestaque->fetch(PDO::FETCH_ASSOC)) {
+                ?>
+                    <div class="produtos">
+                        <a href="#">
+                            <img src="img/produtos/<?= $produtoDestaque['imagem_url'] ?>" alt="<?php echo $produtoDestaque['nome'] ?>">
+                            <h3><?php echo $produtoDestaque['nome'] ?></h3>
+                            <p><?php echo $produtoDestaque['descricao'] ?></p>
+                            <p><?php echo $produtoDestaque['preco'] ?></p>
+                        </a>
+                    </div>
+                <?php
+                }
+                ?>
 
             </div>
 
@@ -348,7 +324,6 @@
     </main>
 
     <script src="js/global.js"></script>
-    <script src="js/js.js"></script>
 </body>
 
 </html>
