@@ -56,10 +56,10 @@ if (isset($_GET['id'])) {
     $imagemVendedor = $stmt_imagemVendedor->fetch(PDO::FETCH_ASSOC);
 
     if (!$produto) {
-        die("Produto não encontrado");
-    }
+        header("Location:../view/paginaNaoEncontrada.html");
+        exit();    }
 } else {
-    die("Produto não encontrado");
+    header("Location:../view/paginaNaoEncontrada.html");
 }
 
 ?>

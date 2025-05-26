@@ -179,3 +179,33 @@ header.menu {
 .links a:hover {
   color: #b14b07;
 }
+
+
+/*PAGINA NAO ENCONTRADA*/
+
+.paginaNEncontrada-exterior {
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.paginaNEncontrada {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+    text-align: center;
+}
+
+.paginaNEncontrada h1 {
+    font-size: 36px;
+    color: #FF6B00;
+}
+
+.paginaNEncontrada p {
+    font-size: 18px;
+    margin: 20px 0;
+}
