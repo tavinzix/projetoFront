@@ -31,38 +31,7 @@ $stmt_produtoDestaque = $connection->prepare($sql_produtoDestaque);
 $stmt_produtoDestaque->execute();
 
 ?>
-<!--TODO arrumar header de todas as paginas
-    TODO arrumar favicon de todas as paginas
-    TODO arrumar responsividade das paginas php
-    TODO verificar js{
-        Feedback claro ao usuário sobre ações e erros. 
-        Validação de formulários.
-    }
-    TODO criar carrinho {
-        vincular com a quantidade   
-        habilitar opção de adicionar ao carrinho no botão da pagina do produto
-    }
-    TODO funcionalidades do adm
-    TODO funcionalidades do vendedor
-    TODO buscar categorias no index e abrir a pagina correspondente
-    TODO mudar toda logica de aceitar a solicitação{
-        nome do adm que aceitou a solicitação
-        criar possivelmente um user pro adm
-        mudar tabela da solicitação para incluir o nome
-        não remover da solicitação quando aprovar, só dar update
-        incluir novo check no insert
-        pensar em uma lógica para listar também quem aprovou a solicitação
-    }
 
-    TODO mascara nos inputs
-    TODO criar filtros nas páginas{
-        solicitações pendentes
-        cadastro de produtos
-        categorias
-        página principal    
-    }
-
-     -->
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -300,11 +269,11 @@ $stmt_produtoDestaque->execute();
 
             <div class="produtos-container">
                 <?php
-                while ($produtoDestaque = $stmt_produtoDestaque->fetch(PDO::FETCH_ASSOC)) {
+                    while ($produtoDestaque = $stmt_produtoDestaque->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <div class="produtos">
-                        <a href="#">
-                            <img src="img/produtos/<?= $produtoDestaque['imagem_url'] ?>" alt="<?php echo $produtoDestaque['nome'] ?>">
+                        <a href="view/produto.php?id=<?php echo $produtoDestaque['produto_id'] ?>">
+                            <img src="img/produtos/<?php echo $produtoDestaque['imagem_url'] ?>" alt="<?php echo $produtoDestaque['nome'] ?>">
                             <h3><?php echo $produtoDestaque['nome'] ?></h3>
                             <p><?php echo $produtoDestaque['descricao'] ?></p>
                             <p><?php echo $produtoDestaque['preco'] ?></p>
@@ -328,6 +297,38 @@ $stmt_produtoDestaque->execute();
 
 </html>
 
+<!--TODO arrumar header de todas as paginas
+    TODO arrumar favicon de todas as paginas
+    TODO arrumar responsividade das paginas php
+    TODO verificar js{
+        Feedback claro ao usuário sobre ações e erros. 
+        Validação de formulários.
+    }
+    TODO criar carrinho {
+        vincular com a quantidade   
+        habilitar opção de adicionar ao carrinho no botão da pagina do produto
+    }
+    TODO funcionalidades do adm
+    TODO funcionalidades do vendedor
+    TODO buscar categorias no index e abrir a pagina correspondente
+    TODO mudar toda logica de aceitar a solicitação{
+        nome do adm que aceitou a solicitação
+        criar possivelmente um user pro adm
+        mudar tabela da solicitação para incluir o nome
+        não remover da solicitação quando aprovar, só dar update
+        incluir novo check no insert
+        pensar em uma lógica para listar também quem aprovou a solicitação
+    }
+
+    TODO mascara nos inputs
+    TODO criar filtros nas páginas{
+        solicitações pendentes
+        cadastro de produtos
+        categorias
+        página principal    
+    }
+
+     -->
 <!--
 404
 Esta página deve ser um ninja 🥷 simplesmente desapareceu!

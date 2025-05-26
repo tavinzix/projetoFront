@@ -1,24 +1,68 @@
 <?php
-    session_start();
-    require_once('../bd/config.inc.php');
-    ini_set('default_charset', 'utf-8');
+session_start();
+require_once('../bd/config.inc.php');
+ini_set('default_charset', 'utf-8');
 
-    $cpf = $_SESSION['cpf'] ?? null;
-    $imagemUsuario = 'img/users/avatar.jpg';
+$cpf = $_SESSION['cpf'] ?? null;
+$imagemUsuario = '../img/users/avatar.jpg';
 
-    if ($cpf) {
-        $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-        $stmt = $connection->prepare($sql);
-        $stmt->bindParam(':cpf', $cpf);
-        $stmt->execute();
+if ($cpf) {
+    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
+    $stmt = $connection->prepare($sql);
+    $stmt->bindParam(':cpf', $cpf);
+    $stmt->execute();
 
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($usuario && !empty($usuario['img_user'])) {
-            $imagemUsuario = 'img/users/' . ($usuario['img_user']);
+    if ($usuario && !empty($usuario['img_user'])) {
+        $imagemUsuario = '../img/users/' . ($usuario['img_user']);
+    }
+}
+
+if (isset($_GET['id'])) {
+    $produto_id = $_GET['id'];
+    $sql_produto = "SELECT p.*, vp.*, v.*, pi.* FROM produtos p 
+                    JOIN vendedores_produtos vp ON vp.produto_id = p.id
+                    JOIN vendedores v on vp.vendedor_id = v.id
+                    LEFT JOIN produto_imagens pi ON p.id = pi.produto_id 
+                    WHERE p.id = :produto_id";
+    $stmt_produto = $connection->prepare($sql_produto);
+    $stmt_produto->bindParam(':produto_id', $produto_id,  PDO::PARAM_INT);
+    $stmt_produto->execute();
+    $produto = $stmt_produto->fetch(PDO::FETCH_ASSOC);
+
+    $sql_imagensProduto = "SELECT * FROM produto_imagens WHERE produto_id = :produto_id ORDER BY ordem ASC";
+    $stmt_imagensProduto = $connection->prepare($sql_imagensProduto);
+    $stmt_imagensProduto->bindParam(':produto_id', $produto_id,  PDO::PARAM_INT);
+    $stmt_imagensProduto->execute();
+    $imagensProduto = $stmt_imagensProduto->fetchAll(PDO::FETCH_ASSOC);
+    
+    $imagemPrincipal = null;
+    $miniaturas = [];
+
+    $imagemPrincipal = null;
+    foreach ($imagensProduto as $img) {
+        if ($img['ordem'] == 1) {
+            $imagemPrincipal = $img;
+            break;
         }
     }
-?>  
+
+    $vendedorId = $produto['vendedor_id'];
+    $sql_imagemVendedor = "SELECT * FROM vendedor_imagens WHERE vendedor_id = :vendedor_id";
+    $stmt_imagemVendedor = $connection->prepare($sql_imagemVendedor);
+    $stmt_imagemVendedor->bindParam(':vendedor_id', $vendedorId,  PDO::PARAM_INT);
+    $stmt_imagemVendedor->execute();
+    $imagemVendedor = $stmt_imagemVendedor->fetch(PDO::FETCH_ASSOC);
+
+    if (!$produto) {
+        die("Produto não encontrado");
+    }
+} else {
+    die("Produto não encontrado");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -36,16 +80,21 @@
 </head>
 
 <body>
-   <!--CABEÇALHO-->
+    <!--CABEÇALHO-->
     <header class="menu">
         <div class="logo">
-            <a href="index.php"> <img src="img/site/logo.png"></a>
+            <a href="../index.php"> <img src="../img/site/logo.png"></a>
         </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
-            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+            <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+
+            <button type="button" id="microfone" onclick="buscaAudio()">
+                <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
+            </button>
+
             <button type="submit" class="lupa-icone">
-                <img src="img/site/lupa.png" id="iconeft">
+                <img src="../img/site/lupa.png" id="iconeft" alt="Lupa">
             </button>
         </form>
 
@@ -54,32 +103,30 @@
         </button>
 
         <ul class="menu-link" id="menu-link">
-            <li><a href="index.php">Início</a></li>
-            <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
-            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
+            <li><a href="../index.php">Início</a></li>
+            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
+            </li>
         </ul>
     </header>
 
     <main class="detalheProduto-container">
         <!--IMAGENS-->
-        <!--/*TODO puxar imagens do banco -->
         <section class="galeria-produto">
             <div class="imagem-principal">
-                <img src="../img/produtos/p1.jpg" id="imagem-grande" alt="Produto">
+                <img src="../img/produtos/<?php echo $imagemPrincipal['imagem_url'] ?>" id="imagem-grande" alt="Produto">
             </div>
-    
+
             <div class="faixa-miniaturas">
                 <button class="btn seta-esquerda-miniatura">&#10094;</button>
                 <div class="miniaturas">
-                    <img src="../img/produtos/p1.jpg" onclick="trocarImagem(this)">
-                    <img src="../img/produtos/p2.png" onclick="trocarImagem(this)">
-                    <img src="../img/produtos/p3.png" onclick="trocarImagem(this)">
-                    <img src="../img/produtos/p1.jpg" onclick="trocarImagem(this)">
-                    <img src="../img/produtos/p2.png" onclick="trocarImagem(this)">
-                    <img src="../img/produtos/p3.png" onclick="trocarImagem(this)">
-                    <img src="../img/produtos/p1.jpg" onclick="trocarImagem(this)">
-                    <img src="../img/produtos/p2.png" onclick="trocarImagem(this)">
-                    <img src="../img/produtos/p3.png" onclick="trocarImagem(this)">
+                    <?php
+                    foreach ($imagensProduto as $miniatura):
+                    ?>
+                        <img src="../img/produtos/<?php echo $miniatura['imagem_url'] ?>" onclick="trocarImagem(this)">
+                    <?php
+                    endforeach;
+                    ?>
                 </div>
                 <button class="btn seta-direita-miniatura">&#10095;</button>
             </div>
@@ -87,12 +134,11 @@
 
         <!--OPÇÕES DO ITEM-->
         <section class="informacoes-produto">
-            <h1>Tijolo Furado</h1>
-            <p class="descricao">Tijolo com 9 furos ideal para sua obra. Compre nosso tijolo agora mesmo e garanta que
-                sua casa não irá cair tão cedo</p>
-            <p class="preco">R$ 1,00</p>
+            <h1><?php echo $produto['nome'] ?></h1>
+            <p class="descricao"><?php echo $produto['descricao'] ?></p>
+            <p class="preco"> R$<?php echo $produto['preco'] ?></p>
+            <!-- TODO puxar do banco -->
             <p>Avaliação: ★★★★☆(125 vendas)</p>
-
 
             <div class="quantidade-container">
                 <label for="quantidade">Quantidade:</label>
@@ -103,50 +149,33 @@
 
             <div class="especificacoes-container">
                 <div class="especificacao">
-                    <label for="cor">Cor:</label>
-                    <select id="cor">
-                        <option>Vermelho</option>
-                        <option>Marrom</option>
-                        <option>Natural</option>
-                    </select>
-                </div>
-
-                <div class="especificacao">
-                    <label for="tamanho">Tamanho:</label>
-                    <select id="tamanho">
-                        <option>Pequeno</option>
-                        <option>Médio</option>
-                        <option>Grande</option>
-                    </select>
-                </div>
-
-                <div class="especificacao">
-                    <label for="voltagem">Voltagem:</label>
-                    <select id="voltagem">
-                        <option>110V</option>
-                        <option>220V</option>
-                        <option>Bivolt</option>
+                    <label for="marca">Marca:</label>
+                    <select id="marca">
+                        <option><?php echo $produto['marca'] ?></option>
                     </select>
                 </div>
             </div>
 
             <div class="acoes">
+                <!-- TODO criar funcionalidades -->
                 <button class="comprar" id="comprar">Comprar Agora</button>
                 <button class="carrinho" id="carrinho">Adicionar ao Carrinho</button>
             </div>
 
             <div class="frete">
+                <!-- TODO criar funcionalidades -->
                 <input type="text" placeholder="Digite seu CEP">
                 <button>Calcular Frete</button>
             </div>
 
             <div class="vendedor">
-                <h3>Vendedor</h3>
+                <h3>Vendedido por</h3>
                 <div class="vendedor-info">
-                    <img src="img/lojas/l1.jpg" alt="Logo da loja">
+                    <img src="../img/lojas/<?php echo $imagemVendedor['imagem_url'] ?>" alt="Logo da loja">
                     <div>
-                        <a href="loja.html" class="nome-loja">Loja do vendedor</a>
-                        <p>Cidade: Pelotas - RS</p>
+                        <a href="loja.html" class="nome-loja"><?php echo $produto['nome_loja'] ?></a>
+                        <p>Localização: <?php echo $produto['cidade'] . ' - ' . $produto['estado'] ?></p>
+                        <!-- TODO puxar do banco -->
                         <p>Avaliação: ★★★★☆(125 vendas)</p>
                     </div>
                 </div>
