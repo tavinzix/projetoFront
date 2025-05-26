@@ -21,7 +21,7 @@
     
     $sql = "SELECT *, CASE WHEN status = '1' then 'Pendente' 
             WHEN status = '2' then 'Recusado' else 'Aprovado' end AS status_texto
-            FROM solicitacoes_vendedor LIMIT 10";
+            FROM solicitacoes_vendedor ORDER BY status, data_solicitacao LIMIT 10";
     $stmt = $connection->prepare($sql);
     $stmt->execute();
 ?>
@@ -89,7 +89,7 @@
                 <tr>
                     <th>Nome da loja</th>
                     <th>CNPJ</th>
-                    <th>Endereço</th>
+                    <th>Localização</th>
                     <th>Status</th>
                     <th>Ação</th>
                 </tr>
@@ -101,7 +101,7 @@
                 <tr>                 
                     <td><?php echo $solicitacao['nome_loja']?></td>
                     <td><?php echo $solicitacao['cnpj']?></td>
-                    <td><?php echo $solicitacao['endereco']?></td>
+                    <td><?php echo $solicitacao['estado'] . ' - ' . $solicitacao['cidade'] ?></td>
                     <td><span class="tag <?php echo $solicitacao['status_texto']?>"><?php echo $solicitacao['status_texto']?></span></td>
                     <td><a onclick='abrirJanelaSolicitacao(<?php echo json_encode($solicitacao) ?>)'><button class="btn-editar">Avaliar</button></a></td>
                 </tr>
@@ -151,7 +151,23 @@
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>Endereco</strong><p id="endereco" name="endereco"></p>
+                    <strong>Estado</strong><p id="estado" name="estado"></p>
+                </div>
+
+                <div class="informacao-loja">
+                    <strong>Cidade</strong><p id="cidade" name="cidade"></p>
+                </div>
+
+                <div class="informacao-loja">
+                    <strong>Bairro</strong><p id="bairro" name="bairro"></p>
+                </div>
+
+                <div class="informacao-loja">
+                    <strong>Rua</strong><p id="rua" name="rua"></p>
+                </div>
+                
+                <div class="informacao-loja">
+                    <strong>Número</strong><p id="numero" name="numero"></p>
                 </div>
 
                 <div class="informacao-loja">

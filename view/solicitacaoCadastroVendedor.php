@@ -65,8 +65,20 @@
             <label for="cep">CEP:</label>
             <input type="text" id="cep" name="cep" required>
 
-            <label for="endereco">Endereço Comercial:</label>
-            <input type="text" id="endereco" name="endereco" required>
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" name="estado" required>
+
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" name="cidade" required>
+
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" required>
+
+            <label for="rua">Rua:</label>
+            <input type="text" id="rua" name="rua" required>
+
+            <label for="numero">Número:</label>
+            <input type="text" id="numero" name="numero" required>
 
             <label for="categoria">Categoria Principal</label>
             <select id="categoria" name="categoria" required>
