@@ -74,7 +74,7 @@ $stmt_produtoDestaque->execute();
 
         <ul class="menu-link" id="menu-link">
             <li><a href="index.php">Início</a></li>
-            <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
+            <li><a href="view/carrinho.php"><img src="img/site/carrinho.png"></a></li>
             <li><a href="view/perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>
     </header>
@@ -276,7 +276,7 @@ $stmt_produtoDestaque->execute();
                             <img src="img/produtos/<?php echo $produtoDestaque['imagem_url'] ?>" alt="<?php echo $produtoDestaque['nome'] ?>">
                             <h3><?php echo $produtoDestaque['nome'] ?></h3>
                             <p><?php echo $produtoDestaque['descricao'] ?></p>
-                            <p><?php echo $produtoDestaque['preco'] ?></p>
+                            <p>R$<?php echo $produtoDestaque['preco'] ?></p>
                         </a>
                     </div>
                 <?php

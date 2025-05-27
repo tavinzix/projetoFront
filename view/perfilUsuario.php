@@ -74,7 +74,7 @@
             <li><a href="painelAdm.php">Painel Administrativo</a></li>
             <li><a href="painelVendedor.html">Painel do vendedor</a></li>
             <li><a href="solicitacaoCadastroVendedor.php">Quero vender na plataforma</a></li>
-            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
+            <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>
     </header>

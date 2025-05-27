@@ -21,7 +21,7 @@ if ($cpf) {
 
 if (isset($_GET['id'])) {
     $produto_id = $_GET['id'];
-    $sql_produto = "SELECT p.*, vp.*, v.*, pi.* FROM produtos p 
+    $sql_produto = "SELECT p.*, vp.*, v.*, pi.*, p.id as produto_id FROM produtos p 
                     JOIN vendedores_produtos vp ON vp.produto_id = p.id
                     JOIN vendedores v on vp.vendedor_id = v.id
                     LEFT JOIN produto_imagens pi ON p.id = pi.produto_id 
@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
     $stmt_imagensProduto->bindParam(':produto_id', $produto_id,  PDO::PARAM_INT);
     $stmt_imagensProduto->execute();
     $imagensProduto = $stmt_imagensProduto->fetchAll(PDO::FETCH_ASSOC);
-    
+
     $imagemPrincipal = null;
     $miniaturas = [];
 
@@ -57,7 +57,8 @@ if (isset($_GET['id'])) {
 
     if (!$produto) {
         header("Location:../view/paginaNaoEncontrada.html");
-        exit();    }
+        exit();
+    }
 } else {
     header("Location:../view/paginaNaoEncontrada.html");
 }
@@ -134,33 +135,37 @@ if (isset($_GET['id'])) {
 
         <!--OPÇÕES DO ITEM-->
         <section class="informacoes-produto">
-            <h1><?php echo $produto['nome'] ?></h1>
-            <p class="descricao"><?php echo $produto['descricao'] ?></p>
-            <p class="preco"> R$<?php echo $produto['preco'] ?></p>
-            <!-- TODO puxar do banco -->
-            <p>Avaliação: ★★★★☆(125 vendas)</p>
+            <form action="../bd/manipula_carrinho.php" method="post">
+                <h1><?php echo $produto['nome'] ?></h1>
+                <input style="display:none" name="produto_id" value="<?php echo $produto['produto_id'] ?>"></input>
+                <p class="descricao"><?php echo $produto['descricao'] ?></p>
+                <p class="preco"> R$<?php echo $produto['preco'] ?></p>
+                <input style="display:none" name="preco" value="<?php echo $produto['preco'] ?>"></input>
+                <!-- TODO puxar do banco -->
+                <p>Avaliação: ★★★★☆(125 vendas)</p>
 
-            <div class="quantidade-container">
-                <label for="quantidade">Quantidade:</label>
-                <button onclick="alterarQtd(-1)">-</button>
-                <input type="number" id="quantidade" value="1" min="1">
-                <button onclick="alterarQtd(1)">+</button>
-            </div>
-
-            <div class="especificacoes-container">
-                <div class="especificacao">
-                    <label for="marca">Marca:</label>
-                    <select id="marca">
-                        <option><?php echo $produto['marca'] ?></option>
-                    </select>
+                <div class="quantidade-container">
+                    <label for="quantidade">Quantidade:</label>
+                    <button onclick="alterarQtd(-1)" type="button">-</button>
+                    <input type="number" id="quantidade" name="quantidade" value="1" min="1">
+                    <button onclick="alterarQtd(1)" type="button">+</button>
                 </div>
-            </div>
 
-            <div class="acoes">
-                <!-- TODO criar funcionalidades -->
-                <button class="comprar" id="comprar">Comprar Agora</button>
-                <button class="carrinho" id="carrinho">Adicionar ao Carrinho</button>
-            </div>
+                <div class="especificacoes-container">
+                    <div class="especificacao">
+                        <label for="marca">Marca:</label>
+                        <select id="marca">
+                            <option><?php echo $produto['marca'] ?></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="acoes">
+                    <!-- TODO criar funcionalidades -->
+                    <button class="comprar" name="acao" value="comprar">Comprar Agora</button>
+                    <button class="carrinho" name="acao" value="carrinho">Adicionar ao Carrinho</button>
+                </div>
+            </form>
 
             <div class="frete">
                 <!-- TODO criar funcionalidades -->
