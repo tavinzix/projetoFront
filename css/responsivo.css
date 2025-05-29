@@ -194,12 +194,12 @@
     }
 
     .item-carrinho {
-        width: 450px;
+        width: 100%;
         align-items: center;
     }
 
     .conteudo-item {
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
     }
 
@@ -276,4 +276,8 @@
     .item-carrinho {
         width: 370px;
     }
+        .conteudo-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
 }

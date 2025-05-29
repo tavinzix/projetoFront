@@ -96,12 +96,12 @@ if ($cpf) {
                 while ($carrinho = $stmt_itens->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <li class="item-carrinho">
-                        <button class="remover-item" title="Remover do carrinho" onclick="removerItem(<?= $carrinho['produto_id'] ?>)">X</button>
+                        <button class="remover-item" title="Remover do carrinho" onclick="removerItem(<?php echo $carrinho['produto_id'] ?>)">X</button>
                         <input type="checkbox" class="selecionar-item">
                         <img src="../img/produtos/<?php echo $carrinho['imagem_url'] ?>" alt="<?php echo $carrinho['nome'] ?>" class="imagem-produto">
                         <div class="conteudo-item">
                             <div class="detalhes-item">
-                                <h4><?php echo $carrinho['nome'] ?></h4>
+                                <h4><a href="produto.php?id=<?php echo $carrinho['produto_id'] ?>"><?php echo $carrinho['nome'] ?></a></h4>
                                 <p>Vendido por: <a href="loja.html"><strong><?php echo $carrinho['nome_loja'] ?></strong></a></p>
                                 <ul class="especificacoes">
                                     <li><?php echo $carrinho['marca'] ?></li>

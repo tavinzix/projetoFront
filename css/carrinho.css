@@ -63,12 +63,13 @@
     margin-bottom: 8px;
 }
 
-.detalhes-item p>a {
+.detalhes-item p>a,
+.detalhes-item h4>a {
     color: #FF6B00;
     text-decoration: none;
 }
 
-.detalhes-item p>a:hover {
+.detalhes-item p>a:hover, .detalhes-item h4>a:hover {
     text-decoration: underline;
 }
 
@@ -121,7 +122,8 @@
     margin: 10px 0;
 }
 
-.btn-finalizar, .altera-qtd {
+.btn-finalizar,
+.altera-qtd {
     background-color: #FF6B00;
     color: #fff;
     border: none;
