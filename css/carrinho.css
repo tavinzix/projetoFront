@@ -121,7 +121,7 @@
     margin: 10px 0;
 }
 
-.btn-finalizar {
+.btn-finalizar, .altera-qtd {
     background-color: #FF6B00;
     color: #fff;
     border: none;

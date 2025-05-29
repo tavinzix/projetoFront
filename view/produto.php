@@ -105,7 +105,7 @@ if (isset($_GET['id'])) {
 
         <ul class="menu-link" id="menu-link">
             <li><a href="../index.php">Início</a></li>
-            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
+            <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
             </li>
         </ul>
@@ -163,7 +163,7 @@ if (isset($_GET['id'])) {
                 <div class="acoes">
                     <!-- TODO criar funcionalidades -->
                     <button class="comprar" name="acao" value="comprar">Comprar Agora</button>
-                    <button class="carrinho" name="acao" value="carrinho">Adicionar ao Carrinho</button>
+                    <button class="carrinho" name="acao" value="adicionar">Adicionar ao Carrinho</button>
                 </div>
             </form>
 

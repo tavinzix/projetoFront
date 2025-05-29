@@ -107,8 +107,7 @@ if ($cpf) {
                 while ($carrinho = $stmt_itens->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <li class="item-carrinho">
-                        <!-- TODO remover do carrinho -->
-                        <button class="remover-item" title="Remover do carrinho">X</button>
+                        <button class="remover-item" title="Remover do carrinho" onclick="removerItem(<?= $carrinho['produto_id'] ?>)">X</button>
                         <input type="checkbox" class="selecionar-item">
                         <img src="../img/produtos/<?php echo $carrinho['imagem_url'] ?>" alt="<?php echo $carrinho['nome'] ?>" class="imagem-produto">
                         <div class="conteudo-item">
@@ -123,11 +122,11 @@ if ($cpf) {
                             <div class="controle-quantidade">
                                 <label for="quantidade">Quantidade:</label>
                                 <div class="quantidade-container">
-                                    <!-- TODO editar quantidade -->
                                     <button onclick="alterarQuantidadeCarrinho(this, -1)">-</button>
-                                    <input type="number" value="<?php echo $carrinho['quantidade'] ?>" min="1">
+                                    <input id="quantidade-item-<?php echo $carrinho['produto_id'] ?>" type="number" value="<?= $carrinho['quantidade'] ?>" min="1">
                                     <button onclick="alterarQuantidadeCarrinho(this, 1)">+</button>
                                 </div>
+                                <button class="altera-qtd" onclick="atualizarQuantidade(<?php echo $carrinho['produto_id'] ?>)">Atualizar quantidade</button>
                             </div>
                         </div>
                     </li>
@@ -150,5 +149,6 @@ if ($cpf) {
 </body>
 
 <script src="../js/global.js"></script>
+<script src="../js/carrinho.js"></script>
 
 </html>

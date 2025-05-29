@@ -166,6 +166,5 @@
         </section>
     </body>
     <script src="../js/global.js"></script>
-    <script src="../js/geolocation.js"></script>
 
 </html>
