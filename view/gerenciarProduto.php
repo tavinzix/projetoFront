@@ -11,6 +11,7 @@ if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
 $cpf = $_SESSION['cpf'];
 $userId = $_SESSION['usuario_id'];
 
+// busca id do usuario para encontrar o vendedor 
 $sql = "SELECT * FROM usuarios WHERE cpf = :cpf";
 $stmt = $connection->prepare($sql);
 $stmt->bindParam(':cpf', $cpf, PDO::PARAM_STR);
@@ -21,7 +22,7 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($usuario && !empty($usuario['img_user'])) {
     $imagemUsuario = '../img/users/' . ($usuario['img_user']);
 }
-
+//  busca os dados do vendedor com base no id do usuario 
 $sqlVendedor = "SELECT * from vendedores where user_id = :user_id";
 $stmt_vendedor = $connection->prepare($sqlVendedor);
 
@@ -29,6 +30,7 @@ $stmt_vendedor->bindParam(':user_id', $userId, PDO::PARAM_INT);
 $stmt_vendedor->execute();
 $vendedor = $stmt_vendedor->fetch(PDO::FETCH_ASSOC);
 
+// busca todos os produtos do vendedor 
 $sql = "SELECT p.*, vp.*, pi.*, 
         CASE WHEN ativo = '1' THEN 'Ativo' WHEN ativo = '0' THEN 'Inativo' END AS status_texto
         FROM produtos p JOIN vendedores_produtos vp ON vp.produto_id = p.id 
@@ -127,6 +129,7 @@ $stmt->execute();
             </form>
         </div>
         <!--TODO deixar responsivo-->
+        <!-- tabela com os produtos do vendedor  -->
         <table class="tabela-produtos">
             <thead>
                 <tr>

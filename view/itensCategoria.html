@@ -18,13 +18,18 @@
     <!--CABEÇALHO-->
     <header class="menu">
         <div class="logo">
-            <a href="index.html"> <img src="../img/site/logo.png"></a>
+            <a href="../index.php"> <img src="../img/site/logo.png"></a>
         </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
-            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+            <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+
+            <button type="button" id="microfone" onclick="buscaAudio()">
+                <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
+            </button>
+
             <button type="submit" class="lupa-icone">
-                <img src="../img/site/lupa.png" id="iconeft">
+                <img src="../img/site/lupa.png" id="iconeft" alt="Lupa">
             </button>
         </form>
 
@@ -33,9 +38,10 @@
         </button>
 
         <ul class="menu-link" id="menu-link">
-            <li><a href="index.html">Início</a></li>
-            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
-            <li><a href="perfilUsuario.html"><img src="../img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
+            <li><a href="../index.php">Início</a></li>
+            <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
+            </li>
         </ul>
     </header>
 

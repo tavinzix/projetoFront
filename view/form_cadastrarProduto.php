@@ -3,6 +3,7 @@ session_start();
 require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
 
+// busca categorias 
 $sqlCategoria = "SELECT * FROM categorias LIMIT 10";
 $stmt_categoria = $connection->prepare($sqlCategoria);
 $stmt_categoria->execute();

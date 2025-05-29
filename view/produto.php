@@ -6,6 +6,7 @@ ini_set('default_charset', 'utf-8');
 $cpf = $_SESSION['cpf'] ?? null;
 $imagemUsuario = '../img/users/avatar.jpg';
 
+// busca o usuario para setar a imagem no header
 if ($cpf) {
     $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
     $stmt = $connection->prepare($sql);
@@ -19,6 +20,7 @@ if ($cpf) {
     }
 }
 
+// pega o id do produto da url e busca os dados
 if (isset($_GET['id'])) {
     $produto_id = $_GET['id'];
     $sql_produto = "SELECT p.*, vp.*, v.*, pi.*, p.id as produto_id FROM produtos p 
@@ -31,16 +33,18 @@ if (isset($_GET['id'])) {
     $stmt_produto->execute();
     $produto = $stmt_produto->fetch(PDO::FETCH_ASSOC);
 
+    // busca as imagens do produto
     $sql_imagensProduto = "SELECT * FROM produto_imagens WHERE produto_id = :produto_id ORDER BY ordem ASC";
     $stmt_imagensProduto = $connection->prepare($sql_imagensProduto);
     $stmt_imagensProduto->bindParam(':produto_id', $produto_id,  PDO::PARAM_INT);
     $stmt_imagensProduto->execute();
     $imagensProduto = $stmt_imagensProduto->fetchAll(PDO::FETCH_ASSOC);
 
+    // define a galeria de imagens do produto 
     $imagemPrincipal = null;
     $miniaturas = [];
-
-    $imagemPrincipal = null;
+    
+    // percorre todas as imagens até encontrar a com ordem 1 para definir como a imagem principal 
     foreach ($imagensProduto as $img) {
         if ($img['ordem'] == 1) {
             $imagemPrincipal = $img;
@@ -48,6 +52,7 @@ if (isset($_GET['id'])) {
         }
     }
 
+    // busca a imagem da loja 
     $vendedorId = $produto['vendedor_id'];
     $sql_imagemVendedor = "SELECT * FROM vendedor_imagens WHERE vendedor_id = :vendedor_id";
     $stmt_imagemVendedor = $connection->prepare($sql_imagemVendedor);
@@ -55,6 +60,7 @@ if (isset($_GET['id'])) {
     $stmt_imagemVendedor->execute();
     $imagemVendedor = $stmt_imagemVendedor->fetch(PDO::FETCH_ASSOC);
 
+    // se não encontrar o id do produto, direciona para outra página
     if (!$produto) {
         header("Location:../view/paginaNaoEncontrada.html");
         exit();
@@ -114,6 +120,7 @@ if (isset($_GET['id'])) {
     <main class="detalheProduto-container">
         <!--IMAGENS-->
         <section class="galeria-produto">
+            <!-- seta a imagem principal  -->
             <div class="imagem-principal">
                 <img src="../img/produtos/<?php echo $imagemPrincipal['imagem_url'] ?>" id="imagem-grande" alt="Produto">
             </div>
@@ -121,6 +128,7 @@ if (isset($_GET['id'])) {
             <div class="faixa-miniaturas">
                 <button class="btn seta-esquerda-miniatura">&#10094;</button>
                 <div class="miniaturas">
+                    <!-- percorre todas as imagens e define como miniatura  -->
                     <?php
                     foreach ($imagensProduto as $miniatura):
                     ?>
@@ -135,6 +143,7 @@ if (isset($_GET['id'])) {
 
         <!--OPÇÕES DO ITEM-->
         <section class="informacoes-produto">
+            <!-- seta os dados do produto  -->
             <form action="../bd/manipula_carrinho.php" method="post">
                 <h1><?php echo $produto['nome'] ?></h1>
                 <input style="display:none" name="produto_id" value="<?php echo $produto['produto_id'] ?>"></input>
@@ -143,14 +152,16 @@ if (isset($_GET['id'])) {
                 <input style="display:none" name="preco" value="<?php echo $produto['preco'] ?>"></input>
                 <!-- TODO puxar do banco -->
                 <p>Avaliação: ★★★★☆(125 vendas)</p>
-
+                
+                <!-- alterar a quantidade que vai adicionar ao carrinho -->
                 <div class="quantidade-container">
                     <label for="quantidade">Quantidade:</label>
                     <button onclick="alterarQtd(-1)" type="button">-</button>
                     <input type="number" id="quantidade" name="quantidade" value="1" min="1">
                     <button onclick="alterarQtd(1)" type="button">+</button>
                 </div>
-
+                
+                <!-- especificações do produto -->
                 <div class="especificacoes-container">
                     <div class="especificacao">
                         <label for="marca">Marca:</label>
@@ -159,20 +170,22 @@ if (isset($_GET['id'])) {
                         </select>
                     </div>
                 </div>
-
+                
+                <!-- ações do produto  -->
                 <div class="acoes">
-                    <!-- TODO criar funcionalidades -->
+                    <!-- TODO criar funcionalidade de comprar agora -->
                     <button class="comprar" name="acao" value="comprar">Comprar Agora</button>
                     <button class="carrinho" name="acao" value="adicionar">Adicionar ao Carrinho</button>
                 </div>
             </form>
 
             <div class="frete">
-                <!-- TODO criar funcionalidades -->
+                <!-- TODO criar funcionalidade - integrar com api -->
                 <input type="text" placeholder="Digite seu CEP">
                 <button>Calcular Frete</button>
             </div>
-
+            
+            <!-- dados da loja -->
             <div class="vendedor">
                 <h3>Vendedido por</h3>
                 <div class="vendedor-info">

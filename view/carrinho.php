@@ -10,6 +10,7 @@ if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
 $cpf = $_SESSION['cpf'] ?? null;
 $userId = $_SESSION['usuario_id'];
 
+// busca cpf para setar a imagem do header
 if ($cpf) {
     $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
     $stmt = $connection->prepare($sql);
@@ -22,7 +23,7 @@ if ($cpf) {
         $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
 
-    //itens
+    //busca os itens do carrinho
     $sql_itens = "SELECT ci.*, p.*, u.id, p.nome, v.*, (SELECT imagem_url FROM produto_imagens WHERE produto_id = p.id ORDER BY ordem ASC LIMIT 1) AS imagem_url
                     FROM carrinho_itens ci  
                     JOIN carrinho c ON c.id = ci.carrinho_id 
@@ -88,14 +89,17 @@ if ($cpf) {
         </ul>
     </header>
 
+    <!-- informações do carrinho  -->
     <section class="pagina-carrinho">
         <h2>Meu Carrinho</h2>
         <div class="carrinho-exterior">
             <ul class="lista-carrinho">
+                <!-- insere os dados dos produtos  -->
                 <?php
                 while ($carrinho = $stmt_itens->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <li class="item-carrinho">
+                        <!-- botão para remover item do carrinho - chama função js passando o id do produto  -->
                         <button class="remover-item" title="Remover do carrinho" onclick="removerItem(<?php echo $carrinho['produto_id'] ?>)">X</button>
                         <input type="checkbox" class="selecionar-item">
                         <img src="../img/produtos/<?php echo $carrinho['imagem_url'] ?>" alt="<?php echo $carrinho['nome'] ?>" class="imagem-produto">
@@ -110,6 +114,7 @@ if ($cpf) {
                             </div>
                             <div class="controle-quantidade">
                                 <label for="quantidade">Quantidade:</label>
+                                <!-- função js para alterar a quantidade do item no carrinho  -->
                                 <div class="quantidade-container">
                                     <button onclick="alterarQuantidadeCarrinho(this, -1)">-</button>
                                     <input id="quantidade-item-<?php echo $carrinho['produto_id'] ?>" type="number" value="<?= $carrinho['quantidade'] ?>" min="1">
@@ -123,7 +128,8 @@ if ($cpf) {
                 }
                 ?>
             </ul>
-
+            
+            <!-- janela com o resumo da compra - janela dinamica quando seleciona o checkbox do item  -->
             <div class="janela-resumo">
                 <div class="resumo-compra">
                     <h3>Resumo da Compra</h3>

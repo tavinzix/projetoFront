@@ -7,7 +7,7 @@
     $userId = $_SESSION['usuario_id'];
 
     $imagemUsuario = '../img/users/avatar.jpg';
-
+     // busca cpf para setar a imagem do header
     if ($cpf) {
         $sql_imagem = "SELECT * FROM usuarios WHERE cpf = :cpf";
         $stmt = $connection->prepare($sql_imagem);
@@ -22,6 +22,7 @@
 
         $_SESSION['id'] = $imagem['id'];
 
+        // busca endereços cadastrados 
         $sql_endereco = "SELECT * from usuarios u join enderecos e on e.user_id = u.id where u.cpf = :cpf";
         $stmt_endereco = $connection->prepare($sql_endereco);
         $stmt_endereco->bindParam(':cpf', $cpf);
@@ -44,25 +45,38 @@
             rel="stylesheet">
     </head>
     <body>
+        <!--CABEÇALHO-->
         <header class="menu">
             <div class="logo">
-                <a href="../index.php"><img src="../img/site/logo.png"></a>
+                <a href="../index.php"> <img src="../img/site/logo.png"></a>
             </div>
-            <form action="#" method="GET" class="busca-container">
-                <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+
+            <form action="buscar produto do banco" method="GET" class="busca-container">
+                <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+
+                <button type="button" id="microfone" onclick="buscaAudio()">
+                    <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
+                </button>
+
                 <button type="submit" class="lupa-icone">
-                    <img src="../img/site/lupa.png" id="iconeft">
+                    <img src="../img/site/lupa.png" id="iconeft" alt="Lupa">
                 </button>
             </form>
-            <button class="menu-hamburguer">&#9776;</button>
-            <ul class="menu-link">
+
+            <button class="menu-hamburguer" id="menu-hamburguer">
+                &#9776;
+            </button>
+
+            <ul class="menu-link" id="menu-link">
                 <li><a href="../index.php">Início</a></li>
-                <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
-                <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
+                <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
+                <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
+                </li>
             </ul>
         </header>
 
         <section class="editar-enderecos">
+            <!-- lista endereços cadastrados -->
             <h3>Meus Endereços</h3>
             <!--TODO arrumar botão de editar para carregar os dados para o input-->
             <div class="lista-enderecos">
@@ -71,10 +85,12 @@
                     if($stmt_endereco->rowCount() > 0){
                         while ($usuario = $stmt_endereco->fetch(PDO::FETCH_ASSOC)) { ?>
                         <div class="endereco">
+                            <!-- dados do endereço  -->
                             <p><strong><?= $usuario['tipo'] ?></strong></p>
                             <p><?= $usuario['rua'] . ', ' . $usuario['numero'] . ' - ' . $usuario['bairro'] ?></p>
                             <p><?= $usuario['cidade'] . ' - ' . $usuario['estado'] . ', ' . $usuario['cep'] ?></p>
-
+                            
+                            <!-- editar ou remover endereço  -->
                             <div class="acoes-endereco">
                                 <form action="../bd/editarEnderecoUsuario.php" method="POST">
                                     <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
@@ -94,6 +110,7 @@
                         </div>
                     <?php
                         }
+                        // mensagem caso não tenha nenhum endereço 
                     }else { ?>
                         <div class="endereco">
                             <h3>Ainda não há endereços cadastrados</h3>
@@ -104,6 +121,7 @@
             ?>
             </div>
 
+            <!-- cadastro de endereço  -->
             <form class="form-endereco" action="../bd/editarEnderecoUsuario.php" method="POST">
                 <h4>Adicionar Novo Endereço</h4>
 

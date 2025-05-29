@@ -10,6 +10,7 @@
 
   $cpf = $_SESSION['cpf'];
 
+//   busca dados do perfil 
   $sql = "SELECT *, to_char(dt_nasc, 'DD/MM/YYYY') as data_nascimento FROM usuarios WHERE cpf = :cpf";
   $stmt = $connection->prepare($sql);
   $stmt->bindParam(':cpf', $cpf);
@@ -21,8 +22,6 @@
     $imagemUsuario = '../img/users/' . ($usuario['img_user']);
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -66,6 +65,7 @@
     </header>
 
     <section class="editar-perfil">
+        <!-- formulario de edição  -->
         <h3>Editar Perfil</h3>
         <form class="form-perfil" action="../bd/editarPerfilUsuario.php" method="POST" enctype="multipart/form-data">     
             <div class="campo-form" style="display:none">
@@ -124,7 +124,8 @@
                     </div>
                     <div class="foto-interna">
                         <label for="foto">Nova foto</label>
-                        <input type="file" id="foto" name="novaImagem">
+                        <input type="file" id="foto" name="novaImagem" onchange="img.src = window.URL.createObjectURL(this.files[0])">
+                        <img id="img" style="max-width:150px">
                     </div>
                 </div>
             </div>

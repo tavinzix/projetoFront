@@ -9,7 +9,7 @@
     }
 
     $cpf = $_SESSION['cpf'];
-
+    // busca cpf para setar a imagem do header
     $sql = "SELECT * FROM usuarios WHERE cpf = :cpf";
     $stmt = $connection->prepare($sql);
     $stmt->bindParam(':cpf', $cpf, PDO::PARAM_STR);

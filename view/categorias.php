@@ -6,6 +6,7 @@
     $cpf = $_SESSION['cpf'] ?? null;
     $imagemUsuario = '../img/users/avatar.jpg';
 
+    // busca cpf para setar a imagem do header
     if ($cpf) {
         $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
         $stmt = $connection->prepare($sql);
@@ -22,6 +23,8 @@
     //TODO paginar os restantes
     //TODO editar categoria
     //TODO remover categoria
+
+    // busca as categorias cadastradas
     $sql = "SELECT * FROM categorias LIMIT 10";
     $stmt = $connection->prepare($sql);
     $stmt->execute();
@@ -50,9 +53,14 @@
         </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
-            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+            <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+
+            <button type="button" id="microfone" onclick="buscaAudio()">
+                <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
+            </button>
+
             <button type="submit" class="lupa-icone">
-                <img src="../img/site/lupa.png" id="iconeft">
+                <img src="../img/site/lupa.png" id="iconeft" alt="Lupa">
             </button>
         </form>
 
@@ -61,9 +69,10 @@
         </button>
 
         <ul class="menu-link" id="menu-link">
-            <li><a href="../view/index.php">Início</a></li>
-            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
-            <li><a href="../view/perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
+            <li><a href="../index.php">Início</a></li>
+            <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
+            </li>
         </ul>
     </header>
 

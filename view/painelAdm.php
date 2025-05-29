@@ -63,6 +63,7 @@
     </header>
 
     <main class="painelAdm-exterior">
+        <!-- menu  -->
         <nav class="opcoes-menu">
             <h3>Menu</h3>
             <ul>
@@ -74,6 +75,7 @@
             </ul>
         </nav>
 
+        <!-- grafico e informações  -->
         <main class="info-plataforma">
             <section class="metricas">
                 <div class="card">

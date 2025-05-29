@@ -3,23 +3,27 @@
     require_once('../bd/config.inc.php');
     $user_id = $_SESSION["usuario_id"];
 
+    // buscar se há solicitacao pendente 
     $sql_pendente = "SELECT COUNT(*) from solicitacoes_vendedor where user_id = :user_id and status = '1'";
     $stmt_pendente = $connection->prepare($sql_pendente);
     $stmt_pendente->bindParam(':user_id', $user_id);
     $stmt_pendente->execute();
     $pendente =  $stmt_pendente->fetchColumn();
     
+    // buscar se há solicitação rejeitada 
     $sql_recusado = "SELECT motivo_rejeicao from solicitacoes_vendedor where user_id = :user_id and status = '2'";
     $stmt_recusado = $connection->prepare($sql_recusado);
     $stmt_recusado->bindParam(':user_id', $user_id);
     $stmt_recusado->execute();
     $recusado =  $stmt_recusado->fetchColumn();
     
+    //redireciona caso tenha solicitação pendente
     if($pendente){
         header("Location:../view/solicitacaoVendedorPendente.html");
         exit();
     }
-   
+    
+    // redireciona caso tenha solicitação recusada
     if($recusado){
         $_SESSION['msgRecusado'] = $recusado;
         header("Location:../view/solicitacaoVendedorRecusado.php");
@@ -43,6 +47,7 @@
 </head>
 
 <body>
+    <!-- formulário de solicitação -->
     <section class="formulario-solicitacao-vendedor">
         <h2>Solicitação de cadastro para vender na plataforma </h2>
         <form action="../bd/solicitacao_vendedor.php" method="post" id="form">

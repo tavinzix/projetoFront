@@ -5,7 +5,7 @@
 
     $cpf = $_SESSION['cpf'] ?? null;
     $imagemUsuario = '../img/users/avatar.jpg';
-
+    // busca a imagem para setar no header 
     if ($cpf) {
         $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
         $stmt = $connection->prepare($sql);
@@ -19,6 +19,7 @@
         }
     }
     
+    // busca solicitações pendentes 
     $sql = "SELECT *, CASE WHEN status = '1' then 'Pendente' 
             WHEN status = '2' then 'Recusado' else 'Aprovado' end AS status_texto
             FROM solicitacoes_vendedor ORDER BY status, data_solicitacao LIMIT 10";
@@ -103,6 +104,7 @@
                     <td><?php echo $solicitacao['cnpj']?></td>
                     <td><?php echo $solicitacao['estado'] . ' - ' . $solicitacao['cidade'] ?></td>
                     <td><span class="tag <?php echo $solicitacao['status_texto']?>"><?php echo $solicitacao['status_texto']?></span></td>
+                    <!-- abre modal com todas as informações da loja -->
                     <td><a onclick='abrirJanelaSolicitacao(<?php echo json_encode($solicitacao) ?>)'><button class="btn-editar">Avaliar</button></a></td>
                 </tr>
                 <?php 
@@ -111,8 +113,9 @@
             </tbody>
         </table>
     </main>
-
+        
     <div id="janela-solicitacoes" class="janela-solicitacao">
+        <!-- detalhes da solicitação -->
         <div class="janela-conteudo-solicitacoes">
             <span onclick="fecharJanelaSolicitacao()">&#10005;</span>
             <h2>Detalhes da loja</h2>
@@ -186,7 +189,7 @@
                     <strong>Motivo da rejeição:</strong><br>
                     <textarea id="motivo" name="motivo" rows="4" required></textarea>
                 </div>
-                
+                <!-- aprovar ou rejeitar solicitação -->
                 <button onclick="aprovar()" class="btn-editar" type="button" id="aprovarBtn">Aprovar</button>
                 <button onclick="rejeitar()" class="btn-editar" type="button" id="rejeitarBtn">Rejeitar</button>
             </form>
