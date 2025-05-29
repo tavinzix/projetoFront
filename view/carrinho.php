@@ -35,17 +35,6 @@ if ($cpf) {
     $stmt_itens = $connection->prepare($sql_itens);
     $stmt_itens->bindValue(':userId', $userId);
     $stmt_itens->execute();
-
-    //resumo da compra
-    $sql_valor = "SELECT SUM(preco_unitario * quantidade) AS total_compra FROM carrinho_itens ci JOIN carrinho c ON ci.carrinho_id = c.id
-        JOIN usuarios u ON u.id = c.usuario_id WHERE u.id = :userId";
-
-    $stmt_total = $connection->prepare($sql_valor);
-    $stmt_total->bindValue(':userId', $userId);
-    $stmt_total->execute();
-
-    $usuario = $stmt_total->fetch(PDO::FETCH_ASSOC);
-    $total = $usuario['total_compra'];
 }
 
 ?>
@@ -138,9 +127,8 @@ if ($cpf) {
             <div class="janela-resumo">
                 <div class="resumo-compra">
                     <h3>Resumo da Compra</h3>
-                    <!--TODO lógica para contar quantidade e calcular valor -->
-                    <p>Itens Selecionados: 1</p>
-                    <p>Total dos itens: <strong>R$ <?php echo $total ?></strong></p>
+                    <p class="qtd-itens">Itens Selecionados: 0</p>
+                    <p>Total dos itens: <strong class="preco-total">R$ 0,00 </strong></p>
                     <a href="checkoutCarrinho.html"><button class="btn-finalizar">Finalizar Compra</button></a>
                 </div>
             </div>
