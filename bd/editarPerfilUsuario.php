@@ -13,36 +13,47 @@
    $tamanho_arquivo=$_FILES['novaImagem']['size']; 
    $arquivo_temporario=$_FILES['novaImagem']['tmp_name']; 
 
+   //atualizar a imagem
     if($nome_arquivo != ''){
         $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
         $novo_nome = $id . '.' . $extensao;
 
+        //deletar imagem antiga
         $caminho_imagem_antiga = "../img/users/" . $novo_nome;
         if (file_exists($caminho_imagem_antiga)) {
             unlink($caminho_imagem_antiga);
         }
 
+        //mover imagem para a pasta
         if (move_uploaded_file($arquivo_temporario, "../img/users/$novo_nome")){
             echo " Upload do arquivo foi concluído com sucesso <br>";
         }else{
             echo "Arquivo não pode ser copiado para o servidor.";
         }
         
+        //valida se senha está preenchida
         if(isset($senha_atual) && $senha_atual !='' && isset($nova_senha) && $nova_senha !='' && isset($confirmar_senha) && $confirmar_senha !=''){
             $sql = "UPDATE usuarios SET nome_completo = :nome, email = :email, senha = :nova_senha, telefone = :telefone, img_user = :imagem WHERE id = :id";
             $statement = $connection->prepare($sql); 
-        }else{
+        }
+        //não atualiza senha
+        else{
             $sql = "UPDATE usuarios SET nome_completo = :nome, email = :email, telefone = :telefone, img_user = :imagem WHERE id = :id";
             $statement = $connection->prepare($sql); 
         }
         
         $statement = $connection->prepare($sql);
         $statement->bindParam(':imagem', $novo_nome, PDO::PARAM_INT);
+
+    //atualizar demais campos
     }else{
+        //valida se senha está preenchida
         if(isset($senha_atual) && $senha_atual !='' && isset($nova_senha) && $nova_senha !='' && isset($confirmar_senha) && $confirmar_senha !=''){
             $sql = "UPDATE usuarios SET nome_completo = :nome, email = :email, senha = :nova_senha, telefone = :telefone WHERE id = :id";
             $statement = $connection->prepare($sql); 
-        }else{
+        }
+        //nao atualiza senha
+        else{
             $sql = "UPDATE usuarios SET nome_completo = :nome, email = :email, telefone = :telefone WHERE id = :id";
             $statement = $connection->prepare($sql); 
         }

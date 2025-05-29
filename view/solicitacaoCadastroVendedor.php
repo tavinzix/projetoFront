@@ -23,7 +23,7 @@
         exit();
     }
     
-    // redireciona caso tenha solicitação recusada
+    // redireciona caso tenha solicitação recusada e guarda o motivo da rejeição na sessão
     if($recusado){
         $_SESSION['msgRecusado'] = $recusado;
         header("Location:../view/solicitacaoVendedorRecusado.php");

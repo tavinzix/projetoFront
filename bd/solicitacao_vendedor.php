@@ -1,12 +1,15 @@
 <?php
     session_start();
     require_once('config.inc.php');
+    // pega os dados do modal
     function erro_json($mensagem){
         header('Content-Type: application/json', true);
         echo json_encode(['status' => 'error', 'mensagem' => $mensagem]);
         exit();
     }
     
+    // para usuario cadastrar solicitação de vendedor
+    // insere na tabela solicitacao vendedor
     if ($_POST['acao'] == 'cadastrar') {
         $userId = $_POST['user_id'];
         $nome = $_POST['nome_loja'];
@@ -50,8 +53,11 @@
         } else {
             echo "Erro";
         }
-    }else if($_POST['acao'] == 'aprovar'){
+    }
 
+    // para adm aprovar a solicitação como vendedor
+    // insere na tabela vendedor e  da um update na tabela da solicitação para definir como aprovada
+    else if($_POST['acao'] == 'aprovar'){
         $userId = $_POST['id_user'];
         $nome = $_POST['nome'];
         $cnpj = $_POST['cnpj'];
@@ -110,7 +116,11 @@
             $connection->rollBack();
             echo 'Erro: ' . $e->getMessage();
         }
-    }else if($_POST['acao'] == 'rejeitar'){
+    }
+    
+    // para o adm recusar a solicitação de vendedor
+    // da um update no status da solicitação e guarda o motivo
+    else if($_POST['acao'] == 'rejeitar'){
         $solicitacaoId = $_POST['id_pedido'];
         $motivo = $_POST['motivo'];
 

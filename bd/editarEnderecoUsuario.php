@@ -3,11 +3,8 @@ session_start();
 require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
 
-if (!isset($_POST['acao'])) {
-    header("Location: perfilUsuario.php");
-    exit();
-}
 
+//editar endereço do usuario
 if ($_POST['acao'] == 'editar') {
     $id = $_POST['id'];
     $userId =$_POST['userId'];
@@ -46,7 +43,9 @@ if ($_POST['acao'] == 'editar') {
         echo "Erro";
     }  
 
-} elseif ($_POST['acao']== 'excluir') {
+} 
+//excluir endereço
+elseif ($_POST['acao']== 'excluir') {
     $id = $_POST['id'];
     $userId =$_POST['userId'];
 
@@ -63,7 +62,9 @@ if ($_POST['acao'] == 'editar') {
         header("Location: ../view/perfilUsuario.php");
         exit();
     }
-} elseif ($_POST['acao'] == 'salvar') {
+} 
+//salvar novo endereço
+elseif ($_POST['acao'] == 'salvar') {
     $userId =$_POST['userId'];
     $tipo = $_POST['tipo'];
     $cep = $_POST['cep'];

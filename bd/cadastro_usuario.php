@@ -2,10 +2,8 @@
 
 require_once('config.inc.php');
 
-   if (!isset($_POST['botaoEnviar'])) {
-      exit;
-   }
 
+   //criar conta de usuario
    $nome = $_POST['nome'];
    $email = $_POST['email'];
    $cpf = $_POST['cpf'];

@@ -8,15 +8,18 @@ if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     header("Location:../view/login.html");
 }
 
+// para adicionar item ao carrinho
 if ($_POST['acao'] == 'adicionar') {
     $userId = $_SESSION['usuario_id'];
 
+    // busca se ja existe um carrinho vinculado ao usuario 
     $sql_BuscaCarrinho = 'SELECT id FROM carrinho WHERE usuario_id = :userId LIMIT 1';
     $statement_buscaCarrinho = $connection->prepare($sql_BuscaCarrinho);
     $statement_buscaCarrinho->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement_buscaCarrinho->execute();
     $codcarrinho = $statement_buscaCarrinho->fetchColumn();
 
+    // se não há um carrinho, cria
     if (!$codcarrinho) {
         $sql_Insertcarrinho = 'INSERT INTO carrinho (usuario_id) VALUES (:userId)';
         $statement_insertCarrinho = $connection->prepare($sql_Insertcarrinho);
@@ -26,10 +29,12 @@ if ($_POST['acao'] == 'adicionar') {
         $codcarrinho = $connection->lastInsertId();
     }
 
+    // pega o item, quantidade, e preco 
     $qtd = $_POST['quantidade'];
     $cod = $_POST['produto_id'];
     $preco_unitario = $_POST['preco'];
 
+    // busca se já há um item no carrinho com o mesmo id 
     $sql_VerificaExistente = "SELECT id, quantidade FROM carrinho_itens 
                                 WHERE carrinho_id = :carrinho_id AND produto_id = :produto_id";
     $stmt_verifica = $connection->prepare($sql_VerificaExistente);
@@ -38,6 +43,7 @@ if ($_POST['acao'] == 'adicionar') {
     $stmt_verifica->execute();
     $itemExistente = $stmt_verifica->fetch(PDO::FETCH_ASSOC);
 
+    // se já tem o item no carrinho, atualiza a quantidade 
     if ($itemExistente) {
         $novaQuantidade = $itemExistente['quantidade'] + $qtd;
         $sql_Atualiza = "UPDATE carrinho_itens SET quantidade = :qtd WHERE id = :id";
@@ -47,7 +53,10 @@ if ($_POST['acao'] == 'adicionar') {
 
         $stmt_atualiza->execute();
 
-    } else {
+    } 
+    // se não tem, insere o item com as suas informações
+    // TODO testar se ao alterar o preço do item vai atualizar no carrinho 
+    else {
         $sql_InsertCarrinhoItem = "INSERT INTO carrinho_itens (carrinho_id, produto_id, quantidade, preco_unitario) 
                                VALUES (:codcarrinho, :cod, :qtd, :preco_unitario)";
         $statement_insert = $connection->prepare($sql_InsertCarrinhoItem);
@@ -60,7 +69,9 @@ if ($_POST['acao'] == 'adicionar') {
 
     header("Location: ../view/produto.php?id=$cod");
     exit;
-} else if ($_POST['acao'] == 'remover') {
+} 
+// remover o item do carrinho 
+else if ($_POST['acao'] == 'remover') {
     $itemId = $_POST['item_id'];
 
     $sql = "DELETE FROM carrinho_itens WHERE produto_id = :itemId";
@@ -72,7 +83,9 @@ if ($_POST['acao'] == 'adicionar') {
     } else {
         echo "erro";
     }
-} else if ($_POST['acao'] == 'atualizar') {
+} 
+// atualizar a quantidade do item no carrinho 
+else if ($_POST['acao'] == 'atualizar') {
     $itemId = $_POST['item_id'];
     $novaQuantidade = $_POST['quantidade'];
 

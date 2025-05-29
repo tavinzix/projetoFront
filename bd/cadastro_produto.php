@@ -2,6 +2,7 @@
 session_start();
 require_once('../bd/config.inc.php');
 
+//salva os dados do item
 $nome = $_POST['nome'];
 $descricao = $_POST['descricao'];
 $categoria = $_POST['categoria'];
@@ -30,7 +31,7 @@ $nome_arquivo5 = $_FILES['imagem5']['name'];
 $tamanho_arquivo5 = $_FILES['imagem5']['size'];
 $arquivo_temporario5 = $_FILES['imagem5']['tmp_name'];
 
-
+//insere os dados na tabela produto
 $sql = "INSERT INTO produtos (nome, descricao, categoria_id, marca)
             VALUES (:nome, :descricao, :categoria_id, :marca)";
 
@@ -42,7 +43,7 @@ $stmt_produto->bindParam(':categoria_id', $categoria, PDO::PARAM_STR);
 $stmt_produto->bindParam(':marca', $marca, PDO::PARAM_INT);
 $stmt_produto->execute();
 
-
+//busca o id do vendedor que está fazendo o cadastro
 $sqlVendedor = "SELECT * from vendedores where user_id = :user_id";
 $stmt_vendedor = $connection->prepare($sqlVendedor);
 
@@ -52,6 +53,7 @@ $stmt_vendedor->execute();
 $vendedor = $stmt_vendedor->fetch(PDO::FETCH_ASSOC);
 $produto_id = $connection->lastInsertId();
 
+//vincula o cadastro do produto com o vendedor
 $sqlVendedorProduto = "INSERT INTO vendedores_produtos (vendedor_id, produto_id, preco, estoque, ativo)
                             VALUES (:vendedor_id, :produto_id, :preco, :estoque, '1')";
 
@@ -65,7 +67,7 @@ $stmt_vendedorProduto->bindParam(':estoque', $estoque, PDO::PARAM_INT);
 $stmt_vendedorProduto->execute();
 
 
-
+// cria um vetor de imagens
 $imagens = [
     1 => ['arquivo' => $_FILES['imagem1'], 'obrigatoria' => true],
     2 => ['arquivo' => $_FILES['imagem2'], 'obrigatoria' => false],
@@ -74,6 +76,7 @@ $imagens = [
     5 => ['arquivo' => $_FILES['imagem5'], 'obrigatoria' => false],
 ];
 
+//percorre as imagens
 foreach ($imagens as $ordem => $dados) {
     $arquivo = $dados['arquivo'];
     $obrigatoria = $dados['obrigatoria'];
@@ -83,10 +86,12 @@ foreach ($imagens as $ordem => $dados) {
         $novo_nome = $produto_id . '_' . $ordem . '.' . $extensao;
         $caminho = "../img/produtos/$novo_nome";
 
+        //exclui caso já tenha
         if (file_exists($caminho)) {
             unlink($caminho);
         }
 
+        //insere na tabela produto imagens
         if (move_uploaded_file($arquivo['tmp_name'], $caminho)) {
             $sqlImagem = "INSERT INTO produto_imagens (produto_id, imagem_url, ordem) 
                           VALUES (:produto_id, :imagem_url, :ordem)";
