@@ -1,24 +1,24 @@
 <?php
-  session_start();
-  require_once('../bd/config.inc.php');
-  ini_set('default_charset', 'utf-8');
+session_start();
+require_once('../bd/config.inc.php');
+ini_set('default_charset', 'utf-8');
 
-  if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
+if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     header("Location:login.php");
     exit;
-  }
+}
 
-  $cpf = $_SESSION['cpf'];
+$cpf = $_SESSION['cpf'];
 
 //   busca dados do perfil 
-  $sql = "SELECT *, to_char(dt_nasc, 'DD/MM/YYYY') as data_nascimento FROM usuarios WHERE cpf = :cpf";
-  $stmt = $connection->prepare($sql);
-  $stmt->bindParam(':cpf', $cpf);
-  $stmt->execute();
+$sql = "SELECT *, to_char(dt_nasc, 'DD/MM/YYYY') as data_nascimento FROM usuarios WHERE cpf = :cpf";
+$stmt = $connection->prepare($sql);
+$stmt->bindParam(':cpf', $cpf);
+$stmt->execute();
 
-  $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  if ($usuario && !empty($usuario['img_user'])) {
+if ($usuario && !empty($usuario['img_user'])) {
     $imagemUsuario = '../img/users/' . ($usuario['img_user']);
 }
 ?>
@@ -67,7 +67,7 @@
     <section class="editar-perfil">
         <!-- formulario de edição  -->
         <h3>Editar Perfil</h3>
-        <form class="form-perfil" action="../bd/editarPerfilUsuario.php" method="POST" enctype="multipart/form-data">     
+        <form class="form-perfil" action="../bd/editarPerfilUsuario.php" method="POST" enctype="multipart/form-data">
             <div class="campo-form" style="display:none">
                 <label for="id">id</label>
                 <input type="text" id="id" name="id" value="<?php echo $usuario['id'] ?>">
@@ -77,63 +77,62 @@
                 <label for="nome">Nome Completo</label>
                 <input type="text" id="nome" name="nome" value="<?php echo $usuario['nome_completo'] ?>">
             </div>
-        
+
             <div class="campo-form">
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" value="<?php echo $usuario['email'] ?>">
             </div>
-          
+
             <div class="campo-form">
                 <label for="email">Telefone</label>
                 <input type="text" id="email" name="telefone" value="<?php echo $usuario['telefone'] ?>">
             </div>
-          
+
             <div class="campo-form">
                 <label for="email">CPF</label>
                 <input type="text" id="email" name="cpf" value="<?php echo $usuario['cpf'] ?>" disabled>
             </div>
-            
+
             <div class="campo-form">
                 <label for="email">Data de nascimento</label>
                 <input type="email" id="email" name="email" value="<?php echo $usuario['data_nascimento'] ?>" disabled>
             </div>
-        
+
             <div class="campo-form">
                 <label for="senha-atual">Senha Atual</label>
                 <input type="password" id="senha-atual" name="senha_atual">
             </div>
-        
+
             <div class="campo-form">
                 <label for="nova-senha">Nova Senha</label>
                 <input type="password" id="nova-senha" name="nova_senha">
             </div>
-        
+
             <div class="campo-form">
                 <label for="confirmar-senha">Confirmar Nova Senha</label>
                 <input type="password" id="confirmar-senha" name="confirmar_senha">
             </div>
 
-            <!--TODO opção para remover foto -->
             <div class="campo-form-foto">
                 <label>Foto de Perfil</label>
-                
+
                 <div class="container-fotos">
                     <div class="foto-interna">
-                        <img src="<?= $imagemUsuario ?>" alt="Perfil">
+                        <img src="<?= $imagemUsuario ?>" alt="Perfil" id="atual">
                         <label for="foto">Foto atual</label>
+                        <button type="submit" class="btn-remover" name="acao" value="removerFoto">Remover foto</button>
                     </div>
                     <div class="foto-interna">
                         <label for="foto">Nova foto</label>
                         <input type="file" id="foto" name="novaImagem" onchange="img.src = window.URL.createObjectURL(this.files[0])">
-                        <img id="img" style="max-width:150px">
+                        <img id="img" style="max-width:300px">
                     </div>
                 </div>
             </div>
-          </div>
-          <button type="submit" class="btn-salvar" name="salvar">Salvar Alterações</button>
+            <button type="submit" class="btn-salvar" name="acao" value="salvar">Salvar Alterações</button>
         </form>
-      </section>
-      <script src="../js/global.js"></script>
+    </section>
+    <script src="../js/global.js"></script>
 
 </body>
 

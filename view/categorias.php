@@ -1,33 +1,33 @@
 <?php
-    session_start();
-    require_once('../bd/config.inc.php');
-    ini_set('default_charset', 'utf-8');
+session_start();
+require_once('../bd/config.inc.php');
+ini_set('default_charset', 'utf-8');
 
-    $cpf = $_SESSION['cpf'] ?? null;
-    $imagemUsuario = '../img/users/avatar.jpg';
+$cpf = $_SESSION['cpf'] ?? null;
+$imagemUsuario = '../img/users/avatar.jpg';
 
-    // busca cpf para setar a imagem do header
-    if ($cpf) {
-        $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-        $stmt = $connection->prepare($sql);
-        $stmt->bindParam(':cpf', $cpf);
-        $stmt->execute();
-
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($usuario && !empty($usuario['img_user'])) {
-            $imagemUsuario = '../img/users/' . ($usuario['img_user']);
-        }
-    }
-
-    //TODO paginar os restantes
-    //TODO editar categoria
-    //TODO remover categoria
-
-    // busca as categorias cadastradas
-    $sql = "SELECT * FROM categorias LIMIT 10";
+// busca cpf para setar a imagem do header
+if ($cpf) {
+    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
     $stmt = $connection->prepare($sql);
+    $stmt->bindParam(':cpf', $cpf);
     $stmt->execute();
+
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($usuario && !empty($usuario['img_user'])) {
+        $imagemUsuario = '../img/users/' . ($usuario['img_user']);
+    }
+}
+
+//TODO paginar depois de exibir 10
+
+// busca as categorias cadastradas
+$sql = "SELECT *, CASE WHEN status = '1' then 'Ativo' 
+            WHEN status = '2' then 'Inativo' end AS status_texto FROM categorias";
+$stmt = $connection->prepare($sql);
+$stmt->execute();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -45,6 +45,7 @@
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <!--CABEÇALHO-->
     <header class="menu">
@@ -104,27 +105,76 @@
             </thead>
             <tbody>
                 <?php
-                    while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) { 
+                while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 ?>
-                <tr>                 
-                    <td><img class="imagem-produto" src="../img/categoria/<?= $categoria['imagem'] ?>" id="imagem-categoria" alt="imagem-categoria"></td>
-                    <td><?php echo $categoria['nome']?></td>
-                    <td><?php echo $categoria['descricao']?></td>
-                    <td><?php echo $categoria['url']?></td>
-                    <td><a href="#"><button class="btn-editar">Editar</button></a></td>
-                </tr>
-                <?php 
-                    } 
+                    <tr>
+                        <td><img class="imagem-produto" src="../img/categoria/<?= $categoria['imagem'] ?>" id="imagem-categoria" alt="imagem-categoria"></td>
+                        <td><?php echo $categoria['nome'] ?></td>
+                        <td><?php echo $categoria['descricao'] ?></td>
+                        <td><?php echo $categoria['url'] ?></td>
+                        <td><span class="tag <?php echo $categoria['status_texto'] ?>"><?php echo $categoria['status_texto'] ?></span></td>
+
+                        <!-- abre modal com todas as informações da loja -->
+                        <td><a onclick='abrirJanelaCategoria(<?php echo json_encode($categoria) ?>)'><button class="btn-editar">Editar</button></a></td>
+                    </tr>
+                <?php
+                }
                 ?>
             </tbody>
         </table>
     </main>
+
+    <div id="janela-categoria" class="janela-categoria">
+        <!-- detalhes da categoria -->
+        <div class="janela-conteudo-categoria">
+            <span onclick="fecharJanelaCategoria()">&#10005;</span>
+            <h2>Detalhes da categoria</h2>
+
+            <form action="../bd/cadastro_categoria.php" method="post" enctype="multipart/form-data" id="formularioCategoria">
+                <div class="informacao-categoria" style="display:none"> 
+                    <strong>Id da categoria:</strong>
+                    <p id="id_categoria" name="id_categoria"></p>
+                </div>
+
+                <div class="informacao-categoria">
+                    <strong>Nome da categoria:</strong> <br>
+                    <input id="nome" name="nome">
+                </div>
+
+                <div class="informacao-categoria">
+                    <strong>Descrição:</strong><br>
+                    <textarea id="descricao" name="descricao"></textarea>
+                </div>
+
+                <div class="informacao-categoria">
+                    <strong>URL:</strong><br>
+                    <input id="url" name="url">
+                </div>
+
+                <div class="informacao-categoria">
+                    <strong>Imagem atual:</strong><br>
+                    <img id="imagemAtual" style="max-width: 200px;"><br>
+
+                    <strong>Alterar imagem:</strong><br>
+                    <input type="file" id="imagem" name="novaImagem">
+                </div>
+
+                <!-- editar, inativar ou ativar categoria -->
+                <button onclick="editar()" class="btn-editar" type="button" id="editarBtn">Editar</button>
+                <button onclick="inativar()" class="btn-editar" type="button" id="inativarBtn" style="display: none;">Inativar</button>
+                <button onclick="ativar()" class="btn-editar" type="button" id="ativarBtn" style="display: none;">Ativar</button>
+            </form>
+        </div>
+    </div>
+
     <?php
-        if(isset($_SESSION['msgSucesso'])){
-            echo '<script>alert("'.$_SESSION['msgSucesso'].'")</script>';
-            unset($_SESSION["msgSucesso"]);
-        }
+    if (isset($_SESSION['msgSucesso'])) {
+        echo '<script>alert("' . $_SESSION['msgSucesso'] . '")</script>';
+        unset($_SESSION["msgSucesso"]);
+    }
     ?>
 </body>
 <script src="../js/global.js"></script>
+<script src="../js/painelAdm.js"></script>
+
 </html>

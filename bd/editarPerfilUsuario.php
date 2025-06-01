@@ -2,6 +2,7 @@
     session_start();
     require_once('../bd/config.inc.php');
 
+if ($_POST['acao'] == 'salvar') {
    $id = $_POST['id'];
    $nome = $_POST['nome'];
    $email = $_POST['email'];
@@ -72,4 +73,21 @@
    } else {
       echo "Erro";
    }
+} 
+elseif ($_POST['acao'] == 'removerFoto') {
+    $id = $_POST['id'];
+    $sql_remover = "UPDATE usuarios SET img_user = 'avatar.jpg' WHERE id = :id";
+    $statement_remover = $connection->prepare($sql_remover);
+    $statement_remover->bindParam(':id', $id, PDO::PARAM_INT);
+    $statement_remover->execute();
+
+    if ($statement_remover) {
+        $_SESSION['msgSucesso'] = 'Alteração Efetuada com sucesso';
+        header("Location:../view/perfilUsuario.php");
+    } else {
+        echo "Erro";
+    }
+}
+
+
 ?>

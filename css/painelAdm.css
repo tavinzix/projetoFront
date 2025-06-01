@@ -132,7 +132,7 @@ canvas {
     font-weight: bold;
 }
 
-.tag.Aprovado {
+.tag.Aprovado, .tag.Ativo {
     background-color: #d1f7c4;
     color: #2e7d32;
 }
@@ -142,7 +142,7 @@ canvas {
     color: #7d782e;
 }
 
-.tag.Recusado {
+.tag.Recusado, .tag.Inativo {
     background-color: #ffe0e0;
     color: #c62828;
 }
@@ -162,7 +162,8 @@ canvas {
     background: #b14b07;
 }
 
-.janela-solicitacao {
+.janela-solicitacao,
+.janela-categoria {
     display: none;
     position: fixed;
     z-index: 999;
@@ -174,7 +175,8 @@ canvas {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.janela-conteudo-solicitacoes {
+.janela-conteudo-solicitacoes,
+.janela-conteudo-categoria {
     background-color: #fff;
     margin: 5% auto;
     padding: 0 20px 20px 20px;
@@ -186,7 +188,8 @@ canvas {
     position: relative;
 }
 
-.janela-conteudo-solicitacoes h2 {
+.janela-conteudo-solicitacoes h2,
+.janela-conteudo-categoria h2 {
     position: sticky;
     top: 0;
     padding: 10px 0;
@@ -197,7 +200,8 @@ canvas {
     border-bottom: 1px solid #ddd;
 }
 
-.janela-conteudo-solicitacoes span {
+.janela-conteudo-solicitacoes span,
+.janela-conteudo-categoria span {
     float: right;
     position: sticky;
     top: 0;
@@ -211,7 +215,8 @@ canvas {
     z-index: 1;
 }
 
-.informacao-loja {
+.informacao-loja,
+.informacao-categoria {
     background-color: #f8f8f8;
     padding: 10px;
     margin-top: 15px;
@@ -219,11 +224,14 @@ canvas {
     text-align: left;
 }
 
-.informacao-loja p {
+.informacao-loja p,
+.informacao-categoria p {
     margin: 5px 0;
 }
 
-.informacao-loja textarea {
+.informacao-loja textarea,
+.informacao-categoria input,
+.informacao-categoria textarea {
     padding: 0.5rem;
     border-radius: 6px;
     border: 1px solid #ccc;

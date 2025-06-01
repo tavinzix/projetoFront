@@ -93,16 +93,19 @@ CREATE TABLE solicitacoes_vendedor (
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
-COMMENT ON COLUMN solicitacoes_vendedor.status IS '1 = Pendente, 2 = Rejeitado';
+COMMENT ON COLUMN solicitacoes_vendedor.status IS '1 = Pendente, 2 = Rejeitado, 3 = Aprovado' ;
 COMMENT ON COLUMN solicitacoes_vendedor.motivo_rejeicao IS 'Motivo da rejeição, se aplicável';
 
 CREATE TABLE categorias (
-    id SERIAL PRIMARY KEY,                 
-    nome VARCHAR(255) NOT NULL,             
-    descricao TEXT,                        
-    imagem VARCHAR(255),                    
-    url VARCHAR(255) UNIQUE NOT NULL     
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    imagem VARCHAR(255),
+    url VARCHAR(255) UNIQUE NOT NULL,
+    status CHAR(1) CHECK (status IN ('1', '2')),
 );
+
+COMMENT ON COLUMN categorias.status IS '1 = Ativo, 2 = Inativo';
 
 CREATE TABLE produtos (
     id SERIAL PRIMARY KEY,

@@ -224,7 +224,7 @@
     align-items: center;
 }
 
-.campo-form-foto img {
+.campo-form-foto #atual {
     height: 250px;
     width: 250px;
 }

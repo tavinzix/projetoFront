@@ -112,3 +112,87 @@ function rejeitar() {
     fecharJanelaSolicitacao();
     window.location.reload(true);
 }
+
+function abrirJanelaCategoria(categoria) {
+    document.getElementById("id_categoria").innerText = categoria.id;
+    document.getElementById("nome").value = categoria.nome;
+    document.getElementById("descricao").value = categoria.descricao;
+    document.getElementById("url").value = categoria.url;
+
+    const imagemAtual = document.getElementById("imagemAtual");
+    imagemAtual.src = "../img/categoria/" + categoria.imagem;
+
+    const inativarBtn = document.getElementById("inativarBtn");
+    const ativarBtn = document.getElementById("ativarBtn");
+
+    if (categoria.status == '1') {
+        inativarBtn.style.display = "inline-block";
+        ativarBtn.style.display = "none";
+    } else {
+        inativarBtn.style.display = "none";
+        ativarBtn.style.display = "inline-block";
+    }
+
+    document.getElementById("janela-categoria").style.display = "block";
+}
+
+function fecharJanelaCategoria() {
+    document.getElementById("janela-categoria").style.display = "none";
+}
+
+function editar() {
+    const form = document.getElementById("formularioCategoria")
+    const formData = new FormData(form);
+    let categoriaId = document.getElementById("id_categoria").innerHTML;
+    let nome = document.getElementById("nome").value;
+    let descricao = document.getElementById("descricao").value;
+    let url = document.getElementById("url").value;
+    
+    formData.append('acao', 'editar');
+    formData.append('id_categoria', categoriaId);
+    formData.append('nome', nome);
+    formData.append('descricao', descricao);
+    formData.append('url', url);
+
+    fetch('../bd/cadastro_categoria.php', {
+        method: "POST",
+        body: formData
+    });
+
+    window.location.reload(true);
+}
+
+function inativar() {
+    const form = document.getElementById("formularioCategoria")
+    const formData = new FormData(form);
+
+    let categoriaId = document.getElementById("id_categoria").innerHTML;
+
+    formData.append('acao', 'inativar');
+    formData.append('id_categoria', categoriaId);
+
+
+    fetch('../bd/cadastro_categoria.php', {
+        method: "POST",
+        body: formData
+    });
+
+    window.location.reload(true);
+}
+
+function ativar() {
+    const form = document.getElementById("formularioCategoria")
+    const formData = new FormData(form);
+
+    let categoriaId = document.getElementById("id_categoria").innerHTML;
+
+    formData.append('acao', 'ativar');
+    formData.append('id_categoria', categoriaId);
+
+    fetch('../bd/cadastro_categoria.php', {
+        method: "POST",
+        body: formData
+    });
+
+    window.location.reload(true);
+}

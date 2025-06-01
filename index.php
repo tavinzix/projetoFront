@@ -19,7 +19,7 @@ if ($cpf) {
     }
 }
 
-$sql_categoria = "SELECT * FROM categorias ORDER BY nome";
+$sql_categoria = "SELECT * FROM categorias where status = '1' ORDER BY nome";
 $stmt_categoria = $connection->prepare($sql_categoria);
 $stmt_categoria->execute();
 
@@ -97,7 +97,6 @@ $stmt_produtoDestaque->execute();
                             <div class="img-categoria">
                                 <img src="img/categoria/<?= $categoria['imagem'] ?>" alt="<?php echo $categoria['nome'] ?>">
                             </div>
-                            <p><?php echo $categoria['url'] ?></p>
                             <p><?php echo $categoria['nome'] ?></p>
                         </a>
                     </div>
@@ -304,18 +303,12 @@ $stmt_produtoDestaque->execute();
         Feedback claro ao usuário sobre ações e erros. 
         Validação de formulários.
     }
-    TODO criar carrinho {
-        vincular com a quantidade   
-        habilitar opção de adicionar ao carrinho no botão da pagina do produto
-    }
     TODO funcionalidades do adm
     TODO funcionalidades do vendedor
-    TODO buscar categorias no index e abrir a pagina correspondente
     TODO mudar toda logica de aceitar a solicitação{
         nome do adm que aceitou a solicitação
         criar possivelmente um user pro adm
         mudar tabela da solicitação para incluir o nome
-        não remover da solicitação quando aprovar, só dar update
         incluir novo check no insert
         pensar em uma lógica para listar também quem aprovou a solicitação
     }

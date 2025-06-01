@@ -55,7 +55,7 @@ if ($_POST['acao'] == 'adicionar') {
 
     } 
     // se não tem, insere o item com as suas informações
-    // TODO testar se ao alterar o preço do item vai atualizar no carrinho 
+    // TODO preço está fixo no carrinho, verificar melhor funcionalidade para atualizar ou não o carrinho
     else {
         $sql_InsertCarrinhoItem = "INSERT INTO carrinho_itens (carrinho_id, produto_id, quantidade, preco_unitario) 
                                VALUES (:codcarrinho, :cod, :qtd, :preco_unitario)";
