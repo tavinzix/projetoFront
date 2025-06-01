@@ -93,12 +93,11 @@ $stmt_produtoDestaque->execute();
                 while ($categoria = $stmt_categoria->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <div class="itens-categoria">
-                        <!-- TODO abrir pagina da categoria com os respectivos itens
-                     <a href="itensCategoria/<?php echo $categoria['url']; ?>.html">-->
-                        <a href="itensCategoria.html">
+                        <a href="view/itensCategoria.php?url=<?php echo $categoria['url']; ?>">
                             <div class="img-categoria">
                                 <img src="img/categoria/<?= $categoria['imagem'] ?>" alt="<?php echo $categoria['nome'] ?>">
                             </div>
+                            <p><?php echo $categoria['url'] ?></p>
                             <p><?php echo $categoria['nome'] ?></p>
                         </a>
                     </div>
@@ -269,7 +268,7 @@ $stmt_produtoDestaque->execute();
 
             <div class="produtos-container">
                 <?php
-                    while ($produtoDestaque = $stmt_produtoDestaque->fetch(PDO::FETCH_ASSOC)) {
+                while ($produtoDestaque = $stmt_produtoDestaque->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <div class="produtos">
                         <a href="view/produto.php?id=<?php echo $produtoDestaque['produto_id'] ?>">
@@ -293,6 +292,7 @@ $stmt_produtoDestaque->execute();
     </main>
 
     <script src="js/global.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
@@ -330,31 +330,28 @@ $stmt_produtoDestaque->execute();
 
      -->
 <!--
-404
-Esta página deve ser um ninja 🥷 simplesmente desapareceu!
-Tente pesquisar por palavras-chave 
 
-/*
-Uso                                     Cor                 Código HEX 
-Primária (confiança/profissionalismo)   Azul Escuro         #1F3C88 
-Secundária (neutro/moderno)             Cinza Claro         #F2F2F2 
-Texto principal                         Cinza Grafite       #333333 
-Botões/CTAs (ação/energia)              Laranja Vibrante    #FF6B00 
-Destaques ou ícones                     Amarelo Industrial  #FFD100 
-Complementar (detalhes/links)           Azul Claro          #4A90E2
-azul claro #4987ff
-Amarelo construção #f9a825;
-cinza #4d4d51
-*/
+    /*
+    Uso                                     Cor                 Código HEX 
+    Primária (confiança/profissionalismo)   Azul Escuro         #1F3C88 
+    Secundária (neutro/moderno)             Cinza Claro         #F2F2F2 
+    Texto principal                         Cinza Grafite       #333333 
+    Botões/CTAs (ação/energia)              Laranja Vibrante    #FF6B00 
+    Destaques ou ícones                     Amarelo Industrial  #FFD100 
+    Complementar (detalhes/links)           Azul Claro          #4A90E2
+    azul claro #4987ff
+    Amarelo construção #f9a825;
+    cinza #4d4d51
+    */
 
 
-lista icones hexa html
-https://www.compart.com/en/unicode/category
-https://erikasarti.com/html/dingbats-simbolos-desenhos/
+    lista icones hexa html
+    https://www.compart.com/en/unicode/category
+    https://erikasarti.com/html/dingbats-simbolos-desenhos/
 
 
 
-icone carrinho https://icons8.com.br/icon/5esIoe7Rz8YD/buying
-icone lupa https://icons8.com.br/icon/7695/search
-icone microfone http://icons8.com.br/icons/set/microfone
+    icone carrinho https://icons8.com.br/icon/5esIoe7Rz8YD/buying
+    icone lupa https://icons8.com.br/icon/7695/search
+    icone microfone http://icons8.com.br/icons/set/microfone
 -->

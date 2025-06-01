@@ -1,3 +1,56 @@
+<?php
+require_once('../bd/config.inc.php');
+ini_set('default_charset', 'utf-8');
+
+// busca o usuario para setar a imagem no header
+$cpf = $_SESSION['cpf'] ?? null;
+$imagemUsuario = '../img/users/avatar.jpg';
+
+if ($cpf) {
+    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
+    $stmt = $connection->prepare($sql);
+    $stmt->bindParam(':cpf', $cpf);
+    $stmt->execute();
+
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($usuario && !empty($usuario['img_user'])) {
+        $imagemUsuario = '../img/users/' . ($usuario['img_user']);
+    }
+}
+
+// pega a url da categoria e busca os itens
+if (isset($_GET['url'])) {
+    $categoria_url = $_GET['url'];
+
+    //informações da categoria
+    $sql_categoria = "SELECT * FROM categorias where url = :categoria_url";
+
+    $stmt_categoria = $connection->prepare($sql_categoria);
+    $stmt_categoria->bindParam(':categoria_url', $categoria_url,  PDO::PARAM_STR);
+    $stmt_categoria->execute();
+    $categoria = $stmt_categoria->fetch(PDO::FETCH_ASSOC);
+
+    //busca os produtos
+    $sql_produto = "SELECT p.*, vp.*, pi.*, c.nome as nome_categoria, p.id  as produto_id FROM produtos p
+                    JOIN categorias c on c.id = p.categoria_id 
+                    JOIN vendedores_produtos vp ON vp.produto_id = p.id
+                    LEFT JOIN produto_imagens pi ON p.id = pi.produto_id and pi.ordem = 1
+					where c.url = :categoria_url ";
+
+    $stmt_produto = $connection->prepare($sql_produto);
+    $stmt_produto->bindParam(':categoria_url', $categoria_url,  PDO::PARAM_STR);
+    $stmt_produto->execute();
+
+    if (!$categoria) {
+        header("Location:../view/paginaNaoEncontrada.html");
+        exit();
+    }
+} else {
+    header("Location:../view/paginaNaoEncontrada.html");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -39,14 +92,14 @@
 
         <ul class="menu-link" id="menu-link">
             <li><a href="../index.php">Início</a></li>
-            <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
+            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
             </li>
         </ul>
     </header>
 
     <div class="titulo-categoria">
-        <h1>Tijolos</h1>
+        <h1><?php echo $categoria['nome'] ?></h1>
     </div>
 
     <main class="layout-itensCategoria">
@@ -58,7 +111,7 @@
             <div class="itens-filtros">
                 <label for="valor-min">Valor Mínimo:</label>
                 <input type="number" id="valor-min" name="valor-min" placeholder="R$ 0,00">
-           
+
                 <label for="valor-max">Valor Máximo:</label>
                 <input type="number" id="valor-max" name="valor-max" placeholder="R$ 1.000,00">
             </div>
@@ -108,66 +161,25 @@
 
         <!--Itens-->
         <section class="itensCategoria-exterior">
-            <div class="produto-card">
-                <img src="../img/produtos/p2.png" alt="Produto">
-                <h3>Tijolo Furado</h3>
-                <p>R$ 1,00</p>
-                <a href="produto.html"> <button>Ver Detalhes</button></a>
-            </div>
+            <?php
+            while ($itemCategoria = $stmt_produto->fetch(PDO::FETCH_ASSOC)) {
+            ?>
+                <div class="produto-card">
+                    <img src="../img/produtos/<?php echo $itemCategoria['imagem_url'] ?>" alt="<?php echo $itemCategoria['nome'] ?>">
+                    <p style="display:none">Id produto<?php echo $itemCategoria['produto_id'] ?></p>
+                    <h3><?php echo $itemCategoria['nome'] ?></h3>
+                    <p>R$<?php echo $itemCategoria['preco'] ?></p>
+                    <a href="produto.php?id=<?php echo $itemCategoria['produto_id'] ?>">
+                        <button>Ver Detalhes</button>
+                    </a>
+                </div>
+            <?php
+            }
+            ?>
 
-            <div class="produto-card">
-                <img src="../img/produtos/p3.png" alt="Produto">
-                <h3>Tijolo Maciço</h3>
-                <p>R$ 1,50</p>
-                <a href="produto.html"> <button>Ver Detalhes</button></a>
-            </div>
-            <div class="produto-card">
-                <img src="../img/produtos/p2.png" alt="Produto">
-                <h3>Tijolo Furado</h3>
-                <p>R$ 1,00</p>
-                <a href="produto.html"> <button>Ver Detalhes</button></a>
-            </div>
-
-            <div class="produto-card">
-                <img src="../img/produtos/p3.png" alt="Produto">
-                <h3>Tijolo Maciço</h3>
-                <p>R$ 1,50</p>
-                <a href="produto.html"> <button>Ver Detalhes</button></a>
-            </div>
-            <div class="produto-card">
-                <img src="../img/produtos/p2.png" alt="Produto">
-                <h3>Tijolo Furado</h3>
-                <p>R$ 1,00</p>
-                <a href="produto.html"> <button>Ver Detalhes</button></a>
-            </div>
-
-            <div class="produto-card">
-                <img src="../img/produtos/p3.png" alt="Produto">
-                <h3>Tijolo Maciço</h3>
-                <p>R$ 1,50</p>
-                <a href="produto.html"> <button>Ver Detalhes</button></a>
-            </div>
-            <div class="produto-card">
-                <img src="../img/produtos/p2.png" alt="Produto">
-                <h3>Tijolo Furado</h3>
-                <p>R$ 1,00</p>
-                <a href="produto.html"> <button>Ver Detalhes</button></a>
-            </div>
-
-            <div class="produto-card">
-                <img src="../img/produtos/p3.png" alt="Produto">
-                <h3>Tijolo Maciço</h3>
-                <p>R$ 1,50</p>
-                <a href="produto.html"> <button>Ver Detalhes</button></a>
-            </div>
-            <div class="produto-card">
-                <img src="../img/produtos/p2.png" alt="Produto">
-                <h3>Tijolo Furado</h3>
-                <p>R$ 1,00</p>
-                <a href="produto.html"> <button>Ver Detalhes</button></a>
-            </div>
         </section>
     </main>
     <script src="../js/global.js"></script>
 </body>
+
 </html>
