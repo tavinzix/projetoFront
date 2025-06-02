@@ -1,3 +1,32 @@
+<?php
+session_start();
+require_once('../bd/config.inc.php');
+ini_set('default_charset', 'utf-8');
+
+if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
+    header("Location:../view/login.html");
+}
+
+$cpf = $_SESSION['cpf'] ?? null;
+$userId = $_SESSION['usuario_id'];
+
+// busca cpf para setar a imagem do header
+if ($cpf) {
+    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
+    $stmt = $connection->prepare($sql);
+    $stmt->bindParam(':cpf', $cpf);
+    $stmt->execute();
+
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($usuario && !empty($usuario['img_user'])) {
+        $imagemUsuario = '../img/users/' . ($usuario['img_user']);
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -13,6 +42,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="../img/site/icone.png" type="image/x-icon">
 </head>
 
 <body>
@@ -23,9 +53,14 @@
         </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
-            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+            <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+
+            <button type="button" id="microfone" onclick="buscaAudio()">
+                <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
+            </button>
+
             <button type="submit" class="lupa-icone">
-                <img src="../img/site/lupa.png" id="iconeft">
+                <img src="../img/site/lupa.png" id="iconeft" alt="Lupa">
             </button>
         </form>
 
@@ -35,8 +70,9 @@
 
         <ul class="menu-link" id="menu-link">
             <li><a href="../index.php">Início</a></li>
-            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
-            <li><a href="perfilUsuario.html"><img src="../img/users/idUser_nome.jpg" id="icone-perfil"></a></li>
+            <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
+            </li>
         </ul>
     </header>
 

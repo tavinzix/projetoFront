@@ -1,3 +1,6 @@
+TODO revisar tabelas
+TODO criar backup e restore
+
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     nome_completo VARCHAR(255) NOT NULL,
@@ -131,6 +134,9 @@ CREATE TABLE vendedores_produtos (
     UNIQUE (vendedor_id, produto_id)
 );
 
+TODO ver coluna imagem{
+    imagem ou imagem_url
+}
 CREATE TABLE produto_imagens (
     id SERIAL PRIMARY KEY,
     produto_id INT NOT NULL,

@@ -22,6 +22,7 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($usuario && !empty($usuario['img_user'])) {
     $imagemUsuario = '../img/users/' . ($usuario['img_user']);
 }
+
 //  busca os dados do vendedor com base no id do usuario 
 $sqlVendedor = "SELECT * from vendedores where user_id = :user_id";
 $stmt_vendedor = $connection->prepare($sqlVendedor);
@@ -79,25 +80,16 @@ $stmt->execute();
             &#9776;
         </button>
 
-        <!--<ul class="menu-link" id="menu-link">
+        <ul class="menu-link" id="menu-link">
             <li><a href="index.html">Início</a></li>
             <?php if ($_SESSION['tipo_usuario'] == 'admin') { ?>
                 <li><a href="painelAdm.php">Painel Administrativo</a></li><?php } ?>
             <?php if ($_SESSION['tipo_usuario'] == 'vendedor') { ?>
-                <li><a href="painelVendedor.html">Painel do vendedor</a></li><?php } ?>
+                <li><a href="painelVendedor.php">Painel do vendedor</a></li><?php } ?>
             <?php if ($_SESSION['tipo_usuario'] == 'usuario') { ?>
-                <li><a href="solicitacaoCadastroVendedor.html">Quero vender na plataforma</a></li>
-            <?php } ?>          
-            <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
-            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
-        </ul>-->
-
-        <ul class="menu-link" id="menu-link">
-            <li><a href="../index.php">Início</a></li>
-            <li><a href="painelAdm.php">Painel Administrativo</a></li>
-            <li><a href="painelVendedor.html">Painel do vendedor</a></li>
-            <li><a href="solicitacaoCadastroVendedor.php">Quero vender na plataforma</a></li>
-            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
+                <li><a href="solicitacaoCadastroVendedor.php">Quero vender na plataforma</a></li>
+            <?php } ?>
+            <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>
     </header>
@@ -143,7 +135,7 @@ $stmt->execute();
             </thead>
             <tbody>
                 <?php
-                    while ($produto = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                while ($produto = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <tr>
                         <td><img src="../img/produtos/<?= $produto['imagem_url'] ?>" class="imagem-produto" /></td>

@@ -25,7 +25,7 @@ require_once('config.inc.php');
    $statement->bindParam(':cpf', $cpf, PDO::PARAM_STR);
 
    if ($statement->execute()) {
-      echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href = '../view/login.php';</script>";
+      echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href = '../view/login.html';</script>";
       exit;
   } else {
       echo "<script>alert('Erro ao cadastrar!');</script>";

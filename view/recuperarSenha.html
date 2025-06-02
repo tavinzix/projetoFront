@@ -2,67 +2,69 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/global.css">
-  <link rel="stylesheet" href="../css/formulario.css">
-  <link rel="stylesheet" href="../css/responsivo.css">
-  <title>Recuperar senha | Iconst</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/formulario.css">
+    <link rel="stylesheet" href="../css/responsivo.css">
+    <title>Recuperar senha | Iconst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="../img/site/icone.png" type="image/x-icon">
+
 </head>
 
 <body>
-  <div class="recuperar-exterior">
-    <div class="recuperar-forms">
-        <!-- formulario 1 - informar dados -->
-      <div class="recuperacao-formulario" id="form1">
-        <h2>Esqueceu sua senha?</h2>
-        <p>Informe seus dados para receber por email um código de verificação.</p>
+    <div class="recuperar-exterior">
+        <div class="recuperar-forms">
+            <!-- formulario 1 - informar dados -->
+            <div class="recuperacao-formulario" id="form1">
+                <h2>Esqueceu sua senha?</h2>
+                <p>Informe seus dados para receber por email um código de verificação.</p>
 
-        <label for="cpfLabel">CPF</label>
-        <input type="text" id="cpf" name="cpf" maxlength="11" minlength="11" placeholder="Digite seu CPF" />
+                <label for="cpfLabel">CPF</label>
+                <input type="text" id="cpf" name="cpf" maxlength="11" minlength="11" placeholder="Digite seu CPF" />
 
-        <label for="cpfLabel">Data de nascimento</label>
-        <input type="date" id="dtNasc" name="dtNasc" min="1900-01-01" max="2025-12-31"/>
+                <label for="cpfLabel">Data de nascimento</label>
+                <input type="date" id="dtNasc" name="dtNasc" min="1900-01-01" max="2025-12-31" />
 
-        <button onclick="enviarCodigo()">Redefinir senha</button>
+                <button onclick="enviarCodigo()">Redefinir senha</button>
 
-        <div class="links">
-          <a href="login.html">← Lembrou a senha?</a>
+                <div class="links">
+                    <a href="login.html">← Lembrou a senha?</a>
+                </div>
+            </div>
+
+
+            <!-- formulario 2 - informar codigo  -->
+            <div class="recuperacao-formulario" style="display: none;" id="form2">
+                <h2>Digite o código recebido</h2>
+
+                <label for="codigoLabel">Codigo</label>
+                <input type="text" id="codigo" name="codigo" placeholder="Digite seu código" required />
+
+                <button onclick="validarCodigo()">Enviar</button>
+            </div>
+
+
+            <!-- formulario 3 - definir senha  -->
+            <form class="recuperacao-formulario" style="display: none;" id="form3">
+                <h2>Insira sua nova senha</h2>
+
+                <label for="senha">Senha</label>
+                <input type="text" id="senha" name="senha" placeholder="Digite sua senha" required />
+
+                <label for="cSenha">Confirme sua senha</label>
+                <input type="text" id="cSenha" name="cSenha" placeholder="Confirme sua senha" required />
+
+                <button onclick="redefinirSenha()">Enviar</button>
+            </form>
         </div>
-      </div>
-
-
-      <!-- formulario 2 - informar codigo  -->
-      <div class="recuperacao-formulario" style="display: none;" id="form2">
-        <h2>Digite o código recebido</h2>
-        
-        <label for="codigoLabel">Codigo</label>
-        <input type="text" id="codigo" name="codigo" placeholder="Digite seu código" required />
-
-        <button onclick="validarCodigo()">Enviar</button>
-      </div>
-
-
-      <!-- formulario 3 - definir senha  -->
-      <form class="recuperacao-formulario" style="display: none;" id="form3">
-        <h2>Insira sua nova senha</h2>
-
-        <label for="senha">Senha</label>
-        <input type="text" id="senha" name="senha" placeholder="Digite sua senha" required />
-
-        <label for="cSenha">Confirme sua senha</label>
-        <input type="text" id="cSenha" name="cSenha" placeholder="Confirme sua senha" required />
-
-        <button onclick="redefinirSenha()">Enviar</button>
-      </form>
     </div>
-  </div>
 
-  <script src="../js/formulario.js"></script>
+    <script src="../js/formulario.js"></script>
 </body>
 
 </html>

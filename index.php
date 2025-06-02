@@ -47,6 +47,7 @@ $stmt_produtoDestaque->execute();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="icon" href="img/site/icone.png" type="image/x-icon">
 </head>
 
 <body>
@@ -57,7 +58,7 @@ $stmt_produtoDestaque->execute();
         </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
-            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+            <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
 
             <button type="button" id="microfone" onclick="buscaAudio()">
                 <img src="img/site/microfone.png" id="iconeft" alt="Microfone">

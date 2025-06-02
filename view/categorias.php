@@ -44,6 +44,8 @@ $stmt->execute();
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="icon" href="../img/site/icone.png" type="image/x-icon">
 </head>
 
 <body>

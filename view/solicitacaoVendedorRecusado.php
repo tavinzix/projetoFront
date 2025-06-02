@@ -1,5 +1,5 @@
-<?php 
-    session_start();
+<?php
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +16,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="icon" href="../img/site/icone.png" type="image/x-icon">
+
 </head>
 
 <body>
@@ -24,9 +26,9 @@
         <br><br>
         <p style="text-align: center;">Motivo da rejeição:<br>
             <?php
-                if(isset($_SESSION['msgRecusado'])){
-                    echo $_SESSION['msgRecusado'];
-                }
+            if (isset($_SESSION['msgRecusado'])) {
+                echo $_SESSION['msgRecusado'];
+            }
             ?>
         </p>
         <div class="links">

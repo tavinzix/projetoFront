@@ -4,7 +4,7 @@ require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
-    header("Location:login.php");
+    header("Location:login.html");
     exit;
 }
 

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
 
@@ -13,7 +14,6 @@ if ($cpf) {
     $stmt->execute();
 
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
     if ($usuario && !empty($usuario['img_user'])) {
         $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
@@ -65,10 +65,11 @@ if (isset($_GET['url'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="icon" href="../img/site/icone.png" type="image/x-icon">
 </head>
 
 <body>
-    <!--CABEÇALHO-->
+     <!--CABEÇALHO-->
     <header class="menu">
         <div class="logo">
             <a href="../index.php"> <img src="../img/site/logo.png"></a>
@@ -92,8 +93,8 @@ if (isset($_GET['url'])) {
 
         <ul class="menu-link" id="menu-link">
             <li><a href="../index.php">Início</a></li>
-            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
-            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
+            <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
             </li>
         </ul>
     </header>

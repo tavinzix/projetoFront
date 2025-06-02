@@ -1,96 +1,100 @@
 <?php
-    session_start();
-    require_once('../bd/config.inc.php');
-    ini_set('default_charset', 'utf-8');
+session_start();
+require_once('../bd/config.inc.php');
+ini_set('default_charset', 'utf-8');
 
-    $cpf = $_SESSION['cpf'] ?? null;
-    $userId = $_SESSION['usuario_id'];
+$cpf = $_SESSION['cpf'] ?? null;
+$userId = $_SESSION['usuario_id'];
 
-    $imagemUsuario = '../img/users/avatar.jpg';
-     // busca cpf para setar a imagem do header
-    if ($cpf) {
-        $sql_imagem = "SELECT * FROM usuarios WHERE cpf = :cpf";
-        $stmt = $connection->prepare($sql_imagem);
-        $stmt->bindParam(':cpf', $cpf);
-        $stmt->execute();
+$imagemUsuario = '../img/users/avatar.jpg';
+// busca cpf para setar a imagem do header
+if ($cpf) {
+    $sql_imagem = "SELECT * FROM usuarios WHERE cpf = :cpf";
+    $stmt = $connection->prepare($sql_imagem);
+    $stmt->bindParam(':cpf', $cpf);
+    $stmt->execute();
 
-        $imagem = $stmt->fetch(PDO::FETCH_ASSOC);
+    $imagem = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($imagem && !empty($imagem['img_user'])) {
-            $imagemUsuario = '../img/users/' . ($imagem['img_user']);
-        }
-
-        $_SESSION['id'] = $imagem['id'];
-
-        // busca endereços cadastrados 
-        $sql_endereco = "SELECT * from usuarios u join enderecos e on e.user_id = u.id where u.cpf = :cpf";
-        $stmt_endereco = $connection->prepare($sql_endereco);
-        $stmt_endereco->bindParam(':cpf', $cpf);
-        $stmt_endereco->execute();
+    if ($imagem && !empty($imagem['img_user'])) {
+        $imagemUsuario = '../img/users/' . ($imagem['img_user']);
     }
+
+    $_SESSION['id'] = $imagem['id'];
+
+    // busca endereços cadastrados 
+    $sql_endereco = "SELECT * from usuarios u join enderecos e on e.user_id = u.id where u.cpf = :cpf";
+    $stmt_endereco = $connection->prepare($sql_endereco);
+    $stmt_endereco->bindParam(':cpf', $cpf);
+    $stmt_endereco->execute();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/global.css">
-        <link rel="stylesheet" href="../css/perfilUsuario.css">
-        <link rel="stylesheet" href="../css/responsivo.css">
-        <title>Editar endereços | Iconst</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
-            rel="stylesheet">
-    </head>
-    <body>
-        <!--CABEÇALHO-->
-        <header class="menu">
-            <div class="logo">
-                <a href="../index.php"> <img src="../img/site/logo.png"></a>
-            </div>
 
-            <form action="buscar produto do banco" method="GET" class="busca-container">
-                <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/perfilUsuario.css">
+    <link rel="stylesheet" href="../css/responsivo.css">
+    <title>Editar endereços | Iconst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
-                <button type="button" id="microfone" onclick="buscaAudio()">
-                    <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
-                </button>
+    <link rel="icon" href="../img/site/icone.png" type="image/x-icon">
+</head>
 
-                <button type="submit" class="lupa-icone">
-                    <img src="../img/site/lupa.png" id="iconeft" alt="Lupa">
-                </button>
-            </form>
+<body>
+    <!--CABEÇALHO-->
+    <header class="menu">
+        <div class="logo">
+            <a href="../index.php"> <img src="../img/site/logo.png"></a>
+        </div>
 
-            <button class="menu-hamburguer" id="menu-hamburguer">
-                &#9776;
+        <form action="buscar produto do banco" method="GET" class="busca-container">
+            <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+
+            <button type="button" id="microfone" onclick="buscaAudio()">
+                <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
             </button>
 
-            <ul class="menu-link" id="menu-link">
-                <li><a href="../index.php">Início</a></li>
-                <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
-                <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
-                </li>
-            </ul>
-        </header>
+            <button type="submit" class="lupa-icone">
+                <img src="../img/site/lupa.png" id="iconeft" alt="Lupa">
+            </button>
+        </form>
 
-        <section class="editar-enderecos">
-            <!-- lista endereços cadastrados -->
-            <h3>Meus Endereços</h3>
-            <!--TODO arrumar botão de editar para carregar os dados para o input
+        <button class="menu-hamburguer" id="menu-hamburguer">
+            &#9776;
+        </button>
+
+        <ul class="menu-link" id="menu-link">
+            <li><a href="../index.php">Início</a></li>
+            <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
+            </li>
+        </ul>
+    </header>
+
+    <section class="editar-enderecos">
+        <!-- lista endereços cadastrados -->
+        <h3>Meus Endereços</h3>
+        <!--TODO arrumar botão de editar para carregar os dados para o input
                 TODO criar modal-->
-            <div class="lista-enderecos">
-                <?php 
-                if ($cpf){
-                    if($stmt_endereco->rowCount() > 0){
-                        while ($usuario = $stmt_endereco->fetch(PDO::FETCH_ASSOC)) { ?>
+        <div class="lista-enderecos">
+            <?php
+            if ($cpf) {
+                if ($stmt_endereco->rowCount() > 0) {
+                    while ($usuario = $stmt_endereco->fetch(PDO::FETCH_ASSOC)) { ?>
                         <div class="endereco">
                             <!-- dados do endereço  -->
                             <p><strong><?= $usuario['tipo'] ?></strong></p>
                             <p><?= $usuario['rua'] . ', ' . $usuario['numero'] . ' - ' . $usuario['bairro'] ?></p>
                             <p><?= $usuario['cidade'] . ' - ' . $usuario['estado'] . ', ' . $usuario['cep'] ?></p>
-                            
+
                             <!-- editar ou remover endereço  -->
                             <div class="acoes-endereco">
                                 <form action="../bd/editarEnderecoUsuario.php" method="POST">
@@ -110,80 +114,80 @@
                             </div>
                         </div>
                     <?php
-                        }
-                        // mensagem caso não tenha nenhum endereço 
-                    }else { ?>
-                        <div class="endereco">
-                            <h3>Ainda não há endereços cadastrados</h3>
-                        </div>
-                    <?php 
                     }
+                    // mensagem caso não tenha nenhum endereço 
+                } else { ?>
+                    <div class="endereco">
+                        <h3>Ainda não há endereços cadastrados</h3>
+                    </div>
+            <?php
                 }
+            }
             ?>
-            </div>
+        </div>
 
-            <!-- cadastro de endereço  -->
-            <form class="form-endereco" action="../bd/editarEnderecoUsuario.php" method="POST">
-                <h4>Adicionar Novo Endereço</h4>
+        <!-- cadastro de endereço  -->
+        <form class="form-endereco" action="../bd/editarEnderecoUsuario.php" method="POST">
+            <h4>Adicionar Novo Endereço</h4>
 
-                <div class="campo-form">
-                    <div class="itens-filtros">
-                        <label>Tipo de endereço:</label>
-                        <div>
-                            <input type="radio" name="tipo" value="Casa">
-                            <label for="casa">Casa</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="tipo" value="Trabalho">
-                            <label for="trabalho">Trabalho</label>
-                        </div>
+            <div class="campo-form">
+                <div class="itens-filtros">
+                    <label>Tipo de endereço:</label>
+                    <div>
+                        <input type="radio" name="tipo" value="Casa">
+                        <label for="casa">Casa</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="tipo" value="Trabalho">
+                        <label for="trabalho">Trabalho</label>
                     </div>
                 </div>
+            </div>
 
-                <div class="campo-form" style="display:none">
-                    <label for="userId">User ID</label>
-                    <input type="text" id="userId" name="userId" value="<?php echo $userId ?>">
-                </div>
+            <div class="campo-form" style="display:none">
+                <label for="userId">User ID</label>
+                <input type="text" id="userId" name="userId" value="<?php echo $userId ?>">
+            </div>
 
-                <div class="campo-form">
-                    <label for="cep">CEP</label>
-                    <input type="text" id="cep" name="cep" onclick="getMyLocation()" required>
-                </div>
+            <div class="campo-form">
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep" onclick="getMyLocation()" required>
+            </div>
 
-                <div class="campo-form">
-                    <label for="estado">Estado</label>
-                    <input type="text" id="estado" name="estado" required>
-                </div>
+            <div class="campo-form">
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado" required>
+            </div>
 
-                <div class="campo-form">
-                    <label for="cidade">Cidade</label>
-                    <input type="text" id="cidade" name="cidade" required>
-                </div>
+            <div class="campo-form">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" name="cidade" required>
+            </div>
 
-                <div class="campo-form">
-                    <label for="rua">Rua</label>
-                    <input type="text" id="rua" name="rua" required>
-                </div>
+            <div class="campo-form">
+                <label for="rua">Rua</label>
+                <input type="text" id="rua" name="rua" required>
+            </div>
 
-                <div class="campo-form">
-                    <label for="numero">Número</label>
-                    <input type="text" id="numero" name="numero" required>
-                </div>
+            <div class="campo-form">
+                <label for="numero">Número</label>
+                <input type="text" id="numero" name="numero" required>
+            </div>
 
-                <div class="campo-form">
-                    <label for="bairro">Bairro</label>
-                    <input type="text" id="bairro" name="bairro" required>
-                </div>
+            <div class="campo-form">
+                <label for="bairro">Bairro</label>
+                <input type="text" id="bairro" name="bairro" required>
+            </div>
 
-                <div class="campo-form">
-                    <label for="complemento">Complemento</label>
-                    <input type="text" id="complemento" name="complemento">
-                </div>
+            <div class="campo-form">
+                <label for="complemento">Complemento</label>
+                <input type="text" id="complemento" name="complemento">
+            </div>
 
-                <button type="submit" class="btn-salvar" name="acao" value="salvar">Salvar Endereço</button>
-            </form>
-        </section>
-    </body>
-    <script src="../js/global.js"></script>
+            <button type="submit" class="btn-salvar" name="acao" value="salvar">Salvar Endereço</button>
+        </form>
+    </section>
+</body>
+<script src="../js/global.js"></script>
 
 </html>

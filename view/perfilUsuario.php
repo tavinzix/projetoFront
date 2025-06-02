@@ -61,7 +61,7 @@
             <?php if ($_SESSION['tipo_usuario'] == 'admin'){?>
                 <li><a href="painelAdm.php">Painel Administrativo</a></li><?php } ?>
             <?php if ($_SESSION['tipo_usuario'] == 'vendedor'){?>
-                <li><a href="painelVendedor.html">Painel do vendedor</a></li><?php } ?>
+                <li><a href="painelVendedor.php">Painel do vendedor</a></li><?php } ?>
             <?php if ($_SESSION['tipo_usuario'] == 'usuario'){?>
                 <li><a href="solicitacaoCadastroVendedor.html">Quero vender na plataforma</a></li>
             <?php } ?>          
@@ -72,7 +72,7 @@
          <ul class="menu-link" id="menu-link">
             <li><a href="../index.php">Início</a></li>
             <li><a href="painelAdm.php">Painel Administrativo</a></li>
-            <li><a href="painelVendedor.html">Painel do vendedor</a></li>
+            <li><a href="painelVendedor.php">Painel do vendedor</a></li>
             <li><a href="solicitacaoCadastroVendedor.php">Quero vender na plataforma</a></li>
             <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>

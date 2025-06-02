@@ -47,7 +47,6 @@
         $statement->execute();
 
         if ($statement) {
-            $_SESSION['msgSucesso'] = 'Solicitação enviada com sucesso, aguarde o resultado';
             header("Location:../view/solicitacaoCadastroVendedor.php");
             exit();
         } else {
