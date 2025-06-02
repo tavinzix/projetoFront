@@ -297,9 +297,7 @@ $stmt_produtoDestaque->execute();
 
 </html>
 
-<!--TODO arrumar header de todas as paginas
-    TODO arrumar favicon de todas as paginas
-    TODO arrumar responsividade das paginas php
+<!--TODO arrumar responsividade das paginas php
     TODO verificar js{
         Feedback claro ao usuário sobre ações e erros. 
         Validação de formulários.

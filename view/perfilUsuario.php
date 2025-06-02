@@ -65,7 +65,7 @@
             <?php if ($_SESSION['tipo_usuario'] == 'usuario'){?>
                 <li><a href="solicitacaoCadastroVendedor.html">Quero vender na plataforma</a></li>
             <?php } ?>          
-            <li><a href="carrinho.html"><img src="img/site/carrinho.png"></a></li>
+            <li><a href="carrinho.php"><img src="img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>-->
 

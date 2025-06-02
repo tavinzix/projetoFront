@@ -64,8 +64,8 @@
 
         <ul class="menu-link" id="menu-link">
             <li><a href="../view/index.php">Início</a></li>
-            <li><a href="carrinho.html"><img src="../img/site/carrinho.png"></a></li>
-            <li><a href="../view/perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
+            <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>
     </header>
 
