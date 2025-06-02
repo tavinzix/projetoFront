@@ -241,32 +241,32 @@
     align-self: flex-start;
 }
 
-/*EDITAR ENDERECO*/
+/*EDITAR ENDERECO E FORMA DE PAGAMENTO*/
 
-.editar-enderecos {
+.editar-enderecos, .editar-pagamento {
     background: #f9f9f9;
     padding: 30px;
 }
 
-.editar-enderecos h3 {
+.editar-enderecos h3, .editar-pagamento h3 {
     font-size: 20px;
     margin-bottom: 20px;
 }
 
-.lista-enderecos {
+.lista-enderecos, .lista-formas {
     display: flex;
     gap: 15px;
     margin-bottom: 30px;
 }
 
-.endereco {
+.endereco, .forma-pagamento {
     background: #fff;
     border: 1px solid #ddd;
     padding: 15px;
     border-radius: 10px;
 }
 
-.acoes-endereco {
+.acoes-endereco, .acoes-formas {
     margin-top: 10px;
     display: flex;
     gap: 15px;
@@ -292,14 +292,14 @@
     transform: translateY(-3px);
 }
 
-.form-endereco {
+.form-endereco, .form-forma {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-top: 15px;
 }
 
-.form-endereco h4 {
+.form-endereco h4, .form-forma h4 {
     font-size: 20px;
     margin-bottom: 10px;
 }

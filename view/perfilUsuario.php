@@ -89,7 +89,7 @@
                 <a href="form_editarPerfilUsuario.php"> <button class="btn-edicao">Editar perfil</button></a>
                 <a href="form_editarEnderecoUsuario.php"> <button class="btn-edicao">Editar endereços</button></a>           
                 <!--/*TODO criar formulário para forma de pagamento-->     
-                <a href="form_editarEnderecoUsuario.php"> <button class="btn-edicao">Formas de pagamento</button></a>                
+                <a href="form_editarFormaPagamentoUsuario.php"> <button class="btn-edicao">Formas de pagamento</button></a>                
                 <a href="../bd/sair.php"> <button class="btn-edicao">Finalizar sessão</button></a>                
             </div>
         </section>
