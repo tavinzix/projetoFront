@@ -3,10 +3,14 @@ session_start();
 require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
 
+if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
+    header("Location:../view/login.html");
+}
+
 $cpf = $_SESSION['cpf'] ?? null;
 $userId = $_SESSION['usuario_id'];
-
 $imagemUsuario = '../img/users/avatar.jpg';
+
 // busca cpf para setar a imagem do header
 if ($cpf) {
     $sql_imagem = "SELECT * FROM usuarios WHERE cpf = :cpf";
@@ -23,10 +27,10 @@ if ($cpf) {
     $_SESSION['id'] = $imagem['id'];
 
     // busca endereços cadastrados 
-    $sql_endereco = "SELECT * from usuarios u join enderecos e on e.user_id = u.id where u.cpf = :cpf";
-    $stmt_endereco = $connection->prepare($sql_endereco);
-    $stmt_endereco->bindParam(':cpf', $cpf);
-    $stmt_endereco->execute();
+    $sql_forma = "SELECT * from usuarios u join formas_pagamento fp on fp.user_id = u.id where u.cpf = :cpf";
+    $stmt_forma = $connection->prepare($sql_forma);
+    $stmt_forma->bindParam(':cpf', $cpf);
+    $stmt_forma->execute();
 }
 ?>
 
@@ -87,27 +91,23 @@ if ($cpf) {
         <div class="lista-formas">
             <?php
             if ($cpf) {
-                if ($stmt_endereco->rowCount() > 0) {
-                    while ($usuario = $stmt_endereco->fetch(PDO::FETCH_ASSOC)) { ?>
+                if ($stmt_forma->rowCount() > 0) {
+                    while ($usuario = $stmt_forma->fetch(PDO::FETCH_ASSOC)) { ?>
                         <div class="forma-pagamento">
                             <!-- dados da forma de pagamento  -->
-                            <p><strong><?= $usuario['tipo'] ?></strong></p>
-                            <p><?= $usuario['rua'] . ', ' . $usuario['numero'] . ' - ' . $usuario['bairro'] ?></p>
-                            <p><?= $usuario['cidade'] . ' - ' . $usuario['estado'] . ', ' . $usuario['cep'] ?></p>
+                            <p><strong><?php echo $usuario['nome_cartao'] ?></strong></p>
+                            <p><?php echo $usuario['nome_titular']?></p>
+                            <p><?php echo $usuario['numero_cartao'] . ' - ' . $usuario['validade'] ?></p>
 
-                            <!-- editar ou remover forma de pagamentp  -->
+                            <!-- editar ou remover forma de pagamento  -->
                             <div class="acoes-formas">
                                 <form action="../bd/editarFormaPagamentoUsuario.php" method="POST">
                                     <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
                                     <input type="hidden" name="userId" value="<?= $usuario['user_id'] ?>">
-                                    <input type="hidden" name="tipo" value="<?= $usuario['tipo'] ?>">
-                                    <input type="hidden" name="cep" value="<?= $usuario['cep'] ?>">
-                                    <input type="hidden" name="estado" value="<?= $usuario['estado'] ?>">
-                                    <input type="hidden" name="cidade" value="<?= $usuario['cidade'] ?>">
-                                    <input type="hidden" name="bairro" value="<?= $usuario['bairro'] ?>">
-                                    <input type="hidden" name="rua" value="<?= $usuario['rua'] ?>">
-                                    <input type="hidden" name="numero" value="<?= $usuario['numero'] ?>">
-                                    <input type="hidden" name="complemento" value="<?= $usuario['complemento'] ?>">
+                                    <input type="hidden" name="tipo" value="<?= $usuario['nome_titular'] ?>">
+                                    <input type="hidden" name="cep" value="<?= $usuario['nome_cartao'] ?>">
+                                    <input type="hidden" name="estado" value="<?= $usuario['validade'] ?>">
+                                    <input type="hidden" name="cidade" value="<?= $usuario['cvv'] ?>">
                                     <button class="btn-editar" name="acao" value="editar">Editar</button>
                                     <button class="btn-remover" name="acao" value="excluir">Remover</button>
                                 </form>
@@ -128,7 +128,7 @@ if ($cpf) {
 
         <!-- cadastro de forma de pagamento  -->
         <form class="form-forma" action="../bd/editarFormaPagamentoUsuario.php" method="POST">
-            <h4>Adicionar Novo Endereço</h4>
+            <h4>Adicionar nova forma de pagamento</h4>
 
             <div class="campo-form" style="display:none">
                 <label for="userId">User ID</label>
@@ -136,8 +136,18 @@ if ($cpf) {
             </div>
 
             <div class="campo-form">
-                <label for="nome">Nome do Titular</label>
+                <label for="nome">Nome do titular</label>
                 <input type="text" id="nome" name="nome" required>
+            </div>
+           
+            <div class="campo-form">
+                <label for="cartao">Nome do cartão</label>
+                <input type="text" id="cartao" name="cartao" required>
+            </div>
+            
+            <div class="campo-form">
+                <label for="numero">Número</label>
+                <input type="text" id="numero" name="numero" required>
             </div>
 
             <div class="campo-form">
@@ -147,7 +157,7 @@ if ($cpf) {
 
             <div class="campo-form">
                 <label for="cvv">CVV</label>
-                <input type="number" id="cvv" name="cvv" required>
+                <input type="number" id="cvv" name="cvv" minlength="3" maxlength="3" required>
             </div>
 
             <button type="submit" class="btn-salvar" name="acao" value="salvar">Salvar</button>

@@ -3,6 +3,10 @@ session_start();
 require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
 
+if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
+    header("Location:../view/login.html");
+}
+
 $cpf = $_SESSION['cpf'] ?? null;
 $userId = $_SESSION['usuario_id'];
 
@@ -128,7 +132,7 @@ if ($cpf) {
 
         <!-- cadastro de endereço  -->
         <form class="form-endereco" action="../bd/editarEnderecoUsuario.php" method="POST">
-            <h4>Adicionar Novo Endereço</h4>
+            <h4>Adicionar novo endereço</h4>
 
             <div class="campo-form">
                 <div class="itens-filtros">

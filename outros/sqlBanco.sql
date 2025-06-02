@@ -1,4 +1,3 @@
-TODO revisar tabelas
 TODO criar backup e restore
 
 CREATE TABLE usuarios (
@@ -134,13 +133,10 @@ CREATE TABLE vendedores_produtos (
     UNIQUE (vendedor_id, produto_id)
 );
 
-TODO ver coluna imagem{
-    imagem ou imagem_url
-}
 CREATE TABLE produto_imagens (
     id SERIAL PRIMARY KEY,
     produto_id INT NOT NULL,
-    imagem VARCHAR(255) NOT NULL,
+    imagem_url VARCHAR(255) NOT NULL,
     ordem INT DEFAULT 1,
     FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
 );
@@ -205,3 +201,21 @@ CREATE TABLE vendedores_ofertas (
     FOREIGN KEY (vendedor_id) REFERENCES vendedores(id) ON DELETE CASCADE,
     FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
 );
+
+CREATE TABLE vendedor_imagens(
+    id SERIAL PRIMARY KEY, 
+    vendedor_id INT NOT NULL,
+    imagem_url character varying(255) NOT NULL  DEFAULT 'semImagem.jpg',
+    FOREIGN KEY (vendedor_id) REFERENCES vendedores(id) ON DELETE CASCADE,
+)
+
+CREATE TABLE formas_pagamento(
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+	nome_titular varchar(30),
+	nome_cartao varchar(30),
+	numero_cartao varchar(20) UNIQUE,
+    validade varchar(10),
+    cvv char(3),
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
+)
