@@ -19,7 +19,7 @@ if ($cpf) {
     }
 }
 
-// pega a url da categoria e busca os itens
+// pega a url e busca os itens
 if (isset($_GET['url'])) {
     $pesquisa = $_GET['url'];
 
@@ -68,15 +68,15 @@ if (isset($_GET['url'])) {
             <a href="../index.php"> <img src="../img/site/logo.png"></a>
         </div>
 
-        <form action="buscar produto do banco" method="GET" class="busca-container">
-            <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+        <form action="buscaProdutos.php" method="GET" class="busca-container">
+            <input type="text" class="busca-input" id="caixa-pesquisa" name="url" placeholder="Procurar produto ou loja">
 
             <button type="button" id="microfone" onclick="buscaAudio()">
                 <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
             </button>
 
             <button type="submit" class="lupa-icone">
-                <img src="../img/site/lupa.png" id="iconeft" alt="Lupa">
+                <img src="../img/site/lupa.png" id="iconeft">
             </button>
         </form>
 
@@ -87,13 +87,13 @@ if (isset($_GET['url'])) {
         <ul class="menu-link" id="menu-link">
             <li><a href="../index.php">Início</a></li>
             <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
-            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
+            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
             </li>
         </ul>
     </header>
 
     <div class="titulo-categoria">
-        <h1><?php echo $_GET['url'] ?></h1>
+        <h1>Você buscou por: <?php echo $_GET['url'] ?></h1>
     </div>
 
     <main class="layout-itensCategoria">

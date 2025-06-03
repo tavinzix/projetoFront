@@ -57,7 +57,7 @@ $stmt_produtoDestaque->execute();
             <a href="index.php"> <img src="img/site/logo.png"></a>
         </div>
 
-        <form action="buscaProdutos.php" method="GET" class="busca-container">
+        <form action="view/buscaProdutos.php" method="GET" class="busca-container">
             <input type="text" class="busca-input" id="caixa-pesquisa" name="url" placeholder="Procurar produto ou loja">
 
             <button type="button" id="microfone" onclick="buscaAudio()">
