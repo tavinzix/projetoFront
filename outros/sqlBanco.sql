@@ -1,5 +1,3 @@
-TODO criar backup e restore
-
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     nome_completo VARCHAR(255) NOT NULL,

@@ -21,33 +21,26 @@ if ($cpf) {
 
 // pega a url da categoria e busca os itens
 if (isset($_GET['url'])) {
-    $categoria_url = $_GET['url'];
-
-    //informações da categoria
-    $sql_categoria = "SELECT * FROM categorias where url = :categoria_url";
-
-    $stmt_categoria = $connection->prepare($sql_categoria);
-    $stmt_categoria->bindParam(':categoria_url', $categoria_url,  PDO::PARAM_STR);
-    $stmt_categoria->execute();
-    $categoria = $stmt_categoria->fetch(PDO::FETCH_ASSOC);
+    $pesquisa = $_GET['url'];
 
     //busca os produtos
-    $sql_produto = "SELECT p.*, vp.*, pi.*, c.nome as nome_categoria, p.id  as produto_id FROM produtos p
-                    JOIN categorias c on c.id = p.categoria_id 
-                    JOIN vendedores_produtos vp ON vp.produto_id = p.id
-                    LEFT JOIN produto_imagens pi ON p.id = pi.produto_id and pi.ordem = 1
-					where c.url = :categoria_url ";
+    $sql_produto = "SELECT p.*, vp.*, pi.*, p.id as produto_id FROM produtos p
+                JOIN vendedores_produtos vp ON vp.produto_id = p.id
+                LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1
+                WHERE p.nome ILIKE :pesquisa";
+    $pesquisa = '%' . $pesquisa . '%';
+
 
     $stmt_produto = $connection->prepare($sql_produto);
-    $stmt_produto->bindParam(':categoria_url', $categoria_url,  PDO::PARAM_STR);
+    $stmt_produto->bindParam(':pesquisa', $pesquisa,  PDO::PARAM_STR);
     $stmt_produto->execute();
 
-    if (!$categoria) {
-        //header("Location:../view/paginaNaoEncontrada.html");
+    if ($stmt_produto->rowCount() === 0) {
+        header("Location:../view/paginaNaoEncontrada.html");
         exit();
     }
 } else {
-    //header("Location:../view/paginaNaoEncontrada.html");
+    header("Location:../view/paginaNaoEncontrada.html");
 }
 ?>
 
@@ -173,14 +166,14 @@ if (isset($_GET['url'])) {
         <!--Itens-->
         <section class="itensCategoria-exterior">
             <?php
-            while ($itemCategoria = $stmt_produto->fetch(PDO::FETCH_ASSOC)) {
+            while ($itemEncontrado = $stmt_produto->fetch(PDO::FETCH_ASSOC)) {
             ?>
                 <div class="produto-card">
-                    <img src="../img/produtos/<?php echo $itemCategoria['imagem_url'] ?>" alt="<?php echo $itemCategoria['nome'] ?>">
-                    <p style="display:none">Id produto<?php echo $itemCategoria['produto_id'] ?></p>
-                    <h3><?php echo $itemCategoria['nome'] ?></h3>
-                    <p>R$<?php echo $itemCategoria['preco'] ?></p>
-                    <a href="produto.php?id=<?php echo $itemCategoria['produto_id'] ?>">
+                    <img src="../img/produtos/<?php echo $itemEncontrado['imagem_url'] ?>" alt="<?php echo $itemEncontrado['nome'] ?>">
+                    <p style="display:none">Id produto<?php echo $itemEncontrado['produto_id'] ?></p>
+                    <h3><?php echo $itemEncontrado['nome'] ?></h3>
+                    <p>R$<?php echo $itemEncontrado['preco'] ?></p>
+                    <a href="produto.php?id=<?php echo $itemEncontrado['produto_id'] ?>">
                         <button>Ver Detalhes</button>
                     </a>
                 </div>

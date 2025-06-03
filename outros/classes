@@ -1,0 +1,1016 @@
+<?php
+
+// Classe Usuario
+class Usuario {
+    private $id;
+    private $nome_completo;
+    private $email;
+    private $senha;
+    private $telefone;
+    private $dt_nasc;
+    private $cpf;
+    private $data_criacao;
+    private $status;
+    private $img_user;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setNomeCompleto($nome_completo) {
+        $this->nome_completo = $nome_completo;
+    }
+    public function getNomeCompleto() {
+        return $this->nome_completo;
+    }
+    public function setEmail($email) {
+        $this->email = $email;
+    }
+    public function getEmail() {
+        return $this->email;
+    }
+    public function setSenha($senha) {
+        $this->senha = $senha;
+    }
+    public function getSenha() {
+        return $this->senha;
+    }
+    public function setTelefone($telefone) {
+        $this->telefone = $telefone;
+    }
+    public function getTelefone() {
+        return $this->telefone;
+    }
+    public function setDtNasc($dt_nasc) {
+        $this->dt_nasc = $dt_nasc;
+    }
+    public function getDtNasc() {
+        return $this->dt_nasc;
+    }
+    public function setCpf($cpf) {
+        $this->cpf = $cpf;
+    }
+    public function getCpf() {
+        return $this->cpf;
+    }
+    public function setDataCriacao($data_criacao) {
+        $this->data_criacao = $data_criacao;
+    }
+    public function getDataCriacao() {
+        return $this->data_criacao;
+    }
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+    public function getStatus() {
+        return $this->status;
+    }
+    public function setImgUser($img_user) {
+        $this->img_user = $img_user;
+    }
+    public function getImgUser() {
+        return $this->img_user;
+    }
+}
+
+// Classe Endereco
+class Endereco {
+    private $id;
+    private $user_id;
+    private $tipo;
+    private $cep;
+    private $estado;
+    private $cidade;
+    private $bairro;
+    private $rua;
+    private $numero;
+    private $complemento;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setUserId($user_id) {
+        $this->user_id = $user_id;
+    }
+    public function getUserId() {
+        return $this->user_id;
+    }
+    public function setTipo($tipo) {
+        $this->tipo = $tipo;
+    }
+    public function getTipo() {
+        return $this->tipo;
+    }
+    public function setCep($cep) {
+        $this->cep = $cep;
+    }
+    public function getCep() {
+        return $this->cep;
+    }
+    public function setEstado($estado) {
+        $this->estado = $estado;
+    }
+    public function getEstado() {
+        return $this->estado;
+    }
+    public function setCidade($cidade) {
+        $this->cidade = $cidade;
+    }
+    public function getCidade() {
+        return $this->cidade;
+    }
+    public function setBairro($bairro) {
+        $this->bairro = $bairro;
+    }
+    public function getBairro() {
+        return $this->bairro;
+    }
+    public function setRua($rua) {
+        $this->rua = $rua;
+    }
+    public function getRua() {
+        return $this->rua;
+    }
+    public function setNumero($numero) {
+        $this->numero = $numero;
+    }
+    public function getNumero() {
+        return $this->numero;
+    }
+    public function setComplemento($complemento) {
+        $this->complemento = $complemento;
+    }
+    public function getComplemento() {
+        return $this->complemento;
+    }
+}
+
+// Classe Vendedor
+class Vendedor {
+    private $id;
+    private $user_id;
+    private $nome_loja;
+    private $cnpj;
+    private $descricao_loja;
+    private $email;
+    private $telefone;
+    private $categoria;
+    private $cep;
+    private $estado;
+    private $cidade;
+    private $bairro;
+    private $rua;
+    private $numero;
+    private $imagem_logo;
+    private $avaliacao_media;
+    private $status;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setUserId($user_id) {
+        $this->user_id = $user_id;
+    }
+    public function getUserId() {
+        return $this->user_id;
+    }
+    public function setNomeLoja($nome_loja) {
+        $this->nome_loja = $nome_loja;
+    }
+    public function getNomeLoja() {
+        return $this->nome_loja;
+    }
+    public function setCnpj($cnpj) {
+        $this->cnpj = $cnpj;
+    }
+    public function getCnpj() {
+        return $this->cnpj;
+    }
+    public function setDescricaoLoja($descricao_loja) {
+        $this->descricao_loja = $descricao_loja;
+    }
+    public function getDescricaoLoja() {
+        return $this->descricao_loja;
+    }
+    public function setEmail($email) {
+        $this->email = $email;
+    }
+    public function getEmail() {
+        return $this->email;
+    }
+    public function setTelefone($telefone) {
+        $this->telefone = $telefone;
+    }
+    public function getTelefone() {
+        return $this->telefone;
+    }
+    public function setCategoria($categoria) {
+        $this->categoria = $categoria;
+    }
+    public function getCategoria() {
+        return $this->categoria;
+    }
+    public function setCep($cep) {
+        $this->cep = $cep;
+    }
+    public function getCep() {
+        return $this->cep;
+    }
+    public function setEstado($estado) {
+        $this->estado = $estado;
+    }
+    public function getEstado() {
+        return $this->estado;
+    }
+    public function setCidade($cidade) {
+        $this->cidade = $cidade;
+    }
+    public function getCidade() {
+        return $this->cidade;
+    }
+    public function setBairro($bairro) {
+        $this->bairro = $bairro;
+    }
+    public function getBairro() {
+        return $this->bairro;
+    }
+    public function setRua($rua) {
+        $this->rua = $rua;
+    }
+    public function getRua() {
+        return $this->rua;
+    }
+    public function setNumero($numero) {
+        $this->numero = $numero;
+    }
+    public function getNumero() {
+        return $this->numero;
+    }
+    public function setImagemLogo($imagem_logo) {
+        $this->imagem_logo = $imagem_logo;
+    }
+    public function getImagemLogo() {
+        return $this->imagem_logo;
+    }
+    public function setAvaliacaoMedia($avaliacao_media) {
+        $this->avaliacao_media = $avaliacao_media;
+    }
+    public function getAvaliacaoMedia() {
+        return $this->avaliacao_media;
+    }
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+    public function getStatus() {
+        return $this->status;
+    }
+}
+
+// Classe VendedorEntrega
+class VendedorEntrega {
+    private $id;
+    private $vendedor_id;
+    private $nome_transporte;
+    private $tipo_envio;
+    private $preco_base;
+    private $prazo_entrega;
+    private $ativo;
+    private $data_criacao;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setVendedorId($vendedor_id) {
+        $this->vendedor_id = $vendedor_id;
+    }
+    public function getVendedorId() {
+        return $this->vendedor_id;
+    }
+    public function setNomeTransporte($nome_transporte) {
+        $this->nome_transporte = $nome_transporte;
+    }
+    public function getNomeTransporte() {
+        return $this->nome_transporte;
+    }
+    public function setTipoEnvio($tipo_envio) {
+        $this->tipo_envio = $tipo_envio;
+    }
+    public function getTipoEnvio() {
+        return $this->tipo_envio;
+    }
+    public function setPrecoBase($preco_base) {
+        $this->preco_base = $preco_base;
+    }
+    public function getPrecoBase() {
+        return $this->preco_base;
+    }
+    public function setPrazoEntrega($prazo_entrega) {
+        $this->prazo_entrega = $prazo_entrega;
+    }
+    public function getPrazoEntrega() {
+        return $this->prazo_entrega;
+    }
+    public function setAtivo($ativo) {
+        $this->ativo = $ativo;
+    }
+    public function getAtivo() {
+        return $this->ativo;
+    }
+    public function setDataCriacao($data_criacao) {
+        $this->data_criacao = $data_criacao;
+    }
+    public function getDataCriacao() {
+        return $this->data_criacao;
+    }
+}
+
+// Classe Administrador
+class Administrador {
+    private $id;
+    private $user_id;
+    private $senha;
+    private $data_criacao;
+    private $status;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setUserId($user_id) {
+        $this->user_id = $user_id;
+    }
+    public function getUserId() {
+        return $this->user_id;
+    }
+    public function setSenha($senha) {
+        $this->senha = $senha;
+    }
+    public function getSenha() {
+        return $this->senha;
+    }
+    public function setDataCriacao($data_criacao) {
+        $this->data_criacao = $data_criacao;
+    }
+    public function getDataCriacao() {
+        return $this->data_criacao;
+    }
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+    public function getStatus() {
+        return $this->status;
+    }
+}
+
+// Classe SolicitacaoVendedor
+class SolicitacaoVendedor {
+    private $id;
+    private $user_id;
+    private $nome_loja;
+    private $cnpj;
+    private $email;
+    private $telefone;
+    private $cep;
+    private $estado;
+    private $cidade;
+    private $bairro;
+    private $rua;
+    private $numero;
+    private $categoria;
+    private $descricao_loja;
+    private $data_solicitacao;
+    private $status;
+    private $motivo_rejeicao;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setUserId($user_id) {
+        $this->user_id = $user_id;
+    }
+    public function getUserId() {
+        return $this->user_id;
+    }
+    public function setNomeLoja($nome_loja) {
+        $this->nome_loja = $nome_loja;
+    }
+    public function getNomeLoja() {
+        return $this->nome_loja;
+    }
+    public function setCnpj($cnpj) {
+        $this->cnpj = $cnpj;
+    }
+    public function getCnpj() {
+        return $this->cnpj;
+    }
+    public function setEmail($email) {
+        $this->email = $email;
+    }
+    public function getEmail() {
+        return $this->email;
+    }
+    public function setTelefone($telefone) {
+        $this->telefone = $telefone;
+    }
+    public function getTelefone() {
+        return $this->telefone;
+    }
+    public function setCep($cep) {
+        $this->cep = $cep;
+    }
+    public function getCep() {
+        return $this->cep;
+    }
+    public function setEstado($estado) {
+        $this->estado = $estado;
+    }
+    public function getEstado() {
+        return $this->estado;
+    }
+    public function setCidade($cidade) {
+        $this->cidade = $cidade;
+    }
+    public function getCidade() {
+        return $this->cidade;
+    }
+    public function setBairro($bairro) {
+        $this->bairro = $bairro;
+    }
+    public function getBairro() {
+        return $this->bairro;
+    }
+    public function setRua($rua) {
+        $this->rua = $rua;
+    }
+    public function getRua() {
+        return $this->rua;
+    }
+    public function setNumero($numero) {
+        $this->numero = $numero;
+    }
+    public function getNumero() {
+        return $this->numero;
+    }
+    public function setCategoria($categoria) {
+        $this->categoria = $categoria;
+    }
+    public function getCategoria() {
+        return $this->categoria;
+    }
+    public function setDescricaoLoja($descricao_loja) {
+        $this->descricao_loja = $descricao_loja;
+    }
+    public function getDescricaoLoja() {
+        return $this->descricao_loja;
+    }
+    public function setDataSolicitacao($data_solicitacao) {
+        $this->data_solicitacao = $data_solicitacao;
+    }
+    public function getDataSolicitacao() {
+        return $this->data_solicitacao;
+    }
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+    public function getStatus() {
+        return $this->status;
+    }
+    public function setMotivoRejeicao($motivo_rejeicao) {
+        $this->motivo_rejeicao = $motivo_rejeicao;
+    }
+    public function getMotivoRejeicao() {
+        return $this->motivo_rejeicao;
+    }
+}
+
+// Classe Categoria
+class Categoria {
+    private $id;
+    private $nome;
+    private $descricao;
+    private $imagem;
+    private $url;
+    private $status;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setNome($nome) {
+        $this->nome = $nome;
+    }
+    public function getNome() {
+        return $this->nome;
+    }
+    public function setDescricao($descricao) {
+        $this->descricao = $descricao;
+    }
+    public function getDescricao() {
+        return $this->descricao;
+    }
+    public function setImagem($imagem) {
+        $this->imagem = $imagem;
+    }
+    public function getImagem() {
+        return $this->imagem;
+    }
+    public function setUrl($url) {
+        $this->url = $url;
+    }
+    public function getUrl() {
+        return $this->url;
+    }
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+    public function getStatus() {
+        return $this->status;
+    }
+}
+
+// Classe Produto
+class Produto {
+    private $id;
+    private $nome;
+    private $descricao;
+    private $categoria_id;
+    private $marca;
+    private $atributos;
+    private $data_criacao;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setNome($nome) {
+        $this->nome = $nome;
+    }
+    public function getNome() {
+        return $this->nome;
+    }
+    public function setDescricao($descricao) {
+        $this->descricao = $descricao;
+    }
+    public function getDescricao() {
+        return $this->descricao;
+    }
+    public function setCategoriaId($categoria_id) {
+        $this->categoria_id = $categoria_id;
+    }
+    public function getCategoriaId() {
+        return $this->categoria_id;
+    }
+    public function setMarca($marca) {
+        $this->marca = $marca;
+    }
+    public function getMarca() {
+        return $this->marca;
+    }
+    public function setAtributos($atributos) {
+        $this->atributos = $atributos;
+    }
+    public function getAtributos() {
+        return $this->atributos;
+    }
+    public function setDataCriacao($data_criacao) {
+        $this->data_criacao = $data_criacao;
+    }
+    public function getDataCriacao() {
+        return $this->data_criacao;
+    }
+}
+
+// Classe VendedorProduto
+class VendedorProduto {
+    private $id;
+    private $vendedor_id;
+    private $produto_id;
+    private $preco;
+    private $estoque;
+    private $ativo;
+    private $data_criacao;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setVendedorId($vendedor_id) {
+        $this->vendedor_id = $vendedor_id;
+    }
+    public function getVendedorId() {
+        return $this->vendedor_id;
+    }
+    public function setProdutoId($produto_id) {
+        $this->produto_id = $produto_id;
+    }
+    public function getProdutoId() {
+        return $this->produto_id;
+    }
+    public function setPreco($preco) {
+        $this->preco = $preco;
+    }
+    public function getPreco() {
+        return $this->preco;
+    }
+    public function setEstoque($estoque) {
+        $this->estoque = $estoque;
+    }
+    public function getEstoque() {
+        return $this->estoque;
+    }
+    public function setAtivo($ativo) {
+        $this->ativo = $ativo;
+    }
+    public function getAtivo() {
+        return $this->ativo;
+    }
+    public function setDataCriacao($data_criacao) {
+        $this->data_criacao = $data_criacao;
+    }
+    public function getDataCriacao() {
+        return $this->data_criacao;
+    }
+}
+
+// Classe ProdutoImagem
+class ProdutoImagem {
+    private $id;
+    private $produto_id;
+    private $imagem_url;
+    private $ordem;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setProdutoId($produto_id) {
+        $this->produto_id = $produto_id;
+    }
+    public function getProdutoId() {
+        return $this->produto_id;
+    }
+    public function setImagemUrl($imagem_url) {
+        $this->imagem_url = $imagem_url;
+    }
+    public function getImagemUrl() {
+        return $this->imagem_url;
+    }
+    public function setOrdem($ordem) {
+        $this->ordem = $ordem;
+    }
+    public function getOrdem() {
+        return $this->ordem;
+    }
+}
+
+// Classe AvaliacaoProduto
+class AvaliacaoProduto {
+    private $id;
+    private $produto_id;
+    private $usuario_id;
+    private $nota;
+    private $comentario;
+    private $data_avaliacao;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setProdutoId($produto_id) {
+        $this->produto_id = $produto_id;
+    }
+    public function getProdutoId() {
+        return $this->produto_id;
+    }
+    public function setUsuarioId($usuario_id) {
+        $this->usuario_id = $usuario_id;
+    }
+    public function getUsuarioId() {
+        return $this->usuario_id;
+    }
+    public function setNota($nota) {
+        $this->nota = $nota;
+    }
+    public function getNota() {
+        return $this->nota;
+    }
+    public function setComentario($comentario) {
+        $this->comentario = $comentario;
+    }
+    public function getComentario() {
+        return $this->comentario;
+    }
+    public function setDataAvaliacao($data_avaliacao) {
+        $this->data_avaliacao = $data_avaliacao;
+    }
+    public function getDataAvaliacao() {
+        return $this->data_avaliacao;
+    }
+}
+
+// Classe Carrinho
+class Carrinho {
+    private $id;
+    private $usuario_id;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setUsuarioId($usuario_id) {
+        $this->usuario_id = $usuario_id;
+    }
+    public function getUsuarioId() {
+        return $this->usuario_id;
+    }
+}
+
+// Classe CarrinhoItem
+class CarrinhoItem {
+    private $id;
+    private $carrinho_id;
+    private $produto_id;
+    private $quantidade;
+    private $preco_unitario;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setCarrinhoId($carrinho_id) {
+        $this->carrinho_id = $carrinho_id;
+    }
+    public function getCarrinhoId() {
+        return $this->carrinho_id;
+    }
+    public function setProdutoId($produto_id) {
+        $this->produto_id = $produto_id;
+    }
+    public function getProdutoId() {
+        return $this->produto_id;
+    }
+    public function setQuantidade($quantidade) {
+        $this->quantidade = $quantidade;
+    }
+    public function getQuantidade() {
+        return $this->quantidade;
+    }
+    public function setPrecoUnitario($preco_unitario) {
+        $this->preco_unitario = $preco_unitario;
+    }
+    public function getPrecoUnitario() {
+        return $this->preco_unitario;
+    }
+}
+
+// Classe Pedido
+class Pedido {
+    private $id;
+    private $usuario_id;
+    private $data_pedido;
+    private $status;
+    private $valor_total;
+    private $endereco_entrega_id;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setUsuarioId($usuario_id) {
+        $this->usuario_id = $usuario_id;
+    }
+    public function getUsuarioId() {
+        return $this->usuario_id;
+    }
+    public function setDataPedido($data_pedido) {
+        $this->data_pedido = $data_pedido;
+    }
+    public function getDataPedido() {
+        return $this->data_pedido;
+    }
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+    public function getStatus() {
+        return $this->status;
+    }
+    public function setValorTotal($valor_total) {
+        $this->valor_total = $valor_total;
+    }
+    public function getValorTotal() {
+        return $this->valor_total;
+    }
+    public function setEnderecoEntregaId($endereco_entrega_id) {
+        $this->endereco_entrega_id = $endereco_entrega_id;
+    }
+    public function getEnderecoEntregaId() {
+        return $this->endereco_entrega_id;
+    }
+}
+
+// Classe PedidoItem
+class PedidoItem {
+    private $id;
+    private $pedido_id;
+    private $produto_id;
+    private $quantidade;
+    private $preco_unitario;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setPedidoId($pedido_id) {
+        $this->pedido_id = $pedido_id;
+    }
+    public function getPedidoId() {
+        return $this->pedido_id;
+    }
+    public function setProdutoId($produto_id) {
+        $this->produto_id = $produto_id;
+    }
+    public function getProdutoId() {
+        return $this->produto_id;
+    }
+    public function setQuantidade($quantidade) {
+        $this->quantidade = $quantidade;
+    }
+    public function getQuantidade() {
+        return $this->quantidade;
+    }
+    public function setPrecoUnitario($preco_unitario) {
+        $this->preco_unitario = $preco_unitario;
+    }
+    public function getPrecoUnitario() {
+        return $this->preco_unitario;
+    }
+}
+
+// Classe VendedorOferta
+class VendedorOferta {
+    private $id;
+    private $vendedor_id;
+    private $produto_id;
+    private $preco_oferta;
+    private $data_inicio;
+    private $data_fim;
+    private $ativo;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setVendedorId($vendedor_id) {
+        $this->vendedor_id = $vendedor_id;
+    }
+    public function getVendedorId() {
+        return $this->vendedor_id;
+    }
+    public function setProdutoId($produto_id) {
+        $this->produto_id = $produto_id;
+    }
+    public function getProdutoId() {
+        return $this->produto_id;
+    }
+    public function setPrecoOferta($preco_oferta) {
+        $this->preco_oferta = $preco_oferta;
+    }
+    public function getPrecoOferta() {
+        return $this->preco_oferta;
+    }
+    public function setDataInicio($data_inicio) {
+        $this->data_inicio = $data_inicio;
+    }
+    public function getDataInicio() {
+        return $this->data_inicio;
+    }
+    public function setDataFim($data_fim) {
+        $this->data_fim = $data_fim;
+    }
+    public function getDataFim() {
+        return $this->data_fim;
+    }
+    public function setAtivo($ativo) {
+        $this->ativo = $ativo;
+    }
+    public function getAtivo() {
+        return $this->ativo;
+    }
+}
+
+// Classe VendedorImagem
+class VendedorImagem {
+    private $id;
+    private $vendedor_id;
+    private $imagem_url;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setVendedorId($vendedor_id) {
+        $this->vendedor_id = $vendedor_id;
+    }
+    public function getVendedorId() {
+        return $this->vendedor_id;
+    }
+    public function setImagemUrl($imagem_url) {
+        $this->imagem_url = $imagem_url;
+    }
+    public function getImagemUrl() {
+        return $this->imagem_url;
+    }
+}
+
+// Classe FormaPagamento
+class FormaPagamento {
+    private $id;
+    private $user_id;
+    private $nome_titular;
+    private $nome_cartao;
+    private $numero_cartao;
+    private $validade;
+    private $cvv;
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function setUserId($user_id) {
+        $this->user_id = $user_id;
+    }
+    public function getUserId() {
+        return $this->user_id;
+    }
+    public function setNomeTitular($nome_titular) {
+        $this->nome_titular = $nome_titular;
+    }
+    public function getNomeTitular() {
+        return $this->nome_titular;
+    }
+    public function setNomeCartao($nome_cartao) {
+        $this->nome_cartao = $nome_cartao;
+    }
+    public function getNomeCartao() {
+        return $this->nome_cartao;
+    }
+    public function setNumeroCartao($numero_cartao) {
+        $this->numero_cartao = $numero_cartao;
+    }
+    public function getNumeroCartao() {
+        return $this->numero_cartao;
+    }
+    public function setValidade($validade) {
+        $this->validade = $validade;
+    }
+    public function getValidade() {
+        return $this->validade;
+    }
+    public function setCvv($cvv) {
+        $this->cvv = $cvv;
+    }
+
+    public function getCvv(){
+        return $this->cvv;
+    }
+}
