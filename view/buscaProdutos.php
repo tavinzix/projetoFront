@@ -21,21 +21,27 @@ if ($cpf) {
 
 // pega a url e busca os itens
 if (isset($_GET['url'])) {
-    $pesquisa = $_GET['url'];
-
-    //busca os produtos
-    $sql_produto = "SELECT p.*, vp.*, pi.*, p.id as produto_id FROM produtos p
-                JOIN vendedores_produtos vp ON vp.produto_id = p.id
-                LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1
-                WHERE p.nome ILIKE :pesquisa";
+    //trata caracter especial como ' 
+    $pesquisa = addslashes($_GET['url']);
     $pesquisa = '%' . $pesquisa . '%';
 
+    //busca os produtos
+    //TODO tratar acentos
+    $sql_produto = "SELECT p.*, vp.*, pi.*, p.id as produto_id FROM produtos p
+                JOIN vendedores_produtos vp ON vp.produto_id = p.id
+                JOIN vendedores v on vp.vendedor_id = v.id
+                LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1
+                WHERE p.nome ILIKE :pesquisa or v.nome_loja ILIKE :pesquisa";
 
     $stmt_produto = $connection->prepare($sql_produto);
     $stmt_produto->bindParam(':pesquisa', $pesquisa,  PDO::PARAM_STR);
     $stmt_produto->execute();
 
+    //implementar busca pela loja
+    //SELECT v.*, vi.* FROM vendedores v JOIN vendedor_imagens vi ON vi.vendedor_id = v.id WHERE v.nome_loja ILIKE '%loja%'
+
     if ($stmt_produto->rowCount() === 0) {
+        //TODO mesma página porém alertando que não encontrou o item
         header("Location:../view/paginaNaoEncontrada.html");
         exit();
     }
@@ -68,7 +74,7 @@ if (isset($_GET['url'])) {
             <a href="../index.php"> <img src="../img/site/logo.png"></a>
         </div>
 
-        <form action="buscaProdutos.php" method="GET" class="busca-container">
+        <form action="buscaProdutos.php" method="GET" class="busca-container" id="buscaProduto">
             <input type="text" class="busca-input" id="caixa-pesquisa" name="url" placeholder="Procurar produto ou loja">
 
             <button type="button" id="microfone" onclick="buscaAudio()">

@@ -18,64 +18,49 @@ function alterarQuantidadeCarrinho(botao, valor) {
 
 
 /*API Speech Recognition*/
-function buscaAudio(){
+function buscaAudio() {
     if ('webkitSpeechRecognition' in window) {
         // Inicializa o reconhecimento de fala
         const recognition = new webkitSpeechRecognition();
-        recognition.lang = 'pt-BR';  // Define o idioma para português
-        recognition.continuous = false;  // Reconhecimento só acontece quando o usuário para de falar
-        recognition.interimResults = false;  // Não exibe resultados intermediários
+        recognition.lang = 'pt-BR'; // Define o idioma para português
+        recognition.continuous = false; // Reconhecimento só acontece quando o usuário para de falar
+        recognition.interimResults = false; // Só mostra quando para de falar
 
-        const searchBox = document.getElementById('caixa-pesquisa');  // Caixa de pesquisa
-        let timer;  // Variável do temporizador
+        const searchBox = document.getElementById('caixa-pesquisa'); // Caixa de pesquisa
+        const form = document.querySelector('.busca-container'); // Formulário
+        let timer;
 
-        // Função para enviar a pesquisa (simulando pressionamento de "Enter")
-        function simulateEnter() {
-            // Simula o evento "Enter" no campo de pesquisa
-            const event = new KeyboardEvent('keypress', {
-                key: 'Enter',
-                keyCode: 13,
-                which: 13
-            });
-            searchBox.dispatchEvent(event);
+        // Submete o formulário
+        function submitFormulario() {
+            if (searchBox.value.trim() !== "") {
+                form.submit();
+            }
         }
 
-        // Evento de resultado do reconhecimento
         recognition.onresult = function (event) {
-            // Obtém o texto final reconhecido
-            const transcript = event.results[0][0].transcript;
-            searchBox.value = transcript;  // Preenche o campo de pesquisa com o texto reconhecido
+            const transcript = event.results[0][0].transcript; //obtem o que foi dito
+            searchBox.value = transcript; // Preenche o campo de pesquisa com o texto reconhecido
 
-            // Limpa o temporizador e reinicia
             clearTimeout(timer);
-            timer = setTimeout(simulateEnter, 2000);  // Inicia o temporizador de 2 segundos
+            timer = setTimeout(() => {
+                submitFormulario(); // Envia o formulário
+            }, 2000);
         };
 
-        // Evento de erro
         recognition.onerror = function (event) {
             console.error("Erro no reconhecimento de fala: ", event.error);
         };
 
-        // Quando o botão de microfone é clicado, inicia o reconhecimento de fala
+        // Quando o microfone é clicado, inicia o reconhecimento de fala
         document.getElementById('microfone').addEventListener('click', function () {
             recognition.start();
-            searchBox.value = '';  // Limpa o campo de pesquisa quando iniciar
-            clearTimeout(timer);  // Limpa qualquer temporizador anterior
+            searchBox.value = ''; // Limpa o campo de pesquisa quando iniciar
+            clearTimeout(timer); // Limpa o temporizador
         });
-
-        // Evento para detectar quando o usuário pressionar Enter no campo de pesquisa
-        searchBox.addEventListener('keypress', function (event) {
-            if (event.key === 'Enter') {
-                alert("Você pesquisou por: " + searchBox.value);
-                // Aqui você pode fazer algo como enviar a pesquisa para o servidor
-            }
-        });
-
     } else {
         alert("A API de Reconhecimento de Fala não é suportada neste navegador.");
     }
 }
-
 
 //API GEOLOCATION
 function getMyLocation() {
