@@ -298,6 +298,9 @@ $stmt_produtoDestaque->execute();
 </html>
 
 <!--TODO arrumar responsividade das paginas php
+    TODO editar produto
+    TODO editar pagina da loja
+    
     TODO verificar js{
         Feedback claro ao usuário sobre ações e erros. 
         Validação de formulários.

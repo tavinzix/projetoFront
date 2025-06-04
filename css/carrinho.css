@@ -173,7 +173,7 @@
     color: #555;
 }
 
-.lista-enderecos {
+.lista-enderecos, .lista-pagamento {
     display: flex;
     flex-direction: column;
     gap: 10px;

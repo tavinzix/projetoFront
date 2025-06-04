@@ -42,11 +42,11 @@ if (isset($_GET['url'])) {
 
     if ($stmt_produto->rowCount() === 0) {
         //TODO mesma página porém alertando que não encontrou o item
-        header("Location:../view/paginaNaoEncontrada.html");
+        //header("Location:../view/paginaNaoEncontrada.html");
         exit();
     }
 } else {
-    header("Location:../view/paginaNaoEncontrada.html");
+    //header("Location:../view/paginaNaoEncontrada.html");
 }
 ?>
 

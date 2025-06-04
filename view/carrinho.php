@@ -65,8 +65,8 @@ if ($cpf) {
             <a href="../index.php"> <img src="../img/site/logo.png"></a>
         </div>
 
-        <form action="buscar produto do banco" method="GET" class="busca-container">
-            <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+        <form action="buscaProdutos.php" method="GET" class="busca-container">
+            <input type="text" class="busca-input" id="caixa-pesquisa" name="url" placeholder="Procurar produto ou loja">
 
             <button type="button" id="microfone" onclick="buscaAudio()">
                 <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
@@ -135,7 +135,7 @@ if ($cpf) {
                     <h3>Resumo da Compra</h3>
                     <p class="qtd-itens">Itens Selecionados: 0</p>
                     <p>Total dos itens: <strong class="preco-total">R$ 0,00 </strong></p>
-                    <a href="checkoutCarrinho.html"><button class="btn-finalizar">Finalizar Compra</button></a>
+                    <a href="checkoutCarrinho.php"><button class="btn-finalizar">Finalizar Compra</button></a>
                 </div>
             </div>
         </div>
