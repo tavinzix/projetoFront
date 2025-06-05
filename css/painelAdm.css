@@ -132,7 +132,8 @@ canvas {
     font-weight: bold;
 }
 
-.tag.Aprovado, .tag.Ativo {
+.tag.Aprovado,
+.tag.Ativo {
     background-color: #d1f7c4;
     color: #2e7d32;
 }
@@ -142,7 +143,8 @@ canvas {
     color: #7d782e;
 }
 
-.tag.Recusado, .tag.Inativo {
+.tag.Recusado,
+.tag.Inativo {
     background-color: #ffe0e0;
     color: #c62828;
 }
@@ -160,82 +162,6 @@ canvas {
 .filtros button:hover,
 .btn-nova-categoria:hover {
     background: #b14b07;
-}
-
-.janela-solicitacao,
-.janela-categoria {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
-.janela-conteudo-solicitacoes,
-.janela-conteudo-categoria {
-    background-color: #fff;
-    margin: 5% auto;
-    padding: 0 20px 20px 20px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 600px;
-    max-height: 80vh;
-    overflow-y: auto;
-    position: relative;
-}
-
-.janela-conteudo-solicitacoes h2,
-.janela-conteudo-categoria h2 {
-    position: sticky;
-    top: 0;
-    padding: 10px 0;
-    margin: 0;
-    font-size: 20px;
-    font-weight: bold;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-}
-
-.janela-conteudo-solicitacoes span,
-.janela-conteudo-categoria span {
-    float: right;
-    position: sticky;
-    top: 0;
-    display: block;
-    text-align: right;
-    padding: 5px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    background-color: #fff;
-    z-index: 1;
-}
-
-.informacao-loja,
-.informacao-categoria {
-    background-color: #f8f8f8;
-    padding: 10px;
-    margin-top: 15px;
-    border-radius: 6px;
-    text-align: left;
-}
-
-.informacao-loja p,
-.informacao-categoria p {
-    margin: 5px 0;
-}
-
-.informacao-loja textarea,
-.informacao-categoria input,
-.informacao-categoria textarea {
-    padding: 0.5rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
 }
 
 /*LISTAGEM DE CATEGORIAS*/

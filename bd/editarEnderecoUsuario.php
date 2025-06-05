@@ -45,7 +45,7 @@ if ($_POST['acao'] == 'editar') {
 
 } 
 //excluir endereço
-elseif ($_POST['acao']== 'excluir') {
+else if ($_POST['acao']== 'excluir') {
     $id = $_POST['id'];
     $userId =$_POST['userId'];
 
@@ -64,7 +64,7 @@ elseif ($_POST['acao']== 'excluir') {
     }
 } 
 //salvar novo endereço
-elseif ($_POST['acao'] == 'salvar') {
+else if ($_POST['acao'] == 'salvar') {
     $userId =$_POST['userId'];
     $tipo = $_POST['tipo'];
     $cep = $_POST['cep'];
@@ -75,6 +75,7 @@ elseif ($_POST['acao'] == 'salvar') {
     $numero = $_POST['numero'];
     $complemento = $_POST['complemento'];
 
+    //TODO TRATAR POIS A API MANDA NOME COMPLETO E NO BANCO SALVA A SIGLA
     $sql = "INSERT INTO enderecos (user_id, tipo, cep, estado, cidade, bairro, rua, numero, complemento)
             VALUES (:user_id, :tipo, :cep, :estado, :cidade, :bairro, :rua, :numero, :complemento)";
     

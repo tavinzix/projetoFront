@@ -209,3 +209,88 @@ header.menu {
     font-size: 18px;
     margin: 20px 0;
 }
+
+/*MODAL*/
+
+.janela-solicitacao,
+.janela-categoria,
+.janela-endereco {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.janela-conteudo-solicitacoes,
+.janela-conteudo-categoria,
+.janela-conteudo-endereco {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 0 20px 20px 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.janela-conteudo-solicitacoes h2,
+.janela-conteudo-categoria h2,
+.janela-conteudo-endereco h2 {
+    position: sticky;
+    top: 0;
+    padding: 10px 0;
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.janela-conteudo-solicitacoes span,
+.janela-conteudo-categoria span,
+.janela-conteudo-endereco span {
+    float: right;
+    position: sticky;
+    top: 0;
+    display: block;
+    text-align: right;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.informacao-loja,
+.informacao-categoria,
+.informacao-endereco {
+    background-color: #f8f8f8;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 6px;
+    text-align: left;
+}
+
+.informacao-loja p,
+.informacao-categoria p,
+.informacao-endereco p {
+    margin: 5px 0;
+}
+
+.informacao-loja textarea,
+.informacao-categoria input,
+.informacao-categoria textarea,
+.informacao-endereco input, .informacao-endereco textarea {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}

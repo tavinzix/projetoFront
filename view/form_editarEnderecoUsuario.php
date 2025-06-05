@@ -104,15 +104,9 @@ if ($cpf) {
                                 <form action="../bd/editarEnderecoUsuario.php" method="POST">
                                     <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
                                     <input type="hidden" name="userId" value="<?= $usuario['user_id'] ?>">
-                                    <input type="hidden" name="tipo" value="<?= $usuario['tipo'] ?>">
-                                    <input type="hidden" name="cep" value="<?= $usuario['cep'] ?>">
-                                    <input type="hidden" name="estado" value="<?= $usuario['estado'] ?>">
-                                    <input type="hidden" name="cidade" value="<?= $usuario['cidade'] ?>">
-                                    <input type="hidden" name="bairro" value="<?= $usuario['bairro'] ?>">
-                                    <input type="hidden" name="rua" value="<?= $usuario['rua'] ?>">
-                                    <input type="hidden" name="numero" value="<?= $usuario['numero'] ?>">
-                                    <input type="hidden" name="complemento" value="<?= $usuario['complemento'] ?>">
-                                    <button class="btn-editar" name="acao" value="editar">Editar</button>
+                                    <a onclick='abrirJanelaEndereco(<?php echo json_encode($usuario) ?>)'>
+                                        <button type="button" class="btn-editar">Editar</button>
+                                    </a>
                                     <button class="btn-remover" name="acao" value="excluir">Remover</button>
                                 </form>
                             </div>
@@ -128,6 +122,71 @@ if ($cpf) {
                 }
             }
             ?>
+        </div>
+        
+        <!-- modal para editar endereço -->
+        <div id="janela-endereco" class="janela-endereco">
+            <!-- detalhes da categoria -->
+            <div class="janela-conteudo-endereco">
+                <span onclick="fecharJanelaEndereco()">&#10005;</span>
+                <h2>Detalhes do endereço</h2>
+
+                <form action="../bd/editarEnderecoUsuario.php" method="POST" id="formularioEdicaoEndereco">
+                    <div class="informacao-endereco" style="display:none">
+                        <strong>Id do endereço:</strong>
+                        <p id="id_endereco" name="id_endereco"></p>
+                    </div>
+                    
+                    <div class="informacao-endereco" style="display:none">
+                        <strong>Id do usuario:</strong>
+                        <p id="id_usuario" name="id_usuario"></p>
+                    </div>
+
+                    <div class="informacao-endereco">
+                        <!-- TODO tipo radio para mostrar o endereço -->
+                        <strong>Tipo do endereço:</strong> <br>
+                        <input id="tipo" name="tipo">
+                    </div>
+
+                    <div class="informacao-endereco">
+                        <strong>CEP:</strong><br>
+                        <textarea id="cep" name="cep"></textarea>
+                    </div>
+
+                    <div class="informacao-endereco">
+                        <strong>Estado:</strong><br>
+                        <input id="estado" name="estado">
+                    </div>
+
+                    <div class="informacao-endereco">
+                        <strong>Cidade:</strong><br>
+                        <input id="cidade" name="cidade">
+                    </div>
+
+                    <div class="informacao-endereco">
+                        <strong>Bairro:</strong><br>
+                        <input id="bairro" name="bairro">
+                    </div>
+
+                    <div class="informacao-endereco">
+                        <strong>Rua:</strong><br>
+                        <input id="rua" name="rua">
+                    </div>
+
+                    <div class="informacao-endereco">
+                        <strong>Número:</strong><br>
+                        <input id="numero" name="numero">
+                    </div>
+                    
+                    <div class="informacao-endereco">
+                        <strong>Complemento:</strong><br>
+                        <input id="complemento" name="complemento">
+                    </div>
+
+                    <!-- editar endereço -->
+                    <button onclick="editar()" class="btn-editar" type="button" id="editarBtn">Editar</button>
+                </form>
+            </div>
         </div>
 
         <!-- cadastro de endereço  -->
@@ -193,5 +252,6 @@ if ($cpf) {
     </section>
 </body>
 <script src="../js/global.js"></script>
+<script src="../js/perfilUsuario.js"></script>
 
 </html>
