@@ -11,14 +11,15 @@ if ($_POST['acao'] == 'editar') {
     $nome_titular = $_POST['nome_titular'];
     $nome_cartao = $_POST['nome_cartao'];
     $numero_cartao = $_POST['numero_cartao'];
-    $validade = $_POST['$validade'];
+    $validade = $_POST['validade'];
     $cvv = $_POST['cvv'];
 
     $sql = "UPDATE formas_pagamento SET nome_titular = :nome_titular, nome_cartao = :nome_cartao, numero_cartao = :numero_cartao, validade = :validade, cvv = :cvv
             WHERE id = :id AND user_id = :userId";
     
     $stmt = $connection->prepare($sql);
-
+    var_dump($sql);
+    
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
     $stmt->bindParam(':nome_titular', $nome_titular, PDO::PARAM_STR);
@@ -31,12 +32,11 @@ if ($_POST['acao'] == 'editar') {
 
     if($stmt){
         $_SESSION['msgSucesso'] = 'Forma de pagamaneto atualizada com sucesso!';
-        header("Location: perfilUsuario.php");
+        header("Location: ../view/perfilUsuario.php");
         exit();
     }else{
         echo "Erro";
     }  
-
 } 
 //excluir endereço
 elseif ($_POST['acao']== 'excluir') {
