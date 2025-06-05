@@ -75,3 +75,47 @@ function editar() {
 
     window.location.reload(true);
 }
+
+function abrirJanelaPagamento(pagamento) {
+    document.getElementById("id_forma").innerText = pagamento.id;
+    document.getElementById("id_usuario").innerText = pagamento.user_id;
+    document.getElementById("nome_titular").value = pagamento.nome_titular;
+    document.getElementById("nome_cartao").value = pagamento.nome_cartao;
+    document.getElementById("numero_cartao").value = pagamento.numero_cartao;
+    document.getElementById("validade").value = pagamento.validade;
+    document.getElementById("cvv").value = pagamento.cvv;
+
+    document.getElementById("janela-pagamento").style.display = "block";
+}
+
+function fecharJanelaPagamento() {
+    document.getElementById("janela-pagamento").style.display = "none";
+}
+
+function editar() {
+    const form = document.getElementById("formularioEdicaoPagamento")
+    const formData = new FormData(form);
+    let pagamentoId = document.getElementById("id_forma").innerHTML;
+    let userId = document.getElementById("id_usuario").innerHTML;
+    let nome_titular = document.getElementById("nome_titular").value;
+    let nome_cartao = document.getElementById("nome_cartao").value;
+    let numero_cartao = document.getElementById("numero_cartao").value;
+    let validade = document.getElementById("validade").value;
+    let cvv = document.getElementById("cvv").value;
+
+    formData.append('acao', 'editar');
+    formData.append('id', pagamentoId);
+    formData.append('userId', userId);
+    formData.append('nome_titular', nome_titular);
+    formData.append('nome_cartao', nome_cartao);
+    formData.append('numero_cartao', numero_cartao);
+    formData.append('validade', validade);
+    formData.append('cvv', cvv);
+
+    fetch('../bd/editarFormaPagamentoUsuario.php', {
+        method: "POST",
+        body: formData
+    });
+
+    window.location.reload(true);
+}

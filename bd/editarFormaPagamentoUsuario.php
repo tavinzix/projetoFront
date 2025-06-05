@@ -8,35 +8,29 @@ ini_set('default_charset', 'utf-8');
 if ($_POST['acao'] == 'editar') {
     $id = $_POST['id'];
     $userId =$_POST['userId'];
-    $tipo = $_POST['tipo'];
-    $cep = $_POST['cep'];
-    $estado = $_POST['estado'];
-    $cidade = $_POST['cidade'];
-    $bairro = $_POST['bairro'];
-    $rua = $_POST['rua'];
-    $numero = $_POST['numero'];
-    $complemento = $_POST['complemento'];
+    $nome_titular = $_POST['nome_titular'];
+    $nome_cartao = $_POST['nome_cartao'];
+    $numero_cartao = $_POST['numero_cartao'];
+    $validade = $_POST['$validade'];
+    $cvv = $_POST['cvv'];
 
-    $sql = "UPDATE enderecos SET tipo = :tipo, cep = :cep, estado = :estado, cidade = :cidade, bairro = :bairro, 
-            rua = :rua, numero = :numero, complemento = :complemento WHERE id = :id AND user_id = :userId";
+    $sql = "UPDATE formas_pagamento SET nome_titular = :nome_titular, nome_cartao = :nome_cartao, numero_cartao = :numero_cartao, validade = :validade, cvv = :cvv
+            WHERE id = :id AND user_id = :userId";
     
     $stmt = $connection->prepare($sql);
 
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-    $stmt->bindParam(':tipo', $tipo, PDO::PARAM_STR);
-    $stmt->bindParam(':cep', $cep, PDO::PARAM_STR);
-    $stmt->bindParam(':estado', $estado, PDO::PARAM_STR);
-    $stmt->bindParam(':cidade', $cidade, PDO::PARAM_STR);
-    $stmt->bindParam(':bairro', $bairro, PDO::PARAM_STR);
-    $stmt->bindParam(':rua', $rua, PDO::PARAM_STR);
-    $stmt->bindParam(':numero', $numero, PDO::PARAM_STR);
-    $stmt->bindParam(':complemento', $complemento, PDO::PARAM_STR);
+    $stmt->bindParam(':nome_titular', $nome_titular, PDO::PARAM_STR);
+    $stmt->bindParam(':nome_cartao', $nome_cartao, PDO::PARAM_STR);
+    $stmt->bindParam(':numero_cartao', $numero_cartao, PDO::PARAM_STR);
+    $stmt->bindParam(':validade', $validade, PDO::PARAM_STR);
+    $stmt->bindParam(':cvv', $cvv, PDO::PARAM_STR);
 
     $stmt->execute();
 
     if($stmt){
-        $_SESSION['msgSucesso'] = 'Endereço atualizado com sucesso!';
+        $_SESSION['msgSucesso'] = 'Forma de pagamaneto atualizada com sucesso!';
         header("Location: perfilUsuario.php");
         exit();
     }else{

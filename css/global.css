@@ -214,7 +214,7 @@ header.menu {
 
 .janela-solicitacao,
 .janela-categoria,
-.janela-endereco {
+.janela-endereco, .janela-pagamento {
     display: none;
     position: fixed;
     z-index: 999;
@@ -228,7 +228,7 @@ header.menu {
 
 .janela-conteudo-solicitacoes,
 .janela-conteudo-categoria,
-.janela-conteudo-endereco {
+.janela-conteudo-endereco, .janela-conteudo-pagamento {
     background-color: #fff;
     margin: 5% auto;
     padding: 0 20px 20px 20px;
@@ -242,7 +242,7 @@ header.menu {
 
 .janela-conteudo-solicitacoes h2,
 .janela-conteudo-categoria h2,
-.janela-conteudo-endereco h2 {
+.janela-conteudo-endereco h2, .janela-conteudo-pagamento h2 {
     position: sticky;
     top: 0;
     padding: 10px 0;
@@ -255,7 +255,7 @@ header.menu {
 
 .janela-conteudo-solicitacoes span,
 .janela-conteudo-categoria span,
-.janela-conteudo-endereco span {
+.janela-conteudo-endereco span, .janela-conteudo-pagamento span {
     float: right;
     position: sticky;
     top: 0;
@@ -271,7 +271,7 @@ header.menu {
 
 .informacao-loja,
 .informacao-categoria,
-.informacao-endereco {
+.informacao-endereco, .informacao-pagamento {
     background-color: #f8f8f8;
     padding: 10px;
     margin-top: 15px;
@@ -281,14 +281,14 @@ header.menu {
 
 .informacao-loja p,
 .informacao-categoria p,
-.informacao-endereco p {
+.informacao-endereco p, .informacao-pagamento p {
     margin: 5px 0;
 }
 
 .informacao-loja textarea,
 .informacao-categoria input,
 .informacao-categoria textarea,
-.informacao-endereco input, .informacao-endereco textarea {
+.informacao-endereco input, .informacao-endereco textarea, .informacao-pagamento input {
     padding: 0.5rem;
     border-radius: 6px;
     border: 1px solid #ccc;

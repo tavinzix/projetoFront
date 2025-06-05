@@ -59,15 +59,15 @@ if ($cpf) {
             <a href="../index.php"> <img src="../img/site/logo.png"></a>
         </div>
 
-        <form action="buscar produto do banco" method="GET" class="busca-container">
-            <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+        <form action="buscaProdutos.php" method="GET" class="busca-container" id="buscaProduto">
+            <input type="text" class="busca-input" id="caixa-pesquisa" name="url" placeholder="Procurar produto ou loja">
 
             <button type="button" id="microfone" onclick="buscaAudio()">
                 <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
             </button>
 
             <button type="submit" class="lupa-icone">
-                <img src="../img/site/lupa.png" id="iconeft" alt="Lupa">
+                <img src="../img/site/lupa.png" id="iconeft">
             </button>
         </form>
 
@@ -86,8 +86,6 @@ if ($cpf) {
     <section class="editar-enderecos">
         <!-- lista endereços cadastrados -->
         <h3>Meus Endereços</h3>
-        <!--TODO arrumar botão de editar para carregar os dados para o input
-                TODO criar modal-->
         <div class="lista-enderecos">
             <?php
             if ($cpf) {
@@ -126,7 +124,6 @@ if ($cpf) {
         
         <!-- modal para editar endereço -->
         <div id="janela-endereco" class="janela-endereco">
-            <!-- detalhes da categoria -->
             <div class="janela-conteudo-endereco">
                 <span onclick="fecharJanelaEndereco()">&#10005;</span>
                 <h2>Detalhes do endereço</h2>

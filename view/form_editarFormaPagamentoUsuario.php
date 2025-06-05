@@ -59,15 +59,15 @@ if ($cpf) {
             <a href="../index.php"> <img src="../img/site/logo.png"></a>
         </div>
 
-        <form action="buscar produto do banco" method="GET" class="busca-container">
-            <input type="text" class="busca-input" id="caixa-pesquisa" placeholder="Procurar produto ou loja">
+        <form action="buscaProdutos.php" method="GET" class="busca-container" id="buscaProduto">
+            <input type="text" class="busca-input" id="caixa-pesquisa" name="url" placeholder="Procurar produto ou loja">
 
             <button type="button" id="microfone" onclick="buscaAudio()">
                 <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
             </button>
 
             <button type="submit" class="lupa-icone">
-                <img src="../img/site/lupa.png" id="iconeft" alt="Lupa">
+                <img src="../img/site/lupa.png" id="iconeft">
             </button>
         </form>
 
@@ -86,8 +86,6 @@ if ($cpf) {
     <section class="editar-pagamento">
         <!-- lista formas de pagamento cadastradas -->
         <h3>Minhas formas de pagamento</h3>
-        <!--TODO arrumar botão de editar para carregar os dados para o input
-                TODO criar modal-->
         <div class="lista-formas">
             <?php
             if ($cpf) {
@@ -96,7 +94,7 @@ if ($cpf) {
                         <div class="forma-pagamento">
                             <!-- dados da forma de pagamento  -->
                             <p><strong><?php echo $usuario['nome_cartao'] ?></strong></p>
-                            <p><?php echo $usuario['nome_titular']?></p>
+                            <p><?php echo $usuario['nome_titular'] ?></p>
                             <p><?php echo $usuario['numero_cartao'] . ' - ' . $usuario['validade'] ?></p>
 
                             <!-- editar ou remover forma de pagamento  -->
@@ -104,11 +102,9 @@ if ($cpf) {
                                 <form action="../bd/editarFormaPagamentoUsuario.php" method="POST">
                                     <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
                                     <input type="hidden" name="userId" value="<?= $usuario['user_id'] ?>">
-                                    <input type="hidden" name="tipo" value="<?= $usuario['nome_titular'] ?>">
-                                    <input type="hidden" name="cep" value="<?= $usuario['nome_cartao'] ?>">
-                                    <input type="hidden" name="estado" value="<?= $usuario['validade'] ?>">
-                                    <input type="hidden" name="cidade" value="<?= $usuario['cvv'] ?>">
-                                    <button class="btn-editar" name="acao" value="editar">Editar</button>
+                                    <a onclick='abrirJanelaPagamento(<?php echo json_encode($usuario) ?>)'>
+                                        <button type="button" class="btn-editar">Editar</button>
+                                    </a>
                                     <button class="btn-remover" name="acao" value="excluir">Remover</button>
                                 </form>
                             </div>
@@ -126,6 +122,55 @@ if ($cpf) {
             ?>
         </div>
 
+        <!-- modal para editar endereço -->
+        <div id="janela-pagamento" class="janela-pagamento">
+            <div class="janela-conteudo-pagamento">
+                <span onclick="fecharJanelaPagamento()">&#10005;</span>
+                <h2>Detalhes da forma de pagamento</h2>
+
+                <form action="../bd/editarFormaPagamentoUsuario.php" method="POST" id="formularioEdicaoPagamento">
+                    <div class="informacao-pagamento" style="display:none">
+                        <strong>Id da forma:</strong>
+                        <p id="id_forma" name="id_forma"></p>
+                    </div>
+
+                    <div class="informacao-pagamento" style="display:none">
+                        <strong>Id do usuario:</strong>
+                        <p id="id_usuario" name="id_usuario"></p>
+                    </div>
+
+                    <div class="informacao-pagamento">
+                        <strong>Nome do titular:</strong><br>
+                        <input id="nome_titular" name="nome_titular">
+                    </div>
+
+                    <div class="informacao-pagamento">
+                        <strong>Nome do cartão:</strong><br>
+                        <input id="nome_cartao" name="nome_cartao">
+                    </div>
+
+                    <div class="informacao-pagamento">
+                        <strong>Número do cartão:</strong><br>
+                        <input id="numero_cartao" name="numero_cartao">
+                    </div>
+
+                    <div class="informacao-pagamento">
+                        <strong>Validade:</strong><br>
+                        <input id="validade" name="validade">
+                    </div>
+
+                    <div class="informacao-pagamento">
+                        <strong>CVV:</strong><br>
+                        <input id="cvv" name="cvv">
+                    </div>
+
+                    <!-- editar pagamento -->
+                    <button onclick="editar()" class="btn-editar" type="button" id="editarBtn">Editar</button>
+                </form>
+            </div>
+        </div>
+
+
         <!-- cadastro de forma de pagamento  -->
         <form class="form-forma" action="../bd/editarFormaPagamentoUsuario.php" method="POST">
             <h4>Adicionar nova forma de pagamento</h4>
@@ -139,12 +184,12 @@ if ($cpf) {
                 <label for="nome">Nome do titular</label>
                 <input type="text" id="nome" name="nome" required>
             </div>
-           
+
             <div class="campo-form">
                 <label for="cartao">Nome do cartão</label>
                 <input type="text" id="cartao" name="cartao" required>
             </div>
-            
+
             <div class="campo-form">
                 <label for="numero">Número</label>
                 <input type="text" id="numero" name="numero" required>
@@ -165,5 +210,6 @@ if ($cpf) {
     </section>
 </body>
 <script src="../js/global.js"></script>
+<script src="../js/perfilUsuario.js"></script>
 
 </html>
