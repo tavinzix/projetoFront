@@ -165,7 +165,7 @@ if ($cpf) {
                     </div>
 
                     <!-- editar pagamento -->
-                    <button onclick="editar()" class="btn-editar" type="button" id="editarBtn">Editar</button>
+                    <button onclick="editarPagamento()" class="btn-editar" type="button" id="editarBtn">Editar</button>
                 </form>
             </div>
         </div>

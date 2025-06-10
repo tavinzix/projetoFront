@@ -1,7 +1,11 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+//require_once('../bd/config.inc.php');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/enderecoUsuario_DAO.php');
+$conexao = (new Conexao())->conectar();
+
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     header("Location:../view/login.html");
@@ -14,7 +18,7 @@ $imagemUsuario = '../img/users/avatar.jpg';
 // busca cpf para setar a imagem do header
 if ($cpf) {
     $sql_imagem = "SELECT * FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql_imagem);
+    $stmt = $conexao->prepare($sql_imagem);
     $stmt->bindParam(':cpf', $cpf);
     $stmt->execute();
 
@@ -26,11 +30,8 @@ if ($cpf) {
 
     $_SESSION['id'] = $imagem['id'];
 
-    // busca endereços cadastrados 
-    $sql_endereco = "SELECT * from usuarios u join enderecos e on e.user_id = u.id where u.cpf = :cpf";
-    $stmt_endereco = $connection->prepare($sql_endereco);
-    $stmt_endereco->bindParam(':cpf', $cpf);
-    $stmt_endereco->execute();
+    $listaEndereco = new enderecoUsuario_DAO($conexao);
+    $enderecos = $listaEndereco->listarEndereco($cpf);
 }
 ?>
 
@@ -89,13 +90,14 @@ if ($cpf) {
         <div class="lista-enderecos">
             <?php
             if ($cpf) {
-                if ($stmt_endereco->rowCount() > 0) {
-                    while ($usuario = $stmt_endereco->fetch(PDO::FETCH_ASSOC)) { ?>
+                if ($enderecos->rowCount() > 0) {
+                    while ($usuario = $enderecos->fetch(PDO::FETCH_ASSOC)) { ?>
                         <div class="endereco">
                             <!-- dados do endereço  -->
                             <p><strong><?= $usuario['tipo'] ?></strong></p>
                             <p><?= $usuario['rua'] . ', ' . $usuario['numero'] . ' - ' . $usuario['bairro'] ?></p>
                             <p><?= $usuario['cidade'] . ' - ' . $usuario['estado'] . ', ' . $usuario['cep'] ?></p>
+                            <p><?= $usuario['id'] . ' - ' . $usuario['user_id'] ?></p>
 
                             <!-- editar ou remover endereço  -->
                             <div class="acoes-endereco">
@@ -121,23 +123,16 @@ if ($cpf) {
             }
             ?>
         </div>
-        
+
         <!-- modal para editar endereço -->
         <div id="janela-endereco" class="janela-endereco">
             <div class="janela-conteudo-endereco">
                 <span onclick="fecharJanelaEndereco()">&#10005;</span>
                 <h2>Detalhes do endereço</h2>
 
-                <form action="../bd/editarEnderecoUsuario.php" method="POST" id="formularioEdicaoEndereco">
-                    <div class="informacao-endereco" style="display:none">
-                        <strong>Id do endereço:</strong>
-                        <p id="id_endereco" name="id_endereco"></p>
-                    </div>
-                    
-                    <div class="informacao-endereco" style="display:none">
-                        <strong>Id do usuario:</strong>
-                        <p id="id_usuario" name="id_usuario"></p>
-                    </div>
+                <form action="../bd/controller/EnderecoUsuario_controller.php" method="POST" id="formularioEdicaoEndereco">
+                    <input id="id_endereco" name="id">
+                    <input id="id_usuario" name="userId">
 
                     <div class="informacao-endereco">
                         <!-- TODO tipo radio para mostrar o endereço -->
@@ -147,7 +142,7 @@ if ($cpf) {
 
                     <div class="informacao-endereco">
                         <strong>CEP:</strong><br>
-                        <textarea id="cep" name="cep"></textarea>
+                        <input id="cep" name="cep"></input>
                     </div>
 
                     <div class="informacao-endereco">
@@ -174,7 +169,7 @@ if ($cpf) {
                         <strong>Número:</strong><br>
                         <input id="numero" name="numero">
                     </div>
-                    
+
                     <div class="informacao-endereco">
                         <strong>Complemento:</strong><br>
                         <input id="complemento" name="complemento">
@@ -187,7 +182,7 @@ if ($cpf) {
         </div>
 
         <!-- cadastro de endereço  -->
-        <form class="form-endereco" action="../bd/editarEnderecoUsuario.php" method="POST">
+        <form class="form-endereco" action="../bd/controller/EnderecoUsuario_controller.php" method="POST">
             <h4>Adicionar novo endereço</h4>
 
             <div class="campo-form">
@@ -204,7 +199,7 @@ if ($cpf) {
                 </div>
             </div>
 
-            <div class="campo-form" style="display:none">
+            <div class="campo-form" style="display:block;">
                 <label for="userId">User ID</label>
                 <input type="text" id="userId" name="userId" value="<?php echo $userId ?>">
             </div>

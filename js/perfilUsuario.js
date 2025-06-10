@@ -24,8 +24,8 @@ function filtrarPedidos(filtro) {
 }
 
 function abrirJanelaEndereco(endereco) {
-    document.getElementById("id_endereco").innerText = endereco.id;
-    document.getElementById("id_usuario").innerText = endereco.user_id;
+    document.getElementById("id_endereco").value = endereco.id;
+    document.getElementById("id_usuario").value = endereco.user_id;
     document.getElementById("tipo").value = endereco.tipo;
     document.getElementById("cep").value = endereco.cep;
     document.getElementById("estado").value = endereco.estado;
@@ -45,30 +45,10 @@ function fecharJanelaEndereco() {
 function editar() {
     const form = document.getElementById("formularioEdicaoEndereco")
     const formData = new FormData(form);
-    let enderecoId = document.getElementById("id_endereco").innerHTML;
-    let userId = document.getElementById("id_usuario").innerHTML;
-    let tipo = document.getElementById("tipo").value;
-    let cep = document.getElementById("cep").value;
-    let estado = document.getElementById("estado").value;
-    let cidade = document.getElementById("cidade").value;
-    let bairro = document.getElementById("bairro").value;
-    let rua = document.getElementById("rua").value;
-    let numero = document.getElementById("numero").value;
-    let complemento = document.getElementById("complemento").value;
 
     formData.append('acao', 'editar');
-    formData.append('id', enderecoId);
-    formData.append('userId', userId);
-    formData.append('tipo', tipo);
-    formData.append('cep', cep);
-    formData.append('estado', estado);
-    formData.append('cidade', cidade);
-    formData.append('bairro', bairro);
-    formData.append('rua', rua);
-    formData.append('numero', numero);
-    formData.append('complemento', complemento);
 
-    fetch('../bd/editarEnderecoUsuario.php', {
+    fetch('../bd/controller/EnderecoUsuario_controller.php', {
         method: "POST",
         body: formData
     });
@@ -92,9 +72,9 @@ function fecharJanelaPagamento() {
     document.getElementById("janela-pagamento").style.display = "none";
 }
 
-function editar() {
-    const form = document.getElementById("formularioEdicaoPagamento")
-    const formData = new FormData(form);
+function editarPagamento() {
+    const formPagamento = document.getElementById("formularioEdicaoPagamento")
+    const formDataPagamento = new FormData(formPagamento);
     let pagamentoId = document.getElementById("id_forma").innerHTML;
     let userId = document.getElementById("id_usuario").innerHTML;
     let nome_titular = document.getElementById("nome_titular").value;
@@ -103,18 +83,18 @@ function editar() {
     let validade = document.getElementById("validade").value;
     let cvv = document.getElementById("cvv").value;
 
-    formData.append('acao', 'editar');
-    formData.append('id', pagamentoId);
-    formData.append('userId', userId);
-    formData.append('nome_titular', nome_titular);
-    formData.append('nome_cartao', nome_cartao);
-    formData.append('numero_cartao', numero_cartao);
-    formData.append('validade', validade);
-    formData.append('cvv', cvv);
+    formDataPagamento.append('acao', 'editar');
+    formDataPagamento.append('id', pagamentoId);
+    formDataPagamento.append('userId', userId);
+    formDataPagamento.append('nome_titular', nome_titular);
+    formDataPagamento.append('nome_cartao', nome_cartao);
+    formDataPagamento.append('numero_cartao', numero_cartao);
+    formDataPagamento.append('validade', validade);
+    formDataPagamento.append('cvv', cvv);
 
     fetch('../bd/editarFormaPagamentoUsuario.php', {
         method: "POST",
-        body: formData
+        body: formDataPagamento
     });
 
     window.location.reload(true);
