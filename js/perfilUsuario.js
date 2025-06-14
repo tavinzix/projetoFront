@@ -57,8 +57,8 @@ function editar() {
 }
 
 function abrirJanelaPagamento(pagamento) {
-    document.getElementById("id_forma").innerText = pagamento.id;
-    document.getElementById("id_usuario").innerText = pagamento.user_id;
+    document.getElementById("id_forma").value = pagamento.id;
+    document.getElementById("id_usuario").value = pagamento.user_id;
     document.getElementById("nome_titular").value = pagamento.nome_titular;
     document.getElementById("nome_cartao").value = pagamento.nome_cartao;
     document.getElementById("numero_cartao").value = pagamento.numero_cartao;
@@ -75,24 +75,10 @@ function fecharJanelaPagamento() {
 function editarPagamento() {
     const formPagamento = document.getElementById("formularioEdicaoPagamento")
     const formDataPagamento = new FormData(formPagamento);
-    let pagamentoId = document.getElementById("id_forma").innerHTML;
-    let userId = document.getElementById("id_usuario").innerHTML;
-    let nome_titular = document.getElementById("nome_titular").value;
-    let nome_cartao = document.getElementById("nome_cartao").value;
-    let numero_cartao = document.getElementById("numero_cartao").value;
-    let validade = document.getElementById("validade").value;
-    let cvv = document.getElementById("cvv").value;
 
     formDataPagamento.append('acao', 'editar');
-    formDataPagamento.append('id', pagamentoId);
-    formDataPagamento.append('userId', userId);
-    formDataPagamento.append('nome_titular', nome_titular);
-    formDataPagamento.append('nome_cartao', nome_cartao);
-    formDataPagamento.append('numero_cartao', numero_cartao);
-    formDataPagamento.append('validade', validade);
-    formDataPagamento.append('cvv', cvv);
 
-    fetch('../bd/editarFormaPagamentoUsuario.php', {
+    fetch('../bd/controller/FormaPagamentoUsuario_controller.php', {
         method: "POST",
         body: formDataPagamento
     });

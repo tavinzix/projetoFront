@@ -96,11 +96,11 @@ else if ($_POST['acao'] == 'excluir') {
 
     if ($retorno) {
         $_SESSION['msgSucesso'] = 'Endereço removido com sucesso!';
-        header("Location: ../view/perfilUsuario.php");
+        header("Location: ../../view/perfilUsuario.php");
         exit();
     } else {
         $_SESSION['msgSucesso'] = 'Erro ao remover endereço!';
-        header("Location: ../view/perfilUsuario.php");
+        header("Location: ../../view/perfilUsuario.php");
         exit();
     }
 }

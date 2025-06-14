@@ -101,7 +101,7 @@ if ($cpf) {
 
                             <!-- editar ou remover endereço  -->
                             <div class="acoes-endereco">
-                                <form action="../bd/editarEnderecoUsuario.php" method="POST">
+                                <form action="../bd/controller/EnderecoUsuario_controller.php" method="POST">
                                     <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
                                     <input type="hidden" name="userId" value="<?= $usuario['user_id'] ?>">
                                     <a onclick='abrirJanelaEndereco(<?php echo json_encode($usuario) ?>)'>
@@ -131,8 +131,8 @@ if ($cpf) {
                 <h2>Detalhes do endereço</h2>
 
                 <form action="../bd/controller/EnderecoUsuario_controller.php" method="POST" id="formularioEdicaoEndereco">
-                    <input id="id_endereco" name="id">
-                    <input id="id_usuario" name="userId">
+                    <input id="id_endereco" name="id" style="display:none;">
+                    <input id="id_usuario" name="userId" style="display:none;">
 
                     <div class="informacao-endereco">
                         <!-- TODO tipo radio para mostrar o endereço -->
@@ -199,7 +199,7 @@ if ($cpf) {
                 </div>
             </div>
 
-            <div class="campo-form" style="display:block;">
+            <div class="campo-form" style="display:none;">
                 <label for="userId">User ID</label>
                 <input type="text" id="userId" name="userId" value="<?php echo $userId ?>">
             </div>

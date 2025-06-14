@@ -1,7 +1,11 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
+//require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/formaPagamentoUsuario_DAO.php');
+$conexao = (new Conexao())->conectar();
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     header("Location:../view/login.html");
@@ -14,7 +18,7 @@ $imagemUsuario = '../img/users/avatar.jpg';
 // busca cpf para setar a imagem do header
 if ($cpf) {
     $sql_imagem = "SELECT * FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql_imagem);
+    $stmt = $conexao->prepare($sql_imagem);
     $stmt->bindParam(':cpf', $cpf);
     $stmt->execute();
 
@@ -26,11 +30,8 @@ if ($cpf) {
 
     $_SESSION['id'] = $imagem['id'];
 
-    // busca endereços cadastrados 
-    $sql_forma = "SELECT * from usuarios u join formas_pagamento fp on fp.user_id = u.id where u.cpf = :cpf";
-    $stmt_forma = $connection->prepare($sql_forma);
-    $stmt_forma->bindParam(':cpf', $cpf);
-    $stmt_forma->execute();
+    $listaForma = new formaPagamentoUsuario_DAO($conexao);
+    $formas = $listaForma->listarForma($cpf);
 }
 ?>
 
@@ -89,8 +90,8 @@ if ($cpf) {
         <div class="lista-formas">
             <?php
             if ($cpf) {
-                if ($stmt_forma->rowCount() > 0) {
-                    while ($usuario = $stmt_forma->fetch(PDO::FETCH_ASSOC)) { ?>
+                if ($formas->rowCount() > 0) {
+                    while ($usuario = $formas->fetch(PDO::FETCH_ASSOC)) { ?>
                         <div class="forma-pagamento">
                             <!-- dados da forma de pagamento  -->
                             <p><strong><?php echo $usuario['nome_cartao'] ?></strong></p>
@@ -99,7 +100,7 @@ if ($cpf) {
 
                             <!-- editar ou remover forma de pagamento  -->
                             <div class="acoes-formas">
-                                <form action="../bd/editarFormaPagamentoUsuario.php" method="POST">
+                                <form action="../bd/controller/FormaPagamentoUsuario_controller.php" method="POST">
                                     <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
                                     <input type="hidden" name="userId" value="<?= $usuario['user_id'] ?>">
                                     <a onclick='abrirJanelaPagamento(<?php echo json_encode($usuario) ?>)'>
@@ -111,7 +112,7 @@ if ($cpf) {
                         </div>
                     <?php
                     }
-                    // mensagem caso não tenha nenhum endereço 
+                    // mensagem caso não tenha nenhuma forma de pagamento cadastrada
                 } else { ?>
                     <div class="forma-pagamento">
                         <h3>Ainda não há formas de pagamento cadastradas</h3>
@@ -122,22 +123,16 @@ if ($cpf) {
             ?>
         </div>
 
-        <!-- modal para editar endereço -->
+        <!-- modal para editar forma de pagamento -->
         <div id="janela-pagamento" class="janela-pagamento">
             <div class="janela-conteudo-pagamento">
                 <span onclick="fecharJanelaPagamento()">&#10005;</span>
                 <h2>Detalhes da forma de pagamento</h2>
 
-                <form action="../bd/editarFormaPagamentoUsuario.php" method="POST" id="formularioEdicaoPagamento">
-                    <div class="informacao-pagamento" style="display:none">
-                        <strong>Id da forma:</strong>
-                        <p id="id_forma" name="id_forma"></p>
-                    </div>
+                <form action="../bd/controller/FormaPagamentoUsuario_controller.php" method="POST" id="formularioEdicaoPagamento">
 
-                    <div class="informacao-pagamento" style="display:none">
-                        <strong>Id do usuario:</strong>
-                        <p id="id_usuario" name="id_usuario"></p>
-                    </div>
+                    <input  id="id_forma" name="id_forma">
+                    <input id="id_usuario" name="id_usuario">
 
                     <div class="informacao-pagamento">
                         <strong>Nome do titular:</strong><br>
@@ -172,7 +167,7 @@ if ($cpf) {
 
 
         <!-- cadastro de forma de pagamento  -->
-        <form class="form-forma" action="../bd/editarFormaPagamentoUsuario.php" method="POST">
+        <form class="form-forma" action="../bd/controller/FormaPagamentoUsuario_controller.php" method="POST">
             <h4>Adicionar nova forma de pagamento</h4>
 
             <div class="campo-form" style="display:none">
@@ -182,17 +177,17 @@ if ($cpf) {
 
             <div class="campo-form">
                 <label for="nome">Nome do titular</label>
-                <input type="text" id="nome" name="nome" required>
+                <input type="text" id="nome" name="nome_titular" required>
             </div>
 
             <div class="campo-form">
                 <label for="cartao">Nome do cartão</label>
-                <input type="text" id="cartao" name="cartao" required>
+                <input type="text" id="cartao" name="nome_cartao" required>
             </div>
 
             <div class="campo-form">
                 <label for="numero">Número</label>
-                <input type="text" id="numero" name="numero" required>
+                <input type="text" id="numero" name="numero_cartao" required>
             </div>
 
             <div class="campo-form">
