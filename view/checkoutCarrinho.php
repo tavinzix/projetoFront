@@ -3,7 +3,12 @@ session_start();
 require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
 
+if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
+    header("Location:../view/login.html");
+}
+
 $cpf = $_SESSION['cpf'] ?? null;
+
 
 if ($cpf) {
     $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
@@ -53,93 +58,74 @@ if ($cpf) {
         <div class="checkout-exterior">
             <h1>Confirmação de Compra</h1>
 
-            <section>
-                <h2>Escolha um Endereço</h2>
-                <div class="lista-enderecos">
-
-                    <?php
-                    if ($cpf) {
+            <form method="POST" action="resumoCompra.php">
+                <section>
+                    <h2>Escolha um Endereço</h2>
+                    <div class="lista-enderecos">
+                        <?php
                         if ($stmt_endereco->rowCount() > 0) {
                             while ($endereco = $stmt_endereco->fetch(PDO::FETCH_ASSOC)) { ?>
-                                <div class="card">
-                                    <input type="radio" name="endereco" />
+                                <label class="card">
+                                    <input type="radio" name="endereco_id" value="<?= $endereco['id'] ?>" required />
                                     <div>
                                         <p><strong><?= $endereco['tipo'] ?></strong></p>
                                         <p><?= $endereco['rua'] . ', ' . $endereco['numero'] . ' - ' . $endereco['bairro'] ?></p>
                                         <p><?= $endereco['cidade'] . ' - ' . $endereco['estado'] . ', ' . $endereco['cep'] ?></p>
                                     </div>
-                                </div>
-                            <?php
-                            }
-                            // mensagem caso não tenha nenhum endereço 
+                                </label>
+                            <?php }
                         } else { ?>
                             <div class="card">
                                 <h3>Ainda não há endereços cadastrados</h3>
                             </div>
-                    <?php
-                        }
-                    }
-                    ?>
-                </div>
-                <!--TODO habilitar opção-->
-                <a href="form_editarEnderecoUsuario.php"><button class="adicionar-opcao">+ Adicionar novo endereço</button></a>
-            </section>
+                        <?php } ?>
+                    </div>
+                    <a href="form_editarEnderecoUsuario.php"><button type="button" class="adicionar-opcao">+ Adicionar novo endereço</button></a>
+                </section>
 
-            <section>
-                <h2>Forma de Pagamento</h2>
-                <div class="lista-pagamento">
-                    <?php
-                    if ($cpf) {
+                <section>
+                    <h2>Forma de Pagamento</h2>
+                    <div class="lista-pagamento">
+                        <?php
                         if ($stmt_pagamento->rowCount() > 0) {
                             while ($pagamento = $stmt_pagamento->fetch(PDO::FETCH_ASSOC)) { ?>
-                                <div class="card">
-                                    <input type="radio" name="pagamento" />
+                                <label class="card">
+                                    <input type="radio" name="pagamento_id" value="<?= $pagamento['id'] ?>" required />
                                     <div>
                                         <p><strong><?= $pagamento['nome_cartao'] ?></strong></p>
-                                        <p><?= $pagamento['nome_titular'] . ', ' . $pagamento['nome_cartao'] ?></p>
+                                        <p><?= $pagamento['nome_titular'] . ', ' . $pagamento['numero_cartao'] ?></p>
                                     </div>
-                                </div>
-                            <?php
-                            }
-                            // mensagem caso não tenha nenhuma forma de pagamento
-                        } else { ?>
-                            <div class="card">
-                                <h3>Ainda não há formas de pagamento cadastradas</h3>
+                                </label>
+                        <?php }
+                        } ?>
+                        <!-- Opções adicionais fixas -->
+                        <label class="card">
+                            <input type="radio" name="pagamento_id" value="pix" required />
+                            <div>
+                                <p><strong>PIX</strong></p>
+                                <p>Aprova imediatamente</p>
                             </div>
-                    <?php
-                        }
-                    }
-                    ?>
+                        </label>
 
-                    <label class="card">
-                        <input type="radio" name="pagamento" />
-                        <div>
-                            <p><strong>PIX</strong></p>
-                            <p>Aprova imediatamente</p>
-                        </div>
-                    </label>
+                        <label class="card">
+                            <input type="radio" name="pagamento_id" value="boleto" required />
+                            <div>
+                                <p><strong>Boleto</strong></p>
+                                <p>Aprova em até 3 dias úteis</p>
+                            </div>
+                        </label>
+                    </div>
+                    <a href="form_editarFormaPagamentoUsuario.php"><button type="button" class="adicionar-opcao">+ Adicionar nova forma de pagamento</button></a>
+                </section>
 
-                    <label class="card">
-                        <input type="radio" name="pagamento" />
-                        <div>
-                            <p><strong>Boleto</strong></p>
-                            <p>Aprova em até 3 dias úteis</p>
-                        </div>
-                    </label>
+                <div class="links">
+                    <a href="carrinho.php">← Voltar</a>
                 </div>
-                <!--TODO habilitar opção-->
-                <a href="form_editarFormaPagamentoUsuario.php"><button class="adicionar-opcao">+ Adicionar nova forma de pagamento</button></a>
-                
-            </section>
 
-            <div class="links">
-                <a href="carrinho.php">← Voltar</a>
-            </div>
-
-            <div class="botao-avancar">
-                <a href="resumoCompra.html"><button class="botao-avancar">Avançar</button></a>
-            </div>
-
+                <div class="botao-avancar">
+                    <button type="submit" class="botao-avancar">Avançar</button>
+                </div>
+            </form>
         </div>
     </section>
 </body>

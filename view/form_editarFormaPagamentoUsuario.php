@@ -131,7 +131,7 @@ if ($cpf) {
 
                 <form action="../bd/controller/FormaPagamentoUsuario_controller.php" method="POST" id="formularioEdicaoPagamento">
 
-                    <input  id="id_forma" name="id_forma">
+                    <input id="id_forma" name="id_forma">
                     <input id="id_usuario" name="id_usuario">
 
                     <div class="informacao-pagamento">

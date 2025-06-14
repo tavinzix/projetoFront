@@ -95,49 +95,50 @@ if ($cpf) {
         <div class="carrinho-exterior">
             <ul class="lista-carrinho">
                 <!-- insere os dados dos produtos  -->
-                <?php
-                while ($carrinho = $stmt_itens->fetch(PDO::FETCH_ASSOC)) {
-                ?>
-                    <li class="item-carrinho">
-                        <!-- botão para remover item do carrinho - chama função js passando o id do produto  -->
-                        <button class="remover-item" title="Remover do carrinho" onclick="removerItem(<?php echo $carrinho['produto_id'] ?>)">X</button>
-                        <input type="checkbox" class="selecionar-item">
-                        <img src="../img/produtos/<?php echo $carrinho['imagem_url'] ?>" alt="<?php echo $carrinho['nome'] ?>" class="imagem-produto">
-                        <div class="conteudo-item">
-                            <div class="detalhes-item">
-                                <h4><a href="produto.php?id=<?php echo $carrinho['produto_id'] ?>"><?php echo $carrinho['nome'] ?></a></h4>
-                                <p>Vendido por: <a href="loja.html"><strong><?php echo $carrinho['nome_loja'] ?></strong></a></p>
-                                <ul class="especificacoes">
-                                    <li><?php echo $carrinho['marca'] ?></li>
-                                </ul>
-                                <p class="preco">R$<?php echo $carrinho['preco_unitario'] ?></p>
-                            </div>
-                            <div class="controle-quantidade">
-                                <label for="quantidade">Quantidade:</label>
-                                <!-- função js para alterar a quantidade do item no carrinho  -->
-                                <div class="quantidade-container">
-                                    <button onclick="alterarQuantidadeCarrinho(this, -1)">-</button>
-                                    <input id="quantidade-item-<?php echo $carrinho['produto_id'] ?>" type="number" value="<?= $carrinho['quantidade'] ?>" min="1">
-                                    <button onclick="alterarQuantidadeCarrinho(this, 1)">+</button>
+                <form id="form-carrinho" method="POST" action="../bd/controller/Carrinhotemp.php">
+                    <?php
+                    while ($carrinho = $stmt_itens->fetch(PDO::FETCH_ASSOC)) {
+                    ?>
+                        <li class="item-carrinho">
+                            <button class="remover-item" type="button" title="Remover do carrinho" onclick="removerItem(<?php echo $carrinho['produto_id'] ?>)">X</button>
+
+                            <input type="checkbox" class="selecionar-item" name="itensSelecionados[]" value="<?php echo $carrinho['produto_id'] . ',' . $carrinho['preco_unitario'] ?>">
+                            <img src="../img/produtos/<?php echo $carrinho['imagem_url'] ?>" alt="<?php echo $carrinho['nome'] ?>" class="imagem-produto">
+
+                            <div class="conteudo-item">
+                                <div class="detalhes-item">
+                                    <h4><a href="produto.php?id=<?php echo $carrinho['produto_id'] ?>"><?php echo $carrinho['nome'] ?></a></h4>
+                                    <p>Vendido por: <a href="loja.html"><strong><?php echo $carrinho['nome_loja'] ?></strong></a></p>
+                                    <ul class="especificacoes">
+                                        <li><?php echo $carrinho['marca'] ?></li>
+                                    </ul>
+                                    <p class="preco">R$<?php echo $carrinho['preco_unitario'] ?></p>
                                 </div>
-                                <button class="altera-qtd" onclick="atualizarQuantidade(<?php echo $carrinho['produto_id'] ?>)">Atualizar quantidade</button>
+
+                                <div class="controle-quantidade">
+                                    <label for="quantidade">Quantidade:</label>
+                                    <div class="quantidade-container">
+                                        <button type="button" onclick="alterarQuantidadeCarrinho(this, -1)">-</button>
+                                        <input id="quantidade-item-<?php echo $carrinho['produto_id'] ?>" type="number" name="quantidades[<?php echo $carrinho['produto_id'] ?>]" value="<?= $carrinho['quantidade'] ?>" min="1">
+                                        <button type="button" onclick="alterarQuantidadeCarrinho(this, 1)">+</button>
+                                    </div>
+                                    <button type="button" class="altera-qtd" onclick="atualizarQuantidade(<?php echo $carrinho['produto_id'] ?>)">Atualizar quantidade</button>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                <?php
-                }
-                ?>
+                        </li>
+                    <?php } ?>
             </ul>
-            
-            <!-- janela com o resumo da compra - janela dinamica quando seleciona o checkbox do item  -->
+
             <div class="janela-resumo">
                 <div class="resumo-compra">
                     <h3>Resumo da Compra</h3>
                     <p class="qtd-itens">Itens Selecionados: 0</p>
                     <p>Total dos itens: <strong class="preco-total">R$ 0,00 </strong></p>
-                    <a href="checkoutCarrinho.php"><button class="btn-finalizar">Finalizar Compra</button></a>
+                    <button type="submit" class="btn-finalizar">Finalizar Compra</button>
                 </div>
             </div>
+            </form>
+
         </div>
     </section>
 </body>
