@@ -1,7 +1,9 @@
 <?php
     session_start();
-    require_once('../bd/config.inc.php');
     ini_set('default_charset', 'utf-8');
+    require_once('../bd/dao/conexao.php');
+    require_once('../bd/dao/usuario_DAO.php');
+    $conexao = (new Conexao())->conectar();
 
     if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
         header("Location:login.html");
@@ -9,13 +11,9 @@
     }
 
     $cpf = $_SESSION['cpf'];
-    // busca cpf para setar a imagem do header
-    $sql = "SELECT * FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql);
-    $stmt->bindParam(':cpf', $cpf, PDO::PARAM_STR);
-    $stmt->execute();
-    
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
     if ($usuario && !empty($usuario['img_user'])) {
         $imagemUsuario = '../img/users/' . ($usuario['img_user']);
@@ -58,18 +56,18 @@
 
         <!--<ul class="menu-link" id="menu-link">
             <li><a href="index.html">Início</a></li>
-            <?php if ($_SESSION['tipo_usuario'] == 'admin'){?>
+            <?php if ($_SESSION['tipo_usuario'] == 'admin') { ?>
                 <li><a href="painelAdm.php">Painel Administrativo</a></li><?php } ?>
-            <?php if ($_SESSION['tipo_usuario'] == 'vendedor'){?>
+            <?php if ($_SESSION['tipo_usuario'] == 'vendedor') { ?>
                 <li><a href="painelVendedor.php">Painel do vendedor</a></li><?php } ?>
-            <?php if ($_SESSION['tipo_usuario'] == 'usuario'){?>
+            <?php if ($_SESSION['tipo_usuario'] == 'usuario') { ?>
                 <li><a href="solicitacaoCadastroVendedor.html">Quero vender na plataforma</a></li>
             <?php } ?>          
             <li><a href="carrinho.php"><img src="img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
         </ul>-->
 
-         <ul class="menu-link" id="menu-link">
+        <ul class="menu-link" id="menu-link">
             <li><a href="../index.php">Início</a></li>
             <li><a href="painelAdm.php">Painel Administrativo</a></li>
             <li><a href="painelVendedor.php">Painel do vendedor</a></li>
@@ -83,14 +81,13 @@
         <section class="perfil-usuario">
             <img src="<?= $imagemUsuario ?>" class="foto-usuario" alt="Foto do usuário">
             <div class="info-usuario">
-                <h2><?php echo $usuario['nome_completo']?></h2>
-                <p><?php echo $usuario['email']?></p>
-                <p><?php echo $usuario['telefone']?></p>
+                <h2><?php echo $usuario['nome_completo'] ?></h2>
+                <p><?php echo $usuario['email'] ?></p>
+                <p><?php echo $usuario['telefone'] ?></p>
                 <a href="form_editarPerfilUsuario.php"> <button class="btn-edicao">Editar perfil</button></a>
-                <a href="form_editarEnderecoUsuario.php"> <button class="btn-edicao">Editar endereços</button></a>           
-                <!--/*TODO criar formulário para forma de pagamento-->     
-                <a href="form_editarFormaPagamentoUsuario.php"> <button class="btn-edicao">Formas de pagamento</button></a>                
-                <a href="../bd/sair.php"> <button class="btn-edicao">Finalizar sessão</button></a>                
+                <a href="form_editarEnderecoUsuario.php"> <button class="btn-edicao">Editar endereços</button></a>
+                <a href="form_editarFormaPagamentoUsuario.php"> <button class="btn-edicao">Formas de pagamento</button></a>
+                <a href="../bd/sair.php"> <button class="btn-edicao">Finalizar sessão</button></a>
             </div>
         </section>
 
@@ -201,10 +198,10 @@
 
     <!--/*TODO mostrar mensagem depois de carregar a pagina-->
     <?php
-        if(isset($_SESSION['msgSucesso'])){
-            echo '<script>alert("'.$_SESSION['msgSucesso'].'")</script>';
-            unset($_SESSION["msgSucesso"]);
-        }
+    if (isset($_SESSION['msgSucesso'])) {
+        echo '<script>alert("' . $_SESSION['msgSucesso'] . '")</script>';
+        unset($_SESSION["msgSucesso"]);
+    }
     ?>
 </body>
 

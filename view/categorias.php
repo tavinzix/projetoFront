@@ -1,32 +1,30 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+require_once('../bd/dao/categoria_DAO.php');
+$conexao = (new Conexao())->conectar();
 
 $cpf = $_SESSION['cpf'] ?? null;
 $imagemUsuario = '../img/users/avatar.jpg';
 
-// busca cpf para setar a imagem do header
-if ($cpf) {
-    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql);
-    $stmt->bindParam(':cpf', $cpf);
-    $stmt->execute();
+if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
+    header("Location:login.html");
+    exit;
+}
 
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+//setar a imagem do header
+$listaUsuario = new usuario_DAO($conexao);
+$usuario = $listaUsuario->buscaUsuario($cpf);
 
-    if ($usuario && !empty($usuario['img_user'])) {
-        $imagemUsuario = '../img/users/' . ($usuario['img_user']);
-    }
+if ($usuario && !empty($usuario['img_user'])) {
+    $imagemUsuario = '../img/users/' . ($usuario['img_user']);
 }
 
 //TODO paginar depois de exibir 10
-
-// busca as categorias cadastradas
-$sql = "SELECT *, CASE WHEN status = '1' then 'Ativo' 
-            WHEN status = '2' then 'Inativo' end AS status_texto FROM categorias";
-$stmt = $connection->prepare($sql);
-$stmt->execute();
+$listaCategoria = new categoria_DAO($conexao);
+$categorias = $listaCategoria->listarCategoriaComStatus();
 
 ?>
 <!DOCTYPE html>
@@ -44,7 +42,7 @@ $stmt->execute();
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     <link rel="icon" href="../img/site/icone.png" type="image/x-icon">
 </head>
 
@@ -74,7 +72,7 @@ $stmt->execute();
         <ul class="menu-link" id="menu-link">
             <li><a href="../index.php">Início</a></li>
             <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
-            <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a>
+            <li><a href="perfilUsuario.php"><img src="<?php echo $usuario['img_user'] ?>" id="icone-perfil" alt="Perfil"></a>
             </li>
         </ul>
     </header>
@@ -106,22 +104,18 @@ $stmt->execute();
                 </tr>
             </thead>
             <tbody>
-                <?php
-                while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                ?>
+
+                <?php foreach ($categorias as $categoria): ?>
                     <tr>
                         <td><img class="imagem-produto" src="../img/categoria/<?= $categoria['imagem'] ?>" id="imagem-categoria" alt="imagem-categoria"></td>
-                        <td><?php echo $categoria['nome'] ?></td>
-                        <td><?php echo $categoria['descricao'] ?></td>
-                        <td><?php echo $categoria['url'] ?></td>
-                        <td><span class="tag <?php echo $categoria['status_texto'] ?>"><?php echo $categoria['status_texto'] ?></span></td>
-
-                        <!-- abre modal com todas as informações da loja -->
-                        <td><a onclick='abrirJanelaCategoria(<?php echo json_encode($categoria) ?>)'><button class="btn-editar">Editar</button></a></td>
+                        <td><?= $categoria['nome'] ?></td>
+                        <td><?= $categoria['descricao'] ?></td>
+                        <td><?= $categoria['url'] ?></td>
+                        <td><span class="tag <?= $categoria['status_texto'] ?>"><?= $categoria['status_texto'] ?></span></td>
+                        <td><a onclick='abrirJanelaCategoria(<?= json_encode($categoria) ?>)'><button class="btn-editar">Editar</button></a></td>
                     </tr>
-                <?php
-                }
-                ?>
+                <?php endforeach; ?>
+
             </tbody>
         </table>
     </main>
@@ -133,7 +127,7 @@ $stmt->execute();
             <h2>Detalhes da categoria</h2>
 
             <form action="../bd/controller/Categoria_controller.php" method="post" enctype="multipart/form-data" id="formularioCategoria">
-                <div class="informacao-categoria" style="display:none"> 
+                <div class="informacao-categoria" style="display:none">
                     <strong>Id da categoria:</strong>
                     <input id="id_categoria" name="id_categoria">
                 </div>

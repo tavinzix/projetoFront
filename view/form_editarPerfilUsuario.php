@@ -43,7 +43,7 @@ if ($usuario && !empty($usuario['img_user'])) {
     <!--CABEÇALHO-->
     <header class="menu">
         <div class="logo">
-            <a href="index.html"> <img src="../img/site/logo.png"></a>
+            <a href="../index.php"> <img src="../img/site/logo.png"></a>
         </div>
 
         <form action="buscar produto do banco" method="GET" class="busca-container">
@@ -67,7 +67,7 @@ if ($usuario && !empty($usuario['img_user'])) {
     <section class="editar-perfil">
         <!-- formulario de edição  -->
         <h3>Editar Perfil</h3>
-        <form class="form-perfil" action="../bd/editarPerfilUsuario.php" method="POST" enctype="multipart/form-data">
+        <form class="form-perfil" action="../bd/controller/Usuario_controller.php" method="POST" enctype="multipart/form-data">
             <div class="campo-form" style="display:none">
                 <label for="id">id</label>
                 <input type="text" id="id" name="id" value="<?php echo $usuario['id'] ?>">
@@ -129,7 +129,7 @@ if ($usuario && !empty($usuario['img_user'])) {
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn-salvar" name="acao" value="salvar">Salvar Alterações</button>
+            <button type="submit" class="btn-salvar" name="acao" value="editar">Salvar Alterações</button>
         </form>
     </section>
     <script src="../js/global.js"></script>
