@@ -114,7 +114,7 @@ function rejeitar() {
 }
 
 function abrirJanelaCategoria(categoria) {
-    document.getElementById("id_categoria").innerText = categoria.id;
+    document.getElementById("id_categoria").value = categoria.id;
     document.getElementById("nome").value = categoria.nome;
     document.getElementById("descricao").value = categoria.descricao;
     document.getElementById("url").value = categoria.url;
@@ -143,18 +143,10 @@ function fecharJanelaCategoria() {
 function editar() {
     const form = document.getElementById("formularioCategoria")
     const formData = new FormData(form);
-    let categoriaId = document.getElementById("id_categoria").innerHTML;
-    let nome = document.getElementById("nome").value;
-    let descricao = document.getElementById("descricao").value;
-    let url = document.getElementById("url").value;
-    
-    formData.append('acao', 'editar');
-    formData.append('id_categoria', categoriaId);
-    formData.append('nome', nome);
-    formData.append('descricao', descricao);
-    formData.append('url', url);
 
-    fetch('../bd/cadastro_categoria.php', {
+    formData.append('acao', 'editar');
+
+    fetch('../bd/controller/Categoria_controller.php', {
         method: "POST",
         body: formData
     });
@@ -166,13 +158,9 @@ function inativar() {
     const form = document.getElementById("formularioCategoria")
     const formData = new FormData(form);
 
-    let categoriaId = document.getElementById("id_categoria").innerHTML;
-
     formData.append('acao', 'inativar');
-    formData.append('id_categoria', categoriaId);
 
-
-    fetch('../bd/cadastro_categoria.php', {
+    fetch('../bd/controller/Categoria_controller.php', {
         method: "POST",
         body: formData
     });
@@ -184,12 +172,9 @@ function ativar() {
     const form = document.getElementById("formularioCategoria")
     const formData = new FormData(form);
 
-    let categoriaId = document.getElementById("id_categoria").innerHTML;
-
     formData.append('acao', 'ativar');
-    formData.append('id_categoria', categoriaId);
 
-    fetch('../bd/cadastro_categoria.php', {
+    fetch('../bd/controller/Categoria_controller.php', {
         method: "POST",
         body: formData
     });

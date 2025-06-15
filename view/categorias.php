@@ -132,10 +132,10 @@ $stmt->execute();
             <span onclick="fecharJanelaCategoria()">&#10005;</span>
             <h2>Detalhes da categoria</h2>
 
-            <form action="../bd/cadastro_categoria.php" method="post" enctype="multipart/form-data" id="formularioCategoria">
+            <form action="../bd/controller/Categoria_controller.php" method="post" enctype="multipart/form-data" id="formularioCategoria">
                 <div class="informacao-categoria" style="display:none"> 
                     <strong>Id da categoria:</strong>
-                    <p id="id_categoria" name="id_categoria"></p>
+                    <input id="id_categoria" name="id_categoria">
                 </div>
 
                 <div class="informacao-categoria">
