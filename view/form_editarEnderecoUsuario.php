@@ -1,11 +1,10 @@
 <?php
 session_start();
 ini_set('default_charset', 'utf-8');
-//require_once('../bd/config.inc.php');
 require_once('../bd/dao/conexao.php');
 require_once('../bd/dao/enderecoUsuario_DAO.php');
+require_once('../bd/dao/usuario_DAO.php');
 $conexao = (new Conexao())->conectar();
-
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     header("Location:../view/login.html");
@@ -13,22 +12,18 @@ if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
 
 $cpf = $_SESSION['cpf'] ?? null;
 $userId = $_SESSION['usuario_id'];
-
 $imagemUsuario = '../img/users/avatar.jpg';
+
 // busca cpf para setar a imagem do header
 if ($cpf) {
-    $sql_imagem = "SELECT * FROM usuarios WHERE cpf = :cpf";
-    $stmt = $conexao->prepare($sql_imagem);
-    $stmt->bindParam(':cpf', $cpf);
-    $stmt->execute();
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
-    $imagem = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($imagem && !empty($imagem['img_user'])) {
-        $imagemUsuario = '../img/users/' . ($imagem['img_user']);
+    if ($usuario && !empty($usuario['img_user'])) {
+        $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
+    //$_SESSION['id'] = $imagem['id'];
 
-    $_SESSION['id'] = $imagem['id'];
 
     $listaEndereco = new enderecoUsuario_DAO($conexao);
     $enderecos = $listaEndereco->listarEndereco($cpf);

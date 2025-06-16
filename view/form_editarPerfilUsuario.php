@@ -1,22 +1,21 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+$conexao = (new Conexao())->conectar();
+
+$cpf = $_SESSION['cpf'];
+$imagemUsuario = '../img/users/avatar.jpg';
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     header("Location:login.html");
     exit;
 }
 
-$cpf = $_SESSION['cpf'];
-
 //   busca dados do perfil 
-$sql = "SELECT *, to_char(dt_nasc, 'DD/MM/YYYY') as data_nascimento FROM usuarios WHERE cpf = :cpf";
-$stmt = $connection->prepare($sql);
-$stmt->bindParam(':cpf', $cpf);
-$stmt->execute();
-
-$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+$listaUsuario = new usuario_DAO($conexao);
+$usuario = $listaUsuario->buscaUsuario($cpf);
 
 if ($usuario && !empty($usuario['img_user'])) {
     $imagemUsuario = '../img/users/' . ($usuario['img_user']);
@@ -118,7 +117,7 @@ if ($usuario && !empty($usuario['img_user'])) {
 
                 <div class="container-fotos">
                     <div class="foto-interna">
-                        <img src="<?= $imagemUsuario ?>" alt="Perfil" id="atual">
+                        <img src="<?php echo $imagemUsuario ?>" alt="Perfil" id="atual">
                         <label for="foto">Foto atual</label>
                         <button type="submit" class="btn-remover" name="acao" value="removerFoto">Remover foto</button>
                     </div>

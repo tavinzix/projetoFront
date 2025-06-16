@@ -1,31 +1,28 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+$conexao = (new Conexao())->conectar();
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     header("Location:../view/login.html");
 }
 
 $cpf = $_SESSION['cpf'] ?? null;
+$imagemUsuario = '../img/users/avatar.jpg';
 $userId = $_SESSION['usuario_id'];
 
 // busca cpf para setar a imagem do header
 if ($cpf) {
-    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql);
-    $stmt->bindParam(':cpf', $cpf);
-    $stmt->execute();
-
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
     if ($usuario && !empty($usuario['img_user'])) {
         $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -97,7 +94,7 @@ if ($cpf) {
             </ul>
         </nav>
 
-         <!-- grafico e informações  -->
+        <!-- grafico e informações  -->
         <main class="info-vendas">
             <section class="metricas">
                 <div class="card">

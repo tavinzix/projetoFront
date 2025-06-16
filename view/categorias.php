@@ -15,11 +15,13 @@ if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
 }
 
 //setar a imagem do header
-$listaUsuario = new usuario_DAO($conexao);
-$usuario = $listaUsuario->buscaUsuario($cpf);
+if ($cpf) {
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
-if ($usuario && !empty($usuario['img_user'])) {
-    $imagemUsuario = '../img/users/' . ($usuario['img_user']);
+    if ($usuario && !empty($usuario['img_user'])) {
+        $imagemUsuario = '../img/users/' . ($usuario['img_user']);
+    }
 }
 
 //TODO paginar depois de exibir 10

@@ -1,10 +1,9 @@
 <?php
 session_start();
-//require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
-
 require_once('../bd/dao/conexao.php');
 require_once('../bd/dao/formaPagamentoUsuario_DAO.php');
+require_once('../bd/dao/usuario_DAO.php');
 $conexao = (new Conexao())->conectar();
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
@@ -17,18 +16,14 @@ $imagemUsuario = '../img/users/avatar.jpg';
 
 // busca cpf para setar a imagem do header
 if ($cpf) {
-    $sql_imagem = "SELECT * FROM usuarios WHERE cpf = :cpf";
-    $stmt = $conexao->prepare($sql_imagem);
-    $stmt->bindParam(':cpf', $cpf);
-    $stmt->execute();
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
-    $imagem = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($imagem && !empty($imagem['img_user'])) {
-        $imagemUsuario = '../img/users/' . ($imagem['img_user']);
+    if ($usuario && !empty($usuario['img_user'])) {
+        $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
 
-    $_SESSION['id'] = $imagem['id'];
+    //$_SESSION['id'] = $imagem['id'];
 
     $listaForma = new formaPagamentoUsuario_DAO($conexao);
     $formas = $listaForma->listarForma($cpf);
@@ -91,7 +86,7 @@ if ($cpf) {
             <?php
             if ($cpf) {
                 if ($formas->rowCount() > 0) {
-                    while ($usuario = $formas->fetch(PDO::FETCH_ASSOC)) { ?>
+                    foreach ($formas as $usuario): ?>
                         <div class="forma-pagamento">
                             <!-- dados da forma de pagamento  -->
                             <p><strong><?php echo $usuario['nome_cartao'] ?></strong></p>
@@ -111,7 +106,7 @@ if ($cpf) {
                             </div>
                         </div>
                     <?php
-                    }
+                    endforeach;
                     // mensagem caso não tenha nenhuma forma de pagamento cadastrada
                 } else { ?>
                     <div class="forma-pagamento">

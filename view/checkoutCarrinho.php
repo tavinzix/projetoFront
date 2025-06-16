@@ -1,7 +1,11 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+require_once('../bd/dao/enderecoUsuario_DAO.php');
+require_once('../bd/dao/formaPagamentoUsuario_DAO.php');
+$conexao = (new Conexao())->conectar();
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     header("Location:../view/login.html");
@@ -9,28 +13,15 @@ if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
 
 $cpf = $_SESSION['cpf'] ?? null;
 
-
 if ($cpf) {
-    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql);
-    $stmt->bindParam(':cpf', $cpf);
-    $stmt->execute();
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    $listaEndereco = new enderecoUsuario_DAO($conexao);
+    $enderecos = $listaEndereco->listarEndereco($cpf);
 
-    if ($usuario && !empty($usuario['img_user'])) {
-        $imagemUsuario = 'img/users/' . ($usuario['img_user']);
-    }
-
-    $sql_endereco = "SELECT * from usuarios u join enderecos e on e.user_id = u.id where u.cpf = :cpf";
-    $stmt_endereco = $connection->prepare($sql_endereco);
-    $stmt_endereco->bindParam(':cpf', $cpf);
-    $stmt_endereco->execute();
-
-    $sql_pagamento = "SELECT * from usuarios u join formas_pagamento fp on fp.user_id = u.id where u.cpf = :cpf";
-    $stmt_pagamento = $connection->prepare($sql_pagamento);
-    $stmt_pagamento->bindParam(':cpf', $cpf);
-    $stmt_pagamento->execute();
+    $listaPagamento = new formaPagamentoUsuario_DAO($conexao);
+    $pagamentos = $listaPagamento->listarForma($cpf);
 }
 
 ?>
@@ -63,8 +54,8 @@ if ($cpf) {
                     <h2>Escolha um Endereço</h2>
                     <div class="lista-enderecos">
                         <?php
-                        if ($stmt_endereco->rowCount() > 0) {
-                            while ($endereco = $stmt_endereco->fetch(PDO::FETCH_ASSOC)) { ?>
+                        if ($enderecos->rowCount() > 0) {
+                            foreach ($enderecos as $endereco): ?>
                                 <label class="card">
                                     <input type="radio" name="endereco_id" value="<?= $endereco['id'] ?>" required />
                                     <div>
@@ -73,7 +64,7 @@ if ($cpf) {
                                         <p><?= $endereco['cidade'] . ' - ' . $endereco['estado'] . ', ' . $endereco['cep'] ?></p>
                                     </div>
                                 </label>
-                            <?php }
+                            <?php endforeach;
                         } else { ?>
                             <div class="card">
                                 <h3>Ainda não há endereços cadastrados</h3>
@@ -87,8 +78,8 @@ if ($cpf) {
                     <h2>Forma de Pagamento</h2>
                     <div class="lista-pagamento">
                         <?php
-                        if ($stmt_pagamento->rowCount() > 0) {
-                            while ($pagamento = $stmt_pagamento->fetch(PDO::FETCH_ASSOC)) { ?>
+                        if ($pagamentos->rowCount() > 0) {
+                            foreach ($pagamentos as $pagamento): ?>
                                 <label class="card">
                                     <input type="radio" name="pagamento_id" value="<?= $pagamento['id'] ?>" required />
                                     <div>
@@ -96,8 +87,10 @@ if ($cpf) {
                                         <p><?= $pagamento['nome_titular'] . ', ' . $pagamento['numero_cartao'] ?></p>
                                     </div>
                                 </label>
-                        <?php }
-                        } ?>
+                        <?php
+                            endforeach;
+                        }
+                        ?>
                         <!-- Opções adicionais fixas -->
                         <label class="card">
                             <input type="radio" name="pagamento_id" value="pix" required />

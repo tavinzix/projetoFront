@@ -1,19 +1,19 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+require_once('../bd/dao/categoria_DAO.php');
+$conexao = (new Conexao())->conectar();
 
 // busca o usuario para setar a imagem no header
 $cpf = $_SESSION['cpf'] ?? null;
 $imagemUsuario = '../img/users/avatar.jpg';
 
 if ($cpf) {
-    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql);
-    $stmt->bindParam(':cpf', $cpf);
-    $stmt->execute();
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($usuario && !empty($usuario['img_user'])) {
         $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
@@ -33,7 +33,7 @@ if (isset($_GET['url'])) {
                 LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1
                 WHERE p.nome ILIKE :pesquisa or v.nome_loja ILIKE :pesquisa";
 
-    $stmt_produto = $connection->prepare($sql_produto);
+    $stmt_produto = $conexao->prepare($sql_produto);
     $stmt_produto->bindParam(':pesquisa', $pesquisa,  PDO::PARAM_STR);
     $stmt_produto->execute();
 

@@ -115,7 +115,8 @@ class usuario_DAO
     function buscaUsuario($cpf)
     {
         try {
-            $query = $this->conexao->prepare("SELECT * FROM usuarios WHERE cpf = :cpf");
+            $query = $this->conexao->prepare("SELECT *, to_char(dt_nasc, 'DD/MM/YYYY') as data_nascimento FROM usuarios 
+                                            WHERE cpf = :cpf");
             $query->execute(['cpf' => $cpf]);
             $resultado = $query->fetch(PDO::FETCH_ASSOC);
             return $resultado;

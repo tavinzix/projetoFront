@@ -1,33 +1,31 @@
 <?php
 session_start();
-require_once('bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('bd/dao/conexao.php');
+require_once('bd/dao/usuario_DAO.php');
+require_once('bd/dao/categoria_DAO.php');
+$conexao = (new Conexao())->conectar();
 
 $cpf = $_SESSION['cpf'] ?? null;
 $imagemUsuario = 'img/users/avatar.jpg';
 
 if ($cpf) {
-    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql);
-    $stmt->bindParam(':cpf', $cpf);
-    $stmt->execute();
-
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
     if ($usuario && !empty($usuario['img_user'])) {
         $imagemUsuario = 'img/users/' . ($usuario['img_user']);
     }
 }
 
-$sql_categoria = "SELECT * FROM categorias where status = '1' ORDER BY nome";
-$stmt_categoria = $connection->prepare($sql_categoria);
-$stmt_categoria->execute();
+$listaCategoria = new categoria_DAO($conexao);
+$categorias = $listaCategoria->listarCategoriaComStatus();
 
 $sql_produtoDestaque = "SELECT p.*, vp.*, pi.* FROM produtos p 
                         JOIN vendedores_produtos vp ON vp.produto_id = p.id 
                         LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1";
 
-$stmt_produtoDestaque = $connection->prepare($sql_produtoDestaque);
+$stmt_produtoDestaque = $conexao->prepare($sql_produtoDestaque);
 $stmt_produtoDestaque->execute();
 
 ?>
@@ -90,9 +88,7 @@ $stmt_produtoDestaque->execute();
             <button class="btn seta-esquerda-categoria">&#10094;</button>
 
             <div class="categorias">
-                <?php
-                while ($categoria = $stmt_categoria->fetch(PDO::FETCH_ASSOC)) {
-                ?>
+                <?php foreach ($categorias as $categoria): ?>
                     <div class="itens-categoria">
                         <a href="view/itensCategoria.php?url=<?php echo $categoria['url']; ?>">
                             <div class="img-categoria">
@@ -101,9 +97,7 @@ $stmt_produtoDestaque->execute();
                             <p><?php echo $categoria['nome'] ?></p>
                         </a>
                     </div>
-                <?php
-                }
-                ?>
+                <?php endforeach; ?>
             </div>
 
             <button class="btn seta-direita-categoria">&#10095;</button>

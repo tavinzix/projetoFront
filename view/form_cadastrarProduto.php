@@ -1,12 +1,13 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/categoria_DAO.php');
+$conexao = (new Conexao())->conectar();
 
 // busca categorias 
-$sqlCategoria = "SELECT * FROM categorias where status = '1' LIMIT 10";
-$stmt_categoria = $connection->prepare($sqlCategoria);
-$stmt_categoria->execute();
+$listaCategoria = new categoria_DAO($conexao);
+$categorias = $listaCategoria->listarCategoriaComStatus();
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +26,7 @@ $stmt_categoria->execute();
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     <link rel="icon" href="../img/site/icone.png" type="image/x-icon">
 </head>
 
@@ -47,11 +48,11 @@ $stmt_categoria->execute();
             <select name="categoria" id="categoria" required>
                 <option value="">Selecione</option>
                 <?php
-                while ($categoria = $stmt_categoria->fetch(PDO::FETCH_ASSOC)) {
+                foreach ($categorias as $categoria):
                 ?>
                     <option value="<?php echo $categoria['id'] ?>"><?php echo $categoria['nome'] ?></option>
                 <?php
-                }
+                endforeach;
                 ?>
             </select>
 
