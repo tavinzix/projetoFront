@@ -170,15 +170,17 @@ CREATE TABLE pedidos (
     id SERIAL PRIMARY KEY,
     usuario_id INT NOT NULL,
     data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(20) DEFAULT '1' CHECK (status IN ('1', '2', '3', '4', '5', '6', '7')),  
+    status VARCHAR(20) DEFAULT '1' CHECK (status IN ('1', '2', '3', '4', '5', '6', '7', '8', '9')),  
     valor_total NUMERIC(10,2),
-    endereco_entrega_id INT,
+    endereco_entrega_id INT NOT NULL,
+    forma_pagamento_id INT NOT NULL, 
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    FOREIGN KEY (endereco_entrega_id) REFERENCES enderecos(id)
+    FOREIGN KEY (endereco_entrega_id) REFERENCES enderecos(id),
+    FOREIGN KEY (forma_pagamento_id) REFERENCES formas_pagamento(id)
 );
-COMMENT ON COLUMN pedidos.status IS '1 - aguardando pagamento, 2 - a caminho, 3 - aguardando envio,, 4 - enviado, 5 - entregues, 6 - cancelados, 7 - reembolsado';
+COMMENT ON COLUMN pedidos.status IS '1 - aguardando pagamento, 2 - a caminho, 3 - aguardando envio,, 4 - enviado, 5 - entregues, 6 - cancelados, 7 - reembolsado, 8 - estornado, 9 - devolvido';
 
-CREATE TABLE pedido_itens (
+CREATE TABLE pedidos_itens (
     id SERIAL PRIMARY KEY,
     pedido_id INT NOT NULL,
     produto_id INT NOT NULL,

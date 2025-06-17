@@ -120,19 +120,13 @@
     font-size: 15px;
 }
 
-.status.entregue {
-    background-color: #d4f5d4;
-    color: green;
+.status.a-caminho {
+    background-color: #ede0f7;
+    color: #48066b;
 }
-
-.status.status.em-transito {
-    background-color: #d0ebff;
-    color: #0275d8;
-}
-
-.status.aguardando-pagamento {
-    background-color: #fff0cc;
-    color: #b48c00;
+.status.enviado {
+    background-color: #e0f7f4;
+    color: #066b62;
 }
 
 .status.aguardando-envio {
@@ -140,9 +134,19 @@
     color: #ef5b00;
 }
 
-.status.estornado {
-    background-color: #f8d7da;
-    color: #8e1cb1;
+.status.aguardando-pagamento {
+    background-color: #fff0cc;
+    color: #b48c00;
+}
+
+.status.entregue {
+    background-color: #d4f5d4;
+    color: green;
+}
+
+.status.reembolsado {
+    background-color: #dce9c8;
+    color: #5c9306;
 }
 
 .status.cancelado {
@@ -150,14 +154,14 @@
     color: red;
 }
 
-.status.enviado {
-    background-color: #e0f7f4;
-    color: #066b62;
+.status.estornado {
+    background-color: #f8d7da;
+    color: #8e1cb1;
 }
 
-.status.reembolsado {
-    background-color: #dce9c8;
-    color: #5c9306;
+.status.devolvido {
+    background-color: #efffd0;
+    color: #9fd802;
 }
 
 .btn-detalhes {

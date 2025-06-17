@@ -106,4 +106,17 @@ class categoria_DAO
             echo 'Error: ' . $e->getMessage();
         }
     }
+    function listarCategoriaAtiva()
+    {
+        try {
+            $query = $this->conexao->prepare("SELECT *, CASE WHEN status = '1' THEN 'Ativo'
+                                             WHEN status = '2' THEN 'Inativo' END AS status_texto FROM categorias WHERE status = '1'");
+
+            $query->execute();
+
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
 }

@@ -11,6 +11,7 @@ if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
 }
 
 $cpf = $_SESSION['cpf'] ?? null;
+$userId = $_SESSION['usuario_id'];
 $imagemUsuario = '../img/users/avatar.jpg';
 
 // busca cpf para setar a imagem do header
@@ -22,6 +23,31 @@ if ($cpf) {
         $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
 }
+
+$sql_pedidos = "SELECT *, CASE WHEN status = '1' THEN 'Aguardando Pagamento' 
+	                    WHEN status = '2' THEN 'A caminho' 
+                        WHEN status = '3' THEN 'Aguardando Envio' 
+                        WHEN status = '4' THEN 'Enviado' 
+                        WHEN status = '5' THEN 'Entregue' 
+                        WHEN status = '6' THEN 'Cancelado' 
+                        WHEN status = '7' THEN 'Reembolsado'
+                        WHEN status = '8' THEN 'Estornado' 
+                        WHEN status = '9' THEN 'Devolvido' END AS status_texto  from pedidos pe 
+                join pedidos_itens pi on pi.pedido_id = pe.id
+                join produtos pr on pr.id = pi.produto_id
+                join produto_imagens pri on pri.produto_id = pr.id and pri.ordem = '1' 
+                WHERE pe.usuario_id = :userId";
+
+$stmt_pedidos = $conexao->prepare($sql_pedidos);
+$stmt_pedidos->bindValue(':userId', $userId);
+$stmt_pedidos->execute();
+
+
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -82,6 +108,7 @@ if ($cpf) {
     </header>
 
     <main class="pagina-usuario">
+        <!-- perfil do usuario -->
         <section class="perfil-usuario">
             <img src="<?= $imagemUsuario ?>" class="foto-usuario" alt="Foto do usuário">
             <div class="info-usuario">
@@ -101,101 +128,31 @@ if ($cpf) {
 
             <ul class="filtros-pedidos">
                 <li class="aba ativa" onclick="filtrarPedidos('todos')">Todos</li>
-                <li class="aba" onclick="filtrarPedidos('entregue')">Entregues</li>
                 <li class="aba" onclick="filtrarPedidos('em-transito')">A caminho</li>
-                <li class="aba" onclick="filtrarPedidos('aguardando-pagamento')">Aguardando pagamento</li>
-                <li class="aba" onclick="filtrarPedidos('aguardando-envio')">Aguardando envio</li>
-                <li class="aba" onclick="filtrarPedidos('estornado')">Estornados</li>
-                <li class="aba" onclick="filtrarPedidos('cancelado')">Cancelados</li>
                 <li class="aba" onclick="filtrarPedidos('enviado')">Enviados</li>
+                <li class="aba" onclick="filtrarPedidos('aguardando-envio')">Aguardando envio</li>
+                <li class="aba" onclick="filtrarPedidos('aguardando-pagamento')">Aguardando pagamento</li>
+                <li class="aba" onclick="filtrarPedidos('entregue')">Entregues</li>
+                <li class="aba" onclick="filtrarPedidos('reembolsado')">Reembolsado</li>
+                <li class="aba" onclick="filtrarPedidos('cancelado')">Cancelados</li>
+                <li class="aba" onclick="filtrarPedidos('estornado')">Estornados</li>
+                <li class="aba" onclick="filtrarPedidos('devolvido')">Devolvido</li>
             </ul>
 
             <ul class="lista-pedidos">
-                <li class="pedido">
-                    <img src="../img/produtos/p2.png" alt="Produto" class="foto-produto">
-                    <div class="info-pedido">
-                        <h4>Palete de Tijolos Cerâmicos</h4>
-                        <p>Data: 22/04/2025</p>
-                        <p>Status: <span class="status entregue">Entregue</span></p>
-                        <p>Valor: R$ 89,90</p>
-                        <button class="btn-detalhes">Ver Detalhes</button>
-                    </div>
-                </li>
-
-                <li class="pedido">
-                    <img src="../img/produtos/p3.png" alt="Produto" class="foto-produto">
-                    <div class="info-pedido">
-                        <h4>Cimento CP-II 50kg</h4>
-                        <p>Data: 24/04/2025</p>
-                        <p>Status: <span class="status em-transito">Em trânsito</span></p>
-                        <p>Valor: R$ 39,90</p>
-                        <button class="btn-detalhes">Ver Detalhes</button>
-                    </div>
-                </li>
-
-                <li class="pedido">
-                    <img src="../img/produtos/p1.jpg" alt="Produto" class="foto-produto">
-                    <div class="info-pedido">
-                        <h4>Betoneira 400L Monofásica</h4>
-                        <p>Data: 20/04/2025</p>
-                        <p>Status: <span class="status aguardando-pagamento">Aguardando pagamento</span></p>
-                        <p>Valor: R$ 159,90</p>
-                        <button class="btn-detalhes">Ver Detalhes</button>
-                    </div>
-                </li>
-                <li class="pedido">
-                    <img src="../img/produtos/p4.jpg" alt="Produto" class="foto-produto">
-                    <div class="info-pedido">
-                        <h4>Areia Fina Ensacada 20kg</h4>
-                        <p>Data: 25/04/2025</p>
-                        <p>Status: <span class="status aguardando-envio">Aguardando envio</span></p>
-                        <p>Valor: R$ 19,90</p>
-                        <button class="btn-detalhes">Ver Detalhes</button>
-                    </div>
-                </li>
-                <li class="pedido">
-                    <img src="../img/produtos/p3.png" alt="Produto" class="foto-produto">
-                    <div class="info-pedido">
-                        <h4>Cimento CP-II 50kg</h4>
-                        <p>Data: 24/04/2025</p>
-                        <p>Status: <span class="status estornado">Estornado</span></p>
-                        <p>Valor: R$ 39,90</p>
-                        <button class="btn-detalhes">Ver Detalhes</button>
-                    </div>
-                </li>
-
-                <li class="pedido">
-                    <img src="../img/produtos/p4.jpg" alt="Produto" class="foto-produto">
-                    <div class="info-pedido">
-                        <h4>Areia Fina Ensacada 20kg</h4>
-                        <p>Data: 25/04/2025</p>
-                        <p>Status: <span class="status cancelado">Cancelado</span></p>
-                        <p>Valor: R$ 19,90</p>
-                        <button class="btn-detalhes">Ver Detalhes</button>
-                    </div>
-                </li>
-
-                <li class="pedido">
-                    <img src="../img/produtos/p4.jpg" alt="Produto" class="foto-produto">
-                    <div class="info-pedido">
-                        <h4>Areia Fina Ensacada g</h4>
-                        <p>Data: 25/04/2025</p>
-                        <p>Status: <span class="status enviado">Enviado</span></p>
-                        <p>Valor: R$ 19,90</p>
-                        <button class="btn-detalhes">Ver Detalhes</button>
-                    </div>
-                </li>
-
-                <li class="pedido">
-                    <img src="../img/produtos/p4.jpg" alt="Produto" class="foto-produto">
-                    <div class="info-pedido">
-                        <h4>Areia Fina Ensacada g</h4>
-                        <p>Data: 25/04/2025</p>
-                        <p>Status: <span class="status reembolsado">Reembolsado</span></p>
-                        <p>Valor: R$ 19,90</p>
-                        <button class="btn-detalhes">Ver Detalhes</button>
-                    </div>
-                </li>
+                <?php
+                while ($pedidos = $stmt_pedidos->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <li class="pedido">
+                        <img src="../img/produtos/<?php echo $pedidos['imagem_url'] ?>" alt="Produto" class="foto-produto">
+                        <div class="info-pedido">
+                            <h4><?php echo $pedidos['descricao'] ?></h4>
+                            <p>Data: <?php echo date('d/m/Y', strtotime($pedidos['data_pedido'])) ?></p>
+                            <p>Status: <span class="status <?php echo strtolower(str_replace(' ', '-', $pedidos['status_texto'])) ?>"><?php echo $pedidos['status_texto'] ?></span></p>
+                            <p>Valor: R$ <?php echo number_format($pedidos['valor_total'], 2, ',', '.') ?></p>
+                            <button class="btn-detalhes">Ver Detalhes</button>
+                        </div>
+                    <?php } ?>
+                    </li>
             </ul>
         </section>
     </main>
