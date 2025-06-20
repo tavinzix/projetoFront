@@ -1,5 +1,21 @@
 <?php
 session_start();
+ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+require_once('../bd/dao/solicitacao_DAO.php');
+$conexao = (new Conexao())->conectar();
+
+$cpf = $_SESSION['cpf'];
+$userId = $_SESSION['usuario_id'];
+
+if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
+    header("Location:login.html");
+    exit;
+}
+
+$listaSolicitacaoRejeitada = new solicitacao_DAO($conexao);
+$solicitacoes = $listaSolicitacaoRejeitada->buscaSolicitacaoRecusadaPorUsuario($userId);
 ?>
 
 <!DOCTYPE html>
@@ -25,11 +41,7 @@ session_start();
         <h2>Sua solicitação foi negada. <br><br>Você não poderá vender na plataforma</h2>
         <br><br>
         <p style="text-align: center;">Motivo da rejeição:<br>
-            <?php
-            if (isset($_SESSION['msgRecusado'])) {
-                echo $_SESSION['msgRecusado'];
-            }
-            ?>
+          <?php echo $solicitacoes['motivo_rejeicao'] ?>
         </p>
         <div class="links">
             <a href="perfilUsuario.php">←Voltar</a>

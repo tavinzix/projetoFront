@@ -1,24 +1,24 @@
 /*SOLICITAÇÕES PENDENTES*/
 function abrirJanelaSolicitacao(dados_loja) {
-    document.getElementById("id_pedido").innerHTML = dados_loja.id;
-    document.getElementById("id_user").innerHTML = dados_loja.user_id;
-    document.getElementById("status").innerHTML = dados_loja.status;
-    document.getElementById("nome").innerHTML = dados_loja.nome_loja;
-    document.getElementById("cnpj").innerHTML = dados_loja.cnpj;
-    document.getElementById("email").innerHTML = dados_loja.email;
-    document.getElementById("telefone").innerHTML = dados_loja.telefone;
-    document.getElementById("cep").innerHTML = dados_loja.cep;
-    document.getElementById("estado").innerHTML = dados_loja.estado;
-    document.getElementById("cidade").innerHTML = dados_loja.cidade;
-    document.getElementById("bairro").innerHTML = dados_loja.bairro;
-    document.getElementById("rua").innerHTML = dados_loja.rua;
-    document.getElementById("numero").innerHTML = dados_loja.numero;
-    document.getElementById("categoria").innerHTML = dados_loja.categoria;
-    document.getElementById("descricao").innerHTML = dados_loja.descricao_loja;
-    document.getElementById("data").innerHTML = dados_loja.data_solicitacao;
-    document.getElementById("motivo").innerHTML = dados_loja.motivo_rejeicao;
+    document.getElementById("id_pedido").value = dados_loja.id;
+    document.getElementById("id_user").value = dados_loja.user_id;
+    document.getElementById("status").value = dados_loja.status;
+    document.getElementById("nome").value = dados_loja.nome_loja;
+    document.getElementById("cnpj").value = dados_loja.cnpj;
+    document.getElementById("email").value = dados_loja.email;
+    document.getElementById("telefone").value = dados_loja.telefone;
+    document.getElementById("cep").value = dados_loja.cep;
+    document.getElementById("estado").value = dados_loja.estado;
+    document.getElementById("cidade").value = dados_loja.cidade;
+    document.getElementById("bairro").value = dados_loja.bairro;
+    document.getElementById("rua").value = dados_loja.rua;
+    document.getElementById("numero").value = dados_loja.numero;
+    document.getElementById("categoria").value = dados_loja.categoria;
+    document.getElementById("descricao").value = dados_loja.descricao_loja;
+    document.getElementById("data").value = dados_loja.data_solicitacao;
+    document.getElementById("motivo").value = dados_loja.motivo_rejeicao;
 
-    let status = document.getElementById("status").innerText;
+    let status = document.getElementById("status").value;
 
     if (status == '3' || status == '2') {
         const btnRejeitar = document.getElementById("rejeitarBtn");
@@ -57,36 +57,10 @@ function fecharJanelaSolicitacao() {
 function aprovar() {
     const form = document.getElementById("formularioSolicitacao")
     const formData = new FormData(form);
-    let userId = document.getElementById("id_user").innerHTML;
-    let nome = document.getElementById("nome").innerHTML;
-    let cnpj = document.getElementById("cnpj").innerHTML;
-    let descricao = document.getElementById("descricao").innerHTML;
-    let email = document.getElementById("email").innerHTML;
-    let telefone = document.getElementById("telefone").innerHTML;
-    let cep = document.getElementById("cep").innerHTML;
-    let estado = document.getElementById("estado").innerHTML;
-    let cidade = document.getElementById("cidade").innerHTML;
-    let bairro = document.getElementById("bairro").innerHTML;
-    let rua = document.getElementById("rua").innerHTML;
-    let numero = document.getElementById("numero").innerHTML;
-    let categoria = document.getElementById("categoria").innerHTML;
 
     formData.append('acao', 'aprovar');
-    formData.append('id_user', userId);
-    formData.append('nome', nome);
-    formData.append('cnpj', cnpj);
-    formData.append('descricao', descricao);
-    formData.append('email', email);
-    formData.append('telefone', telefone);
-    formData.append('cep', cep);
-    formData.append('estado', estado);
-    formData.append('cidade', cidade);
-    formData.append('bairro', bairro);
-    formData.append('rua', rua);
-    formData.append('numero', numero);
-    formData.append('categoria', categoria);
 
-    fetch('../bd/solicitacao_vendedor.php', {
+    fetch('../bd/controller/Solicitacao_controller.php', {
         method: "POST",
         body: formData
     });
@@ -99,12 +73,9 @@ function rejeitar() {
     const form = document.getElementById("formularioSolicitacao")
     const formData = new FormData(form);
 
-    let pedidoId = document.getElementById("id_pedido").innerHTML;
-
     formData.append('acao', 'rejeitar');
-    formData.append('id_pedido', pedidoId);
 
-    fetch('../bd/solicitacao_vendedor.php', {
+    fetch('../bd/controller/Solicitacao_controller.php', {
         method: "POST",
         body: formData
     });

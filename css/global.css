@@ -1,183 +1,183 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
 }
 
 /*MENU*/
 header.menu {
-  background-color: #FF6B00;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  height: auto;
+    background-color: #FF6B00;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: auto;
 }
 
 .logo {
-  margin: -15px;
+    margin: -15px;
 }
 
 .logo img {
-  width: 250px;
+    width: 250px;
 }
 
 #busca {
-  background-color: azure;
-  width: 500px;
-  height: 70px;
+    background-color: azure;
+    width: 500px;
+    height: 70px;
 }
 
 .menu-hamburguer {
-  font-size: 28px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: none;
 }
 
 .menu-link {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-  align-items: center;
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    align-items: center;
 }
 
 .menu-link li a {
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-  display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: inline-block;
 }
 
 .menu-link li a:hover {
-  opacity: 0.9;
-  transform: translateY(-3px) scale(1.05);
-  transition: transform 0.2s ease;
+    opacity: 0.9;
+    transform: translateY(-3px) scale(1.05);
+    transition: transform 0.2s ease;
 }
 
 #icone-perfil {
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
 }
 
 
 /*CAIXA DE PESQUISA*/
 .busca-container {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  margin: 20px auto;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
 }
 
 .busca-input {
-  width: 100%;
-  padding: 12px 40px 12px 16px;
-  border: 2px solid #ccc;
-  border-radius: 25px;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .busca-input:focus {
-  border-color: #b64d02;
-  outline: none;
-  box-shadow: 0 2px 8px #858585;
+    border-color: #b64d02;
+    outline: none;
+    box-shadow: 0 2px 8px #858585;
 }
 
 .lupa-icone {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-  color: #888;
-  cursor: pointer;
-  background-color: transparent;
-  border: 0;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #888;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
 }
 
 #microfone {
-  position: absolute;
-  right: 60px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 #microfone img {
-  width: 25px;
-  height: 25px;
+    width: 25px;
+    height: 25px;
 }
 
 
 
 .btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 100px;
-  width: 50px;
-  height: 50px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
 }
 
 .quantidade-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
 }
 
 .quantidade-container button {
-  width: 32px;
-  height: 32px;
-  font-size: 20px;
-  background-color: #FF6B00;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    background-color: #FF6B00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .quantidade-container input {
-  width: 60px;
-  text-align: center;
-  font-size: 16px;
-  padding: 5px;
+    width: 60px;
+    text-align: center;
+    font-size: 16px;
+    padding: 5px;
 }
 
 .links {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .links a {
-  color: #FF6B00;
-  text-decoration: none;
-  font-size: 15px;
+    color: #FF6B00;
+    text-decoration: none;
+    font-size: 15px;
 }
 
 .links a:hover {
-  color: #b14b07;
+    color: #b14b07;
 }
 
 
@@ -214,7 +214,8 @@ header.menu {
 
 .janela-solicitacao,
 .janela-categoria,
-.janela-endereco, .janela-pagamento {
+.janela-endereco,
+.janela-pagamento {
     display: none;
     position: fixed;
     z-index: 999;
@@ -228,7 +229,8 @@ header.menu {
 
 .janela-conteudo-solicitacoes,
 .janela-conteudo-categoria,
-.janela-conteudo-endereco, .janela-conteudo-pagamento {
+.janela-conteudo-endereco,
+.janela-conteudo-pagamento {
     background-color: #fff;
     margin: 5% auto;
     padding: 0 20px 20px 20px;
@@ -242,7 +244,8 @@ header.menu {
 
 .janela-conteudo-solicitacoes h2,
 .janela-conteudo-categoria h2,
-.janela-conteudo-endereco h2, .janela-conteudo-pagamento h2 {
+.janela-conteudo-endereco h2,
+.janela-conteudo-pagamento h2 {
     position: sticky;
     top: 0;
     padding: 10px 0;
@@ -255,7 +258,8 @@ header.menu {
 
 .janela-conteudo-solicitacoes span,
 .janela-conteudo-categoria span,
-.janela-conteudo-endereco span, .janela-conteudo-pagamento span {
+.janela-conteudo-endereco span,
+.janela-conteudo-pagamento span {
     float: right;
     position: sticky;
     top: 0;
@@ -271,7 +275,8 @@ header.menu {
 
 .informacao-loja,
 .informacao-categoria,
-.informacao-endereco, .informacao-pagamento {
+.informacao-endereco,
+.informacao-pagamento {
     background-color: #f8f8f8;
     padding: 10px;
     margin-top: 15px;
@@ -281,16 +286,24 @@ header.menu {
 
 .informacao-loja p,
 .informacao-categoria p,
-.informacao-endereco p, .informacao-pagamento p {
+.informacao-endereco p,
+.informacao-pagamento p {
     margin: 5px 0;
 }
 
+.informacao-loja input,
 .informacao-loja textarea,
 .informacao-categoria input,
 .informacao-categoria textarea,
-.informacao-endereco input, .informacao-endereco textarea, .informacao-pagamento input {
+.informacao-endereco input,
+.informacao-endereco textarea,
+.informacao-pagamento input {
     padding: 0.5rem;
     border-radius: 6px;
     border: 1px solid #ccc;
     font-size: 1rem;
+}
+
+.informacao-loja input{
+    width: 280px;
 }

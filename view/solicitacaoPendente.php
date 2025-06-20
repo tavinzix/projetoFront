@@ -1,30 +1,27 @@
 <?php
-    session_start();
-    require_once('../bd/config.inc.php');
-    ini_set('default_charset', 'utf-8');
+session_start();
+ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+require_once('../bd/dao/solicitacao_DAO.php');
+$conexao = (new Conexao())->conectar();
 
-    $cpf = $_SESSION['cpf'] ?? null;
-    $imagemUsuario = '../img/users/avatar.jpg';
-    // busca a imagem para setar no header 
-    if ($cpf) {
-        $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-        $stmt = $connection->prepare($sql);
-        $stmt->bindParam(':cpf', $cpf);
-        $stmt->execute();
 
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+$cpf = $_SESSION['cpf'] ?? null;
+$imagemUsuario = '../img/users/avatar.jpg';
+// busca a imagem para setar no header 
+if ($cpf) {
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
-        if ($usuario && !empty($usuario['img_user'])) {
-            $imagemUsuario = '../img/users/' . ($usuario['img_user']);
-        }
+    if ($usuario && !empty($usuario['img_user'])) {
+        $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
-    
-    // busca solicitações pendentes 
-    $sql = "SELECT *, CASE WHEN status = '1' then 'Pendente' 
-            WHEN status = '2' then 'Recusado' else 'Aprovado' end AS status_texto
-            FROM solicitacoes_vendedor ORDER BY status, data_solicitacao LIMIT 10";
-    $stmt = $connection->prepare($sql);
-    $stmt->execute();
+}
+
+// busca solicitações pendentes 
+$listaSolicitacao = new solicitacao_DAO($conexao);
+$solicitacoes = $listaSolicitacao->buscaSolicitacaoComStatus();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -44,6 +41,7 @@
     <link rel="icon" href="../img/site/icone.png" type="image/x-icon">
 
 </head>
+
 <body>
     <!--CABEÇALHO-->
     <header class="menu">
@@ -99,92 +97,97 @@
             </thead>
             <tbody>
                 <?php
-                    while ($solicitacao = $stmt->fetch(PDO::FETCH_ASSOC)) { 
+                    foreach($solicitacoes as $solicitacao):        
                 ?>
-                <tr>                 
-                    <td><?php echo $solicitacao['nome_loja']?></td>
-                    <td><?php echo $solicitacao['cnpj']?></td>
-                    <td><?php echo $solicitacao['estado'] . ' - ' . $solicitacao['cidade'] ?></td>
-                    <td><span class="tag <?php echo $solicitacao['status_texto']?>"><?php echo $solicitacao['status_texto']?></span></td>
-                    <!-- abre modal com todas as informações da loja -->
-                    <td><a onclick='abrirJanelaSolicitacao(<?php echo json_encode($solicitacao) ?>)'><button class="btn-editar">Avaliar</button></a></td>
-                </tr>
-                <?php 
-                    } 
+                    <tr>
+                        <td><?php echo $solicitacao['nome_loja'] ?></td>
+                        <td><?php echo $solicitacao['cnpj'] ?></td>
+                        <td><?php echo $solicitacao['estado'] . ' - ' . $solicitacao['cidade'] ?></td>
+                        <td><span class="tag <?php echo $solicitacao['status_texto'] ?>"><?php echo $solicitacao['status_texto'] ?></span></td>
+                        <!-- abre modal com todas as informações da loja -->
+                        <td><a onclick='abrirJanelaSolicitacao(<?php echo json_encode($solicitacao) ?>)'><button class="btn-editar">Avaliar</button></a></td>
+                    </tr>
+                <?php
+                    endforeach;
                 ?>
             </tbody>
         </table>
     </main>
-        
+
     <div id="janela-solicitacoes" class="janela-solicitacao">
         <!-- detalhes da solicitação -->
         <div class="janela-conteudo-solicitacoes">
             <span onclick="fecharJanelaSolicitacao()">&#10005;</span>
             <h2>Detalhes da loja</h2>
-            
-            <form action="../bd/solicitacao_vendedor.php" method="post" id="formularioSolicitacao">
-                <div class="informacao-loja" style="display:none">
-                    <strong>Id do pedido:</strong><p id="id_pedido" name="id_pedido"></p>
-                </div>
 
-                <div class="informacao-loja" style="display:none">
-                    <strong>Id usuario:</strong><p id="id_user" name="id_user"></p>
-                </div>
-                
-                <div class="informacao-loja" style="display:none">
-                    <strong>Status:</strong><p id="status" name="status"></p>
-                </div>
-                
+            <form action="../bd/controller/Solicitacao_controller.php" method="post" id="formularioSolicitacao">
+                <input id="id_pedido" name="id_pedido" type="hidden"></input>
+                <input id="id_user" name="id_user" type="hidden"></input>
+                <input id="status" name="status" type="hidden"></input>
+
                 <div class="informacao-loja">
-                    <strong>Nome da loja:</strong><p id="nome" name="nome"></p>
+                    <strong>Nome da loja:</strong><br>
+                    <input id="nome" name="nome" type="text"></input>
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>CNPJ:</strong><p id="cnpj" name="cnpj"></p>
+                    <strong>CNPJ:</strong><br>
+                    <input id="cnpj" name="cnpj"></input>
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>Email:</strong><p id="email" name="email"></p>
+                    <strong>Email:</strong><br>
+                    <input id="email" name="email"></input>
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>Telefone:</strong><p id="telefone" name="telefone"></p>
+                    <strong>Telefone:</strong><br>
+                    <input id="telefone" name="telefone"></input>
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>CEP:</strong><p id="cep" name="cep"></p>
+                    <strong>CEP:</strong><br>
+                    <input id="cep" name="cep"></input>
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>Estado</strong><p id="estado" name="estado"></p>
+                    <strong>Estado</strong><br>
+                    <input id="estado" name="estado"></input>
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>Cidade</strong><p id="cidade" name="cidade"></p>
+                    <strong>Cidade</strong><br>
+                    <input id="cidade" name="cidade"></input>
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>Bairro</strong><p id="bairro" name="bairro"></p>
+                    <strong>Bairro</strong><br>
+                    <input id="bairro" name="bairro"></input>
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>Rua</strong><p id="rua" name="rua"></p>
-                </div>
-                
-                <div class="informacao-loja">
-                    <strong>Número</strong><p id="numero" name="numero"></p>
+                    <strong>Rua</strong><br>
+                    <input id="rua" name="rua"></input>
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>Categoria:</strong><p id="categoria" name="categoria"></p>
+                    <strong>Número</strong><br>
+                    <input id="numero" name="numero"></input>
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>Descrição:</strong><p id="descricao" name="descricao"></p>
+                    <strong>Categoria:</strong><br>
+                    <input id="categoria" name="categoria"></input>
                 </div>
 
                 <div class="informacao-loja">
-                    <strong>Data do pedido:</strong><p id="data"></p>
+                    <strong>Descrição:</strong><br>
+                    <input id="descricao" name="descricao"></input>
+                </div>
+
+                <div class="informacao-loja">
+                    <strong>Data do pedido:</strong><br>
+                    <input id="data"></input>
                 </div>
 
                 <div class="informacao-loja">
@@ -200,4 +203,5 @@
     <script src="../js/painelAdm.js"></script>
     <script src="../js/global.js"></script>
 </body>
+
 </html>
