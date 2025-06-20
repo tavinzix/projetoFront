@@ -1,4 +1,5 @@
 bd/config.inc.php
+bd/dao/conexao.php
 img/lojas
 img/oferta
 img/categoria
