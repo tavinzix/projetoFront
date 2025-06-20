@@ -127,67 +127,67 @@ $solicitacoes = $listaSolicitacao->buscaSolicitacaoComStatus();
 
                 <div class="informacao-loja">
                     <strong>Nome da loja:</strong><br>
-                    <input id="nome" name="nome" type="text"></input>
+                    <input id="nome" name="nome" type="text" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>CNPJ:</strong><br>
-                    <input id="cnpj" name="cnpj"></input>
+                    <input id="cnpj" name="cnpj" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>Email:</strong><br>
-                    <input id="email" name="email"></input>
+                    <input id="email" name="email" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>Telefone:</strong><br>
-                    <input id="telefone" name="telefone"></input>
+                    <input id="telefone" name="telefone" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>CEP:</strong><br>
-                    <input id="cep" name="cep"></input>
+                    <input id="cep" name="cep" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>Estado</strong><br>
-                    <input id="estado" name="estado"></input>
+                    <input id="estado" name="estado" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>Cidade</strong><br>
-                    <input id="cidade" name="cidade"></input>
+                    <input id="cidade" name="cidade" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>Bairro</strong><br>
-                    <input id="bairro" name="bairro"></input>
+                    <input id="bairro" name="bairro" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>Rua</strong><br>
-                    <input id="rua" name="rua"></input>
+                    <input id="rua" name="rua" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>Número</strong><br>
-                    <input id="numero" name="numero"></input>
+                    <input id="numero" name="numero" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>Categoria:</strong><br>
-                    <input id="categoria" name="categoria"></input>
+                    <input id="categoria" name="categoria" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>Descrição:</strong><br>
-                    <input id="descricao" name="descricao"></input>
+                    <input id="descricao" name="descricao" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
                     <strong>Data do pedido:</strong><br>
-                    <input id="data"></input>
+                    <input id="data" readonly></input>
                 </div>
 
                 <div class="informacao-loja">
