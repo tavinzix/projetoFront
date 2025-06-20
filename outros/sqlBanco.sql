@@ -42,9 +42,9 @@ CREATE TABLE vendedores (
     bairro VARCHAR(100) NOT NULL,
     rua VARCHAR(255) NOT NULL,
     numero VARCHAR(20) NOT NULL,
-    imagem_logo VARCHAR(255),
     avaliacao_media NUMERIC(3,2) DEFAULT 0.00,
     status CHARACTER(1) DEFAULT '1' CHECK (status IN ('1', '2', '3')),
+    img_vendedor character varying(255) NOT NULL  DEFAULT 'semImagem.jpg',
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
@@ -199,13 +199,6 @@ CREATE TABLE vendedores_ofertas (
     FOREIGN KEY (vendedor_id) REFERENCES vendedores(id) ON DELETE CASCADE,
     FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
 );
-
-CREATE TABLE vendedor_imagens(
-    id SERIAL PRIMARY KEY, 
-    vendedor_id INT NOT NULL,
-    imagem_url character varying(255) NOT NULL  DEFAULT 'semImagem.jpg',
-    FOREIGN KEY (vendedor_id) REFERENCES vendedores(id) ON DELETE CASCADE,
-)
 
 CREATE TABLE formas_pagamento(
     id SERIAL PRIMARY KEY,
