@@ -19,6 +19,9 @@ $itens = $_SESSION['carrinhotemp'];
 $endereco_id = $_POST['endereco_id'] ?? null;
 $pagamento_id = $_POST['pagamento_id'] ?? null;
 
+$_SESSION['endereco_id'] = $endereco_id;
+$_SESSION['pagamento_id'] = $pagamento_id;
+
 if (!$endereco_id || !$pagamento_id) {
     die('Endereço ou forma de pagamento não selecionado.');
 }
@@ -59,7 +62,7 @@ if (empty($produtosIds)) {
     die('Nenhum produto no carrinho.');
 }
 
-// Prepara placeholders para o IN do PDO
+
 $placeholders = implode(',', array_fill(0, count($produtosIds), '?'));
 
 // SQL para buscar os detalhes dos produtos específicos do usuário
@@ -69,14 +72,12 @@ $sql_itens = "  SELECT ci.*, p.*, u.id, p.nome, v.*, (SELECT imagem_url FROM pro
                     JOIN produtos p ON p.id = ci.produto_id
                     JOIN vendedores_produtos vp on vp.produto_id = p.id
                     JOIN vendedores v on v.id = vp.vendedor_id
-                    JOIN usuarios u ON u.id = c.usuario_id 
+                    JOIN usuarios u ON u.id = c.usuario_id WHERE u.id = ? and p.id IN ($placeholders)";
 
-
-WHERE p.id IN ($placeholders)";
-
-// Prepara e executa o SQL
+$parametros = array_merge([$userId], $produtosIds);
 $stmt_itens = $connection->prepare($sql_itens);
-$stmt_itens->execute($produtosIds);
+$stmt_itens->execute($parametros);
+
 $itensFinal = $stmt_itens->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -87,7 +88,6 @@ foreach ($itensFinal as $item) {
     $subtotal += $item['preco_unitario'] * $item['quantidade'];
 }
 $total = $subtotal + $frete;
-
 ?>
 
 <!DOCTYPE html>
@@ -143,8 +143,8 @@ $total = $subtotal + $frete;
         <h2>Resumo da Compra</h2>
         <a href="checkoutCarrinho.php" class="voltar-link">← Voltar</a>
 
-        <!-- itens -->
         <div class="resumo-container">
+            <!-- itens -->
             <div class="coluna-esquerda">
                 <h3>Itens do Pedido</h3>
                 <ul class="lista-produtos-resumo">
@@ -189,10 +189,16 @@ $total = $subtotal + $frete;
                     <p class="total">Total: <strong><?php echo number_format($total, 2, ',', '.'); ?></strong></p>
                 </div>
 
-                <div class="acoes-resumo">
-                    <!--TODO habilitar opção-->
-                    <button class="botao-confirmar">Confirmar Pedido</button>
-                </div>
+                <form method="POST" action="../bd/pedido.php">
+                    <input type="hidden" name="endereco_id" value="<?php echo $endereco_id; ?>">
+                    <input type="hidden" name="pagamento_id" value="<?php echo $pagamento_id; ?>">
+                    <input type="hidden" name="total" value="<?php echo $total; ?>">
+
+                    <div class="acoes-resumo">
+                        <!--TODO habilitar opção-->
+                        <button name="acao" value="finalizar" class="botao-confirmar">Confirmar Pedido</button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>

@@ -19,7 +19,7 @@ if ($cpf) {
 }
 
 $listaCategoria = new categoria_DAO($conexao);
-$categorias = $listaCategoria->listarCategoriaComStatus();
+$categorias = $listaCategoria->listarCategoriaAtiva();
 
 $sql_produtoDestaque = "SELECT p.*, vp.*, pi.* FROM produtos p 
                         JOIN vendedores_produtos vp ON vp.produto_id = p.id 
