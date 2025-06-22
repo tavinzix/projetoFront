@@ -52,8 +52,7 @@ if ($recusado) {
     <section class="formulario-solicitacao-vendedor">
         <h2>Solicitação de cadastro para vender na plataforma </h2>
         <form action="../bd/controller/Solicitacao_controller.php" method="post" id="form">
-            <label for="user_id" style="display:none">User ID</label>
-            <input type="text" id="user_id" name="user_id" style="display:block" value="<?php echo $user_id ?>">
+            <input type="hidden" id="user_id" name="user_id" value="<?php echo $user_id ?>">
 
             <label for="nome_loja">Nome da Loja:</label>
             <input type="text" id="nome_loja" name="nome_loja" required>

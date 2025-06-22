@@ -104,7 +104,7 @@ else if ($_POST['acao'] == 'aprovar') {
         $conexao->commit();
 
         $_SESSION['msgSucesso'] = 'Solicitação aprovada com sucesso';
-        header("Location:../view/solicitacaoPendente.php");
+        header("Location: ../../view/solicitacaoPendente.php");
         exit();
     } catch (Exception $e) {
         $conexao->rollBack();

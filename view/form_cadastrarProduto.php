@@ -34,7 +34,7 @@ $categorias = $listaCategoria->listarCategoriaComStatus();
     <div class="cadastroProduto-exterior">
         <h2>Cadastrar Novo Produto</h2>
 
-        <form id="formProduto" action="../bd/cadastro_produto" method="POST" enctype="multipart/form-data"
+        <form id="formProduto" action="../bd/controller/Produto_controller.php" method="POST" enctype="multipart/form-data"
             class="cadastroProduto-formulario">
 
             <label for="nome">Nome do Produto</label>
@@ -106,7 +106,8 @@ $categorias = $listaCategoria->listarCategoriaComStatus();
                 </div>
                 <input type="hidden" name="detalhes" id="detalhes" />
 
-                <button type="submit">Cadastrar Produto</button>
+                <button type="submit" name="acao" value="cadastrar">Cadastrar Produto</button>
+                
         </form>
     </div>
     <script src="../js/global.js"></script>

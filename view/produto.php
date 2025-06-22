@@ -1,19 +1,19 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+require_once('../bd/dao/produto_DAO.php');
+require_once('../bd/dao/vendedor_DAO.php');
+$conexao = (new Conexao())->conectar();
 
 $cpf = $_SESSION['cpf'] ?? null;
 $imagemUsuario = '../img/users/avatar.jpg';
 
-// busca o usuario para setar a imagem no header
+// busca a imagem para setar no header 
 if ($cpf) {
-    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql);
-    $stmt->bindParam(':cpf', $cpf);
-    $stmt->execute();
-
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
     if ($usuario && !empty($usuario['img_user'])) {
         $imagemUsuario = '../img/users/' . ($usuario['img_user']);
@@ -23,27 +23,15 @@ if ($cpf) {
 // pega o id do produto da url e busca os dados
 if (isset($_GET['id'])) {
     $produto_id = $_GET['id'];
-    $sql_produto = "SELECT p.*, vp.*, v.*, pi.*, p.id as produto_id FROM produtos p 
-                    JOIN vendedores_produtos vp ON vp.produto_id = p.id
-                    JOIN vendedores v on vp.vendedor_id = v.id
-                    LEFT JOIN produto_imagens pi ON p.id = pi.produto_id 
-                    WHERE p.id = :produto_id";
-    $stmt_produto = $connection->prepare($sql_produto);
-    $stmt_produto->bindParam(':produto_id', $produto_id,  PDO::PARAM_INT);
-    $stmt_produto->execute();
-    $produto = $stmt_produto->fetch(PDO::FETCH_ASSOC);
 
-    // busca as imagens do produto
-    $sql_imagensProduto = "SELECT * FROM produto_imagens WHERE produto_id = :produto_id ORDER BY ordem ASC";
-    $stmt_imagensProduto = $connection->prepare($sql_imagensProduto);
-    $stmt_imagensProduto->bindParam(':produto_id', $produto_id,  PDO::PARAM_INT);
-    $stmt_imagensProduto->execute();
-    $imagensProduto = $stmt_imagensProduto->fetchAll(PDO::FETCH_ASSOC);
+    $listaProduto = new produto_DAO($conexao);
+    $produto = $listaProduto->buscarProdutoPorId($produto_id);
+    $imagensProduto = $listaProduto->buscarImagensProduto($produto_id);
 
     // define a galeria de imagens do produto 
     $imagemPrincipal = null;
     $miniaturas = [];
-    
+
     // percorre todas as imagens até encontrar a com ordem 1 para definir como a imagem principal 
     foreach ($imagensProduto as $img) {
         if ($img['ordem'] == 1) {
@@ -52,13 +40,9 @@ if (isset($_GET['id'])) {
         }
     }
 
-    // busca a imagem da loja 
     $vendedorId = $produto['vendedor_id'];
-    $sql_imagemVendedor = "SELECT * FROM vendedor_imagens WHERE vendedor_id = :vendedor_id";
-    $stmt_imagemVendedor = $connection->prepare($sql_imagemVendedor);
-    $stmt_imagemVendedor->bindParam(':vendedor_id', $vendedorId,  PDO::PARAM_INT);
-    $stmt_imagemVendedor->execute();
-    $imagemVendedor = $stmt_imagemVendedor->fetch(PDO::FETCH_ASSOC);
+    $listaVendedor = new vendedor_DAO($conexao);
+    $imagemVendedor = $listaVendedor->buscarVendedorPorId($vendedorId);
 
     // se não encontrar o id do produto, direciona para outra página
     if (!$produto) {
@@ -154,7 +138,7 @@ if (isset($_GET['id'])) {
                 <input style="display:none" name="preco" value="<?php echo $produto['preco'] ?>"></input>
                 <!-- TODO puxar do banco -->
                 <p>Avaliação: ★★★★☆(125 vendas)</p>
-                
+
                 <!-- alterar a quantidade que vai adicionar ao carrinho -->
                 <div class="quantidade-container">
                     <label for="quantidade">Quantidade:</label>
@@ -162,7 +146,7 @@ if (isset($_GET['id'])) {
                     <input type="number" id="quantidade" name="quantidade" value="1" min="1">
                     <button onclick="alterarQtd(1)" type="button">+</button>
                 </div>
-                
+
                 <!-- especificações do produto -->
                 <div class="especificacoes-container">
                     <div class="especificacao">
@@ -172,7 +156,7 @@ if (isset($_GET['id'])) {
                         </select>
                     </div>
                 </div>
-                
+
                 <!-- ações do produto  -->
                 <div class="acoes">
                     <!-- TODO criar funcionalidade de comprar agora -->
@@ -186,12 +170,12 @@ if (isset($_GET['id'])) {
                 <input type="text" placeholder="Digite seu CEP">
                 <button>Calcular Frete</button>
             </div>
-            
+
             <!-- dados da loja -->
             <div class="vendedor">
                 <h3>Vendedido por</h3>
                 <div class="vendedor-info">
-                    <img src="../img/lojas/<?php echo $imagemVendedor['imagem_url'] ?>" alt="Logo da loja">
+                    <img src="../img/lojas/<?php echo $imagemVendedor['img_vendedor'] ?>" alt="Logo da loja">
                     <div>
                         <a href="loja.html" class="nome-loja"><?php echo $produto['nome_loja'] ?></a>
                         <p>Localização: <?php echo $produto['cidade'] . ' - ' . $produto['estado'] ?></p>

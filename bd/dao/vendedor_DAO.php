@@ -36,5 +36,31 @@ class vendedor_DAO
         }
     }
 
+    function buscaVendedorPorIdUser($userId)
+    {
+        try {
+            $query = $this->conexao->prepare("SELECT * FROM vendedores WHERE user_id = :userId");
+            $query->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $query->execute();
+
+            return $query->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function buscarVendedorPorId($vendedor_id)
+    {
+        try {
+            $query = $this->conexao->prepare("SELECT * FROM vendedores WHERE id = :vendedor_id");
+            $query->bindParam(':vendedor_id', $vendedor_id, PDO::PARAM_INT);
+            $query->execute();
+
+            return $query->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
     
 }

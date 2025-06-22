@@ -97,7 +97,7 @@ $solicitacoes = $listaSolicitacao->buscaSolicitacaoComStatus();
             </thead>
             <tbody>
                 <?php
-                    foreach($solicitacoes as $solicitacao):        
+                foreach ($solicitacoes as $solicitacao):
                 ?>
                     <tr>
                         <td><?php echo $solicitacao['nome_loja'] ?></td>
@@ -108,7 +108,7 @@ $solicitacoes = $listaSolicitacao->buscaSolicitacaoComStatus();
                         <td><a onclick='abrirJanelaSolicitacao(<?php echo json_encode($solicitacao) ?>)'><button class="btn-editar">Avaliar</button></a></td>
                     </tr>
                 <?php
-                    endforeach;
+                endforeach;
                 ?>
             </tbody>
         </table>
@@ -182,7 +182,7 @@ $solicitacoes = $listaSolicitacao->buscaSolicitacaoComStatus();
 
                 <div class="informacao-loja">
                     <strong>Descrição:</strong><br>
-                    <input id="descricao" name="descricao" readonly></input>
+                    <textarea id="descricao" name="descricao" rows="4" readonly></textarea>
                 </div>
 
                 <div class="informacao-loja">
