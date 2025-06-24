@@ -91,5 +91,21 @@ class produto_DAO
             echo 'Error: ' . $e->getMessage();
         }
     }
+
+    function buscarProdutosNomeLoja($pesquisa)
+    {
+        try {
+            $query = $this->conexao->prepare("SELECT p.*, vp.*, pi.*, p.id as produto_id FROM produtos p
+                                        JOIN vendedores_produtos vp ON vp.produto_id = p.id
+                                        JOIN vendedores v on vp.vendedor_id = v.id
+                                        LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1
+                                        WHERE p.nome ILIKE :pesquisa OR v.nome_loja ILIKE :pesquisa");
+            $query->bindParam(':pesquisa', $pesquisa, PDO::PARAM_STR);
+            $query->execute();
+            return $query;
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
     
 }

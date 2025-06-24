@@ -3,6 +3,7 @@ session_start();
 ini_set('default_charset', 'utf-8');
 require_once('../bd/dao/conexao.php');
 require_once('../bd/dao/usuario_DAO.php');
+require_once('../bd/dao/produto_DAO.php');
 require_once('../bd/dao/categoria_DAO.php');
 $conexao = (new Conexao())->conectar();
 
@@ -27,20 +28,13 @@ if (isset($_GET['url'])) {
 
     //busca os produtos
     //TODO tratar acentos
-    $sql_produto = "SELECT p.*, vp.*, pi.*, p.id as produto_id FROM produtos p
-                JOIN vendedores_produtos vp ON vp.produto_id = p.id
-                JOIN vendedores v on vp.vendedor_id = v.id
-                LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1
-                WHERE p.nome ILIKE :pesquisa or v.nome_loja ILIKE :pesquisa";
-
-    $stmt_produto = $conexao->prepare($sql_produto);
-    $stmt_produto->bindParam(':pesquisa', $pesquisa,  PDO::PARAM_STR);
-    $stmt_produto->execute();
+    $listaProduto = new produto_DAO($conexao);
+    $produtos = $listaProduto->buscarProdutosNomeLoja($pesquisa);
 
     //implementar busca pela loja
     //SELECT v.*, vi.* FROM vendedores v JOIN vendedor_imagens vi ON vi.vendedor_id = v.id WHERE v.nome_loja ILIKE '%loja%'
 
-    if ($stmt_produto->rowCount() === 0) {
+    if ($produtos->rowCount() === 0) {
         //TODO mesma página porém alertando que não encontrou o item
         //header("Location:../view/paginaNaoEncontrada.html");
         exit();
@@ -172,7 +166,7 @@ if (isset($_GET['url'])) {
         <!--Itens-->
         <section class="itensCategoria-exterior">
             <?php
-            while ($itemEncontrado = $stmt_produto->fetch(PDO::FETCH_ASSOC)) {
+            while ($itemEncontrado = $produtos->fetch(PDO::FETCH_ASSOC)) {
             ?>
                 <div class="produto-card">
                     <img src="../img/produtos/<?php echo $itemEncontrado['imagem_url'] ?>" alt="<?php echo $itemEncontrado['nome'] ?>">

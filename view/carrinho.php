@@ -1,7 +1,10 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+require_once('../bd/dao/carrinho_DAO.php');
+$conexao = (new Conexao())->conectar();
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     header("Location:../view/login.html");
@@ -11,31 +14,19 @@ $cpf = $_SESSION['cpf'] ?? null;
 $userId = $_SESSION['usuario_id'];
 
 // busca cpf para setar a imagem do header
-if ($cpf) {
-    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql);
-    $stmt->bindParam(':cpf', $cpf);
-    $stmt->execute();
+$cpf = $_SESSION['cpf'] ?? null;
+$imagemUsuario = '../img/users/avatar.jpg';
 
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+if ($cpf) {
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
     if ($usuario && !empty($usuario['img_user'])) {
         $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
 
-    //busca os itens do carrinho
-    $sql_itens = "SELECT ci.*, p.*, u.id, p.nome, v.*, (SELECT imagem_url FROM produto_imagens WHERE produto_id = p.id ORDER BY ordem ASC LIMIT 1) AS imagem_url
-                    FROM carrinho_itens ci  
-                    JOIN carrinho c ON c.id = ci.carrinho_id 
-                    JOIN produtos p ON p.id = ci.produto_id
-                    JOIN vendedores_produtos vp on vp.produto_id = p.id
-                    JOIN vendedores v on v.id = vp.vendedor_id
-                    JOIN usuarios u ON u.id = c.usuario_id 
-                    WHERE u.id = :userId";
-
-    $stmt_itens = $connection->prepare($sql_itens);
-    $stmt_itens->bindValue(':userId', $userId);
-    $stmt_itens->execute();
+    $listaItensCarrinho = new carrinho_DAO($conexao);
+    $itens = $listaItensCarrinho->buscaItensCarrinho($userId);
 }
 
 ?>
@@ -97,7 +88,7 @@ if ($cpf) {
                 <!-- insere os dados dos produtos  -->
                 <form id="form-carrinho" method="POST" action="../bd/controller/Carrinhotemp.php">
                     <?php
-                    while ($carrinho = $stmt_itens->fetch(PDO::FETCH_ASSOC)) {
+                    foreach ($itens as $carrinho):
                     ?>
                         <li class="item-carrinho">
                             <button class="remover-item" type="button" title="Remover do carrinho" onclick="removerItem(<?php echo $carrinho['produto_id'] ?>)">X</button>
@@ -126,7 +117,7 @@ if ($cpf) {
                                 </div>
                             </div>
                         </li>
-                    <?php } ?>
+                    <?php endforeach; ?>
             </ul>
 
             <div class="janela-resumo">

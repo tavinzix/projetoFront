@@ -130,7 +130,7 @@ if (isset($_GET['id'])) {
         <!--OPÇÕES DO ITEM-->
         <section class="informacoes-produto">
             <!-- seta os dados do produto  -->
-            <form action="../bd/manipula_carrinho.php" method="post">
+            <form action="../bd/controller/Carrinho_controller.php" method="post">
                 <h1><?php echo $produto['nome'] ?></h1>
                 <input style="display:none" name="produto_id" value="<?php echo $produto['produto_id'] ?>"></input>
                 <p class="descricao"><?php echo $produto['descricao'] ?></p>

@@ -7,12 +7,17 @@ function removerItem(itemId) {
     formData.append('acao', 'remover');
     formData.append('item_id', itemId);
 
-    fetch('../bd/manipula_carrinho.php', {
+    fetch('../bd/controller/Carrinho_controller.php', {
         method: 'POST',
         body: formData
-    });
-
-    window.location.reload(true);
+    })
+        .then(response => {
+            if (response.ok) {
+                window.location.reload(true);
+            } else {
+                alert("Erro ao remover o item.");
+            }
+        });
 }
 
 function atualizarQuantidade(itemId) {
@@ -30,7 +35,7 @@ function atualizarQuantidade(itemId) {
     formData.append('item_id', itemId);
     formData.append('quantidade', novaQuantidade);
 
-    fetch('../bd/manipula_carrinho.php', {
+    fetch('../bd/controller/Carrinho_controller.php', {
         method: 'POST',
         body: formData
     })
@@ -38,7 +43,7 @@ function atualizarQuantidade(itemId) {
         .then(data => {
             if (data === 'atualizado') {
                 alert("Quantidade atualizada com sucesso!");
-                window.location.reload(true);
+                // window.location.reload(true);
             } else {
                 alert("Erro ao atualizar a quantidade.");
             }
@@ -54,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () { // Espera o carregam
     // atualiza o resumo da compra
     function atualizarResumo() {
         let totalItens = 0;
-        let totalValor = 0;  
+        let totalValor = 0;
 
         // Percorre todos os checkboxs
         checkboxes.forEach((checkbox) => {
