@@ -58,11 +58,12 @@ class carrinho_DAO
     function atualizarQuantidadeItemCarrinho(Carrinho $carrinho, $novaQuantidade)
     {
         try {
-            $query = $this->conexao->prepare("UPDATE carrinho_itens SET quantidade = :quantidade WHERE id = :id");
+            $query = $this->conexao->prepare("UPDATE carrinho_itens SET quantidade = :quantidade WHERE produto_id = :itemId and carrinho_id = :carrinhoId");
 
             $resultado = $query->execute([
                 'quantidade' => $novaQuantidade,
-                'id' => $carrinho->getCarrinhoItemId()
+                'itemId' => $carrinho->getProdutoId(),
+                'carrinhoId' => $carrinho->getId()
             ]);
 
             return $resultado;

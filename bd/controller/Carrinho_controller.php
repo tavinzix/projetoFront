@@ -61,33 +61,38 @@ if ($_POST['acao'] == 'adicionar') {
     $carrinho = new Carrinho();
     $carrinho->setProdutoId($produtoId);
     $carrinho->setUsuarioId($userId);
-    
+
     $carrinhoId = $carrinhoDAO->verificaCarrinho($carrinho);
-    
-    
+
+
     $carrinho->setId($carrinhoId);
 
     $resultado = $carrinhoDAO->removerItemCarrinho($carrinho);
 
-    if($resultado) {
+    if ($resultado) {
         header("Location: ../../view/carrinho.php");
         exit();
     }
 } else if ($_POST['acao'] == 'atualizar') {
-    $itemId = $_POST['item_id'];
+    $carrinhoDAO = new carrinho_DAO($conexao);
+    $userId = $_SESSION['usuario_id'];
+    $produtoId = $_POST['item_id'];
     $novaQuantidade = $_POST['quantidade'];
 
     $carrinho = new Carrinho();
-    $carrinho->setCarrinhoItemId($itemId);
-    $carrinho->setQuantidade($novaQuantidade);
+    $carrinho->setProdutoId($produtoId);
+    $carrinho->setUsuarioId($userId);
+
+    $carrinhoId = $carrinhoDAO->verificaCarrinho($carrinho);
+
+    $carrinho->setId($carrinhoId);
 
     $carrinhoDAO = new carrinho_DAO($conexao);
     $resultado = $carrinhoDAO->atualizarQuantidadeItemCarrinho($carrinho, $novaQuantidade);
 
     if ($resultado) {
         echo ("atualizado");
-    }else{
+    } else {
         echo ("erro ao atualizar");
     }
 }
-
