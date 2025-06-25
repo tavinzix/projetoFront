@@ -1,7 +1,13 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+require_once('../bd/dao/pedido_DAO.php');
+require_once('../bd/dao/enderecoUsuario_DAO.php');
+require_once('../bd/dao/formaPagamentoUsuario_DAO.php');
+require_once('../bd/dao/carrinho_DAO.php');
+$conexao = (new Conexao())->conectar();
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     header("Location:../view/login.html");
@@ -27,32 +33,20 @@ if (!$endereco_id || !$pagamento_id) {
 }
 
 // Busca endereço selecionado
-$sql_endereco = "SELECT * FROM enderecos WHERE id = :id AND user_id = :userId LIMIT 1";
-$stmt_endereco = $connection->prepare($sql_endereco);
-$stmt_endereco->bindValue(':id', $endereco_id);
-$stmt_endereco->bindValue(':userId', $userId);
-$stmt_endereco->execute();
-$endereco = $stmt_endereco->fetch(PDO::FETCH_ASSOC);
+$listaEndereco = new enderecoUsuario_DAO($conexao);
+$endereco = $listaEndereco->listarEnderecoPorId($endereco_id, $userId);
 
 // Busca forma de pagamento selecionada
-$sql_pagamento = "SELECT * FROM formas_pagamento WHERE id = :id AND user_id = :userId LIMIT 1";
-$stmt_pagamento = $connection->prepare($sql_pagamento);
-$stmt_pagamento->bindValue(':id', $pagamento_id);
-$stmt_pagamento->bindValue(':userId', $userId);
-$stmt_pagamento->execute();
-$pagamento = $stmt_pagamento->fetch(PDO::FETCH_ASSOC);
+$listaPagamento = new formaPagamentoUsuario_DAO($conexao);
+$pagamento = $listaPagamento->listarFormaPorId($pagamento_id, $userId);
 
 // busca cpf para setar a imagem do header
 if ($cpf) {
-    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql);
-    $stmt->bindParam(':cpf', $cpf);
-    $stmt->execute();
-
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
     if ($usuario && !empty($usuario['img_user'])) {
-        $imagemUsuario = '../img/users/' . $usuario['img_user'];
+        $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
 }
 
@@ -62,24 +56,11 @@ if (empty($produtosIds)) {
     die('Nenhum produto no carrinho.');
 }
 
-
 $placeholders = implode(',', array_fill(0, count($produtosIds), '?'));
 
-// SQL para buscar os detalhes dos produtos específicos do usuário
-$sql_itens = "  SELECT ci.*, p.*, u.id, p.nome, v.*, (SELECT imagem_url FROM produto_imagens WHERE produto_id = p.id ORDER BY ordem ASC LIMIT 1) AS imagem_url
-                    FROM carrinho_itens ci  
-                    JOIN carrinho c ON c.id = ci.carrinho_id 
-                    JOIN produtos p ON p.id = ci.produto_id
-                    JOIN vendedores_produtos vp on vp.produto_id = p.id
-                    JOIN vendedores v on v.id = vp.vendedor_id
-                    JOIN usuarios u ON u.id = c.usuario_id WHERE u.id = ? and p.id IN ($placeholders)";
-
 $parametros = array_merge([$userId], $produtosIds);
-$stmt_itens = $connection->prepare($sql_itens);
-$stmt_itens->execute($parametros);
-
-$itensFinal = $stmt_itens->fetchAll(PDO::FETCH_ASSOC);
-
+$listaItensCarrinho = new carrinho_DAO($conexao);
+$itensFinal = $listaItensCarrinho->detalhesItensCarrinho($parametros, $placeholders);
 
 $subtotal = 0;
 $frete = 25.00;
@@ -189,7 +170,7 @@ $total = $subtotal + $frete;
                     <p class="total">Total: <strong><?php echo number_format($total, 2, ',', '.'); ?></strong></p>
                 </div>
 
-                <form method="POST" action="../bd/pedido.php">
+                <form method="POST" action="../bd/controller/Pedido_controller.php">
                     <input type="hidden" name="endereco_id" value="<?php echo $endereco_id; ?>">
                     <input type="hidden" name="pagamento_id" value="<?php echo $pagamento_id; ?>">
                     <input type="hidden" name="total" value="<?php echo $total; ?>">

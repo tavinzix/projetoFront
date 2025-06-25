@@ -27,20 +27,13 @@ if (isset($_GET['url'])) {
     $pesquisa = '%' . $pesquisa . '%';
 
     //busca os produtos
-    //TODO tratar acentos
     $listaProduto = new produto_DAO($conexao);
     $produtos = $listaProduto->buscarProdutosNomeLoja($pesquisa);
 
-    //implementar busca pela loja
-    //SELECT v.*, vi.* FROM vendedores v JOIN vendedor_imagens vi ON vi.vendedor_id = v.id WHERE v.nome_loja ILIKE '%loja%'
+    
 
-    if ($produtos->rowCount() === 0) {
-        //TODO mesma página porém alertando que não encontrou o item
-        //header("Location:../view/paginaNaoEncontrada.html");
-        exit();
-    }
 } else {
-    //header("Location:../view/paginaNaoEncontrada.html");
+    header("Location:../view/paginaNaoEncontrada.html");
 }
 ?>
 
@@ -166,16 +159,25 @@ if (isset($_GET['url'])) {
         <!--Itens-->
         <section class="itensCategoria-exterior">
             <?php
-            while ($itemEncontrado = $produtos->fetch(PDO::FETCH_ASSOC)) {
+
+            if ($produtos->rowCount() !== 0) {
+                while ($itemEncontrado = $produtos->fetch(PDO::FETCH_ASSOC)) {
             ?>
+                    <div class="produto-card">
+                        <img src="../img/produtos/<?php echo $itemEncontrado['imagem_url'] ?>" alt="<?php echo $itemEncontrado['nome'] ?>">
+                        <p style="display:none">Id produto<?php echo $itemEncontrado['produto_id'] ?></p>
+                        <h3><?php echo $itemEncontrado['nome'] ?></h3>
+                        <p>R$<?php echo $itemEncontrado['preco'] ?></p>
+                        <a href="produto.php?id=<?php echo $itemEncontrado['produto_id'] ?>">
+                            <button>Ver Detalhes</button>
+                        </a>
+                    </div>
+                <?php
+                }
+            } else {
+                ?>
                 <div class="produto-card">
-                    <img src="../img/produtos/<?php echo $itemEncontrado['imagem_url'] ?>" alt="<?php echo $itemEncontrado['nome'] ?>">
-                    <p style="display:none">Id produto<?php echo $itemEncontrado['produto_id'] ?></p>
-                    <h3><?php echo $itemEncontrado['nome'] ?></h3>
-                    <p>R$<?php echo $itemEncontrado['preco'] ?></p>
-                    <a href="produto.php?id=<?php echo $itemEncontrado['produto_id'] ?>">
-                        <button>Ver Detalhes</button>
-                    </a>
+                    <h3>Nenhum produto encontrado para essa pesquisa</h3>
                 </div>
             <?php
             }

@@ -74,4 +74,15 @@ class formaPagamentoUsuario_DAO
             echo 'Error: ' . $e->getMessage();
         }
     }
+
+    function listarFormaPorId($formaId, $userId)
+    {
+        try {
+            $query = $this->conexao->prepare("SELECT * FROM formas_pagamento WHERE id = :id AND user_id = :userId LIMIT 1");
+            $query->execute(['id' => $formaId, 'userId' => $userId]);
+            return $query->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
 }

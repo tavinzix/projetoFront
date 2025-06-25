@@ -72,8 +72,6 @@ class carrinho_DAO
         }
     }
 
-
-
     function adicionarProduto(Carrinho $carrinho)
     {
         try {
@@ -128,4 +126,45 @@ class carrinho_DAO
             echo 'Error: ' . $e->getMessage();
         }
     }
+
+    function limpaItensCompradosCarrinho(Carrinho $carrinho)
+    {
+        try {
+            $query = $this->conexao->prepare("DELETE FROM carrinho_itens WHERE carrinho_id = :carrinhoId and produto_id in (:produtoId)");
+
+            $resultado = $query->execute([
+                'carrinhoId' => $carrinho->getId(),
+                'produtoId' => $carrinho->getProdutoId()
+            ]);
+
+            return $resultado;
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function detalhesItensCarrinho($parametros, $placeholders) {
+    try {
+        $query = $this->conexao->prepare("            SELECT ci.*, p.*, u.id, p.nome, v.*, 
+            (SELECT imagem_url FROM produto_imagens WHERE produto_id = p.id ORDER BY ordem ASC LIMIT 1) AS imagem_url
+            FROM carrinho_itens ci  
+            JOIN carrinho c ON c.id = ci.carrinho_id 
+            JOIN produtos p ON p.id = ci.produto_id
+            JOIN vendedores_produtos vp ON vp.produto_id = p.id
+            JOIN vendedores v ON v.id = vp.vendedor_id
+            JOIN usuarios u ON u.id = c.usuario_id 
+            WHERE u.id = ? AND p.id IN ($placeholders)
+        ");
+
+        $query->execute($parametros);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+        return [];
+    }
+}
+
+
+
+
 }

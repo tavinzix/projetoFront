@@ -53,8 +53,18 @@
             $query = $this->conexao->prepare("SELECT * from usuarios u join enderecos e on e.user_id = u.id 
                                             where u.cpf = :cpf");
             $query->execute(['cpf' => $cpf]);
-            //$enderecos = $query->fetchAll();
             return $query;
+        }catch(PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function listarEnderecoPorId($enderecoId, $userId){
+        try {
+            $query = $this->conexao->prepare("SELECT * FROM enderecos WHERE id = :id AND user_id = :userId LIMIT 1");
+
+            $query->execute(['id' => $enderecoId, 'userId' => $userId]);
+            return $query->fetch(PDO::FETCH_ASSOC);
         }catch(PDOException $e) {
             echo 'Error: ' . $e->getMessage();
         }

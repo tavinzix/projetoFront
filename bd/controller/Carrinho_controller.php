@@ -9,6 +9,11 @@ $conexao = (new Conexao())->conectar();
 
 $vendedorDAO = new vendedor_DAO($conexao);
 
+if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
+    header("Location:../../view/login.html");
+    exit();
+}
+
 #ADICIONAR ITEM AO CARRINHO
 if ($_POST['acao'] == 'adicionar') {
     $userId = $_SESSION['usuario_id'];
