@@ -43,8 +43,7 @@ class categoria_DAO
         }
     }
 
-    function editarCategoriaSemImagem(Categoria $categoria)
-    {
+    function editarCategoriaSemImagem(Categoria $categoria){
         try {
             $query = $this->conexao->prepare("UPDATE categorias SET nome = :nome, descricao = :descricao, url = :url WHERE id = :id");
             $resultado = $query->execute([
@@ -60,8 +59,7 @@ class categoria_DAO
         }
     }
 
-    function inativarCategoria($id)
-    {
+    function inativarCategoria($id){
         try {
             $query = $this->conexao->prepare("UPDATE categorias SET status = 2 where id = :id");
             $resultado = $query->execute(['id' => $id->getId()]);
@@ -71,8 +69,7 @@ class categoria_DAO
         }
     }
 
-    function ativarCategoria($id)
-    {
+    function ativarCategoria($id){
         try {
             $query = $this->conexao->prepare("UPDATE categorias SET status = 1 where id = :id");
             $resultado = $query->execute(['id' => $id->getId()]);
@@ -82,8 +79,7 @@ class categoria_DAO
         }
     }
 
-    function listarCategorias()
-    {
+    function listarCategorias(){
         try {
             $query = $this->conexao->prepare("SELECT * FROM categorias WHERE status = 1");
             $query->execute();
@@ -93,8 +89,7 @@ class categoria_DAO
         }
     }
 
-    function listarCategoriaComStatus()
-    {
+    function listarCategoriaComStatus(){
         try {
             $query = $this->conexao->prepare("SELECT *, CASE WHEN status = '1' THEN 'Ativo'
                                              WHEN status = '2' THEN 'Inativo' END AS status_texto FROM categorias");
@@ -106,8 +101,8 @@ class categoria_DAO
             echo 'Error: ' . $e->getMessage();
         }
     }
-    function listarCategoriaAtiva()
-    {
+    
+    function listarCategoriaAtiva(){
         try {
             $query = $this->conexao->prepare("SELECT *, CASE WHEN status = '1' THEN 'Ativo'
                                              WHEN status = '2' THEN 'Inativo' END AS status_texto FROM categorias WHERE status = '1'");
@@ -119,4 +114,16 @@ class categoria_DAO
             echo 'Error: ' . $e->getMessage();
         }
     }
+
+    function buscarCategoriaPorUrl(Categoria $categoria){
+        try {
+            $query = $this->conexao->prepare("SELECT * FROM categorias WHERE url = :url");
+            $query->execute(['url' => $categoria->getUrl()]);
+    
+            return $query->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+   
 }

@@ -8,8 +8,7 @@ class vendedor_DAO
         $this->conexao = $conexao;
     }
 
-    function cadastrarVendedor(Vendedor $vendedor)
-    {
+    function cadastrarVendedor(Vendedor $vendedor){
         try {
             $query = $this->conexao->prepare("INSERT INTO vendedores (user_id, nome_loja, cnpj, email, telefone, cep, estado, cidade, bairro, rua, numero, categoria, descricao_loja, status, img_vendedor) 
                                             VALUES (:userId, :nomeLoja, :cnpj, :email, :telefone, :cep, :estado, :cidade, :bairro, :rua, :numero, :categoria, :descricaoLoja, 1, 'semImagem.jpg')");
@@ -60,7 +59,5 @@ class vendedor_DAO
         } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();
         }
-    }
-
-    
+    }    
 }

@@ -29,9 +29,6 @@ if (isset($_GET['url'])) {
     //busca os produtos
     $listaProduto = new produto_DAO($conexao);
     $produtos = $listaProduto->buscarProdutosNomeLoja($pesquisa);
-
-    
-
 } else {
     header("Location:../view/paginaNaoEncontrada.html");
 }

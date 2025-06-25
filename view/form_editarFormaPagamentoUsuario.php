@@ -23,8 +23,6 @@ if ($cpf) {
         $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
 
-    //$_SESSION['id'] = $imagem['id'];
-
     $listaForma = new formaPagamentoUsuario_DAO($conexao);
     $formas = $listaForma->listarForma($cpf);
 }

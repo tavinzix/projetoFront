@@ -4,6 +4,7 @@ ini_set('default_charset', 'utf-8');
 require_once('bd/dao/conexao.php');
 require_once('bd/dao/usuario_DAO.php');
 require_once('bd/dao/categoria_DAO.php');
+require_once('bd/dao/produto_DAO.php');
 $conexao = (new Conexao())->conectar();
 
 $cpf = $_SESSION['cpf'] ?? null;
@@ -21,12 +22,8 @@ if ($cpf) {
 $listaCategoria = new categoria_DAO($conexao);
 $categorias = $listaCategoria->listarCategoriaAtiva();
 
-$sql_produtoDestaque = "SELECT p.*, vp.*, pi.* FROM produtos p 
-                        JOIN vendedores_produtos vp ON vp.produto_id = p.id 
-                        LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1";
-
-$stmt_produtoDestaque = $conexao->prepare($sql_produtoDestaque);
-$stmt_produtoDestaque->execute();
+$listaProdutosDestaque = new produto_DAO($conexao);
+$produtosDestaque = $listaProdutosDestaque->buscaProdutosEmDestaque();
 
 ?>
 
@@ -261,9 +258,7 @@ $stmt_produtoDestaque->execute();
             </div>
 
             <div class="produtos-container">
-                <?php
-                while ($produtoDestaque = $stmt_produtoDestaque->fetch(PDO::FETCH_ASSOC)) {
-                ?>
+                <?php foreach ($produtosDestaque as $produtoDestaque): ?>
                     <div class="produtos">
                         <a href="view/produto.php?id=<?php echo $produtoDestaque['produto_id'] ?>">
                             <img src="img/produtos/<?php echo $produtoDestaque['imagem_url'] ?>" alt="<?php echo $produtoDestaque['nome'] ?>">
@@ -273,7 +268,7 @@ $stmt_produtoDestaque->execute();
                         </a>
                     </div>
                 <?php
-                }
+                endforeach;
                 ?>
 
             </div>

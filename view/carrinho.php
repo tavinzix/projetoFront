@@ -12,11 +12,9 @@ if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
 
 $cpf = $_SESSION['cpf'] ?? null;
 $userId = $_SESSION['usuario_id'];
-
-// busca cpf para setar a imagem do header
-$cpf = $_SESSION['cpf'] ?? null;
 $imagemUsuario = '../img/users/avatar.jpg';
 
+// busca cpf para setar a imagem do header
 if ($cpf) {
     $listaUsuario = new usuario_DAO($conexao);
     $usuario = $listaUsuario->buscaUsuario($cpf);

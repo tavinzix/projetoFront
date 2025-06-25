@@ -1,19 +1,24 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+require_once('../bd/dao/produto_DAO.php');
+require_once('../bd/dao/categoria_DAO.php');
+require_once('../bd/model/Categoria_model.php');
+
+$conexao = (new Conexao())->conectar();
 
 // busca o usuario para setar a imagem no header
 $cpf = $_SESSION['cpf'] ?? null;
+$userId = $_SESSION['usuario_id'];
 $imagemUsuario = '../img/users/avatar.jpg';
 
+// busca cpf para setar a imagem do header
 if ($cpf) {
-    $sql = "SELECT img_user FROM usuarios WHERE cpf = :cpf";
-    $stmt = $connection->prepare($sql);
-    $stmt->bindParam(':cpf', $cpf);
-    $stmt->execute();
+    $listaUsuario = new usuario_DAO($conexao);
+    $usuario = $listaUsuario->buscaUsuario($cpf);
 
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($usuario && !empty($usuario['img_user'])) {
         $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
@@ -23,24 +28,14 @@ if ($cpf) {
 if (isset($_GET['url'])) {
     $categoria_url = $_GET['url'];
 
-    //informações da categoria
-    $sql_categoria = "SELECT * FROM categorias where url = :categoria_url";
+    $parametroCategoria = new Categoria();
+    $parametroCategoria->setUrl($categoria_url);
+    $listaCategoria  = new categoria_DAO($conexao);
+    $categoria = $listaCategoria->buscarCategoriaPorUrl($parametroCategoria);
 
-    $stmt_categoria = $connection->prepare($sql_categoria);
-    $stmt_categoria->bindParam(':categoria_url', $categoria_url,  PDO::PARAM_STR);
-    $stmt_categoria->execute();
-    $categoria = $stmt_categoria->fetch(PDO::FETCH_ASSOC);
 
-    //busca os produtos
-    $sql_produto = "SELECT p.*, vp.*, pi.*, c.nome as nome_categoria, p.id  as produto_id FROM produtos p
-                    JOIN categorias c on c.id = p.categoria_id 
-                    JOIN vendedores_produtos vp ON vp.produto_id = p.id
-                    LEFT JOIN produto_imagens pi ON p.id = pi.produto_id and pi.ordem = 1
-					where c.url = :categoria_url ";
-
-    $stmt_produto = $connection->prepare($sql_produto);
-    $stmt_produto->bindParam(':categoria_url', $categoria_url,  PDO::PARAM_STR);
-    $stmt_produto->execute();
+    $listaProdutos = new produto_DAO($conexao);
+    $produtos = $listaProdutos->buscaProdutosPorCategoria($categoria_url);
 
     if (!$categoria) {
         header("Location:../view/paginaNaoEncontrada.html");
@@ -69,7 +64,7 @@ if (isset($_GET['url'])) {
 </head>
 
 <body>
-     <!--CABEÇALHO-->
+    <!--CABEÇALHO-->
     <header class="menu">
         <div class="logo">
             <a href="../index.php"> <img src="../img/site/logo.png"></a>
@@ -163,7 +158,7 @@ if (isset($_GET['url'])) {
         <!--Itens-->
         <section class="itensCategoria-exterior">
             <?php
-            while ($itemCategoria = $stmt_produto->fetch(PDO::FETCH_ASSOC)) {
+            foreach ($produtos as $itemCategoria):
             ?>
                 <div class="produto-card">
                     <img src="../img/produtos/<?php echo $itemCategoria['imagem_url'] ?>" alt="<?php echo $itemCategoria['nome'] ?>">
@@ -175,7 +170,7 @@ if (isset($_GET['url'])) {
                     </a>
                 </div>
             <?php
-            }
+            endforeach;
             ?>
 
         </section>

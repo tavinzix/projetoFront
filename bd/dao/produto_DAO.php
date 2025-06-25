@@ -107,5 +107,54 @@ class produto_DAO
             echo 'Error: ' . $e->getMessage();
         }
     }
-    
+
+    function buscaProdutosPorVendedor($vendedor_id)
+    {
+        try {
+            $query = $this->conexao->prepare("SELECT p.*, vp.*, pi.*, 
+                                            CASE WHEN ativo = '1' THEN 'Ativo' WHEN ativo = '0' THEN 'Inativo' END AS status_texto
+                                            FROM produtos p JOIN vendedores_produtos vp ON vp.produto_id = p.id 
+                                            LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1
+                                            WHERE vp.vendedor_id = :vendedor_id");
+
+            $query->bindParam(':vendedor_id', $vendedor_id, PDO::PARAM_INT);
+            $query->execute();
+
+            return $query;
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function buscaProdutosPorCategoria($categoria_url)
+    {
+        try {
+            $query = $this->conexao->prepare("SELECT p.*, vp.*, pi.*, c.nome as nome_categoria, p.id  as produto_id FROM produtos p
+                                            JOIN categorias c on c.id = p.categoria_id 
+                                            JOIN vendedores_produtos vp ON vp.produto_id = p.id
+                                            LEFT JOIN produto_imagens pi ON p.id = pi.produto_id and pi.ordem = 1
+                                            where c.url = :categoria_url");
+
+            $query->bindParam(':categoria_url', $categoria_url, PDO::PARAM_STR);
+            $query->execute();
+
+            return $query;
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function buscaProdutosEmDestaque()
+    {
+        try {
+            $query = $this->conexao->prepare("SELECT p.*, vp.*, pi.* FROM produtos p 
+                        JOIN vendedores_produtos vp ON vp.produto_id = p.id 
+                        LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1");
+            
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
 }

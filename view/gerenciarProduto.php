@@ -1,7 +1,11 @@
 <?php
 session_start();
-require_once('../bd/config.inc.php');
 ini_set('default_charset', 'utf-8');
+require_once('../bd/dao/conexao.php');
+require_once('../bd/dao/usuario_DAO.php');
+require_once('../bd/dao/produto_DAO.php');
+require_once('../bd/dao/vendedor_DAO.php');
+$conexao = (new Conexao())->conectar();
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     header("Location:login.html");
@@ -10,39 +14,24 @@ if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
 
 $cpf = $_SESSION['cpf'];
 $userId = $_SESSION['usuario_id'];
+$imagemUsuario = '../img/users/avatar.jpg';
 
-// busca id do usuario para encontrar o vendedor 
-$sql = "SELECT * FROM usuarios WHERE cpf = :cpf";
-$stmt = $connection->prepare($sql);
-$stmt->bindParam(':cpf', $cpf, PDO::PARAM_STR);
-$stmt->execute();
-
-$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+// busca o usuario para setar a imagem no header
+$listaUsuario = new usuario_DAO($conexao);
+$usuario = $listaUsuario->buscaUsuario($cpf);
 
 if ($usuario && !empty($usuario['img_user'])) {
     $imagemUsuario = '../img/users/' . ($usuario['img_user']);
 }
 
-//  busca os dados do vendedor com base no id do usuario 
-$sqlVendedor = "SELECT * from vendedores where user_id = :user_id";
-$stmt_vendedor = $connection->prepare($sqlVendedor);
-
-$stmt_vendedor->bindParam(':user_id', $userId, PDO::PARAM_INT);
-$stmt_vendedor->execute();
-$vendedor = $stmt_vendedor->fetch(PDO::FETCH_ASSOC);
-
-// busca todos os produtos do vendedor 
-$sql = "SELECT p.*, vp.*, pi.*, 
-        CASE WHEN ativo = '1' THEN 'Ativo' WHEN ativo = '0' THEN 'Inativo' END AS status_texto
-        FROM produtos p JOIN vendedores_produtos vp ON vp.produto_id = p.id 
-        LEFT JOIN produto_imagens pi ON p.id = pi.produto_id AND pi.ordem = 1
-        WHERE vp.vendedor_id = :vendedor_id";
-
-$stmt = $connection->prepare($sql);
-
+// busca os dados do vendedor com base no id do usuario 
+$listaVendedor = new vendedor_DAO($conexao);
+$vendedor = $listaVendedor->buscaVendedorPorIdUser($userId);
 $vendedor_id = $vendedor['id'];
-$stmt->bindParam(':vendedor_id', $vendedor_id, PDO::PARAM_INT);
-$stmt->execute();
+
+$listaProdutosVendedor = new produto_DAO($conexao);
+$produtosVendedor = $listaProdutosVendedor->buscaProdutosPorVendedor($vendedor_id);
+
 ?>
 
 <!DOCTYPE html>
@@ -135,7 +124,9 @@ $stmt->execute();
             </thead>
             <tbody>
                 <?php
-                while ($produto = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                // Verifica se há produtos para o vendedor
+                if ($produtosVendedor->rowCount() !== 0) {
+                    foreach ($produtosVendedor as $produto):
                 ?>
                     <tr>
                         <td><img src="../img/produtos/<?= $produto['imagem_url'] ?>" class="imagem-produto" /></td>
@@ -147,6 +138,12 @@ $stmt->execute();
                             <!-- TODO criar funcionalidade -->
                             <a href="editarProduto.html"><button class="btn-editar">Editar</button></a>
                         </td>
+                    </tr>
+                <?php  endforeach ; }else{
+
+                ?>
+                    <tr>
+                        <td colspan="6" class="sem-produtos">Nenhum produto encontrado.</td>
                     </tr>
                 <?php } ?>
             </tbody>
