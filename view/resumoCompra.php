@@ -10,7 +10,7 @@ require_once('../bd/dao/carrinho_DAO.php');
 $conexao = (new Conexao())->conectar();
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
-    header("Location:../view/login.html");
+    header("Location:../view/login.php");
     exit;
 }
 

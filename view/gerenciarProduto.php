@@ -8,7 +8,7 @@ require_once('../bd/dao/vendedor_DAO.php');
 $conexao = (new Conexao())->conectar();
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
-    header("Location:login.html");
+    header("Location:login.php");
     exit;
 }
 

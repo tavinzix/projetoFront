@@ -1,4 +1,6 @@
-/*Mostrar/esconder senha*/
+/*
+LOGIN
+Mostrar/esconder senha*/
 const mostrarSenha = document.getElementById('mostrar-senha');
 const senhaInput = document.getElementById('senha');
 if (mostrarSenha) {
@@ -26,7 +28,6 @@ if (mostrarCSenha) {
         }
     });
 }
-
 
 /*Recuperar senha*/
 function enviarCodigo() {

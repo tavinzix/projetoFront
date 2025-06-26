@@ -26,7 +26,7 @@ if ($_POST['acao'] == 'cadastrar') {
     $retorno = $usuarioDAO->cadastrarUsuario($usuario);
     if ($retorno) {
         $_SESSION['msgSucesso'] = 'Usuário cadastrado com sucesso';
-        header("Location: ../../view/login.html");
+        header("Location: ../../view/login.php");
         exit();
     } else {
         $_SESSION['msgSucesso'] = 'Erro ao cadastrar usuário';

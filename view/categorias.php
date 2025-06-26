@@ -10,7 +10,7 @@ $cpf = $_SESSION['cpf'] ?? null;
 $imagemUsuario = '../img/users/avatar.jpg';
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
-    header("Location:login.html");
+    header("Location:login.php");
     exit;
 }
 

@@ -10,7 +10,7 @@ $conexao = (new Conexao())->conectar();
 $vendedorDAO = new vendedor_DAO($conexao);
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
-    header("Location:../../view/login.html");
+    header("Location:../../view/login.php");
     exit();
 }
 

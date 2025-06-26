@@ -10,7 +10,7 @@ $cpf = $_SESSION['cpf'];
 $userId = $_SESSION['usuario_id'];
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
-    header("Location:login.html");
+    header("Location:login.php");
     exit;
 }
 

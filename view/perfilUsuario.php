@@ -8,7 +8,7 @@ require_once('../bd/dao/pedido_DAO.php');
 $conexao = (new Conexao())->conectar();
 
 if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
-    header("Location:login.html");
+    header("Location:login.php");
     exit;
 }
 
@@ -53,8 +53,13 @@ $pedido = $listaPedidos->buscaPedidosComStatus($userId);
             <a href="../index.php"> <img src="../img/site/logo.png"></a>
         </div>
 
-        <form action="buscar produto do banco" method="GET" class="busca-container">
-            <input type="text" class="busca-input" placeholder="Procurar produto ou loja">
+        <form action="buscaProdutos.php" method="GET" class="busca-container">
+            <input type="text" class="busca-input" id="caixa-pesquisa" name="url" placeholder="Procurar produto ou loja">
+
+            <button type="button" id="microfone" onclick="buscaAudio()">
+                <img src="../img/site/microfone.png" id="iconeft" alt="Microfone">
+            </button>
+
             <button type="submit" class="lupa-icone">
                 <img src="../img/site/lupa.png" id="iconeft">
             </button>
@@ -64,7 +69,7 @@ $pedido = $listaPedidos->buscaPedidosComStatus($userId);
             &#9776;
         </button>
 
-        <ul class="menu-link" id="menu-link">
+        <!-- <ul class="menu-link" id="menu-link">
             <li><a href="index.html">Início</a></li>
             <?php if ($_SESSION['tipo_usuario'] == 'admin') { ?>
                 <li><a href="painelAdm.php">Painel Administrativo</a></li><?php } ?>
@@ -75,16 +80,16 @@ $pedido = $listaPedidos->buscaPedidosComStatus($userId);
             <?php } ?>          
             <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
-        </ul>
+        </ul> -->
 
-        <!-- <ul class="menu-link" id="menu-link">
+        <ul class="menu-link" id="menu-link">
             <li><a href="../index.php">Início</a></li>
             <li><a href="painelAdm.php">Painel Administrativo</a></li>
             <li><a href="painelVendedor.php">Painel do vendedor</a></li>
             <li><a href="solicitacaoCadastroVendedor.php">Quero vender na plataforma</a></li>
             <li><a href="carrinho.php"><img src="../img/site/carrinho.png"></a></li>
             <li><a href="perfilUsuario.php"><img src="<?= $imagemUsuario ?>" id="icone-perfil" alt="Perfil"></a></li>
-        </ul> -->
+        </ul>
     </header>
 
     <main class="pagina-usuario">

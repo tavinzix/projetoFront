@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if (isset($_SESSION["msg"])) {
+        $mensagem = $_SESSION["msg"];
+        echo "<script>alert('$mensagem');</script>";
+        unset($_SESSION["msg"]);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -53,8 +62,10 @@
         </div>
     </div>
 
+    
     <script src="../js/global.js"></script>
     <script src="../js/formulario.js"></script>
+    <!-- <script src="../js/validacao.js"></script> -->
 </body>
 
 </html>
