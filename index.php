@@ -286,7 +286,19 @@ $produtosDestaque = $listaProdutosDestaque->buscaProdutosEmDestaque();
 
 </html>
 
-<!--TODO arrumar responsividade das paginas php
+<!-- 
+    TODO MASCARA INPUT
+            login - cpf
+            criar conta usuario - cpf, data de nascimento, telefone
+            esqueceu a senha - toda pagina
+            editar perfil - telefone
+
+    TODO VALIDACOES
+            esqueceu a senha - toda pagina
+
+    TODO confirmações após o envio ou quando irá editar/excluir
+
+    TODO arrumar responsividade das paginas php
     TODO editar produto
     TODO editar pagina da loja
     TODO implementar busca pela loja
