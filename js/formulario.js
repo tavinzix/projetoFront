@@ -46,5 +46,5 @@ function validarCodigo() {
 
 function redefinirSenha() {
     alert("Senha alterada");
-    window.location.href = "index.html";
+    window.location.href = "../index.php";
 }

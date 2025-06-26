@@ -124,4 +124,43 @@ class usuario_DAO
             echo 'Error: ' . $e->getMessage();
         }
     }
+
+    function verificaLogin(Usuario $usuario){
+        try {
+            $query = $this->conexao->prepare("SELECT * from usuarios WHERE cpf = :cpf and senha = :senha LIMIT 1");
+            $query->execute(['cpf' => $usuario->getCpf(), 'senha' => $usuario->getSenha()]);
+            
+            $resultado = $query->fetch(PDO::FETCH_ASSOC);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function verificaUsuarioAdm($user_id){
+        try {
+            $query = $this->conexao->prepare("SELECT COUNT(*) FROM administradores WHERE user_id = :userId AND status = '1'");
+            $query->execute(['userId' => $user_id]);
+            
+            $resultado = $query->fetchColumn();
+            return $resultado;
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    function verificaUsuarioVendedor($user_id){
+        try {
+            $query = $this->conexao->prepare("SELECT COUNT(*) FROM vendedores WHERE user_id = :userId AND status = '1'");
+            $query->execute(['userId' => $user_id]);
+            
+            $resultado = $query->fetchColumn();
+            return $resultado;
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+
+
 }
