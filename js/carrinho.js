@@ -21,6 +21,11 @@ function removerItem(itemId) {
 }
 
 function atualizarQuantidade(itemId) {
+
+    if (!confirm("Deseja atualizar a quantidade?")) {
+        return;
+    }
+
     const inputQuantidade = document.querySelector(`#quantidade-item-${itemId}`);
 
     const novaQuantidade = parseInt(inputQuantidade.value);
@@ -43,7 +48,7 @@ function atualizarQuantidade(itemId) {
         .then(data => {
             if (data === 'atualizado') {
                 alert("Quantidade atualizada com sucesso!");
-                // window.location.reload(true);
+                window.location.reload(true);
             } else {
                 alert("Erro ao atualizar a quantidade.");
             }

@@ -22,7 +22,7 @@
     <div class="cadastro-formulario">
         <!-- criar conta  -->
       <h2>Crie sua conta</h2>
-      <form action="../bd/controller/Usuario_controller.php" method="POST">
+      <form action="../bd/controller/Usuario_controller.php" method="POST" id="formCriarContaUsuario">
         <label for="nome">Nome completo</label>
         <input type="text" id="nome" placeholder="Seu nome completo" name="nome" required>
 
@@ -30,7 +30,7 @@
         <input type="email" id="email" placeholder="seu@email.com" name="email" required>
 
         <label for="cpf">CPF</label>
-        <input type="text" id="cpf" placeholder="000.000.000-00" name="cpf" required>
+        <input type="text" id="cpf" placeholder="000.000.000-00" name="cpf" maxlength="11" minlength="11" required>
 
         <label for="nascimento">Data de nascimento</label>
         <input type="date" id="nascimento" min="1900-01-01" max="2025-12-31" name="nascimento" required>
@@ -55,6 +55,7 @@
         </div>
 
         <button type="submit" name="acao" value="cadastrar">Criar Conta</button>
+        
         </form>
         <div class="link-cadastro">
           <a href="login.php">← Já tem uma conta? Entrar</a>
@@ -64,6 +65,7 @@
   </div>
 
 <script src="../js/global.js"></script>
+<script src="../js/validacao.js"></script>
 </body>
 
 </html>

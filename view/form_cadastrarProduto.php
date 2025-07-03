@@ -7,7 +7,7 @@ $conexao = (new Conexao())->conectar();
 
 // busca categorias 
 $listaCategoria = new categoria_DAO($conexao);
-$categorias = $listaCategoria->listarCategoriaComStatus();
+$categorias = $listaCategoria->listarCategoriaAtiva();
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +65,7 @@ $categorias = $listaCategoria->listarCategoriaComStatus();
             <input type="number" name="preco" step="0.01" min="0,01" id="preco" required />
 
             <label for="estoque">Estoque</label>
-            <input type="number" name="estoque" id="estoque" required />
+            <input type="number" name="estoque" id="estoque" min="1" required />
 
             <label for="imagens">Fotos do Produto (até 5 imagens)</label>
 

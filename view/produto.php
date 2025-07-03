@@ -18,6 +18,12 @@ if ($cpf) {
     if ($usuario && !empty($usuario['img_user'])) {
         $imagemUsuario = '../img/users/' . ($usuario['img_user']);
     }
+
+    if (isset($_SESSION["msg"])) {
+        $mensagem = $_SESSION["msg"];
+        echo "<script>alert('$mensagem');</script>";
+        unset($_SESSION["msg"]);
+    }
 }
 
 // pega o id do produto da url e busca os dados
@@ -249,53 +255,53 @@ if (isset($_GET['id'])) {
         <h2>Produtos semelhantes</h2>
         <div class="recomendados-lista">
             <div class="item-recomendado">
-                <img src="img/produtos/p1.jpg" alt="Tinta Acrílica">
+                <img src="../img/produtos/13_1.jpg" alt="Tinta Acrílica">
                 <p class="nome">Betoneira</p>
                 <p class="preco">R$ 1.500,00</p>
             </div>
 
             <div class="item-recomendado">
-                <img src="img/produtos/p2.png" alt="Martelo">
+                <img src="../img/produtos/p1.jpg" alt="Martelo">
                 <p class="nome">Tijolo Furado</p>
                 <p class="preco">R$ 2,50</p>
             </div>
 
             <div class="item-recomendado">
-                <img src="img/produtos/p3.png" alt="Kit de Brocas">
+                <img src="../img/produtos/p2.jpg" alt="Kit de Brocas">
                 <p class="nome">Tijolo Maciço</p>
                 <p class="preco">R$ 3,50</p>
             </div>
             <div class="item-recomendado">
-                <img src="img/produtos/p1.jpg" alt="Tinta Acrílica">
+                <img src="../img/produtos/13_1.jpg" alt="Tinta Acrílica">
                 <p class="nome">Betoneira</p>
                 <p class="preco">R$ 1.500,00</p>
             </div>
 
             <div class="item-recomendado">
-                <img src="img/produtos/p2.png" alt="Martelo">
+                <img src="../img/produtos/p1.jpg" alt="Martelo">
                 <p class="nome">Tijolo Furado</p>
                 <p class="preco">R$ 2,50</p>
             </div>
 
             <div class="item-recomendado">
-                <img src="img/produtos/p3.png" alt="Kit de Brocas">
+                <img src="../img/produtos/p2.jpg" alt="Kit de Brocas">
                 <p class="nome">Tijolo Maciço</p>
                 <p class="preco">R$ 3,50</p>
             </div>
             <div class="item-recomendado">
-                <img src="img/produtos/p1.jpg" alt="Tinta Acrílica">
+                <img src="../img/produtos/p1.jpg" alt="Tinta Acrílica">
                 <p class="nome">Betoneira</p>
                 <p class="preco">R$ 1.500,00</p>
             </div>
 
             <div class="item-recomendado">
-                <img src="img/produtos/p2.png" alt="Martelo">
+                <img src="../img/produtos/p2.jpg" alt="Martelo">
                 <p class="nome">Tijolo Furado</p>
                 <p class="preco">R$ 2,50</p>
             </div>
 
             <div class="item-recomendado">
-                <img src="img/produtos/p3.png" alt="Kit de Brocas">
+                <img src="../img/produtos/p2.jpg" alt="Kit de Brocas">
                 <p class="nome">Tijolo Maciço</p>
                 <p class="preco">R$ 3,50</p>
             </div>

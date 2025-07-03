@@ -124,8 +124,8 @@ if ($cpf) {
 
                 <form action="../bd/controller/FormaPagamentoUsuario_controller.php" method="POST" id="formularioEdicaoPagamento">
 
-                    <input id="id_forma" name="id_forma">
-                    <input id="id_usuario" name="id_usuario">
+                    <input type="hidden" id="id_forma" name="id_forma">
+                    <input type="hidden" id="id_usuario" name="id_usuario">
 
                     <div class="informacao-pagamento">
                         <strong>Nome do titular:</strong><br>
@@ -199,5 +199,7 @@ if ($cpf) {
 </body>
 <script src="../js/global.js"></script>
 <script src="../js/perfilUsuario.js"></script>
+<script src="../js/validacao.js"></script>
+
 
 </html>

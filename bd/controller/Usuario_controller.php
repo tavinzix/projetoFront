@@ -30,7 +30,7 @@ if ($_POST['acao'] == 'cadastrar') {
         exit();
     } else {
         $_SESSION['msgSucesso'] = 'Erro ao cadastrar usuário';
-        header("Location: ../../view/form_criarContaUsuario.php");
+        header("Location: ../../view/form_criarContaUsuario.html");
         exit();
     }
 }

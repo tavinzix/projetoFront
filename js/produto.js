@@ -23,6 +23,7 @@ if (miniaturas && btnEsquerdaMiniatura && btnDireitaMiniatura) {
     });
 }
 
+//zoom na imagem principal
 document.addEventListener('DOMContentLoaded', function () {
     const imagemPrincipal = document.querySelector('.imagem-principal');
     const imagem = document.querySelector('.imagem-principal img');

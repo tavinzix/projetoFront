@@ -11,11 +11,11 @@ $conexao = (new Conexao())->conectar();
 
 // busca o usuario para setar a imagem no header
 $cpf = $_SESSION['cpf'] ?? null;
-$userId = $_SESSION['usuario_id'];
 $imagemUsuario = '../img/users/avatar.jpg';
 
 // busca cpf para setar a imagem do header
 if ($cpf) {
+    $userId = $_SESSION['usuario_id'];
     $listaUsuario = new usuario_DAO($conexao);
     $usuario = $listaUsuario->buscaUsuario($cpf);
 

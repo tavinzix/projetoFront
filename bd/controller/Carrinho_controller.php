@@ -56,8 +56,11 @@ if ($_POST['acao'] == 'adicionar') {
         $carrinhoDAO->adicionarProduto($carrinho);
     }
 
+    $_SESSION["msg"] = "Produto adicionado com sucesso";
+   
     header("Location: ../../view/produto.php?id=$cod");
     exit();
+
 } else if ($_POST['acao'] == 'remover') {
     $carrinhoDAO = new carrinho_DAO($conexao);
     $userId = $_SESSION['usuario_id'];

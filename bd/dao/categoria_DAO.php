@@ -105,7 +105,7 @@ class categoria_DAO
     function listarCategoriaAtiva(){
         try {
             $query = $this->conexao->prepare("SELECT *, CASE WHEN status = '1' THEN 'Ativo'
-                                             WHEN status = '2' THEN 'Inativo' END AS status_texto FROM categorias WHERE status = '1'");
+                                             WHEN status = '2' THEN 'Inativo' END AS status_texto FROM categorias WHERE status = '1' ORDER BY nome asc");
 
             $query->execute();
 

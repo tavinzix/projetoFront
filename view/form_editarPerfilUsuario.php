@@ -66,7 +66,7 @@ if ($usuario && !empty($usuario['img_user'])) {
     <section class="editar-perfil">
         <!-- formulario de edição  -->
         <h3>Editar Perfil</h3>
-        <form class="form-perfil" action="../bd/controller/Usuario_controller.php" method="POST" enctype="multipart/form-data">
+        <form class="form-perfil" action="../bd/controller/Usuario_controller.php" method="POST" enctype="multipart/form-data" id="formEditarPerfilUsuario">
             <div class="campo-form" style="display:none">
                 <label for="id">id</label>
                 <input type="text" id="id" name="id" value="<?php echo $usuario['id'] ?>">
@@ -83,20 +83,21 @@ if ($usuario && !empty($usuario['img_user'])) {
             </div>
 
             <div class="campo-form">
-                <label for="email">Telefone</label>
-                <input type="text" id="email" name="telefone" value="<?php echo $usuario['telefone'] ?>">
+                <label for="telefone">Telefone</label>
+                <input type="text" id="telefone" name="telefone" value="<?php echo $usuario['telefone'] ?>">
             </div>
 
             <div class="campo-form">
-                <label for="email">CPF</label>
-                <input type="text" id="email" name="cpf" value="<?php echo $usuario['cpf'] ?>" disabled>
+                <label for="cpf">CPF</label>
+                <input type="text" id="cpf" name="cpf" value="<?php echo $usuario['cpf'] ?>" disabled>
             </div>
 
             <div class="campo-form">
-                <label for="email">Data de nascimento</label>
-                <input type="email" id="email" name="email" value="<?php echo $usuario['data_nascimento'] ?>" disabled>
+                <label for="dt_nasc">Data de nascimento</label>
+                <input type="text" id="dt_nasc" name="dt_nasc" value="<?php echo $usuario['data_nascimento'] ?>" disabled>
             </div>
 
+            <!-- TODO adicionar "olho" para visualização de senhas -->
             <div class="campo-form">
                 <label for="senha-atual">Senha Atual</label>
                 <input type="password" id="senha-atual" name="senha_atual">
@@ -104,12 +105,12 @@ if ($usuario && !empty($usuario['img_user'])) {
 
             <div class="campo-form">
                 <label for="nova-senha">Nova Senha</label>
-                <input type="password" id="nova-senha" name="nova_senha">
+                <input type="password" id="senha" name="nova_senha">
             </div>
 
             <div class="campo-form">
                 <label for="confirmar-senha">Confirmar Nova Senha</label>
-                <input type="password" id="confirmar-senha" name="confirmar_senha">
+                <input type="password" id="cSenha" name="confirmar_senha">
             </div>
 
             <div class="campo-form-foto">
@@ -132,6 +133,7 @@ if ($usuario && !empty($usuario['img_user'])) {
         </form>
     </section>
     <script src="../js/global.js"></script>
+    <script src="../js/validacao.js"></script>
 
 </body>
 

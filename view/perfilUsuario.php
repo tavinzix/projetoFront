@@ -113,7 +113,7 @@ $pedido = $listaPedidos->buscaPedidosComStatus($userId);
 
             <ul class="filtros-pedidos">
                 <li class="aba ativa" onclick="filtrarPedidos('todos')">Todos</li>
-                <li class="aba" onclick="filtrarPedidos('em-transito')">A caminho</li>
+                <li class="aba" onclick="filtrarPedidos('a-caminho')">A caminho</li>
                 <li class="aba" onclick="filtrarPedidos('enviado')">Enviados</li>
                 <li class="aba" onclick="filtrarPedidos('aguardando-envio')">Aguardando envio</li>
                 <li class="aba" onclick="filtrarPedidos('aguardando-pagamento')">Aguardando pagamento</li>
@@ -131,10 +131,10 @@ $pedido = $listaPedidos->buscaPedidosComStatus($userId);
                     <li class="pedido">
                         <img src="../img/produtos/<?php echo $pedidos['imagem_url'] ?>" alt="Produto" class="foto-produto">
                         <div class="info-pedido">
-                            <h4><?php echo $pedidos['descricao'] ?></h4>
+                            <h4><?php echo $pedidos['nome'] ?></h4>
                             <p>Data: <?php echo date('d/m/Y', strtotime($pedidos['data_pedido'])) ?></p>
                             <p>Status: <span class="status <?php echo strtolower(str_replace(' ', '-', $pedidos['status_texto'])) ?>"><?php echo $pedidos['status_texto'] ?></span></p>
-                            <p>Valor: R$ <?php echo number_format($pedidos['valor_total'], 2, ',', '.') ?></p>
+                            <p>Valor: R$ <?php echo number_format(($pedidos['preco_unitario']*$pedidos['quantidade']), 2, ',', '.') ?></p>
                             <button class="btn-detalhes">Ver Detalhes</button>
                         </div>
                     <?php endforeach; ?>
