@@ -448,3 +448,26 @@ Dados gerais
             document.getElementById("detalhes").value = JSON.stringify(detalhes);
         });
     </script>
+
+Uso                                     Cor                 Código HEX 
+Primária (confiança/profissionalismo)   Azul Escuro         #1F3C88 
+Secundária (neutro/moderno)             Cinza Claro         #F2F2F2 
+Texto principal                         Cinza Grafite       #333333 
+Botões/CTAs (ação/energia)              Laranja Vibrante    #FF6B00 
+Destaques ou ícones                     Amarelo Industrial  #FFD100 
+Complementar (detalhes/links)           Azul Claro          #4A90E2
+azul claro #4987ff
+Amarelo construção #f9a825;
+cinza #4d4d51
+*/
+
+
+lista icones hexa html
+https://www.compart.com/en/unicode/category
+https://erikasarti.com/html/dingbats-simbolos-desenhos/
+
+
+
+icone carrinho https://icons8.com.br/icon/5esIoe7Rz8YD/buying
+icone lupa https://icons8.com.br/icon/7695/search
+icone microfone http://icons8.com.br/icons/set/microfone

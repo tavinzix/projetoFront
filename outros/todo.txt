@@ -1,0 +1,37 @@
+TODO MASCARA INPUT
+            login - cpf
+            criar conta usuario - cpf, data de nascimento, telefone
+            esqueceu a senha - toda pagina
+            editar perfil - telefone
+
+    TODO VALIDACOES
+            esqueceu a senha - toda pagina
+
+    TODO confirmações após o envio ou quando irá editar/excluir
+
+    TODO arrumar responsividade das paginas php
+    TODO editar produto
+    TODO editar pagina da loja
+    TODO implementar busca pela loja
+    
+    TODO verificar js{
+        Feedback claro ao usuário sobre ações e erros. 
+        Validação de formulários.
+    }
+    TODO funcionalidades do adm
+    TODO funcionalidades do vendedor
+    TODO mudar toda logica de aceitar a solicitação{
+        nome do adm que aceitou a solicitação
+        criar possivelmente um user pro adm
+        mudar tabela da solicitação para incluir o nome
+        incluir novo check no insert
+        pensar em uma lógica para listar também quem aprovou a solicitação
+    }
+
+    TODO mascara nos inputs
+    TODO criar filtros nas páginas{
+        solicitações pendentes
+        cadastro de produtos
+        categorias
+        página principal    
+    }
