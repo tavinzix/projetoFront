@@ -44,15 +44,15 @@
     }
 
     /*PRODUTO*/
-    .detalheProduto-container{
+    .detalheProduto-container {
         justify-content: center;
     }
 
-    .informacoes-produto{
-        text-align:center ;
+    .informacoes-produto {
+        text-align: center;
     }
 
-    .acoes{
+    .acoes {
         display: flex;
         flex-direction: column;
         width: 500px;
@@ -151,11 +151,11 @@
         gap: 10px;
     }
 
-    .perfilLoja-exterior{
+    .perfilLoja-exterior {
         flex-direction: column;
     }
 
-    .opcoes-loja{
+    .opcoes-loja {
         width: 100%;
     }
 
@@ -170,13 +170,20 @@
         align-items: flex-start;
     }
 
-    .pedido {
-        flex-direction: column;
-        align-items: flex-start;
+    .info-usuario button {
+        margin-top: 10px;
+    }
+
+    .filtros-pedidos {
+        margin-left: 10px;
+    }
+
+    .historico-compras h3 {
+        margin-left: 10px;
     }
 
     .foto-produto {
-        width: 100%;
+        width: 25%;
         height: auto;
     }
 
@@ -207,6 +214,15 @@
         position: relative;
         top: 0;
     }
+
+    .detalhes-item h4>a {
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        overflow: hidden;
+        width: 150px;
+    }
+
 
     /*FINALIZAR COMPRA*/
 
@@ -254,7 +270,7 @@
     }
 
     /*PRODUTO*/
-    .acoes button{
+    .acoes button {
         width: 380px;
     }
 
@@ -274,10 +290,15 @@
     /*CARRINHO*/
 
     .item-carrinho {
-        width: 370px;
+        width: 100%;
     }
-        .conteudo-item {
-            flex-direction: column;
-            align-items: flex-start;
-        }
+
+    .conteudo-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .detalhes-item h4>a {
+        width: 100px;
+    }
 }

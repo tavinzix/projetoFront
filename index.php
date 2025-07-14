@@ -10,6 +10,7 @@ $conexao = (new Conexao())->conectar();
 $cpf = $_SESSION['cpf'] ?? null;
 $imagemUsuario = 'img/users/avatar.jpg';
 
+//busca usuario para setar imagem no header
 if ($cpf) {
     $listaUsuario = new usuario_DAO($conexao);
     $usuario = $listaUsuario->buscaUsuario($cpf);
@@ -19,9 +20,11 @@ if ($cpf) {
     }
 }
 
+//buscar categorias
 $listaCategoria = new categoria_DAO($conexao);
 $categorias = $listaCategoria->listarCategoriaAtiva();
 
+//buscar produto
 $listaProdutosDestaque = new produto_DAO($conexao);
 $produtosDestaque = $listaProdutosDestaque->buscaProdutosEmDestaque();
 
@@ -285,70 +288,3 @@ $produtosDestaque = $listaProdutosDestaque->buscaProdutosEmDestaque();
 </body>
 
 </html>
-
-<!-- 
-    TODO MASCARA INPUT
-            login - cpf
-            criar conta usuario - cpf, data de nascimento, telefone
-            esqueceu a senha - toda pagina
-            editar perfil - telefone
-
-    TODO VALIDACOES
-            esqueceu a senha - toda pagina
-
-    TODO confirmações após o envio ou quando irá editar/excluir
-
-    TODO arrumar responsividade das paginas php
-    TODO editar produto
-    TODO editar pagina da loja
-    TODO implementar busca pela loja
-    
-    TODO verificar js{
-        Feedback claro ao usuário sobre ações e erros. 
-        Validação de formulários.
-    }
-    TODO funcionalidades do adm
-    TODO funcionalidades do vendedor
-    TODO mudar toda logica de aceitar a solicitação{
-        nome do adm que aceitou a solicitação
-        criar possivelmente um user pro adm
-        mudar tabela da solicitação para incluir o nome
-        incluir novo check no insert
-        pensar em uma lógica para listar também quem aprovou a solicitação
-    }
-
-    TODO mascara nos inputs
-    TODO criar filtros nas páginas{
-        solicitações pendentes
-        cadastro de produtos
-        categorias
-        página principal    
-    }
-
-     -->
-<!--
-
-    /*
-    Uso                                     Cor                 Código HEX 
-    Primária (confiança/profissionalismo)   Azul Escuro         #1F3C88 
-    Secundária (neutro/moderno)             Cinza Claro         #F2F2F2 
-    Texto principal                         Cinza Grafite       #333333 
-    Botões/CTAs (ação/energia)              Laranja Vibrante    #FF6B00 
-    Destaques ou ícones                     Amarelo Industrial  #FFD100 
-    Complementar (detalhes/links)           Azul Claro          #4A90E2
-    azul claro #4987ff
-    Amarelo construção #f9a825;
-    cinza #4d4d51
-    */
-
-
-    lista icones hexa html
-    https://www.compart.com/en/unicode/category
-    https://erikasarti.com/html/dingbats-simbolos-desenhos/
-
-
-
-    icone carrinho https://icons8.com.br/icon/5esIoe7Rz8YD/buying
-    icone lupa https://icons8.com.br/icon/7695/search
-    icone microfone http://icons8.com.br/icons/set/microfone
--->
