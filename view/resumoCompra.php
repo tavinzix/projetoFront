@@ -21,12 +21,10 @@ if (!isset($_SESSION['carrinhotemp'])) {
     die('Carrinho vazio.');
 }
 
+//busca informação dos itens, endereço e forma de pagamento
 $itens = $_SESSION['carrinhotemp'];
 $endereco_id = $_POST['endereco_id'] ?? null;
 $pagamento_id = $_POST['pagamento_id'] ?? null;
-
-$_SESSION['endereco_id'] = $endereco_id;
-$_SESSION['pagamento_id'] = $pagamento_id;
 
 if (!$endereco_id || !$pagamento_id) {
     die('Endereço ou forma de pagamento não selecionado.');
@@ -50,18 +48,22 @@ if ($cpf) {
     }
 }
 
+// Extrai somente os ids dos produtos do array
 $produtosIds = array_column($itens, 'id');
 
 if (empty($produtosIds)) {
     die('Nenhum produto no carrinho.');
 }
 
+//cria placeholders para consulta (?,?)
 $placeholders = implode(',', array_fill(0, count($produtosIds), '?'));
 
+//prepara os parametros para a query, userId e o id dos produtos
 $parametros = array_merge([$userId], $produtosIds);
 $listaItensCarrinho = new carrinho_DAO($conexao);
 $itensFinal = $listaItensCarrinho->detalhesItensCarrinho($parametros, $placeholders);
 
+//calcula o valor total
 $subtotal = 0;
 $frete = 25.00;
 

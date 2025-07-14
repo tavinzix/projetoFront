@@ -14,6 +14,7 @@ if (!isset($_SESSION['cpf']) || !isset($_SESSION['logado'])) {
     exit;
 }
 
+//busca historico da solicitação
 $listaSolicitacaoRejeitada = new solicitacao_DAO($conexao);
 $solicitacoes = $listaSolicitacaoRejeitada->buscaSolicitacaoRecusadaPorUsuario($userId);
 ?>
