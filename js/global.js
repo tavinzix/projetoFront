@@ -72,6 +72,12 @@ function getMyLocation() {
 }
 
 function successCallback(position) {
+    const form = document.getElementById("cadastroEnderecoUsuario");
+    if (!form) {
+        console.error("Formulário com id 'cadastroEnderecoUsuario' não encontrado.");
+        return;
+    }
+
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
 
@@ -79,12 +85,12 @@ function successCallback(position) {
         .then(response => response.json())
         .then(data => {
             if (data.address) {
-                document.getElementById("cep").value = data.address.postcode || "";
-                document.getElementById("estado").value = data.address.state || "";
-                document.getElementById("cidade").value = data.address.city || data.address.town || "";
-                document.getElementById("rua").value = data.address.road || "";
-                document.getElementById("numero").value = data.address.house_number || "";
-                document.getElementById("bairro").value = data.address.suburb || "";
+                form.querySelector("#cep").value = data.address.postcode || "";
+                form.querySelector("#estado").value = data.address.state || "";
+                form.querySelector("#cidade").value = data.address.city || data.address.town || "";
+                form.querySelector("#rua").value = data.address.road || "";
+                form.querySelector("#numero").value = data.address.house_number || "";
+                form.querySelector("#bairro").value = data.address.suburb || "";
             } else {
                 alert("Endereço não encontrado.");
             }
@@ -92,6 +98,11 @@ function successCallback(position) {
         .catch(error => console.error("Erro ao obter endereço:", error));
 }
 
+
 function errorCallback(error) {
-    console.error("Erro na geolocalização:", error.message);
+    if (error.code === error.PERMISSION_DENIED) {
+        alert("Você negou o acesso à localização. Permita o uso da localização para preencher o endereço automaticamente.");
+    } else {
+        alert("Erro ao obter localização: " + error.message);
+    }
 }

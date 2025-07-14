@@ -177,7 +177,7 @@ if ($cpf) {
         </div>
 
         <!-- cadastro de endereço  -->
-        <form class="form-endereco" action="../bd/controller/EnderecoUsuario_controller.php" method="POST">
+        <form class="form-endereco" action="../bd/controller/EnderecoUsuario_controller.php" method="POST" id="cadastroEnderecoUsuario">
             <h4>Adicionar novo endereço</h4>
 
             <div class="campo-form">
